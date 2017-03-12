@@ -12,14 +12,15 @@ void main() {
     l_A = 12;
     l_B = 12;
     l_E = 0.001;
+    l_11 = -1;
     v_2 = -1;
     v_3 = 0;
-    if (PLAYER::_C968670BFACE42D9(3)) {
-        sub_142();
+    if (PLAYER::HAS_FORCE_CLEANUP_OCCURRED(3)) {
+        sub_145();
     }
     while (1) {
         if (!v_3) {
-            switch (sub_cf(PLAYER::PLAYER_PED_ID())) {
+            switch (sub_d2(PLAYER::PLAYER_PED_ID())) {
             case 1:
                 if (AUDIO::LOAD_STREAM("MISSION_COMPLETE_FRANKLIN_SMALL", 0)) {
                     AUDIO::PLAY_STREAM_FRONTEND();
@@ -42,17 +43,17 @@ void main() {
         } else if (v_2 == -1) {
             v_2 = GAMEPLAY::GET_GAME_TIMER();
         } else if (GAMEPLAY::GET_GAME_TIMER() > (v_2 + 8000)) {
-            sub_142();
+            sub_145();
         }
         SYSTEM::WAIT(0);
     }
 }
 
-auto sub_cf(auto a_0) {
+auto sub_d2(auto a_0) {
     if (ENTITY::DOES_ENTITY_EXIST(a_0)) {
         v_4 = ENTITY::GET_ENTITY_MODEL(a_0);
         for (v_3 = 0; v_3 <= 2; v_3 += 1) {
-            if (sub_10c(v_3) == v_4) {
+            if (sub_10f(v_3) == v_4) {
                 return v_3;
             }
         }
@@ -60,18 +61,18 @@ auto sub_cf(auto a_0) {
     return 145;
 }
 
-auto sub_10c(auto a_0) {
-    if (sub_136(a_0)) {
-        return g_17C9F._f7463[a_0/*29*/];
+auto sub_10f(auto a_0) {
+    if (sub_139(a_0)) {
+        return g_18A70._f7F07[a_0/*29*/];
     } else if (a_0 != 145) {}
     return 0;
 }
 
-auto sub_136(auto a_0) {
+auto sub_139(auto a_0) {
     return a_0 < 3;
 }
 
-void sub_142() {
+void sub_145() {
     AUDIO::STOP_STREAM();
     SCRIPT::TERMINATE_THIS_THREAD();
 }
