@@ -1,0 +1,124 @@
+// listener's C4 decompiler
+
+void main() {
+    if (PLAYER::_C968670BFACE42D9(2)) {
+        sub_278();
+    }
+    if (ENTITY::DOES_ENTITY_EXIST(l_A)) {
+        ENTITY::FREEZE_ENTITY_POSITION(l_A, 1);
+        l_4/*{3}*/ = ENTITY::GET_ENTITY_COORDS(l_A, 1);
+        l_7/*{3}*/ = ENTITY::GET_ENTITY_ROTATION(l_A, 2);
+    }
+    while (1) {
+        SYSTEM::WAIT(0);
+        if (ENTITY::DOES_ENTITY_EXIST(l_A)) {
+            if (BRAIN::IS_OBJECT_WITHIN_BRAIN_ACTIVATION_RANGE(l_A)) {
+                switch (l_2) {
+                case 0:
+                    if (ENTITY::DOES_ENTITY_HAVE_DRAWABLE(l_A)) {
+                        STREAMING::REQUEST_MODEL(${p_abat_roller_1_col});
+                        if (STREAMING::HAS_MODEL_LOADED(${p_abat_roller_1_col})) {
+                            if (!sub_24f(l_4, 0.0, 0.0, 0.0)) {
+                                l_3 = OBJECT::CREATE_OBJECT(${p_abat_roller_1_col}, l_4, 1, 1, 0);
+                                ENTITY::SET_ENTITY_ROTATION(l_3, l_7, 2, 1);
+                                l_2 = 1;
+                            }
+                        }
+                    }
+                    break;
+                case 1:
+                    if (ENTITY::DOES_ENTITY_HAVE_DRAWABLE(l_A)) {
+                        if (SCRIPT::_GET_NUMBER_OF_INSTANCES_OF_STREAMED_SCRIPT(${michael2}) > 0) {
+                            STREAMING::REQUEST_ANIM_DICT("map_objects");
+                            if (STREAMING::HAS_ANIM_DICT_LOADED("map_objects")) {
+                                l_2 = 2;
+                            }
+                        }
+                    }
+                    break;
+                case 2:
+                    if (ENTITY::DOES_ENTITY_HAVE_DRAWABLE(l_A)) {
+                        if (SCRIPT::_GET_NUMBER_OF_INSTANCES_OF_STREAMED_SCRIPT(${michael2}) > 0) {
+                            if (g_1530E) {
+                                if (STREAMING::HAS_ANIM_DICT_LOADED("map_objects")) {
+                                    ENTITY::PLAY_ENTITY_ANIM(l_A, "P_Abat_roller_1_open", "map_objects", 1.0, 0, 1, 0, 0, 0);
+                                    l_2 = 3;
+                                }
+                            }
+                        }
+                    }
+                    break;
+                case 3:
+                    v_B = 0.35;
+                    v_2/*{3}*/ = l_4 + ({0.0, 0.0, 3.45 });
+                    if (ENTITY::DOES_ENTITY_EXIST(l_3)) {
+                        v_5/*{3}*/ = ENTITY::GET_ENTITY_COORDS(l_3, 1);
+                        if (!sub_203(v_5, v_2, 0.1)) {
+                            v_8/*{3}*/ = v_2 - v_5;
+                            ENTITY::SET_ENTITY_COORDS(l_3, v_5 + ((sub_1c4(v_8) * ((vector)GAMEPLAY::GET_FRAME_TIME())) * ((vector)v_B)), 1, 0, 0, 1);
+                        } else { 
+                            g_1530F = 1;
+                            l_2 = 4;
+                        }
+                    }
+                    break;
+                case 4:
+                    break;
+                }
+            } else { 
+                sub_278();
+            }
+        } else { 
+            sub_278();
+        }
+    }
+}
+
+auto<3> sub_1c4(auto a_0, auto a_1, auto a_2) {
+    v_5 = SYSTEM::VMAG(a_0);
+    if (v_5 != 0.0) {
+        v_6 = 1.0 / v_5;
+        a_0 *= (vector)v_6;
+    } else { 
+        a_0 = 0.0;
+        a_0._f1 = 0.0;
+        a_0._f2 = 0.0;
+    }
+    return a_0;
+}
+
+auto sub_203(auto a_0, auto a_1, auto a_2, auto a_3, auto a_4, auto a_5, auto a_6) {
+    if (a_6 < 0.0) {
+        a_6 = 0.0;
+    }
+    if (GAMEPLAY::ABSF(a_0 - a_3) <= a_6) {
+        if (GAMEPLAY::ABSF(a_0._f1 - a_3._f1) <= a_6) {
+            if (GAMEPLAY::ABSF(a_0._f2 - a_3._f2) <= a_6) {
+                return 1;
+            }
+        }
+    }
+    return 0;
+}
+
+auto sub_24f(auto a_0, auto a_1, auto a_2, auto a_3, auto a_4, auto a_5) {
+    return ((a_0 == a_3) && (a_0._f1 == a_3._f1)) && (a_0._f2 == a_3._f2);
+}
+
+void sub_278() {
+    if (ENTITY::DOES_ENTITY_EXIST(l_3)) {
+        OBJECT::DELETE_OBJECT(&l_3);
+    }
+    STREAMING::SET_MODEL_AS_NO_LONGER_NEEDED(${p_abat_roller_1_col});
+    sub_2a3("ob_abatdoor Terminated >>>>>>>>>>>>>>>>>
+");
+    SCRIPT::TERMINATE_THIS_THREAD();
+}
+
+void sub_2a3(auto a_0) {
+    sub_2b1(a_0);
+}
+
+void sub_2b1(auto a_0) {
+    if (GAMEPLAY::ARE_STRINGS_EQUAL(a_0, a_0)) {}
+}

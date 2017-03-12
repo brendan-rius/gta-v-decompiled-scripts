@@ -1,0 +1,3259 @@
+// listener's C4 decompiler
+
+void main() {
+    l_2 = 1;
+    l_3 = 134;
+    l_4 = 134;
+    l_5 = 1;
+    l_6 = 1;
+    l_7 = 1;
+    l_8 = 134;
+    l_9 = 1;
+    l_A = 12;
+    l_B = 12;
+    l_E = 0.001;
+    l_11 = "NULL";
+    l_16 = 80.0;
+    l_17 = 140.0;
+    l_18 = 180.0;
+    l_1B = 0.0;
+    l_1F = -0.0375;
+    l_20 = 0.17;
+    l_23 = 3;
+    l_27 = 1;
+    l_28 = 65;
+    l_29 = 49;
+    l_2A = 64;
+    l_37 = 15;
+    if (NETWORK::NETWORK_IS_GAME_IN_PROGRESS()) {
+        if (!sub_547a(l_15D)) {
+            sub_53f6();
+        }
+    }
+    if (l_37 == 15) {}
+    l_3F = 0;
+    sub_5166();
+    while (1) {
+        sub_5159();
+        if (sub_4f12()) {
+            sub_53f6();
+        }
+        if (NETWORK::NETWORK_IS_IN_TUTORIAL_SESSION()) {
+            if (NETWORK::_3B39236746714134(PLAYER::PLAYER_ID()) == 32) {
+                if (l_15D._f10 != (50 + PLAYER::PLAYER_ID())) {
+                    sub_4f00(2);
+                }
+            } else if (l_15D._f10 != NETWORK::_3B39236746714134(PLAYER::PLAYER_ID())) {
+                sub_4f00(2);
+            }
+        } else if (l_15D._f10 != -1) {
+            sub_4f00(2);
+        }
+        sub_4ec3(&l_38, 0, 0);
+        switch (sub_4eb5(NETWORK::PARTICIPANT_ID_TO_INT())) {
+        case 0:
+            if (g_187385 == 2) {
+                l_3E = 98;
+            } else { 
+                l_3E = 99;
+            }
+            if (((!g_7842) && (sub_4eaa() != -1)) && (sub_4eaa() != 999)) {
+                if (!l_3A) {
+                    if (sub_4e38(&l_3F, l_3E)) {
+                        l_3A = 1;
+                        l_3F = 0;
+                    }
+                } else if (!l_3C) {
+                    if (!l_3B) {
+                        if (sub_4d59(&l_3F, l_3E)) {
+                            l_3F = 0;
+                            l_3B = 1;
+                        } else { }
+                    } else if (sub_8a8(&l_3F, l_3E)) {
+                        l_3F = 0;
+                        l_3C = 1;
+                    } else { }
+                } else if (sub_89e() >= 2) {
+                    sub_4f00(1);
+                } else { }
+            } else { }
+            break;
+        case 1:
+            sub_826();
+            g_2554DA._f10F1 = 1;
+            sub_563();
+            break;
+        case 2:
+            sub_53f6();
+            break;
+        }
+        if (NETWORK::NETWORK_IS_HOST_OF_THIS_SCRIPT()) {
+            switch (sub_89e()) {
+            case 0:
+                sub_557(2);
+                break;
+            case 2:
+                if (sub_4eb5(NETWORK::PARTICIPANT_ID_TO_INT()) == 1) {
+                    sub_226();
+                }
+                break;
+            case 3:
+                break;
+            case 4:
+                break;
+            }
+        }
+    }
+}
+
+void sub_226() {
+    l_A8 = 0;
+    for (l_A8 = 0; l_A8 < 6; l_A8 += 1) {
+        if (sub_513(PLAYER::INT_TO_PLAYERINDEX(l_A7), 0, 1)) {
+            if (GAMEPLAY::IS_BIT_SET(l_DC[l_A7/*4*/]._f2, l_A8)) {
+                GAMEPLAY::SET_BIT(&l_AA._f2[l_A8/*1*/], l_A7);
+            } else { 
+                GAMEPLAY::CLEAR_BIT(&l_AA._f2[l_A8/*1*/], l_A7);
+            }
+        } else { 
+            GAMEPLAY::CLEAR_BIT(&l_AA._f9[l_A8/*1*/], l_A7);
+            GAMEPLAY::CLEAR_BIT(&l_AA._f9[l_A8/*1*/], l_A7);
+        }
+        if (l_AA._f9[l_A8/*1*/] != 0) {
+            if (l_40[l_A8/*17*/][0/*1*/] != 0) {
+                sub_37d(l_A8, l_40[l_A8/*17*/][0/*1*/], 5);
+            }
+            if (l_40[l_A8/*17*/][1/*1*/] != 0) {
+                sub_37d(l_A8, l_40[l_A8/*17*/][1/*1*/], 5);
+            }
+        } else if (l_AA._f2[l_A8/*1*/] != 0) {
+            if (l_40[l_A8/*17*/][0/*1*/] != 0) {
+                sub_37d(l_A8, l_40[l_A8/*17*/][0/*1*/], 0);
+            }
+            if (l_40[l_A8/*17*/][1/*1*/] != 0) {
+                sub_37d(l_A8, l_40[l_A8/*17*/][1/*1*/], 0);
+            }
+        } else { 
+            if (l_40[l_A8/*17*/][0/*1*/] != 0) {
+                sub_37d(l_A8, l_40[l_A8/*17*/][0/*1*/], 1);
+            }
+            if (l_40[l_A8/*17*/][1/*1*/] != 0) {
+                sub_37d(l_A8, l_40[l_A8/*17*/][1/*1*/], 1);
+            }
+        }
+    }
+    l_A7 += 1;
+    if (l_A7 >= 32) {
+        l_A7 = 0;
+    }
+}
+
+void sub_37d(auto a_0, auto a_1, auto a_2) {
+    v_5 = 1;
+    if (a_2 == 0) {
+        v_5 = 0;
+    }
+    if (l_C8[a_0/*1*/] == 0) {
+        if (OBJECT::_4BC2854478F3A749(a_1) == -1) {
+            if (OBJECT::_160AA1B32F6139B8(a_1) != a_2) {
+                if (NETWORK::NETWORK_HAS_CONTROL_OF_DOOR(a_1)) {
+                    GAMEPLAY::SET_BIT(&l_C8[a_0/*1*/], v_5);
+                    OBJECT::_6BAB9442830C7F53(a_1, a_2, 1, 1);
+                    sub_4ec3(&l_CF[a_0/*2*/], 1, 0);
+                } else { 
+                    NETWORK::NETWORK_REQUEST_CONTROL_OF_DOOR(a_1);
+                }
+            }
+        } else if (OBJECT::_4BC2854478F3A749(a_1) != a_2) {
+            if (NETWORK::NETWORK_HAS_CONTROL_OF_DOOR(a_1)) {
+                GAMEPLAY::SET_BIT(&l_C8[a_0/*1*/], v_5);
+                OBJECT::_6BAB9442830C7F53(a_1, a_2, 1, 1);
+                sub_4ec3(&l_CF[a_0/*2*/], 1, 0);
+            } else { 
+                NETWORK::NETWORK_REQUEST_CONTROL_OF_DOOR(a_1);
+            }
+        }
+    }
+    if (sub_507(&l_CF[a_0/*2*/])) {
+        if (sub_464(&l_CF[a_0/*2*/], 1000, 1)) {
+            sub_457(&l_CF[a_0/*2*/]);
+            l_C8[a_0/*1*/] = 0;
+        }
+    }
+}
+
+void sub_457(auto a_0) {
+    a_0._f1 = 0;
+}
+
+auto sub_464(auto a_0, auto a_1, auto a_2) {
+    if (a_1 == -1) {
+        return 1;
+    }
+    sub_4c2(a_0, a_2, 0);
+    if (NETWORK::NETWORK_IS_GAME_IN_PROGRESS() && (!a_2)) {
+        if (GAMEPLAY::ABSI(NETWORK::GET_TIME_DIFFERENCE(NETWORK::GET_NETWORK_TIME(), a_0)) >= a_1) {
+            return 1;
+        }
+    } else if (GAMEPLAY::ABSI(NETWORK::GET_TIME_DIFFERENCE(GAMEPLAY::GET_GAME_TIMER(), a_0)) >= a_1) {
+        return 1;
+    }
+    return 0;
+}
+
+void sub_4c2(auto a_0, auto a_1, auto a_2) {
+    if (a_0._f1 == 0) {
+        if (NETWORK::NETWORK_IS_GAME_IN_PROGRESS() && (!a_1)) {
+            if (!a_2) {
+                a_0 = NETWORK::GET_NETWORK_TIME();
+            } else { 
+                a_0 = NETWORK::_89023FBBF9200E9F();
+            }
+        } else { 
+            a_0 = GAMEPLAY::GET_GAME_TIMER();
+        }
+        a_0._f1 = 1;
+    }
+}
+
+auto sub_507(auto a_0) {
+    return a_0._f1;
+}
+
+auto sub_513(auto a_0, auto a_1, auto a_2) {
+    v_5 = a_0;
+    if (NETWORK::NETWORK_IS_PLAYER_ACTIVE(a_0)) {
+        if (a_1) {
+            if (!PLAYER::IS_PLAYER_PLAYING(a_0)) {
+                return 0;
+            }
+        }
+        if (a_2) {
+            if (!g_24F57C._f3[v_5/*1*/]) {
+                return 0;
+            }
+        }
+        return 1;
+    }
+    return 0;
+}
+
+void sub_557(auto a_0) {
+    l_AA = a_0;
+}
+
+void sub_563() {
+    v_3/*{3}*/ = sub_813(PLAYER::PLAYER_ID());
+    v_2 = SYSTEM::VDIST(v_3, l_40[l_A9/*17*/]._f3);
+    if ((GAMEPLAY::IS_BIT_SET(g_256CF6, l_A9) || GAMEPLAY::IS_BIT_SET(g_256CF6._f1, l_A9)) || GAMEPLAY::IS_BIT_SET(g_256CF6._f2, l_A9)) {
+        if (GAMEPLAY::IS_BIT_SET(g_256CF6, l_A9)) {
+            GAMEPLAY::SET_BIT(&l_DC[PLAYER::PLAYER_ID()/*4*/]._f2, l_A9);
+        }
+        if (GAMEPLAY::IS_BIT_SET(g_256CF6._f1, l_A9)) {
+            GAMEPLAY::CLEAR_BIT(&l_DC[PLAYER::PLAYER_ID()/*4*/]._f2, l_A9);
+        }
+        if (GAMEPLAY::IS_BIT_SET(g_256CF6._f2, l_A9)) {
+            GAMEPLAY::SET_BIT(&l_DC[PLAYER::PLAYER_ID()/*4*/]._f3, l_A9);
+        }
+    } else if (v_2 <= 20.0) {
+        if (OBJECT::IS_POINT_IN_ANGLED_AREA(v_3, l_40[l_A9/*17*/]._f3, l_40[l_A9/*17*/]._f6, l_40[l_A9/*17*/]._f9, 0, 1)) {
+            if (!GAMEPLAY::IS_BIT_SET(l_DC[PLAYER::PLAYER_ID()/*4*/]._f2, l_A9)) {
+                GAMEPLAY::SET_BIT(&l_DC[PLAYER::PLAYER_ID()/*4*/]._f2, l_A9);
+            }
+        }
+        if (((l_A9 == 0) || (l_A9 == 1)) || (l_A9 == 5)) {
+            if (g_252BB6) {
+                if (OBJECT::IS_POINT_IN_ANGLED_AREA(v_3, l_40[l_A9/*17*/]._fA, l_40[l_A9/*17*/]._fD, l_40[l_A9/*17*/]._f10, 0, 1)) {
+                    if (!GAMEPLAY::IS_BIT_SET(l_DC[PLAYER::PLAYER_ID()/*4*/]._f2, l_A9)) {
+                        GAMEPLAY::SET_BIT(&l_DC[PLAYER::PLAYER_ID()/*4*/]._f2, l_A9);
+                    }
+                }
+            }
+        }
+        if (((l_A9 == 2) || (l_A9 == 3)) || (l_A9 == 4)) {
+            if (sub_7ee() >= 0) {
+                if (sub_7b8(29)) {
+                    if (!GAMEPLAY::IS_BIT_SET(l_DC[PLAYER::PLAYER_ID()/*4*/]._f2, l_A9)) {
+                        GAMEPLAY::SET_BIT(&l_DC[PLAYER::PLAYER_ID()/*4*/]._f2, l_A9);
+                    }
+                } else if (GAMEPLAY::IS_BIT_SET(l_DC[PLAYER::PLAYER_ID()/*4*/]._f2, l_A9) && (!OBJECT::IS_POINT_IN_ANGLED_AREA(v_3, l_40[l_A9/*17*/]._f3, l_40[l_A9/*17*/]._f6, l_40[l_A9/*17*/]._f9, 0, 1))) {
+                    GAMEPLAY::CLEAR_BIT(&l_DC[PLAYER::PLAYER_ID()/*4*/]._f2, l_A9);
+                }
+            }
+        }
+    } else if (GAMEPLAY::IS_BIT_SET(l_DC[PLAYER::PLAYER_ID()/*4*/]._f2, l_A9)) {
+        GAMEPLAY::CLEAR_BIT(&l_DC[PLAYER::PLAYER_ID()/*4*/]._f2, l_A9);
+    }
+    l_A9 += 1;
+    if (l_A9 >= 6) {
+        l_A9 = 0;
+    }
+}
+
+auto sub_7b8(auto a_0) {
+    if (a_0 < 32) {
+        return GAMEPLAY::IS_BIT_SET(g_24F57C._f1F3._f1, a_0);
+    } else { 
+        return GAMEPLAY::IS_BIT_SET(g_24F57C._f1F3._f2, a_0 - 32);
+    }
+}
+
+auto sub_7ee() {
+    return g_200000[sub_806()/*8053*/]._f167C._f2;
+}
+
+auto sub_806() {
+    v_2 = 0;
+    return v_2;
+}
+
+auto<3> sub_813(auto a_0) {
+    return ENTITY::GET_ENTITY_COORDS(PLAYER::GET_PLAYER_PED(a_0), 0);
+}
+
+void sub_826() {
+    if (sub_853()) {
+        if (!l_3D) {
+            OBJECT::_C7F29CA00F46350E(1);
+            l_3D = 1;
+        }
+    } else if (l_3D == 1) {
+        l_3D = 0;
+        OBJECT::_701FDA1E82076BA4();
+    }
+}
+
+auto sub_853() {
+    if (sub_87b()) {
+        return 1;
+    }
+    if (sub_4eaa() == 2) {
+        if (g_187385 == 2) {
+            return 1;
+        }
+    }
+    return 0;
+}
+
+auto sub_87b() {
+    if ((g_187385 == 2) || (g_187385 == 8)) {
+        return 1;
+    }
+    return 0;
+}
+
+auto sub_89e() {
+    return l_AA;
+}
+
+auto sub_8a8(auto a_0, auto a_1) {
+    for (v_11 = 0; v_11 < 40; v_11 += 1) {
+        if (a_0 < 294) {
+            v_4/*{13}*/ = sub_915(a_0, a_1);
+            if ((v_4._f1 == 99) || (v_4._f1 == a_1)) {
+                if (!OBJECT::_C153C43EA202C8C1(v_4)) {
+                    return 0;
+                }
+            }
+        }
+        a_0 += 1;
+    }
+    if (a_0 < 294) {
+        return 0;
+    }
+    return 1;
+}
+
+auto<13> sub_915(auto a_0, auto a_1) {
+    switch (a_0) {
+    case 176:
+        v_4 = 0xf14165a2;
+        v_4._f1 = 99;
+        v_4._f2 = ${prop_com_gar_door_01};
+        v_4._f3/*{3}*/ = {1204.5699462890625, 3110.4, 6.57 };
+        v_4._f7 = 1;
+        v_4._f8 = 1;
+        break;
+    case 1:
+        v_4 = 0xb891bd42;
+        v_4._f1 = 99;
+        v_4._f2 = ${v_ilev_rc_door2};
+        v_4._f3/*{3}*/ = {467.3716125488281, -1014.4520263671875, 26.53619956970215 };
+        v_4._f7 = 1;
+        v_4._f8 = 1;
+        v_4._fB = 1;
+        break;
+    case 2:
+        v_4 = 0x6274eaec;
+        v_4._f1 = 99;
+        v_4._f2 = ${v_ilev_rc_door2};
+        v_4._f3/*{3}*/ = {469.9678955078125, -1014.4520263671875, 26.53619956970215 };
+        v_4._f7 = 1;
+        v_4._f8 = 1;
+        v_4._fB = 1;
+        break;
+    case 3:
+        v_4 = 0xb7eb19bc;
+        v_4._f1 = 99;
+        v_4._f2 = ${v_ilev_gtdoor02};
+        v_4._f3/*{3}*/ = {464.3612976074219, -984.6779174804688, 43.834400177 };
+        v_4._f7 = 1;
+        v_4._f8 = 1;
+        v_4._fB = 1;
+        break;
+    case 4:
+        v_4 = 0x1fddaef9;
+        v_4._f1 = 99;
+        v_4._f2 = ${v_ilev_ph_door01};
+        v_4._f3/*{3}*/ = {434.75, -980.6099853515625, 30.84 };
+        v_4._f7 = 1;
+        v_4._f8 = 1;
+        v_4._fB = 1;
+        break;
+    case 5:
+        v_4 = 0xe4c0b884;
+        v_4._f1 = 99;
+        v_4._f2 = ${v_ilev_ph_door002};
+        v_4._f3/*{3}*/ = {434.75, -983.219970703125, 30.84 };
+        v_4._f7 = 1;
+        v_4._f8 = 1;
+        v_4._fB = 1;
+        break;
+    case 6:
+        v_4 = 0x9c29be5;
+        v_4._f1 = 99;
+        v_4._f2 = ${prop_biolab_g_door};
+        v_4._f3/*{3}*/ = {3589.1, 3671.5, 35.0 };
+        v_4._f7 = 1;
+        v_4._f8 = 1;
+        v_4._fB = 1;
+        break;
+    case 7:
+        v_4 = 0xb58a7372;
+        v_4._f1 = 99;
+        v_4._f2 = ${prop_biolab_g_door};
+        v_4._f3/*{3}*/ = {3587.6, 3663.3, 35.0 };
+        v_4._f7 = 1;
+        v_4._f8 = 1;
+        v_4._fB = 1;
+        break;
+    case 33:
+        v_4 = 0x764f9f1c;
+        v_4._f1 = 99;
+        v_4._f2 = ${v_ilev_bl_shutter2};
+        v_4._f3/*{3}*/ = {3627.7099609375, 3746.719970703125, 27.69 };
+        v_4._f7 = 1;
+        v_4._f8 = 1;
+        v_4._fB = 1;
+        break;
+    case 34:
+        v_4 = 0xa4a57bc7;
+        v_4._f1 = 99;
+        v_4._f2 = ${v_ilev_bl_shutter2};
+        v_4._f3/*{3}*/ = {3620.84, 3751.53, 27.69 };
+        v_4._f7 = 1;
+        v_4._f8 = 1;
+        v_4._fB = 1;
+        break;
+    case 36:
+        v_4 = 0x6fe6354c;
+        v_4._f1 = 99;
+        v_4._f2 = ${v_ilev_abbmaindoor};
+        v_4._f3/*{3}*/ = {962.1, -2183.83, 31.06 };
+        v_4._f7 = 1;
+        v_4._f8 = 1;
+        v_4._fB = 1;
+        break;
+    case 35:
+        v_4 = 0xd22079bf;
+        v_4._f1 = 99;
+        v_4._f2 = ${v_ilev_abbmaindoor2};
+        v_4._f3/*{3}*/ = {961.7899780273438, -2187.08, 31.06 };
+        v_4._f7 = 1;
+        v_4._f8 = 1;
+        v_4._fB = 1;
+        break;
+    case 179:
+        v_4 = 0x2c0bb9ff;
+        v_4._f2 = ${prop_gate_airport_01};
+        v_4._f3/*{3}*/ = {-1138.469970703125, -2730.449951171875, 12.95 };
+        if (a_1 == 98) {
+            v_4._f6 = 1;
+            v_4._fA = 1;
+            v_4._f1 = 98;
+            v_4._fB = 0;
+        } else { 
+            v_4._f1 = 99;
+            v_4._f7 = 1;
+            v_4._f8 = 1;
+            v_4._fB = 0;
+        }
+        break;
+    case 178:
+        v_4 = 0x39c1d56b;
+        v_4._f2 = ${prop_gate_airport_01};
+        v_4._f3/*{3}*/ = {-1151.204345703125, -2723.102294921875, 12.946 };
+        if (a_1 == 98) {
+            v_4._f6 = 1;
+            v_4._fA = 1;
+            v_4._f1 = 98;
+            v_4._fB = 0;
+        } else { 
+            v_4._f1 = 99;
+            v_4._f7 = 1;
+            v_4._f8 = 1;
+            v_4._fB = 0;
+        }
+        break;
+    case 118:
+        v_4 = 0x3dcec8a0;
+        v_4._f2 = ${prop_gate_airport_01};
+        v_4._f3/*{3}*/ = {-977.5173950195312, -2837.264404296875, 12.954899787902832 };
+        if (a_1 == 98) {
+            v_4._f6 = 1;
+            v_4._fA = 1;
+            v_4._f1 = 98;
+            v_4._fB = 0;
+        } else { 
+            v_4._f1 = 99;
+            v_4._f7 = 1;
+            v_4._f8 = 1;
+            v_4._fB = 0;
+        }
+        break;
+    case 119:
+        v_4 = 0x6f1eab43;
+        v_4._f2 = ${prop_gate_airport_01};
+        v_4._f3/*{3}*/ = {-990.2963256835938, -2829.88720703125, 12.949899673461914 };
+        if (a_1 == 98) {
+            v_4._f6 = 1;
+            v_4._fA = 1;
+            v_4._f1 = 98;
+            v_4._fB = 0;
+        } else { 
+            v_4._f1 = 99;
+            v_4._f7 = 1;
+            v_4._f8 = 1;
+            v_4._fB = 0;
+        }
+        break;
+    case 120:
+        v_4 = 0xeacbe1c2;
+        v_4._f2 = ${prop_facgate_01};
+        v_4._f3/*{3}*/ = {-1213.4, -2079.3, 12.907 };
+        if (a_1 == 98) {
+            v_4._f6 = 1;
+            v_4._fA = 1;
+            v_4._f1 = 98;
+            v_4._fB = 0;
+        } else { 
+            v_4._f1 = 99;
+            v_4._f7 = 1;
+            v_4._f8 = 1;
+            v_4._fB = 0;
+        }
+        break;
+    case 121:
+        v_4 = 0xba39c799;
+        v_4._f1 = 99;
+        v_4._f2 = ${prop_fnclink_02gate6_r};
+        v_4._f3/*{3}*/ = {-967.4473266601562, -2778.4951171875, 14.409 };
+        v_4._f7 = 1;
+        v_4._f8 = 1;
+        v_4._fB = 1;
+        break;
+    case 122:
+        v_4 = 0xb27cb81f;
+        v_4._f1 = 99;
+        v_4._f2 = ${prop_fnclink_02gate6_l};
+        v_4._f3/*{3}*/ = {-974.5734252929688, -2774.380859375, 14.409899711608887 };
+        v_4._f7 = 1;
+        v_4._f8 = 1;
+        v_4._fB = 1;
+        break;
+    case 123:
+        v_4 = 0xa4d31ccc;
+        v_4._f1 = 99;
+        v_4._f2 = ${prop_fnclink_02gate6_r};
+        v_4._f3/*{3}*/ = {-971.101806640625, -2776.385498046875, 14.409 };
+        v_4._f7 = 1;
+        v_4._f8 = 1;
+        v_4._fB = 1;
+        break;
+    case 124:
+        v_4 = 0x5e060f27;
+        v_4._f1 = 99;
+        v_4._f2 = ${prop_fnclink_02gate6_l};
+        v_4._f3/*{3}*/ = {-970.9188232421875, -2776.49072265625, 14.409 };
+        v_4._f7 = 1;
+        v_4._f8 = 1;
+        v_4._fB = 1;
+        break;
+    case 125:
+        v_4 = 0x7fb65287;
+        v_4._f1 = 99;
+        v_4._f2 = ${prop_fnclink_02gate6_r};
+        v_4._f3/*{3}*/ = {-935.21142578125, -2767.396728515625, 14.388199806213379 };
+        v_4._f7 = 1;
+        v_4._f8 = 1;
+        v_4._fB = 1;
+        break;
+    case 126:
+        v_4 = 0x3b68c9ed;
+        v_4._f1 = 99;
+        v_4._f2 = ${prop_fnclink_02gate6_l};
+        v_4._f3/*{3}*/ = {-933.1580810546875, -2763.95458984375, 14.388199806213379 };
+        v_4._f7 = 1;
+        v_4._f8 = 1;
+        v_4._fB = 1;
+        break;
+    case 127:
+        v_4 = 0x6d21ad5e;
+        v_4._f1 = 99;
+        v_4._f2 = ${prop_fnclink_02gate6_r};
+        v_4._f3/*{3}*/ = {-933.0535278320312, -2763.779296875, 14.388199806213379 };
+        v_4._f7 = 1;
+        v_4._f8 = 1;
+        v_4._fB = 1;
+        break;
+    case 128:
+        v_4 = 0xf886c42a;
+        v_4._f1 = 99;
+        v_4._f2 = ${prop_fnclink_02gate6_l};
+        v_4._f3/*{3}*/ = {-931.0001831054688, -2760.337158203125, 14.388199806213379 };
+        v_4._f7 = 1;
+        v_4._f8 = 1;
+        v_4._fB = 1;
+        break;
+    case 129:
+        v_4 = 0x2c6e2bfc;
+        v_4._f1 = 99;
+        v_4._f2 = ${prop_fnclink_02gate6_r};
+        v_4._f3/*{3}*/ = {-773.2437744140625, -2842.677490234375, 14.271499633789062 };
+        v_4._f7 = 1;
+        v_4._f8 = 1;
+        v_4._fB = 1;
+        break;
+    case 130:
+        v_4 = 0xb232a0b6;
+        v_4._f1 = 99;
+        v_4._f2 = ${prop_fnclink_02gate6_l};
+        v_4._f3/*{3}*/ = {-769.7720947265625, -2844.681884765625, 14.271499633789062 };
+        v_4._f7 = 1;
+        v_4._f8 = 1;
+        v_4._fB = 1;
+        break;
+    case 131:
+        v_4 = 0xa405045b;
+        v_4._f1 = 99;
+        v_4._f2 = ${prop_fnclink_02gate6_r};
+        v_4._f3/*{3}*/ = {-769.6071166992188, -2844.777099609375, 14.271499633789062 };
+        v_4._f7 = 1;
+        v_4._f8 = 1;
+        v_4._fB = 1;
+        break;
+    case 132:
+        v_4 = 0xcf9d5b8b;
+        v_4._f1 = 99;
+        v_4._f2 = ${prop_fnclink_02gate6_l};
+        v_4._f3/*{3}*/ = {-766.1353759765625, -2846.781494140625, 14.271499633789062 };
+        v_4._f7 = 1;
+        v_4._f8 = 1;
+        v_4._fB = 1;
+        break;
+    case 133:
+        v_4 = 0x1bf3fde;
+        v_4._f1 = 99;
+        v_4._f2 = ${prop_fnclink_09gate1};
+        v_4._f3/*{3}*/ = {-828.9456176757812, -2964.3037109375, 14.275799751281738 };
+        v_4._f7 = 1;
+        v_4._f8 = 1;
+        v_4._fB = 1;
+        break;
+    case 134:
+        v_4 = 0xf1429ee5;
+        v_4._f1 = 99;
+        v_4._f2 = ${prop_fnclink_09gate1};
+        v_4._f3/*{3}*/ = {907.8, -3100.8740234375, 14.280799865722656 };
+        v_4._f7 = 1;
+        v_4._f8 = 1;
+        v_4._fB = 1;
+        break;
+    case 135:
+        v_4 = 0x1b70f341;
+        v_4._f1 = 99;
+        v_4._f2 = ${prop_fnclink_09gate1};
+        v_4._f3/*{3}*/ = {-833.4395141601562, -3186.70947265625, 14.267 };
+        v_4._f7 = 1;
+        v_4._f8 = 1;
+        v_4._fB = 1;
+        break;
+    case 136:
+        v_4 = 0x65ec91d;
+        v_4._f1 = 99;
+        v_4._f2 = ${prop_fnclink_09gate1};
+        v_4._f3/*{3}*/ = {-830.0543823242188, -3391.162841796875, 14.197199821472168 };
+        v_4._f7 = 1;
+        v_4._f8 = 1;
+        v_4._fB = 1;
+        break;
+    case 137:
+        v_4 = 0x3704aa68;
+        v_4._f1 = 99;
+        v_4._f2 = ${prop_fnclink_09gate1};
+        v_4._f3/*{3}*/ = {-913.0833740234375, -3534.9697265625, 14.1924 };
+        v_4._f7 = 1;
+        v_4._f8 = 1;
+        v_4._fB = 1;
+        break;
+    case 138:
+        v_4 = 0xb63d28bf;
+        v_4._f1 = 99;
+        v_4._f2 = ${prop_fnclink_09gate1};
+        v_4._f3/*{3}*/ = {-971.6149291992188, -3549.152099609375, 14.2727 };
+        v_4._f7 = 1;
+        v_4._f8 = 1;
+        v_4._fB = 1;
+        break;
+    case 139:
+        v_4 = 0x8c79d539;
+        v_4._f1 = 99;
+        v_4._f2 = ${prop_fnclink_09gate1};
+        v_4._f3/*{3}*/ = {-1017.6920776367188, -3563.21728515625, 14.2767 };
+        v_4._f7 = 1;
+        v_4._f8 = 1;
+        v_4._fB = 1;
+        break;
+    case 140:
+        v_4 = 0xcfb08d49;
+        v_4._f1 = 99;
+        v_4._f2 = ${prop_fnclink_09gate1};
+        v_4._f3/*{3}*/ = {-1146.8314208984375, -3546.63818359375, 14.259499549865723 };
+        v_4._f7 = 1;
+        v_4._f8 = 1;
+        v_4._fB = 1;
+        break;
+    case 141:
+        v_4 = 0x42af63d;
+        v_4._f1 = 99;
+        v_4._f2 = ${prop_fnclink_09gate1};
+        v_4._f3/*{3}*/ = {-1260.8966064453125, -3480.763916015625, 14.1721 };
+        v_4._f7 = 1;
+        v_4._f8 = 1;
+        v_4._fB = 1;
+        break;
+    case 142:
+        v_4 = 0xf6e4dbb1;
+        v_4._f1 = 99;
+        v_4._f2 = ${prop_fnclink_09gate1};
+        v_4._f3/*{3}*/ = {-1351.1328125, -3404.16162109375, 14.1721 };
+        v_4._f7 = 1;
+        v_4._f8 = 1;
+        v_4._fB = 1;
+        break;
+    case 143:
+        v_4 = 0x28a5bf32;
+        v_4._f1 = 99;
+        v_4._f2 = ${prop_fnclink_09gate1};
+        v_4._f3/*{3}*/ = {-1409.50732421875, -3370.46142578125, 14.2068 };
+        v_4._f7 = 1;
+        v_4._f8 = 1;
+        v_4._fB = 1;
+        break;
+    case 144:
+        v_4 = 0x3449d676;
+        v_4._f1 = 99;
+        v_4._f2 = ${prop_fnclink_09gate1};
+        v_4._f3/*{3}*/ = {-1831.803955078125, -3224.96630859375, 14.3119 };
+        v_4._f7 = 1;
+        v_4._f8 = 1;
+        v_4._fB = 1;
+        break;
+    case 145:
+        v_4 = 0x66193a30;
+        v_4._f1 = 99;
+        v_4._f2 = ${prop_fnclink_09gate1};
+        v_4._f3/*{3}*/ = {-1942.289306640625, -3161.1904296875, 14.2981 };
+        v_4._f7 = 1;
+        v_4._f8 = 1;
+        v_4._fB = 1;
+        break;
+    case 146:
+        v_4 = 0x585f9ebd;
+        v_4._f1 = 99;
+        v_4._f2 = ${prop_fnclink_09gate1};
+        v_4._f3/*{3}*/ = {-1927.5634765625, -3076.26904296875, 14.456899642944336 };
+        v_4._f7 = 1;
+        v_4._f8 = 1;
+        v_4._fB = 1;
+        break;
+    case 147:
+        v_4 = 0x6a41c281;
+        v_4._f1 = 99;
+        v_4._f2 = ${prop_fnclink_09gate1};
+        v_4._f3/*{3}*/ = {-1951.695556640625, -3003.845703125, 14.4418 };
+        v_4._f7 = 1;
+        v_4._f8 = 1;
+        v_4._fB = 1;
+        break;
+    case 148:
+        v_4 = 0x99d3a1a4;
+        v_4._f1 = 99;
+        v_4._f2 = ${prop_fnclink_09gate1};
+        v_4._f3/*{3}*/ = {-1836.875, -2804.968994140625, 14.4557 };
+        v_4._f7 = 1;
+        v_4._f8 = 1;
+        v_4._fB = 1;
+        break;
+    case 149:
+        v_4 = 0x8b97052b;
+        v_4._f1 = 99;
+        v_4._f2 = ${prop_fnclink_09gate1};
+        v_4._f3/*{3}*/ = {-1802.6915283203125, -2745.761474609375, 14.448 };
+        v_4._f7 = 1;
+        v_4._f8 = 1;
+        v_4._fB = 1;
+        break;
+    case 150:
+        v_4 = 0xd090db32;
+        v_4._f2 = ${prop_facgate_01};
+        v_4._f3/*{3}*/ = {-1099.53076171875, -2020.8026123046875, 12.1745 };
+        if (a_1 == 98) {
+            v_4._f6 = 1;
+            v_4._fA = 1;
+            v_4._f1 = 98;
+            v_4._fB = 0;
+        } else { 
+            v_4._f1 = 99;
+            v_4._f7 = 1;
+            v_4._f8 = 1;
+            v_4._fB = 1;
+        }
+        break;
+    case 151:
+        v_4 = 0xdd5ef4ce;
+        v_4._f2 = ${prop_facgate_01};
+        v_4._f3/*{3}*/ = {-994.4995727539062, -2341.648193359375, 12.9448 };
+        if (a_1 == 98) {
+            v_4._f6 = 1;
+            v_4._fA = 1;
+            v_4._f1 = 98;
+            v_4._fB = 0;
+        } else { 
+            v_4._f1 = 99;
+            v_4._f7 = 1;
+            v_4._f8 = 1;
+            v_4._fB = 1;
+        }
+        break;
+    case 152:
+        v_4 = 0xaafa1005;
+        v_4._f2 = ${prop_facgate_01};
+        v_4._f3/*{3}*/ = {-984.0709228515625, -2348.4, 12.9448 };
+        if (a_1 == 98) {
+            v_4._f6 = 1;
+            v_4._fA = 1;
+            v_4._f1 = 98;
+            v_4._fB = 0;
+        } else { 
+            v_4._f1 = 99;
+            v_4._f7 = 1;
+            v_4._f8 = 1;
+            v_4._fB = 1;
+        }
+        break;
+    case 153:
+        v_4 = 0xb9bd2d8b;
+        v_4._f2 = ${prop_gate_airport_01};
+        v_4._f3/*{3}*/ = {-1008.0708, -2406.7509765625, 12.977 };
+        if (a_1 == 98) {
+            v_4._f6 = 1;
+            v_4._fA = 1;
+            v_4._f1 = 98;
+            v_4._fB = 0;
+        } else { 
+            v_4._f1 = 99;
+            v_4._f7 = 1;
+            v_4._f8 = 1;
+            v_4._fB = 0;
+        }
+        break;
+    case 154:
+        v_4 = 0x5a6c56d;
+        v_4._f2 = ${prop_gate_airport_01};
+        v_4._f3/*{3}*/ = {-1015.4854125976562, -2419.582763671875, 12.9586 };
+        if (a_1 == 98) {
+            v_4._f6 = 1;
+            v_4._fA = 1;
+            v_4._f1 = 98;
+            v_4._fB = 0;
+        } else { 
+            v_4._f1 = 99;
+            v_4._f7 = 1;
+            v_4._f8 = 1;
+            v_4._fB = 0;
+        }
+        break;
+    case 62:
+        v_4 = 0xc699614;
+        v_4._f1 = 99;
+        v_4._f2 = ${v_ilev_lester_doorfront};
+        v_4._f3/*{3}*/ = {1273.8199462890625, 1720.6999999999998, 54.919999999999995 };
+        v_4._f7 = 1;
+        v_4._f8 = 1;
+        v_4._fB = 0;
+        break;
+    case 63:
+        v_4 = 0xaf11f176;
+        v_4._f1 = 99;
+        v_4._f2 = ${v_ilev_tort_door};
+        v_4._f3/*{3}*/ = {134.39999999999998, -2204.1, 7.52 };
+        v_4._f7 = 1;
+        v_4._f8 = 1;
+        v_4._fB = 1;
+        break;
+    case 74:
+        v_4 = 0xfb3303c9;
+        v_4._f1 = 99;
+        v_4._f2 = ${v_ilev_janitor_frontdoor};
+        v_4._f3/*{3}*/ = {-107.5373, -9.018099784851074, 70.6707992553711 };
+        v_4._f7 = 1;
+        v_4._f8 = 1;
+        v_4._fB = 1;
+        break;
+    case 72:
+        v_4 = 0x33c28f3a;
+        v_4._f1 = 99;
+        v_4._f2 = ${v_ilev_deviantfrontdoor};
+        v_4._f3/*{3}*/ = {-128.33, -1457.17, 37.94 };
+        v_4._f7 = 1;
+        v_4._f8 = 1;
+        v_4._fB = 1;
+        break;
+    case 73:
+        v_4 = 0x7f63ab84;
+        v_4._f1 = 99;
+        v_4._f2 = ${v_ilev_po_door};
+        v_4._f3/*{3}*/ = {-1910.5799560546875, -576.01, 19.25 };
+        v_4._f7 = 1;
+        v_4._f8 = 1;
+        v_4._fB = 1;
+        break;
+    case 64:
+        v_4 = 0x59142789;
+        v_4._f1 = 99;
+        v_4._f2 = ${v_ilev_ra_door3};
+        v_4._f3/*{3}*/ = {1395.92, 1142.9, 114.79 };
+        v_4._f7 = 1;
+        v_4._f8 = 1;
+        v_4._fB = 1;
+        break;
+    case 65:
+        v_4 = 0x52c31ae7;
+        v_4._f1 = 99;
+        v_4._f2 = ${v_ilev_ra_door3};
+        v_4._f3/*{3}*/ = {1395.92, 1140.6999999999998, 114.79 };
+        v_4._f7 = 1;
+        v_4._f8 = 1;
+        v_4._fB = 1;
+        break;
+    case 66:
+        v_4 = 0x81a7f8b0;
+        v_4._f1 = 99;
+        v_4._f2 = ${v_ilev_ra_door1_l};
+        v_4._f3/*{3}*/ = {1390.52, 1163.43994140625, 114.38 };
+        v_4._f7 = 1;
+        v_4._f8 = 1;
+        v_4._fB = 1;
+        break;
+    case 67:
+        v_4 = 0x735e5c1d;
+        v_4._f1 = 99;
+        v_4._f2 = ${v_ilev_ra_door1_r};
+        v_4._f3/*{3}*/ = {1390.52, 1161.24, 114.38 };
+        v_4._f7 = 1;
+        v_4._f8 = 1;
+        v_4._fB = 1;
+        break;
+    case 68:
+        v_4 = 0xefd05503;
+        v_4._f1 = 99;
+        v_4._f2 = ${v_ilev_ra_door1_l};
+        v_4._f3/*{3}*/ = {1408.0699462890625, 1158.969970703125, 114.48 };
+        v_4._f7 = 1;
+        v_4._f8 = 1;
+        v_4._fB = 1;
+        break;
+    case 69:
+        v_4 = 0x89a688b1;
+        v_4._f1 = 99;
+        v_4._f2 = ${v_ilev_ra_door1_r};
+        v_4._f3/*{3}*/ = {1408.0699462890625, 1161.17, 114.48 };
+        v_4._f7 = 1;
+        v_4._f8 = 1;
+        v_4._fB = 1;
+        break;
+    case 70:
+        v_4 = 0xbc816e66;
+        v_4._f1 = 99;
+        v_4._f2 = ${v_ilev_ra_door1_l};
+        v_4._f3/*{3}*/ = {1409.29, 1146.25, 114.49 };
+        v_4._f7 = 1;
+        v_4._f8 = 1;
+        v_4._fB = 1;
+        break;
+    case 71:
+        v_4 = 0xa613418a;
+        v_4._f1 = 99;
+        v_4._f2 = ${v_ilev_ra_door1_r};
+        v_4._f3/*{3}*/ = {1409.29, 1148.449951171875, 114.49 };
+        v_4._f7 = 1;
+        v_4._f8 = 1;
+        v_4._fB = 1;
+        break;
+    case 75:
+        v_4 = 0x291483e0;
+        v_4._f1 = 99;
+        v_4._f2 = ${v_ilev_bl_door_l};
+        v_4._f3/*{3}*/ = {-1387.05, -586.58, 30.47 };
+        v_4._f7 = 1;
+        v_4._f8 = 1;
+        v_4._fB = 1;
+        break;
+    case 76:
+        v_4 = 0x1e6e6e94;
+        v_4._f1 = 99;
+        v_4._f2 = ${v_ilev_bl_door_r};
+        v_4._f3/*{3}*/ = {1389.24, -588.0, 30.47 };
+        v_4._f7 = 1;
+        v_4._f8 = 1;
+        v_4._fB = 1;
+        break;
+    case 77:
+        v_4 = 0x12a9f3be;
+        v_4._f1 = 99;
+        v_4._f2 = ${prop_sec_gate_01c};
+        v_4._f3/*{3}*/ = {25.03, 664.6, 31.04 };
+        v_4._f7 = 1;
+        v_4._f8 = 5;
+        v_4._fB = 1;
+        break;
+    case 78:
+        v_4 = 0x8aadfc0;
+        v_4._f1 = 99;
+        v_4._f2 = ${prop_sec_gate_01d};
+        v_4._f3/*{3}*/ = {-72.75, -682.1699829101562, 33.27 };
+        v_4._f7 = 1;
+        v_4._f8 = 5;
+        v_4._fB = 1;
+        break;
+    case 60:
+        v_4 = 0xc77c0f47;
+        v_4._f1 = 99;
+        v_4._f2 = ${v_ilev_bank4door02};
+        v_4._f3/*{3}*/ = {-111.48, 6463.93994140625, 31.985 };
+        v_4._f7 = 1;
+        v_4._f8 = 1;
+        v_4._fB = 1;
+        break;
+    case 61:
+        v_4 = 0xd732aeb4;
+        v_4._f1 = 99;
+        v_4._f2 = ${v_ilev_bank4door01};
+        v_4._f3/*{3}*/ = {-109.65, 6462.10986328125, 31.985 };
+        v_4._f7 = 1;
+        v_4._f8 = 1;
+        v_4._fB = 1;
+        break;
+    case 12:
+        v_4 = 0xbc565cf9;
+        v_4._f1 = 99;
+        v_4._f2 = ${hei_v_ilev_bk_gate_pris};
+        v_4._f3/*{3}*/ = {256.3116149902344, 220.65789794921875, 106.42960357666016 };
+        v_4._f7 = 1;
+        v_4._f8 = 1;
+        v_4._fB = 0;
+        break;
+    case 13:
+        v_4 = 0x3c4bdce6;
+        v_4._f1 = 99;
+        v_4._f2 = ${hei_v_ilev_bk_gate2_pris};
+        v_4._f3/*{3}*/ = {262.1980895996094, 222.518798828125, 106.42960357666016 };
+        v_4._f7 = 1;
+        v_4._f8 = 1;
+        v_4._fB = 0;
+        break;
+    case 14:
+        v_4 = 0xe7f69f0e;
+        v_4._f1 = 99;
+        v_4._f2 = ${v_ilev_genbankdoor1};
+        v_4._f3/*{3}*/ = {-2965.821044921875, 481.63, 16.048 };
+        v_4._f7 = 1;
+        v_4._f8 = 1;
+        v_4._fB = 0;
+        break;
+    case 15:
+        v_4 = 0xf5c13aa3;
+        v_4._f1 = 99;
+        v_4._f2 = ${v_ilev_genbankdoor2};
+        v_4._f3/*{3}*/ = {-2965.7099609375, 484.218994140625, 16.048 };
+        v_4._f7 = 1;
+        v_4._f8 = 1;
+        v_4._fB = 0;
+        break;
+    case 16:
+        v_4 = 0x6766457d;
+        v_4._f1 = 99;
+        v_4._f2 = ${v_ilev_genbankdoor1};
+        v_4._f3/*{3}*/ = {1176.49, 2703.610107421875, 38.44 };
+        v_4._f7 = 1;
+        v_4._f8 = 1;
+        v_4._fB = 1;
+        break;
+    case 17:
+        v_4 = 0xc407fec3;
+        v_4._f1 = 99;
+        v_4._f2 = ${v_ilev_genbankdoor2};
+        v_4._f3/*{3}*/ = {1173.9, 2703.610107421875, 38.44 };
+        v_4._f7 = 1;
+        v_4._f8 = 1;
+        v_4._fB = 1;
+        break;
+    case 18:
+        v_4 = 0x77f97569;
+        v_4._f1 = 99;
+        v_4._f2 = ${v_ilev_genbankdoor1};
+        v_4._f3/*{3}*/ = {1656.25, 4852.240234375, 42.35 };
+        v_4._f7 = 1;
+        v_4._f8 = 1;
+        v_4._fB = 1;
+        break;
+    case 19:
+        v_4 = 0x12c2aafd;
+        v_4._f1 = 99;
+        v_4._f2 = ${v_ilev_genbankdoor2};
+        v_4._f3/*{3}*/ = {1656.5699462890625, 4849.66015625, 42.35 };
+        v_4._f7 = 1;
+        v_4._f8 = 1;
+        v_4._fB = 1;
+        break;
+    case 20:
+        v_4 = 0x220dcd9e;
+        v_4._f1 = 99;
+        v_4._f2 = ${v_ilev_genbankdoor1};
+        v_4._f3/*{3}*/ = {-1215.39, -328.5199890136719, 38.13 };
+        v_4._f7 = 1;
+        v_4._f8 = 1;
+        v_4._fB = 0;
+        break;
+    case 21:
+        v_4 = 0xfdb2939;
+        v_4._f1 = 99;
+        v_4._f2 = ${v_ilev_genbankdoor2};
+        v_4._f3/*{3}*/ = {-1213.0699462890625, -327.35, 38.13 };
+        v_4._f7 = 1;
+        v_4._f8 = 1;
+        v_4._fB = 0;
+        break;
+    case 22:
+        v_4 = 0xf5cc68f5;
+        v_4._f1 = 99;
+        v_4._f2 = ${v_ilev_genbankdoor1};
+        v_4._f3/*{3}*/ = {149.63, -1037.22998046875, 29.72 };
+        v_4._f7 = 1;
+        v_4._f8 = 1;
+        v_4._fB = 0;
+        break;
+    case 23:
+        v_4 = 0xbaa7f2ad;
+        v_4._f1 = 99;
+        v_4._f2 = ${v_ilev_genbankdoor2};
+        v_4._f3/*{3}*/ = {152.06, 1038.12, 29.72 };
+        v_4._f7 = 1;
+        v_4._f8 = 1;
+        v_4._fB = 0;
+        break;
+    case 24:
+        v_4 = 0x406e7a76;
+        v_4._f1 = 99;
+        v_4._f2 = ${v_ilev_genbankdoor1};
+        v_4._f3/*{3}*/ = {313.96, -275.6, 54.52 };
+        v_4._f7 = 1;
+        v_4._f8 = 1;
+        v_4._fB = 1;
+        break;
+    case 25:
+        v_4 = 0xd1cd1d35;
+        v_4._f1 = 99;
+        v_4._f2 = ${v_ilev_genbankdoor2};
+        v_4._f3/*{3}*/ = {316.39, 276.49, 54.52 };
+        v_4._f7 = 1;
+        v_4._f8 = 1;
+        v_4._fB = 1;
+        break;
+    case 26:
+        v_4 = 0x9392b8c3;
+        v_4._f1 = 99;
+        v_4._f2 = ${v_ilev_genbankdoor2};
+        v_4._f3/*{3}*/ = {-348.8109130859375, -47.2621, 49.3876 };
+        v_4._f7 = 1;
+        v_4._f8 = 1;
+        v_4._fB = 1;
+        break;
+    case 27:
+        v_4 = 0x6a9066c3;
+        v_4._f1 = 99;
+        v_4._f2 = ${v_ilev_genbankdoor1};
+        v_4._f3/*{3}*/ = {-351.2597961425781, -46.4122, 49.3876 };
+        v_4._f7 = 1;
+        v_4._f8 = 1;
+        v_4._fB = 1;
+        break;
+    case 58:
+        v_4 = 0x5f436911;
+        v_4._f1 = 99;
+        v_4._f2 = ${v_ilev_fibl_door02};
+        v_4._f3/*{3}*/ = {106.38, -742.7, 46.18 };
+        v_4._f7 = 1;
+        v_4._f8 = 1;
+        v_4._fB = 1;
+        break;
+    case 59:
+        v_4 = 0x5199cdbe;
+        v_4._f1 = 99;
+        v_4._f2 = ${v_ilev_fibl_door01};
+        v_4._f3/*{3}*/ = {105.76, -746.65, 46.18 };
+        v_4._f7 = 1;
+        v_4._f8 = 1;
+        v_4._fB = 1;
+        break;
+    case 183:
+        v_4 = 0x93d8f76b;
+        v_4._f1 = 99;
+        v_4._f2 = ${prop_ch3_01_trlrdoor_l};
+        v_4._f3/*{3}*/ = {2333.22998046875, 2574.969970703125, 47.03 };
+        v_4._f7 = 1;
+        v_4._f8 = 1;
+        v_4._fB = 1;
+        break;
+    case 184:
+        v_4 = 0x5af905ac;
+        v_4._f1 = 99;
+        v_4._f2 = ${prop_ch3_01_trlrdoor_r};
+        v_4._f3/*{3}*/ = {2329.64990234375, 2576.639892578125, 47.03 };
+        v_4._f7 = 1;
+        v_4._f8 = 1;
+        v_4._fB = 1;
+        break;
+    case 185:
+        v_4 = 0x19332125;
+        v_4._f1 = 99;
+        v_4._f2 = ${v_ilev_fh_frntdoor};
+        v_4._f3/*{3}*/ = {0.2169, -1823.3031, 29.63909912109375 };
+        v_4._f7 = 1;
+        v_4._f8 = 1;
+        v_4._fB = 1;
+        break;
+    case 186:
+        v_4 = 0xc07270f8;
+        v_4._f1 = 99;
+        v_4._f2 = ${v_ilev_bl_doorel_l};
+        v_4._f3/*{3}*/ = {-2053.159912109375, 3239.49, 30.5 };
+        v_4._f7 = 1;
+        v_4._f8 = 1;
+        v_4._fB = 1;
+        break;
+    case 187:
+        v_4 = 0x74d1d9b8;
+        v_4._f1 = 99;
+        v_4._f2 = ${v_ilev_bl_doorel_r};
+        v_4._f3/*{3}*/ = {-2054.389892578125, 3237.22998046875, 30.5 };
+        v_4._f7 = 1;
+        v_4._f8 = 1;
+        v_4._fB = 1;
+        break;
+    case 188:
+        v_4 = 0x732427d0;
+        v_4._f1 = 99;
+        v_4._f2 = ${prop_cs4_05_tdoor};
+        v_4._f3/*{3}*/ = {31.918, 3666.853515625, 40.8586 };
+        v_4._f7 = 1;
+        v_4._f8 = 1;
+        v_4._fB = 1;
+        break;
+    case 189:
+        v_4 = 0x60da833d;
+        v_4._f1 = 99;
+        v_4._f2 = ${prop_magenta_door};
+        v_4._f3/*{3}*/ = {29.102, 3661.4892578125, 40.854698181152344 };
+        v_4._f7 = 1;
+        v_4._f8 = 1;
+        v_4._fB = 1;
+        break;
+    case 290:
+        v_4 = 0xb967ef20;
+        v_4._f1 = 99;
+        v_4._f2 = ${hei_prop_heist_cutscene_doorb};
+        v_4._f3/*{3}*/ = {776.8, 4184.64013671875, 41.91 };
+        v_4._f7 = 1;
+        v_4._f8 = 1;
+        v_4._fB = 0;
+        break;
+    case 291:
+        v_4 = 0xc3012cc8;
+        v_4._f1 = 99;
+        v_4._f2 = ${hei_prop_heist_cutscene_doora};
+        v_4._f3/*{3}*/ = {722.3989868164062, 4187.9521484375, 41.23099899291992 };
+        v_4._f7 = 1;
+        v_4._f8 = 1;
+        v_4._fB = 0;
+        break;
+    case 292:
+        v_4 = 0x26da5054;
+        v_4._f1 = 99;
+        v_4._f2 = ${hei_prop_heist_cutscene_doorc_r};
+        v_4._f3/*{3}*/ = {610.593994140625, -421.8299865722656, 24.979 };
+        v_4._f7 = 1;
+        v_4._f8 = 1;
+        v_4._fB = 0;
+        break;
+    case 293:
+        v_4 = 0x3e8d7fba;
+        v_4._f1 = 99;
+        v_4._f2 = ${hei_prop_heist_cutscene_doorc_l};
+        v_4._f3/*{3}*/ = {610.8740234375, -419.364990234375, 24.979 };
+        v_4._f7 = 1;
+        v_4._f8 = 1;
+        v_4._fB = 0;
+        break;
+    }
+    switch (a_0) {
+    case 190:
+        v_4 = 0x4ad9b420;
+        v_4._f1 = 99;
+        v_4._f2 = ${prop_fnclink_03gate2};
+        v_4._f3/*{3}*/ = {-687.72998046875, -2458.82, 12.899999999999999 };
+        v_4._f6 = 1;
+        v_4._fA = 1;
+        break;
+    case 191:
+        v_4 = 0x715a8129;
+        v_4._f1 = 99;
+        v_4._f2 = ${prop_fnclink_03gate2};
+        v_4._f3/*{3}*/ = {-697.82, -1226.5, 12.91 };
+        v_4._f6 = 1;
+        v_4._fA = 1;
+        break;
+    case 192:
+        v_4 = 0x66786b5d;
+        v_4._f1 = 99;
+        v_4._f2 = ${prop_fnclink_03gate2};
+        v_4._f3/*{3}*/ = {-692.77, -2455.929931640625, 12.899999999999999 };
+        v_4._f6 = 1;
+        v_4._fA = 1;
+        break;
+    case 194:
+        v_4 = 0x1734ccdb;
+        v_4._f1 = 99;
+        v_4._f2 = ${prop_gate_airport_01};
+        v_4._f3/*{3}*/ = {891.93, -2748.7099609375, 12.95 };
+        v_4._f6 = 1;
+        v_4._fA = 1;
+        break;
+    case 195:
+        v_4 = 0x2baa908b;
+        v_4._f1 = 99;
+        v_4._f2 = ${prop_gate_airport_01};
+        v_4._f3/*{3}*/ = {-896.46, -2746.419921875, 12.95 };
+        v_4._f6 = 1;
+        v_4._fA = 1;
+        break;
+    case 196:
+        v_4 = 0x505d59f0;
+        v_4._f1 = 99;
+        v_4._f2 = ${prop_gate_airport_01};
+        v_4._f3/*{3}*/ = {-859.72998046875, 2683.9, 12.76 };
+        v_4._f6 = 1;
+        v_4._fA = 1;
+        break;
+    case 197:
+        v_4 = 0x5c3bf0a1;
+        v_4._f1 = 99;
+        v_4._f2 = ${prop_facgate_01};
+        v_4._f3/*{3}*/ = {-1019.6099853515625, -1897.02, 13.37 };
+        v_4._f6 = 1;
+        v_4._fA = 1;
+        break;
+    case 198:
+        v_4 = 0x4961caed;
+        v_4._f1 = 99;
+        v_4._f2 = ${prop_facgate_01};
+        v_4._f3/*{3}*/ = {-160.88, 2636.2, 5.03 };
+        v_4._f6 = 1;
+        v_4._fA = 1;
+        break;
+    case 199:
+        v_4 = 0x37b7a799;
+        v_4._f1 = 99;
+        v_4._f2 = ${prop_facgate_01};
+        v_4._f3/*{3}*/ = {-148.71, 2636.2, 5.03 };
+        v_4._f6 = 1;
+        v_4._fA = 1;
+        break;
+    case 200:
+        v_4 = 0x26e005ea;
+        v_4._f1 = 99;
+        v_4._f2 = ${prop_facgate_01};
+        v_4._f3/*{3}*/ = {237.78, -2936.9599609375, 5.05 };
+        v_4._f6 = 1;
+        v_4._fA = 1;
+        break;
+    case 201:
+        v_4 = 0x953b629f;
+        v_4._f1 = 99;
+        v_4._f2 = ${prop_gate_docks_ld};
+        v_4._f3/*{3}*/ = {188.28, -2204.610107421875, 9.3 };
+        v_4._f6 = 1;
+        v_4._fA = 1;
+        break;
+    case 202:
+        v_4 = 0x82533ccf;
+        v_4._f1 = 99;
+        v_4._f2 = ${prop_gate_docks_ld};
+        v_4._f3/*{3}*/ = {127.56, -2185.29, 9.3 };
+        v_4._f6 = 1;
+        v_4._fA = 1;
+        break;
+    case 203:
+        v_4 = 0xc6cc8a24;
+        v_4._f1 = 99;
+        v_4._f2 = ${prop_gate_docks_ld};
+        v_4._f3/*{3}*/ = {-33.22, -2141.27, 9.3 };
+        v_4._f6 = 1;
+        v_4._fA = 1;
+        break;
+    case 204:
+        v_4 = 0xd90f2ea9;
+        v_4._f1 = 99;
+        v_4._f2 = ${prop_facgate_01};
+        v_4._f3/*{3}*/ = {1000.68, 2454.99, 27.57 };
+        v_4._f6 = 1;
+        v_4._fA = 1;
+        break;
+    case 205:
+        v_4 = 0xa2fbc283;
+        v_4._f1 = 99;
+        v_4._f2 = ${prop_facgate_01};
+        v_4._f3/*{3}*/ = {1012.9099731445312, -2456.22998046875, 27.53 };
+        v_4._f6 = 1;
+        v_4._fA = 1;
+        break;
+    case 206:
+        v_4 = 0x48d60f41;
+        v_4._f1 = 99;
+        v_4._f2 = ${prop_facgate_01};
+        v_4._f3/*{3}*/ = {1028.0799560546875, -2364.719970703125, 29.52 };
+        v_4._f6 = 1;
+        v_4._fA = 1;
+        break;
+    case 207:
+        v_4 = 0x7718ebc6;
+        v_4._f1 = 99;
+        v_4._f2 = ${prop_facgate_01};
+        v_4._f3/*{3}*/ = {1033.219970703125, -2299.1, 29.52 };
+        v_4._f6 = 1;
+        v_4._fA = 1;
+        break;
+    case 208:
+        v_4 = 0x6a01d198;
+        v_4._f1 = 99;
+        v_4._f2 = ${prop_facgate_01};
+        v_4._f3/*{3}*/ = {1022.4, -2417.1298828125, 28.13 };
+        v_4._f6 = 1;
+        v_4._fA = 1;
+        break;
+    case 209:
+        v_4 = 0x9f8b3caa;
+        v_4._f1 = 99;
+        v_4._f2 = ${prop_gate_military_01};
+        v_4._f3/*{3}*/ = {2485.43994140625, 432.71, 91.97 };
+        v_4._f6 = 1;
+        v_4._fA = 1;
+        break;
+    case 210:
+        v_4 = 0x8fe19d57;
+        v_4._f1 = 99;
+        v_4._f2 = ${prop_gate_prison_01};
+        v_4._f3/*{3}*/ = {2485.09, 335.84, 91.98 };
+        v_4._f6 = 1;
+        v_4._fA = 1;
+        break;
+    case 211:
+        v_4 = 0xbe1e79d0;
+        v_4._f1 = 99;
+        v_4._f2 = ${prop_facgate_01};
+        v_4._f3/*{3}*/ = {2491.969970703125, -303.48, 91.99 };
+        v_4._f6 = 1;
+        v_4._fA = 1;
+        break;
+    case 212:
+        v_4 = 0xd43fa612;
+        v_4._f1 = 99;
+        v_4._f2 = ${prop_facgate_01};
+        v_4._f3/*{3}*/ = {1944.8599853515625, -957.69, 78.15 };
+        v_4._f6 = 1;
+        v_4._fA = 1;
+        break;
+    case 213:
+        v_4 = 0x356468aa;
+        v_4._f1 = 99;
+        v_4._f2 = ${prop_facgate_01};
+        v_4._f3/*{3}*/ = {1956.74, -956.8599853515625, 78.15 };
+        v_4._f6 = 1;
+        v_4._fA = 1;
+        break;
+    case 214:
+        v_4 = 0x4a38729;
+        v_4._f1 = 99;
+        v_4._f2 = ${prop_gate_prison_01};
+        v_4._f3/*{3}*/ = {1845.0, 2604.81, 44.64 };
+        v_4._f6 = 1;
+        v_4._fA = 1;
+        break;
+    case 215:
+        v_4 = 0x126922b4;
+        v_4._f1 = 99;
+        v_4._f2 = ${prop_gate_prison_01};
+        v_4._f3/*{3}*/ = {1818.55, 2604.81, 44.6 };
+        v_4._f6 = 1;
+        v_4._fA = 1;
+        break;
+    case 216:
+        v_4 = 0xdb0333ed;
+        v_4._f1 = 99;
+        v_4._f2 = ${prop_gate_prison_01};
+        v_4._f3/*{3}*/ = {1799.74, 2616.97998046875, 44.61 };
+        v_4._f6 = 1;
+        v_4._fA = 1;
+        break;
+    case 217:
+        v_4 = 0xa851ce8b;
+        v_4._f1 = 99;
+        v_4._f2 = ${prop_gate_prison_01};
+        v_4._f3/*{3}*/ = {1813.4, 2488.6298828125, 44.47 };
+        v_4._f6 = 1;
+        v_4._fA = 1;
+        break;
+    case 218:
+        v_4 = 0xb67c6ae0;
+        v_4._f1 = 99;
+        v_4._f2 = ${prop_gate_prison_01};
+        v_4._f3/*{3}*/ = {1808.8199462890625, 2474.8798828125, 44.47 };
+        v_4._f6 = 1;
+        v_4._fA = 1;
+        break;
+    case 219:
+        v_4 = 0x84460674;
+        v_4._f1 = 99;
+        v_4._f2 = ${prop_gate_prison_01};
+        v_4._f3/*{3}*/ = {1762.18994140625, 2426.72998046875, 44.44 };
+        v_4._f6 = 1;
+        v_4._fA = 1;
+        break;
+    case 220:
+        v_4 = 0x6fbddd64;
+        v_4._f1 = 99;
+        v_4._f2 = ${prop_gate_prison_01};
+        v_4._f3/*{3}*/ = {1749.219970703125, 2420.28, 44.43 };
+        v_4._f6 = 1;
+        v_4._fA = 1;
+        break;
+    case 221:
+        v_4 = 0x7df879d9;
+        v_4._f1 = 99;
+        v_4._f2 = ${prop_gate_prison_01};
+        v_4._f3/*{3}*/ = {1667.6099853515625, 2408.110107421875, 44.419999999999995 };
+        v_4._f6 = 1;
+        v_4._fA = 1;
+        break;
+    case 222:
+        v_4 = 0x4b7d14e3;
+        v_4._f1 = 99;
+        v_4._f2 = ${prop_gate_prison_01};
+        v_4._f3/*{3}*/ = {1661.76, 2748.32, 44.43 };
+        v_4._f6 = 1;
+        v_4._fA = 1;
+        break;
+    case 223:
+        v_4 = 0x7ad030f5;
+        v_4._f1 = 99;
+        v_4._f2 = ${prop_gate_prison_01};
+        v_4._f3/*{3}*/ = {1653.2099609375, 2409.7099609375, 44.419999999999995 };
+        v_4._f6 = 1;
+        v_4._fA = 1;
+        break;
+    case 224:
+        v_4 = 0xb80dab6f;
+        v_4._f1 = 99;
+        v_4._f2 = ${prop_gate_prison_01};
+        v_4._f3/*{3}*/ = {1558.14, 2469.8701171875, 44.4 };
+        v_4._f6 = 1;
+        v_4._fA = 1;
+        break;
+    case 225:
+        v_4 = 0xde45f7df;
+        v_4._f1 = 99;
+        v_4._f2 = ${prop_gate_prison_01};
+        v_4._f3/*{3}*/ = {1551.18, 2482.58, 44.4 };
+        v_4._f6 = 1;
+        v_4._fA = 1;
+        break;
+    case 226:
+        v_4 = 0xb912ad7d;
+        v_4._f1 = 99;
+        v_4._f2 = ${prop_gate_prison_01};
+        v_4._f3/*{3}*/ = {1547.41, 2576.6, 44.51 };
+        v_4._f6 = 1;
+        v_4._fA = 1;
+        break;
+    case 227:
+        v_4 = 0xa703095e;
+        v_4._f1 = 99;
+        v_4._f2 = ${prop_gate_prison_01};
+        v_4._f3/*{3}*/ = {1547.99, 2591.08, 44.51 };
+        v_4._f6 = 1;
+        v_4._fA = 1;
+        break;
+    case 228:
+        v_4 = 0x14c1e4da;
+        v_4._f1 = 99;
+        v_4._f2 = ${prop_gate_prison_01};
+        v_4._f3/*{3}*/ = {1576.18994140625, 2667.22998046875, 44.51 };
+        v_4._f6 = 1;
+        v_4._fA = 1;
+        break;
+    case 229:
+        v_4 = 0x26f4035;
+        v_4._f1 = 99;
+        v_4._f2 = ${prop_gate_prison_01};
+        v_4._f3/*{3}*/ = {1584.63, 2679.02, 44.51 };
+        v_4._f6 = 1;
+        v_4._fA = 1;
+        break;
+    case 230:
+        v_4 = 0xfa55b002;
+        v_4._f1 = 99;
+        v_4._f2 = ${prop_gate_prison_01};
+        v_4._f3/*{3}*/ = {1648.949951171875, 2741.55, 44.45 };
+        v_4._f6 = 1;
+        v_4._fA = 1;
+        break;
+    case 231:
+        v_4 = 0xf0089b68;
+        v_4._f1 = 99;
+        v_4._f2 = ${prop_gate_prison_01};
+        v_4._f3/*{3}*/ = {1762.5799560546875, 2751.9, 44.45 };
+        v_4._f6 = 1;
+        v_4._fA = 1;
+        break;
+    case 232:
+        v_4 = 0x5dbb76cc;
+        v_4._f1 = 99;
+        v_4._f2 = ${prop_gate_prison_01};
+        v_4._f3/*{3}*/ = {1776.26, 2747.1, 44.43 };
+        v_4._f6 = 1;
+        v_4._fA = 1;
+        break;
+    case 233:
+        v_4 = 0x7d9537d3;
+        v_4._f1 = 99;
+        v_4._f2 = ${prop_gate_prison_01};
+        v_4._f3/*{3}*/ = {1829.8, 2702.919921875, 44.45 };
+        v_4._f6 = 1;
+        v_4._fA = 1;
+        break;
+    case 234:
+        v_4 = 0x8ece5a45;
+        v_4._f1 = 99;
+        v_4._f2 = ${prop_gate_prison_01};
+        v_4._f3/*{3}*/ = {1834.92, 2689.3701171875, 44.45 };
+        v_4._f6 = 1;
+        v_4._fA = 1;
+        break;
+    case 235:
+        v_4 = 0xa10ffec8;
+        v_4._f1 = 99;
+        v_4._f2 = ${prop_fnclink_03gate1};
+        v_4._f3/*{3}*/ = {222.07, 2013.99, 18.41 };
+        v_4._f6 = 1;
+        v_4._fA = 1;
+        break;
+    case 236:
+        v_4 = 0x8e9f59eb;
+        v_4._f1 = 99;
+        v_4._f2 = ${prop_fnclink_03gate1};
+        v_4._f3/*{3}*/ = {210.92999999999998, -2022.5799560546875, 17.65 };
+        v_4._f6 = 1;
+        v_4._fA = 1;
+        break;
+    case 237:
+        v_4 = 0xa054fd56;
+        v_4._f1 = 99;
+        v_4._f2 = ${prop_facgate_01b};
+        v_4._f3/*{3}*/ = {459.7, -2002.93994140625, 22.07 };
+        v_4._f6 = 1;
+        v_4._fA = 1;
+        break;
+    case 238:
+        v_4 = 0xa31b02e2;
+        v_4._f1 = 99;
+        v_4._f2 = ${prop_facgate_01};
+        v_4._f3/*{3}*/ = {451.45, -1994.01, 22.07 };
+        v_4._f6 = 1;
+        v_4._fA = 1;
+        break;
+    case 239:
+        v_4 = 0xb4e9a67f;
+        v_4._f1 = 99;
+        v_4._f2 = ${prop_facgate_01b};
+        v_4._f3/*{3}*/ = {455.74, -1944.8499755859375, 23.66 };
+        v_4._f6 = 1;
+        v_4._fA = 1;
+        break;
+    case 240:
+        v_4 = 0xfd7bb7a2;
+        v_4._f1 = 99;
+        v_4._f2 = ${prop_facgate_01};
+        v_4._f3/*{3}*/ = {466.76, -1939.65, 23.66 };
+        v_4._f6 = 1;
+        v_4._fA = 1;
+        break;
+    case 241:
+        v_4 = 0xd70a6ac0;
+        v_4._f1 = 99;
+        v_4._f2 = ${prop_facgate_01b};
+        v_4._f3/*{3}*/ = {539.83, -1901.88, 24.22 };
+        v_4._f6 = 1;
+        v_4._fA = 1;
+        break;
+    case 242:
+        v_4 = 0x19f6f098;
+        v_4._f1 = 99;
+        v_4._f2 = ${prop_facgate_01};
+        v_4._f3/*{3}*/ = {550.87, -1896.75, 24.15 };
+        v_4._f6 = 1;
+        v_4._fA = 1;
+        break;
+    case 243:
+        v_4 = 0x43ebc0d9;
+        v_4._f1 = 99;
+        v_4._f2 = ${prop_facgate_01};
+        v_4._f3/*{3}*/ = {564.12, -1903.0, 23.71 };
+        v_4._f6 = 1;
+        v_4._fA = 1;
+        break;
+    case 244:
+        v_4 = 0x431ebf3f;
+        v_4._f1 = 99;
+        v_4._f2 = ${prop_facgate_01};
+        v_4._f3/*{3}*/ = {567.4, -1908.219970703125, 23.71 };
+        v_4._f6 = 1;
+        v_4._fA = 1;
+        break;
+    case 245:
+        v_4 = 0x31511ba4;
+        v_4._f1 = 99;
+        v_4._f2 = ${prop_fnclink_03gate1};
+        v_4._f3/*{3}*/ = {1081.65, -1818.42, 36.43 };
+        v_4._f6 = 1;
+        v_4._fA = 1;
+        break;
+    case 246:
+        v_4 = 0x4321bf49;
+        v_4._f1 = 99;
+        v_4._f2 = ${prop_facgate_01};
+        v_4._f3/*{3}*/ = {987.52, -1176.8199462890625, 24.55 };
+        v_4._f6 = 1;
+        v_4._fA = 1;
+        break;
+    case 247:
+        v_4 = 0x31781bf6;
+        v_4._f1 = 99;
+        v_4._f2 = ${prop_facgate_01};
+        v_4._f3/*{3}*/ = {705.64, -1319.67, 24.96 };
+        v_4._f6 = 1;
+        v_4._fA = 1;
+        break;
+    case 248:
+        v_4 = 0x9e9ef642;
+        v_4._f1 = 99;
+        v_4._f2 = ${prop_facgate_01};
+        v_4._f3/*{3}*/ = {712.95, -1329.42, 24.99 };
+        v_4._f6 = 1;
+        v_4._fA = 1;
+        break;
+    case 249:
+        v_4 = 0x8cae5261;
+        v_4._f1 = 99;
+        v_4._f2 = ${prop_facgate_01};
+        v_4._f3/*{3}*/ = {796.46, 921.49, 24.4 };
+        v_4._f6 = 1;
+        v_4._fA = 1;
+        break;
+    case 250:
+        v_4 = 0x67970833;
+        v_4._f1 = 99;
+        v_4._f2 = ${prop_facgate_01};
+        v_4._f3/*{3}*/ = {795.78, -909.33, 24.36 };
+        v_4._f6 = 1;
+        v_4._fA = 1;
+        break;
+    case 251:
+        v_4 = 0xd610e525;
+        v_4._f1 = 99;
+        v_4._f2 = ${prop_facgate_01};
+        v_4._f3/*{3}*/ = {795.1599731445312, -896.64, 24.1 };
+        v_4._f6 = 1;
+        v_4._fA = 1;
+        break;
+    case 252:
+        v_4 = 0xc52a4358;
+        v_4._f1 = 99;
+        v_4._f2 = ${prop_facgate_01};
+        v_4._f3/*{3}*/ = {794.47998046875, -884.47998046875, 24.06 };
+        v_4._f6 = 1;
+        v_4._fA = 1;
+        break;
+    case 253:
+        v_4 = 0x987feb68;
+        v_4._f1 = 99;
+        v_4._f2 = ${prop_fnclink_03gate2};
+        v_4._f3/*{3}*/ = {546.1699829101562, -1869.93994140625, 24.53 };
+        v_4._f6 = 1;
+        v_4._fA = 1;
+        break;
+    case 254:
+        v_4 = 0x66d9081b;
+        v_4._f1 = 99;
+        v_4._f2 = ${prop_fnclink_03gate1};
+        v_4._f3/*{3}*/ = {492.3299865722656, -1410.469970703125, 28.43 };
+        v_4._f6 = 1;
+        v_4._fA = 1;
+        break;
+    case 255:
+        v_4 = 0x7926acb6;
+        v_4._f1 = 99;
+        v_4._f2 = ${prop_fnclink_03gate1};
+        v_4._f3/*{3}*/ = {484.57, -1408.5, 28.48 };
+        v_4._f6 = 1;
+        v_4._fA = 1;
+        break;
+    case 256:
+        v_4 = 0x7f01386f;
+        v_4._f1 = 99;
+        v_4._f2 = ${prop_fnclink_03gate1};
+        v_4._f3/*{3}*/ = {469.3299865722656, 1272.6999999999998, 28.82 };
+        v_4._f6 = 1;
+        v_4._fA = 1;
+        break;
+    case 257:
+        v_4 = 0xd1475cfa;
+        v_4._f1 = 99;
+        v_4._f2 = ${prop_fnclink_03gate1};
+        v_4._f3/*{3}*/ = {487.87, -1272.5899658203125, 28.86 };
+        v_4._f6 = 1;
+        v_4._fA = 1;
+        break;
+    case 258:
+        v_4 = 0xe2937f92;
+        v_4._f1 = 99;
+        v_4._f2 = ${prop_facgate_08};
+        v_4._f3/*{3}*/ = {488.89, -1011.6699829101562, 27.14 };
+        v_4._f6 = 1;
+        v_4._fA = 1;
+        break;
+    case 259:
+        v_4 = 0xac5d1326;
+        v_4._f1 = 99;
+        v_4._f2 = ${prop_fnclink_03gate1};
+        v_4._f3/*{3}*/ = {527.5499877929688, -1597.3299560546875, 28.39 };
+        v_4._f6 = 1;
+        v_4._fA = 1;
+        break;
+    case 260:
+        v_4 = 0xbe1eb6a9;
+        v_4._f1 = 99;
+        v_4._f2 = ${prop_fnclink_03gate1};
+        v_4._f3/*{3}*/ = {544.94, -1649.75, 27.49 };
+        v_4._f6 = 1;
+        v_4._fA = 1;
+        break;
+    case 261:
+        v_4 = 0x7e24a2f;
+        v_4._f1 = 99;
+        v_4._f2 = ${prop_fnclink_03gate2};
+        v_4._f3/*{3}*/ = {151.35, -1668.64, 28.77 };
+        v_4._f6 = 1;
+        v_4._fA = 1;
+        break;
+    case 262:
+        v_4 = 0x199ceda4;
+        v_4._f1 = 99;
+        v_4._f2 = ${prop_fnclink_03gate1};
+        v_4._f3/*{3}*/ = {47.2, -1448.3, 28.44 };
+        v_4._f6 = 1;
+        v_4._fA = 1;
+        break;
+    case 263:
+        v_4 = 0x2a73cae9;
+        v_4._f1 = 99;
+        v_4._f2 = ${prop_lrggate_03a};
+        v_4._f3/*{3}*/ = {1876.37, 194.85, 83.33 };
+        v_4._f6 = 1;
+        v_4._fA = 1;
+        break;
+    case 264:
+        v_4 = 0x7f5b74b7;
+        v_4._f1 = 99;
+        v_4._f2 = ${prop_lrggate_03a};
+        v_4._f3/*{3}*/ = {-1868.31, 183.79, 83.34 };
+        v_4._f6 = 1;
+        v_4._fA = 1;
+        break;
+    case 265:
+        v_4 = 0xd071010;
+        v_4._f1 = 99;
+        v_4._f2 = ${prop_lrggate_03a};
+        v_4._f3/*{3}*/ = {-1452.43, 37.03, 51.75 };
+        v_4._f6 = 1;
+        v_4._fA = 1;
+        break;
+    case 266:
+        v_4 = 0x7ae4ec06;
+        v_4._f1 = 99;
+        v_4._f2 = ${prop_lrggate_03a};
+        v_4._f3/*{3}*/ = {1483.1, 46.93, 53.26 };
+        v_4._f6 = 1;
+        v_4._fA = 1;
+        break;
+    case 267:
+        v_4 = 0x606f371b;
+        v_4._f1 = 99;
+        v_4._f2 = ${prop_lrggate_03a};
+        v_4._f3/*{3}*/ = {-1507.469970703125, 39.16, 54.41 };
+        v_4._f6 = 1;
+        v_4._fA = 1;
+        break;
+    case 268:
+        v_4 = 0x6ed7d3ec;
+        v_4._f1 = 99;
+        v_4._f2 = ${prop_lrggate_03a};
+        v_4._f3/*{3}*/ = {-1528.3599853515625, 35.77, 55.78 };
+        v_4._f6 = 1;
+        v_4._fA = 1;
+        break;
+    case 269:
+        v_4 = 0xc3e87e10;
+        v_4._f1 = 99;
+        v_4._f2 = ${prop_lrggate_02_ld};
+        v_4._f3/*{3}*/ = {-1583.28, 40.14, 59.32 };
+        v_4._f6 = 1;
+        v_4._fA = 1;
+        break;
+    case 270:
+        v_4 = 0x53af1d9b;
+        v_4._f1 = 99;
+        v_4._f2 = ${prop_lrggate_02_ld};
+        v_4._f3/*{3}*/ = {-1616.22998046875, 79.78, 60.78 };
+        v_4._f6 = 1;
+        v_4._fA = 1;
+        break;
+    case 271:
+        v_4 = 0x89780930;
+        v_4._f1 = 99;
+        v_4._f2 = ${prop_lrggate_03a};
+        v_4._f3/*{3}*/ = {-924.97998046875, 9.03, 43.28 };
+        v_4._f6 = 1;
+        v_4._fA = 1;
+        break;
+    case 272:
+        v_4 = 0x664943b3;
+        v_4._f1 = 99;
+        v_4._f2 = ${prop_lrggate_03a};
+        v_4._f3/*{3}*/ = {-905.7, 14.66, 45.66 };
+        v_4._f6 = 1;
+        v_4._fA = 1;
+        break;
+    case 273:
+        v_4 = 0xbb5ceddd;
+        v_4._f1 = 99;
+        v_4._f2 = ${prop_lrggate_02_ld};
+        v_4._f3/*{3}*/ = {-844.0499877929688, 155.96, 66.03 };
+        v_4._f6 = 1;
+        v_4._fA = 1;
+        break;
+    case 274:
+        v_4 = 0x49b38a88;
+        v_4._f1 = 99;
+        v_4._f2 = ${prop_lrggate_04a};
+        v_4._f3/*{3}*/ = {-914.32, 184.54, 68.42 };
+        v_4._f6 = 1;
+        v_4._fA = 1;
+        break;
+    case 79:
+        v_4 = 0x99237903;
+        v_4._f1 = 99;
+        v_4._f2 = ${v_ilev_trev_doorfront};
+        v_4._f3/*{3}*/ = {-1149.7099609375, -1521.0899658203125, 10.79 };
+        v_4._f7 = 1;
+        v_4._f8 = 1;
+        v_4._fB = 1;
+        break;
+    case 80:
+        v_4 = 0xcd0acc8e;
+        v_4._f1 = 99;
+        v_4._f2 = ${v_ilev_ct_door01};
+        v_4._f3/*{3}*/ = {-2343.53, 3265.3701171875, 32.96 };
+        v_4._f7 = 1;
+        v_4._f8 = 1;
+        v_4._fB = 1;
+        break;
+    case 81:
+        v_4 = 0xfad8a82d;
+        v_4._f1 = 99;
+        v_4._f2 = ${v_ilev_ct_door01};
+        v_4._f3/*{3}*/ = {-2342.22998046875, 3267.6201171875, 32.96 };
+        v_4._f7 = 1;
+        v_4._f8 = 1;
+        v_4._fB = 1;
+        break;
+    case 0:
+        v_4 = 0x3f920aa2;
+        v_4._f1 = 99;
+        v_4._f2 = ${v_ilev_housedoor1};
+        v_4._f3/*{3}*/ = {347.8677978515625, -1003.31591796875, -99.09519958496094 };
+        v_4._f7 = 1;
+        v_4._f8 = 0;
+        v_4._fB = 1;
+        break;
+    case 275:
+        v_4 = 0xf6d9ae9e;
+        v_4._f1 = 99;
+        v_4._f2 = ${v_ilev_mm_door};
+        v_4._f3/*{3}*/ = {257.28961181640625, -1001.2545776367188, -98.85870361328125 };
+        v_4._f7 = 1;
+        v_4._f8 = 0;
+        v_4._fB = 1;
+        break;
+    case 276:
+        v_4 = 0x97a3f23c;
+        v_4._f1 = 99;
+        v_4._f2 = ${v_ilev_mm_doorw};
+        v_4._f3/*{3}*/ = {348.2156982421875, -993.1121826171875, 99.043 };
+        v_4._f7 = 1;
+        v_4._f8 = 0;
+        v_4._fB = 1;
+        break;
+    case 277:
+        v_4 = 0x3cf0c28b;
+        v_4._f1 = 99;
+        v_4._f2 = ${v_ilev_fh_bedrmdoor};
+        v_4._f3/*{3}*/ = {-789.3016967773438, 332.01190185546875, 201.55960083 };
+        v_4._f7 = 1;
+        v_4._f8 = 0;
+        v_4._fB = 1;
+        break;
+    case 82:
+        v_4 = 0x9138116f;
+        v_4._f1 = 99;
+        v_4._f2 = ${prop_ld_garaged_01};
+        v_4._f3/*{3}*/ = {-815.3281860351562, 185.9571075439453, 72.99 };
+        v_4._f7 = 1;
+        v_4._f8 = 1;
+        v_4._fB = 1;
+        break;
+    case 85:
+        v_4 = 0x157d7b83;
+        v_4._f1 = 99;
+        v_4._f2 = ${v_ilev_mm_windowwc};
+        v_4._f3/*{3}*/ = {-802.7332763671875, 167.5041046142578, 77.5823974609375 };
+        v_4._f7 = 1;
+        v_4._f8 = 1;
+        v_4._fB = 1;
+        break;
+    case 83:
+        v_4 = 0x91f7ccbb;
+        v_4._f1 = 99;
+        v_4._f2 = ${v_ilev_mm_doorm_l};
+        v_4._f3/*{3}*/ = {-816.716, 179.098, 72.84 };
+        v_4._f7 = 1;
+        v_4._f8 = 1;
+        v_4._fB = 1;
+        break;
+    case 84:
+        v_4 = 0x7531932f;
+        v_4._f1 = 99;
+        v_4._f2 = ${v_ilev_mm_doorm_r};
+        v_4._f3/*{3}*/ = {-816.1068115234375, 177.51089477539062, 72.8274 };
+        v_4._f7 = 1;
+        v_4._f8 = 1;
+        v_4._fB = 1;
+        break;
+    case 86:
+        v_4 = 0xe50379d3;
+        v_4._f1 = 99;
+        v_4._f2 = ${prop_bh1_48_backdoor_l};
+        v_4._f3/*{3}*/ = {-796.565673828125, 177.22140502929688, 73.04049682617188 };
+        v_4._f7 = 1;
+        v_4._f8 = 1;
+        v_4._fB = 1;
+        break;
+    case 87:
+        v_4 = 0x1935e23b;
+        v_4._f1 = 99;
+        v_4._f2 = ${prop_bh1_48_backdoor_r};
+        v_4._f3/*{3}*/ = {-794.505126953125, 178.0124053955078, 73.04049682617188 };
+        v_4._f7 = 1;
+        v_4._f8 = 1;
+        v_4._fB = 1;
+        break;
+    case 88:
+        v_4 = 0x6c4bd59;
+        v_4._f1 = 99;
+        v_4._f2 = ${prop_bh1_48_backdoor_l};
+        v_4._f3/*{3}*/ = {-793.394287109375, 180.50750732421875, 73.04049682617188 };
+        v_4._f7 = 1;
+        v_4._f8 = 1;
+        v_4._fB = 1;
+        break;
+    case 89:
+        v_4 = 0x3db2ab34;
+        v_4._f1 = 99;
+        v_4._f2 = ${prop_bh1_48_backdoor_r};
+        v_4._f3/*{3}*/ = {-794.185302734375, 182.5679931640625, 73.04049682617188 };
+        v_4._f7 = 1;
+        v_4._f8 = 1;
+        v_4._fB = 1;
+        break;
+    case 90:
+        v_4 = 0x3762b69b;
+        v_4._f1 = 99;
+        v_4._f2 = ${v_ilev_mm_door};
+        v_4._f3/*{3}*/ = {-806.2816772460938, 187.02459716796875, 72.624 };
+        v_4._f7 = 1;
+        v_4._f8 = 1;
+        v_4._fB = 1;
+        break;
+    case 91:
+        v_4 = 0x87ba06c6;
+        v_4._f1 = 99;
+        v_4._f2 = ${prop_gate_cult_01_l};
+        v_4._f3/*{3}*/ = {-1041.267578125, 4906.0966796875, 209.2 };
+        v_4._f7 = 1;
+        v_4._f8 = 4;
+        v_4._fC = -1.0;
+        v_4._fB = 1;
+        break;
+    case 92:
+        v_4 = 0xfa97ec80;
+        v_4._f1 = 99;
+        v_4._f2 = ${prop_gate_cult_01_r};
+        v_4._f3/*{3}*/ = {-1044.7490234375, 4914.9716796875, 209.19320678710938 };
+        v_4._f7 = 1;
+        v_4._f8 = 4;
+        v_4._fC = 1.0;
+        v_4._fB = 1;
+        break;
+    case 93:
+        v_4 = 0x9a9273b6;
+        v_4._f1 = 99;
+        v_4._f2 = ${v_ilev_trevtraildr};
+        v_4._f3/*{3}*/ = {1972.7689208984375, 3815.365966796875, 33.663299560546875 };
+        v_4._f7 = 1;
+        v_4._f8 = 1;
+        v_4._fB = 1;
+        break;
+    case 94:
+        v_4 = 0x81135923;
+        v_4._f1 = 99;
+        v_4._f2 = ${v_ilev_fa_frontdoor};
+        v_4._f3/*{3}*/ = {-14.8689, -1441.18212890625, 31.192 };
+        v_4._f7 = 1;
+        v_4._f8 = 1;
+        v_4._fB = 1;
+        break;
+    case 95:
+        v_4 = 0xd80fc0f9;
+        v_4._f1 = 99;
+        v_4._f2 = ${v_ilev_ss_door8};
+        v_4._f3/*{3}*/ = {716.7808227539062, -975.4207153320312, 25.057 };
+        v_4._f7 = 1;
+        v_4._f8 = 1;
+        v_4._fB = 1;
+        break;
+    case 96:
+        v_4 = 0x36a933eb;
+        v_4._f1 = 99;
+        v_4._f2 = ${v_ilev_ss_door7};
+        v_4._f3/*{3}*/ = {719.3817749023438, -975.4185180664062, 25.005699157714844 };
+        v_4._f7 = 1;
+        v_4._f8 = 1;
+        v_4._fB = 1;
+        break;
+    case 286:
+        v_4 = 0x1e25d145;
+        v_4._f1 = 99;
+        v_4._f2 = ${v_ilev_ss_door02};
+        v_4._f3/*{3}*/ = {710.0, -964.0, 31.0 };
+        v_4._f7 = 1;
+        v_4._f8 = 1;
+        v_4._fB = 1;
+        break;
+    case 288:
+        v_4 = 0x3b7d30e1;
+        v_4._f1 = 99;
+        v_4._f2 = ${v_ilev_bl_doorel_l};
+        v_4._f3/*{3}*/ = {3539.0, 3673.7, 20.0 };
+        v_4._f7 = 1;
+        v_4._f8 = 1;
+        v_4._fB = 0;
+        break;
+    case 289:
+        v_4 = 0x647382c1;
+        v_4._f1 = 99;
+        v_4._f2 = ${v_ilev_bl_doorel_r};
+        v_4._f3/*{3}*/ = {3541.6, 3673.2, 20.0 };
+        v_4._f7 = 1;
+        v_4._f8 = 1;
+        v_4._fB = 0;
+        break;
+    case 287:
+        v_4 = 0x3311e66e;
+        v_4._f1 = 99;
+        v_4._f2 = ${v_ilev_store_door};
+        v_4._f3/*{3}*/ = {708.0, -962.0, 31.0 };
+        v_4._f7 = 1;
+        v_4._f8 = 1;
+        v_4._fB = 1;
+        break;
+    case 97:
+        v_4 = 0x5e29aaf4;
+        v_4._f1 = 99;
+        v_4._f2 = ${p_jewel_door_l};
+        v_4._f3/*{3}*/ = {-631.9553833, -236.3332977294922, 38.20650100708 };
+        v_4._f7 = 1;
+        v_4._f8 = 1;
+        v_4._fB = 1;
+        break;
+    case 98:
+        v_4 = 0xd3e249bd;
+        v_4._f1 = 99;
+        v_4._f2 = ${p_jewel_door_r1};
+        v_4._f3/*{3}*/ = {-630.426513671875, -238.4375, 38.20650100708 };
+        v_4._f7 = 1;
+        v_4._f8 = 1;
+        v_4._fB = 1;
+        break;
+    case 99:
+        v_4 = 0x1b603fb1;
+        v_4._f1 = 99;
+        v_4._f2 = ${v_ilev_ss_door04};
+        v_4._f3/*{3}*/ = {1395.6134033203125, 3609.326904296875, 35.13079833984375 };
+        v_4._f7 = 1;
+        v_4._f8 = 1;
+        v_4._fB = 1;
+        break;
+    case 100:
+        v_4 = 0x29b1dc54;
+        v_4._f1 = 99;
+        v_4._f2 = ${v_ilev_ss_doorext};
+        v_4._f3/*{3}*/ = {1388.4986572265625, 3614.82763671875, 39.09189987182617 };
+        v_4._f7 = 1;
+        v_4._f8 = 1;
+        v_4._fB = 1;
+        break;
+    case 101:
+        v_4 = 0x36ccf68a;
+        v_4._f1 = 99;
+        v_4._f2 = ${v_ilev_ss_doorext};
+        v_4._f3/*{3}*/ = {1399.6995849609375, 3607.762939453125, 39.09189987182617 };
+        v_4._f7 = 1;
+        v_4._f8 = 1;
+        v_4._fB = 1;
+        break;
+    case 102:
+        v_4 = 0xc3da70b5;
+        v_4._f1 = 99;
+        v_4._f2 = ${prop_com_gar_door_01};
+        v_4._f3/*{3}*/ = {484.564208984375, -1315.573974609375, 30.2033 };
+        v_4._f7 = 1;
+        v_4._f8 = 1;
+        v_4._fB = 1;
+        break;
+    case 103:
+        v_4 = 0x4dc22943;
+        v_4._f1 = 99;
+        v_4._f2 = ${v_ilev_cs_door};
+        v_4._f3/*{3}*/ = {482.8111877441406, -1311.953, 29.35059928894043 };
+        v_4._f7 = 1;
+        v_4._f8 = 1;
+        v_4._fB = 1;
+        break;
+    case 104:
+        v_4 = 0x51f13dde;
+        v_4._f1 = 99;
+        v_4._f2 = ${v_ilev_epsstoredoor};
+        v_4._f3/*{3}*/ = {241.3621063232422, 361.0470886230469, 105.00299835205078 };
+        v_4._f7 = 1;
+        v_4._f8 = 1;
+        v_4._fB = 1;
+        break;
+    case 105:
+        v_4 = 0xb0ec9e0b;
+        v_4._f1 = 99;
+        v_4._f2 = ${v_ilev_fh_frontdoor};
+        v_4._f3/*{3}*/ = {7.5179, 539.526, 176.1781 };
+        v_4._f7 = 1;
+        v_4._f8 = 1;
+        v_4._fB = 1;
+        break;
+    case 106:
+        v_4 = 0xd97e49be;
+        v_4._f1 = 99;
+        v_4._f2 = ${prop_ch_025c_g_door_01};
+        v_4._f3/*{3}*/ = {18.6504, 546.34, 176.3448028564453 };
+        v_4._f7 = 1;
+        v_4._f8 = 1;
+        v_4._fB = 1;
+        break;
+    case 8:
+        v_4 = 0x878bb6cf;
+        v_4._f1 = 99;
+        v_4._f2 = ${v_ilev_csr_door_l};
+        v_4._f3/*{3}*/ = {-59.893, -1092.9517822265625, 26.8836 };
+        v_4._f7 = 1;
+        v_4._f8 = 1;
+        v_4._fB = 1;
+        break;
+    case 9:
+        v_4 = 0x19535a5c;
+        v_4._f1 = 99;
+        v_4._f2 = ${v_ilev_csr_door_r};
+        v_4._f3/*{3}*/ = {-60.545799255371094, -1094.7489013671875, 26.8887 };
+        v_4._f7 = 1;
+        v_4._f8 = 1;
+        v_4._fB = 1;
+        break;
+    case 10:
+        v_4 = 0xf20c8bc3;
+        v_4._f1 = 99;
+        v_4._f2 = ${v_ilev_csr_door_l};
+        v_4._f3/*{3}*/ = {-38.464, -1108.4461669921875, 26.7198 };
+        v_4._f7 = 1;
+        v_4._f8 = 1;
+        v_4._fB = 1;
+        break;
+    case 11:
+        v_4 = 0xe1656a75;
+        v_4._f1 = 99;
+        v_4._f2 = ${v_ilev_csr_door_r};
+        v_4._f3/*{3}*/ = {-36.6614990234375, -1109.1015625, 26.7198 };
+        v_4._f7 = 1;
+        v_4._f8 = 1;
+        v_4._fB = 1;
+        break;
+    case 107:
+        v_4 = 0x2e5ef661;
+        v_4._f1 = 99;
+        v_4._f2 = ${v_ilev_rc_door3_l};
+        v_4._f3/*{3}*/ = {-608.7288818359375, -1610.3153076171875, 27.158899307250977 };
+        v_4._f7 = 1;
+        v_4._f8 = 1;
+        v_4._fB = 1;
+        break;
+    case 108:
+        v_4 = 0x7f3a1816;
+        v_4._f1 = 99;
+        v_4._f2 = ${v_ilev_rc_door3_r};
+        v_4._f3/*{3}*/ = {-611.32, -1610.088623046875, 27.158899307250977 };
+        v_4._f7 = 1;
+        v_4._f8 = 1;
+        v_4._fB = 1;
+        break;
+    case 109:
+        v_4 = 0x9733c929;
+        v_4._f1 = 99;
+        v_4._f2 = ${v_ilev_rc_door3_l};
+        v_4._f3/*{3}*/ = {-592.9376220703125, -1631.5770263671875, 27.159299850463867 };
+        v_4._f7 = 1;
+        v_4._f8 = 1;
+        v_4._fB = 1;
+        break;
+    case 110:
+        v_4 = 0xc4eea49e;
+        v_4._f1 = 99;
+        v_4._f2 = ${v_ilev_rc_door3_r};
+        v_4._f3/*{3}*/ = {-592.7108764648438, -1628.9859619140625, 27.159299850463867 };
+        v_4._f7 = 1;
+        v_4._f8 = 1;
+        v_4._fB = 1;
+        break;
+    case 111:
+        v_4 = 0xdb8e4a13;
+        v_4._f1 = 99;
+        v_4._f2 = ${v_ilev_shrf2door};
+        v_4._f3/*{3}*/ = {-442.66, 6015.2216796875, 31.8663 };
+        v_4._f7 = 1;
+        v_4._f8 = 1;
+        v_4._fB = 1;
+        break;
+    case 112:
+        v_4 = 0x897ec185;
+        v_4._f1 = 99;
+        v_4._f2 = ${v_ilev_shrf2door};
+        v_4._f3/*{3}*/ = {-444.4985046386719, 6017.06, 31.8663 };
+        v_4._f7 = 1;
+        v_4._f8 = 1;
+        v_4._fB = 1;
+        break;
+    case 113:
+        v_4 = 0x7000909f;
+        v_4._f1 = 99;
+        v_4._f2 = ${v_ilev_shrfdoor};
+        v_4._f3/*{3}*/ = {1855.684814453125, 3683.93017578125, 34.5928 };
+        v_4._f7 = 1;
+        v_4._f8 = 1;
+        v_4._fB = 1;
+        break;
+    case 114:
+        v_4 = 0xfa012b4e;
+        v_4._f1 = 99;
+        v_4._f2 = ${prop_gar_door_01};
+        v_4._f3/*{3}*/ = {-1067.00244140625, -1665.609130859375, 4.7898 };
+        v_4._f7 = 1;
+        v_4._f8 = 1;
+        v_4._fB = 1;
+        break;
+    case 115:
+        v_4 = 0xe91b8983;
+        v_4._f1 = 99;
+        v_4._f2 = ${prop_gar_door_02};
+        v_4._f3/*{3}*/ = {-1064.76318359375, -1668.7623291015625, 4.8084 };
+        v_4._f7 = 1;
+        v_4._f8 = 1;
+        v_4._fB = 1;
+        break;
+    case 116:
+        v_4 = 0x4e8c5463;
+        v_4._f1 = 99;
+        v_4._f2 = ${prop_gar_door_03_ld};
+        v_4._f3/*{3}*/ = {-1074.648193359375, -1676.13134765625, 4.684 };
+        v_4._f7 = 1;
+        v_4._f8 = 1;
+        v_4._fB = 1;
+        break;
+    case 117:
+        v_4 = 0xb13b19c3;
+        v_4._f1 = 99;
+        v_4._f2 = ${prop_gar_door_05};
+        v_4._f3/*{3}*/ = {201.39999999999998, -153.36520385742188, 57.85219955444336 };
+        v_4._f7 = 1;
+        v_4._f8 = 1;
+        v_4._fB = 1;
+        break;
+    case 156:
+        v_4 = 0x5c0c2bf;
+        v_4._f1 = 99;
+        v_4._f2 = ${v_ilev_fb_doorshortl};
+        v_4._f3/*{3}*/ = {-1045.119873046875, -232.00399780273438, 39.4379 };
+        v_4._f7 = 1;
+        v_4._f8 = 1;
+        v_4._fB = 1;
+        break;
+    case 157:
+        v_4 = 0x50d0d8da;
+        v_4._f1 = 99;
+        v_4._f2 = ${v_ilev_fb_doorshortr};
+        v_4._f3/*{3}*/ = {-1046.51611328125, -229.35809326171875, 39.4379 };
+        v_4._f7 = 1;
+        v_4._f8 = 1;
+        v_4._fB = 1;
+        break;
+    case 158:
+        v_4 = 0x507d6540;
+        v_4._f1 = 99;
+        v_4._f2 = ${v_ilev_fb_door01};
+        v_4._f3/*{3}*/ = {-1083.6201171875, -260.41668701171875, 38.18669891357422 };
+        v_4._f7 = 1;
+        v_4._f8 = 1;
+        v_4._fB = 1;
+        break;
+    case 159:
+        v_4 = 0xeb111a69;
+        v_4._f1 = 99;
+        v_4._f2 = ${v_ilev_fb_door02};
+        v_4._f3/*{3}*/ = {-1080.974365234375, -259.0203857421875, 38.18669891357422 };
+        v_4._f7 = 1;
+        v_4._f8 = 1;
+        v_4._fB = 1;
+        break;
+    case 160:
+        v_4 = 0x66a29914;
+        v_4._f1 = 99;
+        v_4._f2 = ${v_ilev_gtdoor};
+        v_4._f3/*{3}*/ = {-1042.5699462890625, -240.6, 38.11 };
+        v_4._f7 = 1;
+        v_4._f8 = 1;
+        v_4._fB = 1;
+        break;
+    case 161:
+        v_4 = 0x2755c920;
+        v_4._f1 = 99;
+        v_4._f2 = ${v_ilev_roc_door4};
+        v_4._f3/*{3}*/ = {-565.1712036132812, 276.625885, 83.2863 };
+        v_4._f7 = 1;
+        v_4._f8 = 1;
+        v_4._fB = 1;
+        break;
+    case 162:
+        v_4 = 0x5ccbb3cb;
+        v_4._f1 = 99;
+        v_4._f2 = ${v_ilev_roc_door4};
+        v_4._f3/*{3}*/ = {-561.2863159179688, 293.5043029785156, 87.777099609375 };
+        v_4._f7 = 1;
+        v_4._f8 = 1;
+        v_4._fB = 1;
+        break;
+    case 163:
+        v_4 = 0x89cfa9;
+        v_4._f1 = 99;
+        v_4._f2 = ${prop_ron_door_01};
+        v_4._f3/*{3}*/ = {1065.2371826171875, -2006.0791015625, 32.2328987121582 };
+        v_4._f7 = 1;
+        v_4._f8 = 1;
+        v_4._fB = 1;
+        break;
+    case 164:
+        v_4 = 0xbd94c9c0;
+        v_4._f1 = 99;
+        v_4._f2 = ${prop_ron_door_01};
+        v_4._f3/*{3}*/ = {1083.5472412109375, -1975.4354248046875, 31.622 };
+        v_4._f7 = 1;
+        v_4._f8 = 1;
+        v_4._fB = 1;
+        break;
+    case 165:
+        v_4 = 0xaf582d47;
+        v_4._f1 = 99;
+        v_4._f2 = ${prop_ron_door_01};
+        v_4._f3/*{3}*/ = {1085.307, -2018.5614013671875, 41.62889862060547 };
+        v_4._f7 = 1;
+        v_4._f8 = 1;
+        v_4._fB = 1;
+        break;
+    case 166:
+        v_4 = 0x2a22c74;
+        v_4._f1 = 99;
+        v_4._f2 = ${v_ilev_housedoor1};
+        v_4._f3/*{3}*/ = {86.66239929199219, -1959.47705078125, 21.2152 };
+        v_4._f7 = 1;
+        v_4._f8 = 1;
+        v_4._fB = 1;
+        break;
+    case 167:
+        v_4 = 0xfae5cbd0;
+        v_4._f1 = 99;
+        v_4._f2 = ${prop_abat_slide};
+        v_4._f3/*{3}*/ = {962.9083862304688, -2105.813720703125, 34.6432 };
+        v_4._f7 = 1;
+        v_4._f8 = 1;
+        v_4._fB = 1;
+        break;
+    case 168:
+        v_4 = 0xebead6b8;
+        v_4._f1 = 99;
+        v_4._f2 = ${prop_gar_door_04};
+        v_4._f3/*{3}*/ = {778.31, 1867.49, 30.66 };
+        v_4._f7 = 1;
+        v_4._f8 = 1;
+        v_4._fB = 1;
+        break;
+    case 169:
+        v_4 = 0x91aefd45;
+        v_4._f1 = 99;
+        v_4._f2 = ${prop_ch3_04_door_01l};
+        v_4._f3/*{3}*/ = {2514.32, 317.34, 93.32 };
+        v_4._f7 = 1;
+        v_4._f8 = 1;
+        v_4._fB = 1;
+        break;
+    case 170:
+        v_4 = 0x9c259232;
+        v_4._f1 = 99;
+        v_4._f2 = ${prop_ch3_04_door_01r};
+        v_4._f3/*{3}*/ = {2512.419921875, -319.26, 93.32 };
+        v_4._f7 = 1;
+        v_4._f8 = 1;
+        v_4._fB = 1;
+        break;
+    case 171:
+        v_4 = 0x28af3a71;
+        v_4._f1 = 99;
+        v_4._f2 = ${prop_sc1_12_door};
+        v_4._f3/*{3}*/ = {-58.47, -1530.51, 34.54 };
+        v_4._f7 = 1;
+        v_4._f8 = 1;
+        v_4._fB = 1;
+        break;
+    case 172:
+        v_4 = 0x2609c1d4;
+        v_4._f1 = 99;
+        v_4._f2 = ${prop_ch1_07_door_01l};
+        v_4._f3/*{3}*/ = {-2255.19384765625, 322.2593078613281, 184.92640686035156 };
+        v_4._f7 = 1;
+        v_4._f8 = 1;
+        v_4._fB = 1;
+        break;
+    case 173:
+        v_4 = 0xd8c8a753;
+        v_4._f1 = 99;
+        v_4._f2 = ${prop_ch1_07_door_01r};
+        v_4._f3/*{3}*/ = {-2254.0556640625, 319.7, 184.92640686035156 };
+        v_4._f7 = 1;
+        v_4._f8 = 1;
+        v_4._fB = 1;
+        break;
+    case 174:
+        v_4 = 0xc98e88df;
+        v_4._f1 = 99;
+        v_4._f2 = ${prop_ch1_07_door_01l};
+        v_4._f3/*{3}*/ = {-2280.596923828125, 265.432, 184.92599487304688 };
+        v_4._f7 = 1;
+        v_4._f8 = 1;
+        v_4._fB = 1;
+        break;
+    case 175:
+        v_4 = 0xfc556e6c;
+        v_4._f1 = 99;
+        v_4._f2 = ${prop_ch1_07_door_01r};
+        v_4._f3/*{3}*/ = {-2278.0390625, 266.57, 184.92599487304688 };
+        v_4._f7 = 1;
+        v_4._f8 = 1;
+        v_4._fB = 1;
+        break;
+    case 180:
+        v_4 = 0x67ce34f4;
+        v_4._f1 = 99;
+        v_4._f2 = ${prop_facgate_08};
+        v_4._f3/*{3}*/ = {413.3648986816406, -1620.0333251953125, 28.3416 };
+        v_4._f7 = 1;
+        v_4._f8 = 1;
+        v_4._fB = 0;
+        break;
+    case 181:
+        v_4 = 0x81c868e8;
+        v_4._f1 = 99;
+        v_4._f2 = ${prop_facgate_08};
+        v_4._f3/*{3}*/ = {418.28961181640625, -1651.396240234375, 28.29509925842285 };
+        v_4._f7 = 1;
+        v_4._f8 = 1;
+        v_4._fB = 0;
+        break;
+    case 182:
+        v_4 = 0x4e00015c;
+        v_4._f1 = 99;
+        v_4._f2 = ${prop_facgate_07b};
+        v_4._f3/*{3}*/ = {397.8846130371094, -1607.3837890625, 28.33 };
+        v_4._f7 = 1;
+        v_4._f8 = 1;
+        v_4._fB = 0;
+        break;
+    case 278:
+        v_4 = 0xb98c3d0a;
+        v_4._f1 = 99;
+        v_4._f2 = ${prop_sc1_21_g_door_01};
+        v_4._f3/*{3}*/ = {-25.28, -1431.06, 30.84 };
+        v_4._f7 = 1;
+        v_4._f8 = 1;
+        v_4._fB = 1;
+        break;
+    case 279:
+        v_4 = 0x270e6b21;
+        v_4._f1 = 99;
+        v_4._f2 = ${prop_ss1_14_garage_door};
+        v_4._f3/*{3}*/ = {-62.38, 352.71728515625, 113.2499 };
+        v_4._f7 = 1;
+        v_4._f8 = 1;
+        v_4._fB = 0;
+        break;
+    case 280:
+        v_4 = 0xb3799158;
+        v_4._f1 = 99;
+        v_4._f2 = ${prop_motel_door_09};
+        v_4._f3/*{3}*/ = {549.2567138671875, -1773.114990234375, 33.730899810791016 };
+        v_4._f7 = 1;
+        v_4._f8 = 1;
+        v_4._fB = 1;
+        break;
+    case 283:
+        v_4 = 0xaa08cf2c;
+        v_4._f1 = 99;
+        v_4._f2 = ${prop_ss1_10_door_l};
+        v_4._f3/*{3}*/ = {-720.39, 256.8599853515625, 80.29 };
+        v_4._f7 = 1;
+        v_4._f8 = 1;
+        v_4._fB = 1;
+        break;
+    case 284:
+        v_4 = 0x385aebd2;
+        v_4._f1 = 99;
+        v_4._f2 = ${prop_ss1_10_door_r};
+        v_4._f3/*{3}*/ = {-718.4199829101562, 257.79, 80.29 };
+        v_4._f7 = 1;
+        v_4._f8 = 1;
+        v_4._fB = 1;
+        break;
+    }
+    return v_4;
+}
+
+auto sub_4d59(auto a_0, auto a_1) {
+    for (v_11 = 0; v_11 < 40; v_11 += 1) {
+        if (a_0 < 294) {
+            v_4/*{13}*/ = sub_915(a_0, a_1);
+            if ((v_4._f1 == 99) || (v_4._f1 == a_1)) {
+                sub_4dc5(v_4, 0);
+            } else { }
+            a_0 += 1;
+        }
+    }
+    if (a_0 < 294) {
+        return 0;
+    }
+    return 1;
+}
+
+void sub_4dc5(auto a_0, auto a_1, auto a_2, auto a_3, auto a_4, auto a_5, auto a_6, auto a_7, auto a_8, auto a_9, auto a_10, auto a_11, auto a_12, auto a_13) {
+    if (a_0 != 0) {
+        OBJECT::ADD_DOOR_TO_SYSTEM(a_0, a_0._f2, a_0._f3, 0, a_D, a_0._fB);
+        if (a_0._f9) {
+            OBJECT::_D9B71952F78A2640(a_0, 1);
+        }
+        if (a_0._fC != 0.0) {
+            OBJECT::_B6E6FBA95C7324AC(a_0, a_0._fC, 0, a_D);
+        }
+        if (!a_0._f6) {
+            if (a_0._f7) {
+                OBJECT::_6BAB9442830C7F53(a_0, a_0._f8, a_D, 0);
+            }
+        }
+        if (a_0._fA) {
+            OBJECT::_A85A21582451E951(a_0, 1);
+        }
+    }
+}
+
+auto sub_4e38(auto a_0, auto a_1) {
+    for (v_11 = 0; v_11 < 40; v_11 += 1) {
+        if (a_0 < 294) {
+            v_4/*{13}*/ = sub_915(a_0, a_1);
+            if ((v_4._f1 == 99) || (v_4._f1 == a_1)) {
+                if (OBJECT::_C153C43EA202C8C1(v_4)) {
+                    OBJECT::REMOVE_DOOR_FROM_SYSTEM(v_4);
+                    return 0;
+                }
+            }
+        }
+        a_0 += 1;
+    }
+    if (a_0 < 294) {
+        return 0;
+    }
+    return 1;
+}
+
+auto sub_4eaa() {
+    return g_5F7C;
+}
+
+auto sub_4eb5(auto a_0) {
+    return l_DC[a_0/*4*/];
+}
+
+void sub_4ec3(auto a_0, auto a_1, auto a_2) {
+    if (NETWORK::NETWORK_IS_GAME_IN_PROGRESS() && (!a_1)) {
+        if (!a_2) {
+            a_0 = NETWORK::GET_NETWORK_TIME();
+        } else { 
+            a_0 = NETWORK::_89023FBBF9200E9F();
+        }
+    } else { 
+        a_0 = GAMEPLAY::GET_GAME_TIMER();
+    }
+    a_0._f1 = 1;
+}
+
+void sub_4f00(auto a_0) {
+    l_DC[NETWORK::PARTICIPANT_ID_TO_INT()/*4*/] = a_0;
+}
+
+auto sub_4f12() {
+    sub_501a(&v_2);
+    if (v_2) {
+        return 1;
+    }
+    if (g_141422 == 0) {
+        if (!NETWORK::NETWORK_IS_GAME_IN_PROGRESS()) {
+            return 1;
+        }
+    }
+    if (sub_500b()) {
+        return 1;
+    }
+    if (g_252FC2) {
+        return 1;
+    }
+    if (sub_4fff()) {
+        return 1;
+    }
+    if (sub_4fe8(157)) {
+        if (!sub_4fd9()) {
+            return 1;
+        }
+    }
+    if (sub_4fe8(155)) {
+        return 1;
+    }
+    if (!NETWORK::NETWORK_IS_SIGNED_ONLINE()) {
+        return 1;
+    }
+    if (sub_4fa5() != 0) {
+        if (SCRIPT::_GET_NUMBER_OF_INSTANCES_OF_STREAMED_SCRIPT(sub_4fa5()) == 0) {
+            return 1;
+        }
+    }
+    return 0;
+}
+
+auto sub_4fa5() {
+    switch (sub_4eaa()) {
+    case 0:
+        return ${freemode};
+        break;
+    case 2:
+        return ${creator};
+        break;
+    }
+    return 0;
+}
+
+auto sub_4fd9() {
+    return g_250CE3._f23C;
+}
+
+auto sub_4fe8(auto a_0) {
+    if (SCRIPT::GET_EVENT_EXISTS(1, a_0)) {
+        return 1;
+    }
+    return 0;
+}
+
+auto sub_4fff() {
+    return g_2528A6;
+}
+
+auto sub_500b() {
+    return g_250CE3._f237;
+}
+
+void sub_501a(auto a_0) {
+    for (v_3 = 0; v_3 < SCRIPT::GET_NUMBER_OF_EVENTS(1); v_3 += 1) {
+        v_4 = SCRIPT::GET_EVENT_AT_INDEX(1, v_3);
+        if (v_4 == 168) {
+            SCRIPT::GET_EVENT_DATA(1, v_3, &v_5, 2);
+            switch (v_5) {
+            case 306:
+                sub_508a(v_3);
+                break;
+            case 2:
+                SCRIPT::GET_EVENT_DATA(1, v_3, &v_7, 3);
+                if (v_7._f2 == 53) {
+                    a_0 = 1;
+                }
+                break;
+            }
+        }
+    }
+}
+
+void sub_508a(auto a_0) {
+    if (SCRIPT::GET_EVENT_DATA(1, a_0, &v_3, 3)) {
+        if (sub_513(v_3._f1, 1, 1)) {
+            v_6 = PLAYER::GET_PLAYER_PED(v_3._f1);
+            if (ENTITY::DOES_ENTITY_EXIST(v_6)) {
+                if (PED::IS_PED_IN_ANY_VEHICLE(v_6, 0)) {
+                    v_7 = PED::GET_VEHICLE_PED_IS_IN(v_6, 0);
+                    if (VEHICLE::IS_VEHICLE_WINDOW_INTACT(v_7, v_3._f2) && NETWORK::NETWORK_GET_THIS_SCRIPT_IS_NETWORK_SCRIPT()) {
+                        if (sub_510b(v_7, &v_8)) {
+                            VEHICLE::REMOVE_VEHICLE_WINDOW(v_7, v_3._f2);
+                        }
+                        if (v_8) {
+                            ENTITY::SET_VEHICLE_AS_NO_LONGER_NEEDED(&v_7);
+                        }
+                    }
+                }
+            }
+        }
+    } else { }
+}
+
+auto sub_510b(auto a_0, auto a_1) {
+    if (ENTITY::DOES_ENTITY_EXIST(a_0)) {
+        if (!ENTITY::IS_ENTITY_A_MISSION_ENTITY(a_0)) {
+            if (NETWORK::NETWORK_GET_ENTITY_IS_LOCAL(a_0)) {
+                ENTITY::SET_ENTITY_AS_MISSION_ENTITY(a_0, 0, 1);
+                a_1 = 1;
+            }
+        }
+        if (ENTITY::_DDE6DF5AE89981D2(a_0, 0)) {
+            if (NETWORK::NETWORK_HAS_CONTROL_OF_ENTITY(a_0)) {
+                return 1;
+            }
+        } else { }
+    } else { }
+    return 0;
+}
+
+void sub_5159() {
+    SYSTEM::WAIT(0);
+}
+
+void sub_5166() {
+    for (v_2 = 0; v_2 < 6; v_2 += 1) {
+        sub_518c(v_2, &l_40[v_2/*17*/]);
+    }
+}
+
+void sub_518c(auto a_0, auto a_1) {
+    switch (a_0) {
+    case 0:
+        a_1[0/*1*/] = 0x3dcec8a0;
+        a_1[1/*1*/] = 0x6f1eab43;
+        a_1._f3/*{3}*/ = {-984.0406494140625, -2833.844970703125, 18.297964096069336 };
+        a_1._f6/*{3}*/ = {-990.199462890625, -2844.138427734375, 10.964786529541016 };
+        a_1._f9 = 15.25;
+        a_1._fA/*{3}*/ = {-983.7081909179688, -2833.199462890625, 12.839786529541016 };
+        a_1._fD/*{3}*/ = {-977.9129638671875, -2823.2373046875, 19.230995178222656 };
+        a_1._f10 = 15.25;
+        break;
+    case 1:
+        a_1[0/*1*/] = 0x2c0bb9ff;
+        a_1[1/*1*/] = 0x39c1d56b;
+        a_1._f3/*{3}*/ = {-1144.9615478515625, -2726.89794921875, 18.298053741455078 };
+        a_1._f6/*{3}*/ = {-1151.8515625, -2739.10888671875, 10.952897071838379 };
+        a_1._f9 = 15.25;
+        a_1._fA/*{3}*/ = {-1144.6776123046875, -2726.47314453125, 12.868383407592773 };
+        a_1._fD/*{3}*/ = {-1138.0712890625, -2714.977783203125, 18.428 };
+        a_1._f10 = 15.25;
+        break;
+    case 2:
+        a_1[0/*1*/] = 0x67ce34f4;
+        a_1._f3/*{3}*/ = {415.2435607910156, -1621.92578125, 28.0427742 };
+        a_1._f6/*{3}*/ = {410.3537292480469, -1628.0494384765625, 34.04277801513672 };
+        a_1._f9 = 6.5;
+        break;
+    case 3:
+        a_1[0/*1*/] = 0x81c868e8;
+        a_1._f3/*{3}*/ = {416.4169921875, -1653.291015625, 28.042776107788086 };
+        a_1._f6/*{3}*/ = {410.6725769042969, -1648.6815185546875, 34.04277801513672 };
+        a_1._f9 = 6.5;
+        break;
+    case 4:
+        a_1[0/*1*/] = 0x4e00015c;
+        a_1._f3/*{3}*/ = {400.634, -1609.80810546875, 28.042776107788086 };
+        a_1._f6/*{3}*/ = {394.49072265625, -1617.1943359375, 34.04277801513672 };
+        a_1._f9 = 8.25;
+        break;
+    case 5:
+        a_1[0/*1*/] = 0xb9bd2d8b;
+        a_1[1/*1*/] = 0x5a6c56d;
+        a_1._f3/*{3}*/ = {-1012.158935546875, -2412.95947265625, 12.69467544555664 };
+        a_1._f6/*{3}*/ = {-1026.245849609375, -2405.0634765625, 18.757205963134766 };
+        a_1._f9 = 15.375;
+        a_1._fA/*{3}*/ = {-1012.158935546875, -2412.95947265625, 12.69467544555664 };
+        a_1._fD/*{3}*/ = {-999.9759521484375, -2419.571044921875, 18.75715065 };
+        a_1._f10 = 15.375;
+        break;
+    }
+}
+
+void sub_53f6() {
+    sub_5424(l_3E);
+    g_2554DA._f5FA = 0;
+    g_2554DA._f10F1 = 0;
+    sub_5418();
+}
+
+void sub_5418() {
+    SCRIPT::TERMINATE_THIS_THREAD();
+}
+
+void sub_5424(auto a_0) {
+    for (v_10 = 0; v_10 < 294; v_10 += 1) {
+        v_3/*{13}*/ = sub_915(v_10, a_0);
+        if ((v_3._f1 == 99) || (v_3._f1 == a_0)) {
+            if (OBJECT::_C153C43EA202C8C1(v_3)) {
+                if (v_3._fB) {
+                    OBJECT::REMOVE_DOOR_FROM_SYSTEM(v_3);
+                }
+            }
+        }
+    }
+}
+
+auto sub_547a(auto a_0, auto a_1, auto a_2, auto a_3, auto a_4, auto a_5, auto a_6, auto a_7, auto a_8, auto a_9, auto a_10, auto a_11, auto a_12, auto a_13, auto a_14, auto a_15, auto a_16, auto a_17, auto a_18, auto a_19) {
+    sub_5638(sub_5657(a_0), a_0);
+    sub_5517(0, -1, 0);
+    NETWORK::NETWORK_REGISTER_HOST_BROADCAST_VARIABLES(&l_AA, 30);
+    NETWORK::NETWORK_REGISTER_PLAYER_BROADCAST_VARIABLES(&l_DC, 129);
+    if (!sub_54be()) {
+        return 0;
+    }
+    GAMEPLAY::SET_THIS_SCRIPT_CAN_BE_PAUSED(0);
+    l_3E = 1;
+    return 1;
+}
+
+auto sub_54be() {
+    v_2 = 0;
+    while (1) {
+        v_2 += 1;
+        if (!NETWORK::NETWORK_IS_GAME_IN_PROGRESS()) {
+            return 0;
+        }
+        if (NETWORK::_5D10B3795F3FC886()) {
+            return 1;
+        }
+        if (sub_500b()) {
+            return 0;
+        }
+        if (sub_4fe8(155)) {
+            return 0;
+        }
+        if (v_2 >= 3600) {
+            return 0;
+        }
+        SYSTEM::WAIT(0);
+    }
+    return 0;
+}
+
+auto sub_5517(auto a_0, auto a_1, auto a_2) {
+    v_5 = NETWORK::NETWORK_GET_SCRIPT_STATUS();
+    while (v_5 != 2) {
+        if ((((v_5 == 3) || (v_5 == 4)) || (v_5 == 5)) || (v_5 == 6)) {
+            if (!a_2) {
+                sub_5418();
+            } else { 
+                return 0;
+            }
+        }
+        if (!sub_562c()) {
+            if (a_0 == 0) {
+                if (!NETWORK::NETWORK_IS_GAME_IN_PROGRESS()) {
+                    if (!a_2) {
+                        sub_5418();
+                    } else { 
+                        return 0;
+                    }
+                }
+                if (sub_500b()) {
+                    if (!a_2) {
+                        sub_5418();
+                    } else { 
+                        return 0;
+                    }
+                }
+                if (sub_4fe8(155)) {
+                    if (!a_2) {
+                        sub_5418();
+                    } else { 
+                        return 0;
+                    }
+                }
+            } else if (!NETWORK::NETWORK_IS_IN_SESSION()) {
+                if (!a_2) {
+                    sub_5418();
+                } else { 
+                    return 0;
+                }
+            }
+        }
+        SYSTEM::WAIT(0);
+        v_5 = NETWORK::NETWORK_GET_SCRIPT_STATUS();
+    }
+    if (a_1 > -1) {
+        g_1406F8 = v_5;
+    }
+    if (a_0 == 0) {
+        if (!NETWORK::NETWORK_IS_GAME_IN_PROGRESS()) {
+            if (!a_2) {
+                sub_5418();
+            } else { 
+                return 0;
+            }
+        }
+    } else if (!NETWORK::NETWORK_IS_IN_SESSION()) {
+        if (!a_2) {
+            sub_5418();
+        } else { 
+            return 0;
+        }
+    }
+    return 1;
+}
+
+auto sub_562c() {
+    return g_141422;
+}
+
+void sub_5638(auto a_0, auto a_1, auto a_2, auto a_3, auto a_4, auto a_5, auto a_6, auto a_7, auto a_8, auto a_9, auto a_10, auto a_11, auto a_12, auto a_13, auto a_14, auto a_15, auto a_16, auto a_17, auto a_18, auto a_19, auto a_20) {
+    if (!NETWORK::NETWORK_IS_GAME_IN_PROGRESS()) {
+        sub_5418();
+    }
+    NETWORK::NETWORK_SET_THIS_SCRIPT_IS_NETWORK_SCRIPT(a_0, 0, a_1._f10);
+}
+
+auto sub_5657(auto a_0) {
+    switch (a_0) {
+    case 3:
+        return 2;
+    case 1:
+        return 32;
+    case 2:
+        return 32;
+    case 32:
+        return 32;
+    case 33:
+        return 32;
+    case 34:
+        return 32;
+    case 35:
+        return 32;
+    case 12:
+        return 32;
+    case 4:
+        return 16;
+    case 13:
+        return 32;
+    case 5:
+        return 16;
+    case 6:
+        return 2;
+    case 8:
+        return 2;
+    case 9:
+        return 2;
+    case 7:
+        return 16;
+    case 10:
+        return 2;
+    case 11:
+        return 4;
+    case 15:
+        return 32;
+    case 16:
+        return 32;
+    case 27:
+        return 2;
+    case 25:
+        return 2;
+    case 26:
+        return 2;
+    case 18:
+        return 32;
+    case 28:
+        return 32;
+    case 29:
+        return 2;
+    case 30:
+        return 32;
+    case 31:
+        return 32;
+    case 17:
+        return 2;
+    case 36:
+        return 32;
+    case 37:
+        return 32;
+    case 19:
+        return 32;
+    case 22:
+        return 32;
+    case 23:
+        return 32;
+    case 24:
+        return 32;
+    case 20:
+        return 2;
+    case 0:
+        return 0;
+    case 21:
+        return 32;
+    case 47:
+        return 32;
+    case 48:
+        return 32;
+    case 38:
+        return 32;
+    case 39:
+        return 32;
+    case 43:
+        return 32;
+    case 41:
+        return 32;
+    case 42:
+        return 32;
+    case 45:
+        return 32;
+    case 46:
+        return 32;
+    case 44:
+        return 32;
+    case 49:
+        return 32;
+    case 50:
+        return 32;
+    case 51:
+        return 32;
+    case 52:
+        return 32;
+    case 53:
+        return 2;
+    case 58:
+        return 1;
+    case 54:
+        return 2;
+    case 55:
+        return 4;
+    case 56:
+        return 2;
+    case 57:
+        return 2;
+    case 40:
+        return 1;
+    case 59:
+        return 2;
+    case 60:
+    case 61:
+    case 62:
+    case 63:
+    case 64:
+    case 65:
+        return 0;
+    case 66:
+        return 1;
+    }
+    asm j 0x590c
+    return 0;
+}

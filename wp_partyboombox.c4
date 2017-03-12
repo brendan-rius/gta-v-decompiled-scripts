@@ -1,0 +1,45 @@
+// listener's C4 decompiler
+
+void main() {
+    if (SCRIPT::_GET_NUMBER_OF_INSTANCES_OF_STREAMED_SCRIPT(${wp_partyboombox}) > 1) {
+        SCRIPT::TERMINATE_THIS_THREAD();
+    }
+    if (PLAYER::_C968670BFACE42D9(18)) {
+        sub_b1();
+    }
+    while (1) {
+        SYSTEM::WAIT(0);
+        if (!BRAIN::IS_WORLD_POINT_WITHIN_BRAIN_ACTIVATION_RANGE()) {
+            l_0 = 3;
+        }
+        switch (l_0) {
+        case 0:
+            if ((TIME::GET_CLOCK_HOURS() >= 22) || (TIME::GET_CLOCK_HOURS() <= 4)) {
+                l_0 = 1;
+            } else { 
+                sub_b1();
+            }
+            break;
+        case 1:
+            if (!STREAMING::IS_IPL_ACTIVE("ID2_21_G_Night")) {
+                STREAMING::REQUEST_IPL("ID2_21_G_Night");
+                l_0 = 2;
+            }
+            break;
+        case 2:
+            break;
+        case 3:
+            if ((!STREAMING::IS_NEW_LOAD_SCENE_ACTIVE()) && (!STREAMING::_D9D2CFFF49FAB35F())) {
+                sub_b1();
+            }
+            break;
+        }
+    }
+}
+
+void sub_b1() {
+    if (STREAMING::IS_IPL_ACTIVE("ID2_21_G_Night")) {
+        STREAMING::REMOVE_IPL("ID2_21_G_Night");
+    }
+    SCRIPT::TERMINATE_THIS_THREAD();
+}

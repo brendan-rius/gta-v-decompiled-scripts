@@ -1,0 +1,77 @@
+// listener's C4 decompiler
+
+void main() {
+    l_2 = 1;
+    l_3 = 134;
+    l_4 = 134;
+    l_5 = 1;
+    l_6 = 1;
+    l_7 = 1;
+    l_8 = 134;
+    l_9 = 1;
+    l_A = 12;
+    l_B = 12;
+    l_E = 0.001;
+    v_2 = -1;
+    v_3 = 0;
+    if (PLAYER::_C968670BFACE42D9(3)) {
+        sub_142();
+    }
+    while (1) {
+        if (!v_3) {
+            switch (sub_cf(PLAYER::PLAYER_PED_ID())) {
+            case 1:
+                if (AUDIO::LOAD_STREAM("MISSION_COMPLETE_FRANKLIN_SMALL", 0)) {
+                    AUDIO::PLAY_STREAM_FRONTEND();
+                    v_3 = 1;
+                }
+                break;
+            case 2:
+                if (AUDIO::LOAD_STREAM("MISSION_COMPLETE_TREVOR_SMALL", 0)) {
+                    AUDIO::PLAY_STREAM_FRONTEND();
+                    v_3 = 1;
+                }
+                break;
+            default:
+                if (AUDIO::LOAD_STREAM("MISSION_COMPLETE_MICHAEL_SMALL", 0)) {
+                    AUDIO::PLAY_STREAM_FRONTEND();
+                    v_3 = 1;
+                }
+                break;
+            }
+        } else if (v_2 == -1) {
+            v_2 = GAMEPLAY::GET_GAME_TIMER();
+        } else if (GAMEPLAY::GET_GAME_TIMER() > (v_2 + 8000)) {
+            sub_142();
+        }
+        SYSTEM::WAIT(0);
+    }
+}
+
+auto sub_cf(auto a_0) {
+    if (ENTITY::DOES_ENTITY_EXIST(a_0)) {
+        v_4 = ENTITY::GET_ENTITY_MODEL(a_0);
+        for (v_3 = 0; v_3 <= 2; v_3 += 1) {
+            if (sub_10c(v_3) == v_4) {
+                return v_3;
+            }
+        }
+    }
+    return 145;
+}
+
+auto sub_10c(auto a_0) {
+    if (sub_136(a_0)) {
+        return g_17C49._f744E[a_0/*29*/];
+    } else if (a_0 != 145) {}
+    return 0;
+}
+
+auto sub_136(auto a_0) {
+    return a_0 < 3;
+}
+
+void sub_142() {
+    AUDIO::STOP_STREAM();
+    SCRIPT::TERMINATE_THIS_THREAD();
+}

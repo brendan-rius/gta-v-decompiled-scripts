@@ -1,0 +1,115 @@
+// listener's C4 decompiler
+
+void main() {
+    l_6 = "Poledance_01";
+    l_7 = ${a_f_y_beach_01};
+    l_8 = "MISSSTRIP_CLUB";
+    if (ENTITY::DOES_ENTITY_EXIST(l_A)) {
+        ENTITY::FREEZE_ENTITY_POSITION(l_A, 1);
+        l_2/*{3}*/ = ENTITY::GET_OFFSET_FROM_ENTITY_IN_WORLD_COORDS(l_A, 0.0, 0.0, 0.0);
+        l_5 = ENTITY::GET_ENTITY_HEADING(l_A);
+        ENTITY::SET_ENTITY_COLLISION(l_A, 0, 0);
+    }
+    while (1) {
+        SYSTEM::WAIT(0);
+        if (ENTITY::DOES_ENTITY_EXIST(l_A)) {
+            if (BRAIN::IS_OBJECT_WITHIN_BRAIN_ACTIVATION_RANGE(l_A)) {
+                switch (l_0) {
+                case 0:
+                    if (sub_251()) {
+                        sub_214();
+                        l_0 = 2;
+                    }
+                    break;
+                case 2:
+                    sub_180();
+                    if (sub_10c()) {
+                        ENTITY::SET_ENTITY_COLLISION(l_A, 1, 0);
+                        l_0 = 3;
+                    }
+                    break;
+                case 3:
+                    if (!PED::IS_PED_INJURED(l_1)) {
+                        AI::TASK_COWER(l_1, -1);
+                        PLAYER::SET_ALL_RANDOM_PEDS_FLEE(PLAYER::PLAYER_ID(), 1);
+                        PED::SET_PED_KEEP_TASK(l_1, 1);
+                        SCRIPT::TERMINATE_THIS_THREAD();
+                    }
+                    break;
+                }
+            } else { 
+                sub_dc();
+            }
+        } else { 
+            sub_dc();
+        }
+    }
+}
+
+void sub_dc() {
+    if (!ENTITY::IS_ENTITY_DEAD(l_1)) {
+        if (!ENTITY::IS_ENTITY_ON_SCREEN(l_1)) {
+            PED::DELETE_PED(&l_1);
+        } else { 
+            PED::SET_PED_KEEP_TASK(l_1, 1);
+        }
+    }
+    SCRIPT::TERMINATE_THIS_THREAD();
+}
+
+auto sub_10c() {
+    v_2/*{3}*/ = {2.0, 2.0, 0.5 };
+    if (!PED::IS_PED_INJURED(PLAYER::PLAYER_PED_ID())) {
+        if (!PED::IS_PED_INJURED(l_1)) {
+            if (ENTITY::IS_ENTITY_AT_ENTITY(PLAYER::PLAYER_PED_ID(), l_1, v_2, 0, 1, 0)) {
+                return 1;
+            }
+            if (ENTITY::HAS_ENTITY_BEEN_DAMAGED_BY_ENTITY(l_1, PLAYER::PLAYER_PED_ID(), 1)) {
+                return 1;
+            }
+            if (ENTITY::IS_ENTITY_TOUCHING_ENTITY(PLAYER::PLAYER_PED_ID(), l_1)) {
+                return 1;
+            }
+        }
+        if (PED::IS_PED_SHOOTING(PLAYER::PLAYER_PED_ID())) {
+            return 1;
+        }
+    }
+    return 0;
+}
+
+void sub_180() {
+    if (!PED::IS_PED_INJURED(l_1)) {
+        if (AI::GET_SCRIPT_TASK_STATUS(l_1, 0x87b9a382) == 7) {
+            AI::TASK_PLAY_ANIM(l_1, l_8, l_6, 0x41000000, 0xc1000000, -1, 0, 0, 0, 0, 0);
+        } else if (ENTITY::HAS_ENTITY_ANIM_FINISHED(l_1, l_8, l_6, 3)) {
+            AI::TASK_PLAY_ANIM(l_1, l_8, l_6, 0x41000000, 0xc1000000, -1, 0, 0, 0, 0, 0);
+        } else if (!l_9) {
+            if (ENTITY::IS_ENTITY_PLAYING_ANIM(l_1, l_8, l_6, 3)) {
+                ENTITY::SET_ENTITY_ANIM_CURRENT_TIME(l_1, l_8, l_6, GAMEPLAY::GET_RANDOM_FLOAT_IN_RANGE(0, 0x3f800000));
+                l_9 = 1;
+            }
+        }
+    }
+}
+
+void sub_214() {
+    if (ENTITY::IS_ENTITY_DEAD(l_1)) {
+        l_1 = PED::CREATE_PED(5, l_7, l_2, l_2._f1, l_2._f2, l_5, 1, 1);
+        PED::SET_PED_RANDOM_COMPONENT_VARIATION(l_1, 0);
+        PED::SET_PED_CAN_BE_TARGETTED(l_1, 0);
+        PED::SET_BLOCKING_OF_NON_TEMPORARY_EVENTS(l_1, 1);
+    }
+}
+
+auto sub_251() {
+    STREAMING::REQUEST_MODEL(l_7);
+    STREAMING::REQUEST_ANIM_DICT(l_8);
+    if (STREAMING::HAS_MODEL_LOADED(l_7) && STREAMING::HAS_ANIM_DICT_LOADED(l_8)) {
+        return 1;
+    } else { 
+        STREAMING::REQUEST_MODEL(l_7);
+        STREAMING::REQUEST_ANIM_DICT(l_8);
+    }
+    return 0;
+}

@@ -1,0 +1,103 @@
+// listener's C4 decompiler
+
+void main() {
+    l_0 = -1;
+    GAMEPLAY::NETWORK_SET_SCRIPT_IS_SAFE_FOR_NETWORK_GAME();
+    STREAMING::REQUEST_IPL("prologue06_int");
+    STREAMING::REQUEST_IPL("prologue01");
+    STREAMING::REQUEST_IPL("prologue02");
+    STREAMING::REQUEST_IPL("prologue03");
+    STREAMING::REQUEST_IPL("prologue04");
+    STREAMING::REQUEST_IPL("prologue05");
+    STREAMING::REQUEST_IPL("prologue06");
+    STREAMING::REQUEST_IPL("prologuerd");
+    STREAMING::REQUEST_IPL("Prologue01c");
+    STREAMING::REQUEST_IPL("Prologue01d");
+    STREAMING::REQUEST_IPL("Prologue01e");
+    STREAMING::REQUEST_IPL("Prologue01f");
+    STREAMING::REQUEST_IPL("Prologue01g");
+    STREAMING::REQUEST_IPL("prologue01h");
+    STREAMING::REQUEST_IPL("prologue01i");
+    STREAMING::REQUEST_IPL("prologue01j");
+    STREAMING::REQUEST_IPL("prologue01k");
+    STREAMING::REQUEST_IPL("prologue01z");
+    STREAMING::REQUEST_IPL("prologue03b");
+    STREAMING::REQUEST_IPL("prologue04b");
+    STREAMING::REQUEST_IPL("prologue05b");
+    STREAMING::REQUEST_IPL("prologue06b");
+    STREAMING::REQUEST_IPL("prologuerdb");
+    STREAMING::REQUEST_IPL("prologue_occl");
+    STREAMING::REQUEST_IPL("DES_ProTree_start");
+    STREAMING::REQUEST_IPL("DES_ProTree_start_lod");
+    STREAMING::REQUEST_IPL("prologue04_cover");
+    STREAMING::REQUEST_IPL("prologue03_grv_fun");
+    STREAMING::REMOVE_IPL("prologue03_grv_dug");
+    STREAMING::REMOVE_IPL("prologue_grv_torch");
+    STREAMING::_AF12610C644A35C9("prologue", 1);
+    STREAMING::REQUEST_MODEL(${csb_prolsec});
+    while (!STREAMING::HAS_MODEL_LOADED(${csb_prolsec})) {
+        SYSTEM::WAIT(0);
+    }
+    PLAYER::SET_PLAYER_MODEL(PLAYER::PLAYER_ID(), ${csb_prolsec});
+    if (!ENTITY::IS_ENTITY_DEAD(PLAYER::PLAYER_PED_ID())) {
+        ENTITY::SET_ENTITY_COORDS(PLAYER::PLAYER_PED_ID(), 5313.7998046875, -5207.2, 83.5, 1, 0, 0, 1);
+        ENTITY::SET_ENTITY_HEADING(PLAYER::PLAYER_PED_ID(), 169.2);
+    }
+    UI::DISPLAY_RADAR(0);
+    PLAYER::SET_PLAYER_CONTROL(PLAYER::PLAYER_ID(), 0, 0);
+    STREAMING::_ACCFB4ACF53551B0(5312.99560546875, -5208.6708984375, 83.90525817871094, 10.0, 0);
+    v_2 = GAMEPLAY::GET_GAME_TIMER() + 10000;
+    while ((!STREAMING::IS_NEW_LOAD_SCENE_LOADED()) && (GAMEPLAY::GET_GAME_TIMER() < v_2)) {
+        SYSTEM::WAIT(0);
+    }
+    SCRIPT::SHUTDOWN_LOADING_SCREEN();
+    AUDIO::START_AUDIO_SCENE("MISSION_FAILED_SCENE");
+    CAM::DO_SCREEN_FADE_IN(2500);
+    STREAMING::NEW_LOAD_SCENE_STOP();
+    UI::REQUEST_ADDITIONAL_TEXT("NG_INSTALL", 0);
+    while (1) {
+        if (!CAM::IS_SCREEN_FADED_IN()) {
+            CAM::DO_SCREEN_FADE_IN(0);
+        }
+        GRAPHICS::DRAW_RECT(0.5, 0.5, 1.0, 1.0, 0, 0, 0, 255, 0);
+        GRAPHICS::DRAW_RECT(0.5, 0.5, 0.8, 0.8, 20, 20, 20, 255, 0);
+        UI::SET_TEXT_SCALE(0.5, 0.5);
+        UI::SET_TEXT_CENTRE(1);
+        if ((SYSTEM::TIMERA() > 10000) && UI::HAS_ADDITIONAL_TEXT_LOADED(0)) {
+            l_0 = GAMEPLAY::GET_RANDOM_INT_IN_RANGE(0, 5);
+            if ((l_0 - l_1) != 0) {
+                l_1 = l_0;
+                SYSTEM::SETTIMERA(0);
+            }
+        } else { 
+            switch (l_0) {
+            case 0:
+                sub_2f7(0.5, 0.4, "NG_INST_TT_1", 0);
+                break;
+            case 1:
+                sub_2f7(0.5, 0.4, "NG_INST_TT_2", 0);
+                break;
+            case 2:
+                sub_2f7(0.5, 0.4, "NG_INST_TT_3", 0);
+                break;
+            case 3:
+                sub_2f7(0.5, 0.4, "NG_INST_TT_4", 0);
+                break;
+            case 4:
+                sub_2f7(0.5, 0.4, "NG_INST_TT_5", 0);
+                break;
+            }
+        }
+        UI::DISABLE_FRONTEND_THIS_FRAME();
+        if (GAMEPLAY::_14832BF2ABA53FC5()) {
+            GAMEPLAY::_C79AE21974B01FB2();
+            return ;
+        }
+        SYSTEM::WAIT(0);
+    }
+}
+
+void sub_2f7(auto a_0, auto a_1, auto a_2, auto a_3) {
+    UI::_SET_TEXT_ENTRY(a_2);
+    UI::_DRAW_TEXT(a_0, a_1, a_3);
+}

@@ -1,0 +1,127 @@
+// listener's C4 decompiler
+
+void main() {
+    l_2 = 1;
+    l_3 = 134;
+    l_4 = 134;
+    l_5 = 1;
+    l_6 = 1;
+    l_7 = 1;
+    l_8 = 134;
+    l_9 = 1;
+    l_A = 12;
+    l_B = 12;
+    l_E = 0.001;
+    l_16 = "NULL";
+    l_19 = 80.0;
+    l_1A = 140.0;
+    l_1B = 180.0;
+    l_1E = 0.0;
+    l_22 = -0.0375;
+    l_23 = 0.17;
+    l_26 = 3;
+    l_2A = 1;
+    l_2B = 65;
+    l_2C = 49;
+    l_2D = 64;
+    v_3 = ${carwash1};
+    v_4 = "carwash1";
+    v_5/*{3}*/ = l_31._f1[0/*3*/];
+    if (SCRIPT::_GET_NUMBER_OF_INSTANCES_OF_STREAMED_SCRIPT(${am_mp_carwash_launch}) > 1) {
+        SCRIPT::TERMINATE_THIS_THREAD();
+    }
+    if (NETWORK::NETWORK_IS_GAME_IN_PROGRESS()) {
+        GAMEPLAY::NETWORK_SET_SCRIPT_IS_SAFE_FOR_NETWORK_GAME();
+        GAMEPLAY::SET_THIS_SCRIPT_CAN_BE_PAUSED(0);
+    } else { 
+        SCRIPT::TERMINATE_THIS_THREAD();
+    }
+    if (g_28006E) {
+        if (SCRIPT::_GET_NUMBER_OF_INSTANCES_OF_STREAMED_SCRIPT(0x7dbb2d2) == 0) {
+            SCRIPT::_REQUEST_SCRIPT_HASH(0x7dbb2d2);
+            while (!SCRIPT::_HAS_SCRIPT_HASH_LOADED(0x7dbb2d2)) {
+                SYSTEM::WAIT(0);
+            }
+            SYSTEM::_START_NEW_SCRIPT_HASH_WITH_ARGS(0x7dbb2d2, &l_31, 23, 1424);
+        }
+        SCRIPT::TERMINATE_THIS_THREAD();
+    }
+    if (sub_2a5(PLAYER::PLAYER_PED_ID())) {}
+    v_8 = 0;
+    while (v_8 == 0) {
+        if (((sub_251(PLAYER::PLAYER_ID(), 1) || sub_21d()) || (!sub_205(PLAYER::PLAYER_ID()))) || sub_1e9()) {
+            v_8 = 0;
+        } else { 
+            v_8 = 1;
+        }
+        SYSTEM::WAIT(0);
+    }
+    if (SYSTEM::VDIST2(v_5, sub_1d1(156)) < SYSTEM::VDIST2(v_5, sub_1d1(155))) {
+        v_4 = "carwash2";
+    }
+    v_2 = GAMEPLAY::GET_GAME_TIMER();
+    v_3 = GAMEPLAY::GET_HASH_KEY(v_4);
+    if (SCRIPT::_GET_NUMBER_OF_INSTANCES_OF_STREAMED_SCRIPT(v_3) == 0) {
+        SCRIPT::REQUEST_SCRIPT(v_4);
+        while (!SCRIPT::HAS_SCRIPT_LOADED(v_4)) {
+            SCRIPT::REQUEST_SCRIPT(v_4);
+            SYSTEM::WAIT(0);
+            if (GAMEPLAY::GET_GAME_TIMER() > (v_2 + 20000)) {
+                SCRIPT::TERMINATE_THIS_THREAD();
+            }
+        }
+        if (SCRIPT::HAS_SCRIPT_LOADED(v_4)) {
+            SYSTEM::START_NEW_SCRIPT(v_4, 1424);
+            SCRIPT::SET_SCRIPT_AS_NO_LONGER_NEEDED(v_4);
+        }
+    }
+    SCRIPT::TERMINATE_THIS_THREAD();
+}
+
+auto<3> sub_1d1(auto a_0) {
+    v_3 = a_0;
+    return g_60AC[v_3/*23*/][0/*3*/];
+}
+
+auto sub_1e9() {
+    return GAMEPLAY::IS_BIT_SET(g_182604[PLAYER::PLAYER_ID()/*324*/]._f1F._f12, 0);
+}
+
+auto sub_205(auto a_0) {
+    return GAMEPLAY::IS_BIT_SET(g_182604[a_0/*324*/]._f74, 6);
+}
+
+auto sub_21d() {
+    v_2 = g_24F57C;
+    if (GAMEPLAY::IS_BIT_SET(g_186A85[v_2/*32*/], 0) && (g_186A85[v_2/*32*/]._f9 == 2)) {
+        return 1;
+    }
+    return 0;
+}
+
+auto sub_251(auto a_0, auto a_1) {
+    if (a_1) {
+        if (sub_27d(a_0)) {
+            return 1;
+        }
+    }
+    if (g_182604[a_0/*324*/] == -1) {
+        return 0;
+    }
+    return 1;
+}
+
+auto sub_27d(auto a_0) {
+    return sub_28b(a_0);
+}
+
+auto sub_28b(auto a_0) {
+    return GAMEPLAY::IS_BIT_SET(g_182604[a_0/*324*/]._fD._f1, 0);
+}
+
+auto sub_2a5(auto a_0) {
+    if (!ENTITY::DOES_ENTITY_EXIST(a_0)) {
+        return 0;
+    }
+    return !ENTITY::IS_ENTITY_DEAD(a_0);
+}

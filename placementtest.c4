@@ -1,0 +1,158 @@
+// listener's C4 decompiler
+
+void main() {
+    l_2 = 1;
+    l_3 = 134;
+    l_4 = 134;
+    l_5 = 1;
+    l_6 = 1;
+    l_7 = 1;
+    l_8 = 134;
+    l_9 = 1;
+    l_A = 12;
+    l_B = 12;
+    l_E = 0.001;
+    l_13 = "NULL";
+    l_14 = 0.0;
+    l_18 = -0.0375;
+    l_19 = 0.17;
+    l_1B = 3;
+    l_1E = 80.0;
+    l_1F = 140.0;
+    l_20 = 180.0;
+    l_26 = 1;
+    l_27 = 65;
+    l_28 = 49;
+    l_29 = 64;
+    v_2 = sub_310();
+    if (PLAYER::_C968670BFACE42D9(3)) {
+        SCRIPT::TERMINATE_THIS_THREAD();
+    }
+    while (1) {
+        if (GRAPHICS::HAS_SCALEFORM_MOVIE_LOADED(v_2)) {
+            switch (l_2C) {
+            case 0:
+                sub_2b0(&v_2, "OFFR_BLIP_R5", 255, 0, 255, 255, 0);
+                sub_299(&v_2);
+                l_2D = GAMEPLAY::GET_GAME_TIMER();
+                l_2C = 1;
+                break;
+            case 1:
+                if ((GAMEPLAY::GET_GAME_TIMER() - l_2D) > 3000) {
+                    sub_26c(&v_2);
+                    l_2C = 2;
+                }
+                break;
+            }
+            if (sub_ec(&v_2, 0)) {}
+        }
+        SYSTEM::WAIT(0);
+    }
+}
+
+auto sub_ec(auto a_0, auto a_1) {
+    if (!sub_25c(&a_0._f2)) {
+        sub_21f(&a_0._f2);
+    }
+    UI::HIDE_HUD_COMPONENT_THIS_FRAME(14);
+    GRAPHICS::_61BB1D9B3A95D802(1);
+    GRAPHICS::DRAW_SCALEFORM_MOVIE(a_0, 0.5, 0.5, 1.0, 1.0, 255, 255, 255, 0, 0);
+    if (a_1) {
+        if (CONTROLS::IS_CONTROL_PRESSED(2, 201)) {
+            return 0;
+        }
+    }
+    if (a_0._f1 == -1) {
+        return 1;
+    }
+    if ((sub_188(&a_0._f2) * 1000.0) > SYSTEM::TO_FLOAT(a_0._f1)) {
+        sub_172(&a_0._f2);
+        return 0;
+    }
+    return 1;
+}
+
+void sub_172(auto a_0) {
+    a_0._f1 = 0.0;
+    a_0._f2 = 0.0;
+    a_0 = 0;
+}
+
+auto sub_188(auto a_0) {
+    if (sub_25c(a_0)) {
+        if (sub_20f(a_0)) {
+            return a_0._f2;
+        } else { 
+            return sub_1c7(GAMEPLAY::IS_BIT_SET(a_0, 4)) - a_0._f1;
+        }
+    } else { 
+        return a_0._f1;
+    }
+}
+
+auto sub_1c7(auto a_0) {
+    if (a_0) {
+        return SYSTEM::TO_FLOAT(GAMEPLAY::GET_GAME_TIMER()) / 1000.0;
+    }
+    if (NETWORK::NETWORK_IS_GAME_IN_PROGRESS()) {
+        v_3 = NETWORK::GET_NETWORK_TIME();
+        return SYSTEM::TO_FLOAT(v_3) / 1000.0;
+    }
+    return SYSTEM::TO_FLOAT(GAMEPLAY::GET_GAME_TIMER()) / 1000.0;
+}
+
+auto sub_20f(auto a_0) {
+    return GAMEPLAY::IS_BIT_SET(a_0, 2);
+}
+
+void sub_21f(auto a_0) {
+    sub_22e(a_0, 0.0);
+}
+
+void sub_22e(auto a_0, auto a_1) {
+    a_0._f1 = sub_1c7(GAMEPLAY::IS_BIT_SET(a_0, 4)) - a_1;
+    GAMEPLAY::SET_BIT(a_0, 1);
+    GAMEPLAY::CLEAR_BIT(a_0, 2);
+    a_0._f2 = 0.0;
+}
+
+auto sub_25c(auto a_0) {
+    return GAMEPLAY::IS_BIT_SET(a_0, 1);
+}
+
+void sub_26c(auto a_0) {
+    a_0._f1 = 300;
+    sub_21f(&a_0._f2);
+    GRAPHICS::_PUSH_SCALEFORM_MOVIE_FUNCTION(a_0, "SPLASH_TEXT_TRANSITION_OUT");
+    GRAPHICS::_PUSH_SCALEFORM_MOVIE_FUNCTION_PARAMETER_INT(300);
+    GRAPHICS::_POP_SCALEFORM_MOVIE_FUNCTION_VOID();
+}
+
+void sub_299(auto a_0) {
+    GRAPHICS::_PUSH_SCALEFORM_MOVIE_FUNCTION(a_0, "SPLASH_TEXT_TRANSITION_IN");
+    GRAPHICS::_POP_SCALEFORM_MOVIE_FUNCTION_VOID();
+}
+
+void sub_2b0(auto a_0, auto a_1, auto a_2, auto a_3, auto a_4, auto a_5, auto a_6) {
+    a_0._f1 = -1;
+    GRAPHICS::_PUSH_SCALEFORM_MOVIE_FUNCTION(a_0, "SPLASH_TEXT_LABEL");
+    sub_2fe(a_1);
+    GRAPHICS::_PUSH_SCALEFORM_MOVIE_FUNCTION_PARAMETER_INT(a_2);
+    GRAPHICS::_PUSH_SCALEFORM_MOVIE_FUNCTION_PARAMETER_INT(a_3);
+    GRAPHICS::_PUSH_SCALEFORM_MOVIE_FUNCTION_PARAMETER_INT(a_4);
+    GRAPHICS::_PUSH_SCALEFORM_MOVIE_FUNCTION_PARAMETER_INT(a_5);
+    GRAPHICS::_POP_SCALEFORM_MOVIE_FUNCTION_VOID();
+    if (a_6) {
+        GRAPHICS::_PUSH_SCALEFORM_MOVIE_FUNCTION(a_0, "SPLASH_TEXT_TRANSITION_IN");
+        GRAPHICS::_POP_SCALEFORM_MOVIE_FUNCTION_VOID();
+    }
+}
+
+void sub_2fe(auto a_0) {
+    GRAPHICS::_BEGIN_TEXT_COMPONENT(a_0);
+    GRAPHICS::_END_TEXT_COMPONENT();
+}
+
+auto sub_310() {
+    return $67D02A194A2FC2BD("SPLASH_TEXT");
+}

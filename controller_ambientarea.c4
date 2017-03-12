@@ -1,0 +1,339 @@
+// listener's C4 decompiler
+
+void main() {
+    l_2 = 1;
+    l_3 = 134;
+    l_4 = 134;
+    l_5 = 1;
+    l_6 = 1;
+    l_7 = 1;
+    l_8 = 134;
+    l_9 = 1;
+    l_A = 12;
+    l_B = 12;
+    l_E = 0.001;
+    l_13 = "NULL";
+    l_16 = 80.0;
+    l_17 = 140.0;
+    l_18 = 180.0;
+    l_1B = 0.0;
+    l_1F = -0.0375;
+    l_20 = 0.17;
+    if (PLAYER::_C968670BFACE42D9(98)) {
+        sub_74a();
+    }
+    sub_60a();
+    v_2 = 0;
+    while (1) {
+        SYSTEM::WAIT(500);
+        v_3 = 0;
+        v_4/*{3}*/ = {0.0, 0.0, 0.0 };
+        if (!ENTITY::IS_ENTITY_DEAD(PLAYER::PLAYER_PED_ID())) {
+            v_4/*{3}*/ = ENTITY::GET_ENTITY_COORDS(PLAYER::PLAYER_PED_ID(), 1);
+        }
+        while (v_3 != 2) {
+            if (sub_5fa(&g_6085[v_2/*7*/])) {
+                if (sub_54f(v_2, v_4)) {
+                    sub_53a(&g_6085[v_2/*7*/], 2);
+                    if (g_6085[v_2/*7*/]._f5 != 0) {
+                        if (SCRIPT::IS_THREAD_ACTIVE(g_6085[v_2/*7*/]._f5)) {
+                            PLAYER::_F745B37630DF176B(g_6085[v_2/*7*/]._f5, 1);
+                        }
+                        g_6085[v_2/*7*/]._f5 = 0;
+                    }
+                }
+            } else if (!sub_52b(g_6085[v_2/*7*/], 4)) {
+                if (sub_27c(&g_6085[v_2/*7*/], v_4)) {
+                    sub_146(v_2);
+                }
+            }
+            v_3 += 1;
+            v_2 += 1;
+            if (v_2 == 5) {
+                v_2 = 0;
+            }
+        }
+    }
+}
+
+void sub_146(auto a_0) {
+    v_5 = 1424;
+    v_6 = 1;
+    switch (a_0) {
+    case 0:
+        v_3 = "re_ArmyBase";
+        v_4 = ${re_armybase};
+        break;
+    case 1:
+        v_5 = 3650;
+        v_3 = "golf_ai_foursome";
+        v_4 = ${golf_ai_foursome};
+        v_6 = 0;
+        break;
+    case 3:
+        v_3 = "re_Prison";
+        v_4 = ${re_prison};
+        break;
+    case 2:
+        v_5 = 3650;
+        v_3 = "golf_ai_foursome_putting";
+        v_4 = ${golf_ai_foursome_putting};
+        v_6 = 0;
+        break;
+    case 4:
+        v_5 = 2050;
+        v_3 = "stripclub";
+        v_4 = ${stripclub};
+        v_6 = 0;
+        break;
+    }
+    if ((!v_6) && sub_25c()) {
+        return ;
+    }
+    if (UI::GET_LENGTH_OF_LITERAL_STRING(v_3) != 0) {
+        if (SCRIPT::_GET_NUMBER_OF_INSTANCES_OF_STREAMED_SCRIPT(v_4) == 0) {
+            SCRIPT::REQUEST_SCRIPT(v_3);
+            while (!SCRIPT::HAS_SCRIPT_LOADED(v_3)) {
+                SYSTEM::WAIT(0);
+            }
+            g_6085[a_0/*7*/]._f5 = SYSTEM::START_NEW_SCRIPT(v_3, v_5);
+            SCRIPT::SET_SCRIPT_AS_NO_LONGER_NEEDED(v_3);
+            if (g_6085[a_0/*7*/]._f5 != 0) {
+                sub_24b(&g_6085[a_0/*7*/], 2);
+            }
+        }
+    }
+}
+
+void sub_24b(auto a_0, auto a_1) {
+    a_0 |= a_1;
+}
+
+auto sub_25c() {
+    if (sub_271() == 0) {
+        return 1;
+    }
+    return 0;
+}
+
+auto sub_271() {
+    return g_5F7C;
+}
+
+auto sub_27c(auto a_0, auto a_1, auto a_2, auto a_3) {
+    if (!sub_52b(a_0, 1)) {
+        if (sub_516() && (!sub_302(6))) {
+            return 0;
+        }
+    }
+    if (SYSTEM::VDIST2(a_1, a_0._f2) > a_0._f1) {
+        return 0;
+    }
+    if (!PED::IS_PED_INJURED(PLAYER::PLAYER_PED_ID())) {
+        if (ENTITY::IS_ENTITY_IN_ANGLED_AREA(PLAYER::PLAYER_PED_ID(), -2080.114990234375, 3292.193115234375, 11.667, -2112.049072265625, 3224.3310546875, 11.667, 115.0, 1, 0, 0)) {
+            return 0;
+        }
+    }
+    return 1;
+}
+
+auto sub_302(auto a_0) {
+    if (g_8861 == 15) {
+        return 0;
+    }
+    if (sub_324(a_0)) {
+        return 0;
+    }
+    return 1;
+}
+
+auto sub_324(auto a_0) {
+    return sub_335(a_0, g_8861);
+}
+
+auto sub_335(auto a_0, auto a_1) {
+    if (a_1 == 15) {
+        return 1;
+    }
+    if (a_0 == 15) {
+        return 0;
+    }
+    switch (a_0) {
+    case 16:
+        switch (a_1) {
+        case 7:
+        case 9:
+        case 10:
+        case 13:
+        case 14:
+            return 0;
+            break;
+        }
+        return 1;
+        break;
+    case 0:
+        switch (a_1) {
+        case 5:
+        case 17:
+            return 1;
+            break;
+        }
+        break;
+    case 2:
+    case 3:
+        switch (a_1) {
+        case 5:
+        case 6:
+        case 8:
+        case 17:
+            return 1;
+            break;
+        }
+        break;
+    case 4:
+        if (a_1 == 17) {
+            return 1;
+        }
+        break;
+    case 5:
+        break;
+    case 6:
+    case 8:
+        if (a_1 == 5) {
+            return 1;
+        }
+        break;
+    case 7:
+        if (a_1 == 6) {
+            return 1;
+        }
+        break;
+    case 9:
+        if (a_1 == 5) {
+            return 1;
+        }
+        break;
+    case 10:
+        switch (a_1) {
+        case 5:
+        case 6:
+        case 17:
+            return 1;
+            break;
+        }
+        break;
+    case 11:
+        if (a_1 == 5) {
+            return 1;
+        }
+        break;
+    case 17:
+        switch (a_1) {
+        case 5:
+        case 12:
+        case 17:
+            return 1;
+            break;
+        }
+        break;
+    case 12:
+    case 18:
+        switch (a_1) {
+        case 5:
+        case 6:
+        case 8:
+            return 1;
+            break;
+        }
+        break;
+    case 13:
+        switch (a_1) {
+        case 5:
+            return 1;
+            break;
+        }
+        break;
+    case 14:
+        switch (a_1) {
+        case 5:
+            return 1;
+            break;
+        }
+        break;
+    }
+    return 0;
+}
+
+auto sub_516() {
+    if (g_8861 == 15) {
+        return 0;
+    }
+    return 1;
+}
+
+auto sub_52b(auto a_0, auto a_1) {
+    return (a_0 & a_1) != 0;
+}
+
+void sub_53a(auto a_0, auto a_1) {
+    a_0 -= a_0 & a_1;
+}
+
+auto sub_54f(auto a_0, auto a_1, auto a_2, auto a_3) {
+    a_1._f2 = 0.0;
+    if (!SCRIPT::IS_THREAD_ACTIVE(g_6085[a_0/*7*/]._f5)) {
+        return 1;
+    }
+    if (sub_52b(g_6085[a_0/*7*/], 4)) {
+        return 1;
+    }
+    if (sub_516() && (!sub_302(6))) {
+        if (!sub_52b(g_6085[a_0/*7*/], 1)) {
+            if ((a_0 == 1) || (a_0 == 2)) {
+                if (SCRIPT::_GET_NUMBER_OF_INSTANCES_OF_STREAMED_SCRIPT(${golf}) == 0) {
+                    return 1;
+                }
+            } else { 
+                return 1;
+            }
+        }
+    }
+    if (SYSTEM::VDIST2(g_6085[a_0/*7*/]._f2, a_1) > (g_6085[a_0/*7*/]._f1 + 400.0)) {
+        return 1;
+    }
+    return 0;
+}
+
+auto sub_5fa(auto a_0) {
+    return sub_52b(a_0, 2);
+}
+
+void sub_60a() {
+    g_6085[0/*7*/]._f2/*{3}*/ = {-2189.544677734375, 3129.612548828125, 0.0 };
+    g_6085[0/*7*/]._f1 = 1000.0 * 1000.0;
+    g_6085[0/*7*/] = 0;
+    g_6085[0/*7*/]._f5 = 0;
+    g_6085[1/*7*/]._f2/*{3}*/ = {-1172.8221435546875, 66.52349853515625, 0.0 };
+    g_6085[1/*7*/]._f1 = 300.0 * 300.0;
+    g_6085[1/*7*/] = 0;
+    g_6085[1/*7*/]._f5 = 0;
+    g_6085[3/*7*/]._f2/*{3}*/ = {1692.1468505859375, 2562.312744140625, 0.0 };
+    g_6085[3/*7*/]._f1 = 300.0 * 300.0;
+    g_6085[3/*7*/] = 0;
+    g_6085[3/*7*/]._f5 = 0;
+    g_6085[2/*7*/]._f2/*{3}*/ = {-1329.6796875, 60.347801208496094, 0.0 };
+    g_6085[2/*7*/]._f1 = 250.0 * 250.0;
+    g_6085[2/*7*/] = 0;
+    g_6085[2/*7*/]._f5 = 0;
+    g_6085[4/*7*/]._f2/*{3}*/ = {114.64, -1290.3399658203125, 0.0 };
+    g_6085[4/*7*/]._f1 = 100.0 * 100.0;
+    g_6085[4/*7*/] = 1;
+    g_6085[4/*7*/]._f5 = 0;
+    for (v_2 = 0; v_2 <= (5 - 1); v_2 += 1) {
+        g_6085[v_2/*7*/]._f2._f2 = 0.0;
+    }
+}
+
+void sub_74a() {
+    SCRIPT::TERMINATE_THIS_THREAD();
+}

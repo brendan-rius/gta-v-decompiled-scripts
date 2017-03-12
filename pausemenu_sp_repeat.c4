@@ -1,0 +1,3825 @@
+// listener's C4 decompiler
+
+void main() {
+    l_2 = 1;
+    l_3 = 134;
+    l_4 = 134;
+    l_5 = 1;
+    l_6 = 1;
+    l_7 = 1;
+    l_8 = 134;
+    l_9 = 1;
+    l_A = 12;
+    l_B = 12;
+    l_E = 0.001;
+    l_13 = "NULL";
+    l_14 = 0.0;
+    l_18 = -0.0375;
+    l_19 = 0.17;
+    if (g_28006E) {
+        if (SCRIPT::_GET_NUMBER_OF_INSTANCES_OF_STREAMED_SCRIPT(0xfd62720d) == 0) {
+            SCRIPT::_REQUEST_SCRIPT_HASH(0xfd62720d);
+            while (!SCRIPT::_HAS_SCRIPT_HASH_LOADED(0xfd62720d)) {
+                SYSTEM::WAIT(0);
+            }
+            SYSTEM::_START_NEW_SCRIPT_HASH_WITH_ARGS(0xfd62720d, &l_DA, 4, 1424);
+        }
+        SCRIPT::TERMINATE_THIS_THREAD();
+    } else if (g_28006D) {
+        if (SCRIPT::_GET_NUMBER_OF_INSTANCES_OF_STREAMED_SCRIPT(0x464a63f5) == 0) {
+            SCRIPT::_REQUEST_SCRIPT_HASH(0x464a63f5);
+            while (!SCRIPT::_HAS_SCRIPT_HASH_LOADED(0x464a63f5)) {
+                SYSTEM::WAIT(0);
+            }
+            SYSTEM::_START_NEW_SCRIPT_HASH_WITH_ARGS(0x464a63f5, &l_DA, 4, 1424);
+        }
+        SCRIPT::TERMINATE_THIS_THREAD();
+    }
+    if (PLAYER::_C968670BFACE42D9(2)) {
+        SCRIPT::TERMINATE_THIS_THREAD();
+    }
+    switch (l_DA) {
+    case 1:
+        switch (l_DA._f1) {
+        case 75:
+            if (l_DA._f2 == 5) {
+                sub_5395(1, 0, 1);
+                sub_535f();
+            } else if (l_DA._f2 == 76) {
+                sub_535f();
+            } else { 
+                sub_5395(1, 1, 0);
+            }
+            break;
+        case 133:
+            if (l_DA._f2 == 76) {
+                sub_535f();
+            } else { 
+                sub_5395(7, 1, 0);
+            }
+            break;
+        case 76:
+            sub_d91(l_DA._f3, 0);
+            break;
+        case 52:
+            if (l_DA._f2 == 52) {
+                UI::_0CF54F20DE43879C(l_DA._f3);
+            }
+            break;
+        default:
+            sub_d69(1);
+            if ((l_DA._f1 == 26) || (l_DA._f1 == 25)) {
+                sub_bd6(0, 1);
+                sub_ba7(2, 0);
+                sub_535f();
+                g_10B8E = 0;
+                sub_b99(-1);
+            } else if (l_DA._f1 == 5) {
+                if ((l_DA._f2 == 75) || (l_DA._f2 == 133)) {
+                } else { 
+                    sub_bd6(0, 1);
+                }
+            } else { 
+                sub_bd6(0, 1);
+                sub_ba7(2, 0);
+                if (!(l_DA._f1 == 52)) {
+                    sub_ba7(1, 0);
+                }
+                g_10B8E = 0;
+                sub_b99(-1);
+            }
+            break;
+        }
+        break;
+    case 2:
+        switch (l_DA._f1) {
+        case 5:
+            switch (g_10B8E) {
+            case 1:
+                sub_5395(1, 1, 0);
+                break;
+            case 7:
+                sub_5395(7, 1, 0);
+                break;
+            }
+            break;
+        case 75:
+            sub_32a(1, 0);
+            break;
+        case 133:
+            sub_32a(7, 0);
+            break;
+        case 76:
+            if (g_10B9F != -1) {
+                sub_2e9(g_10B9F, g_10B8E);
+                sub_b99(-1);
+                UI::SET_FRONTEND_ACTIVE(0);
+                CAM::DO_SCREEN_FADE_OUT(0);
+                UNK2::_3353D13F09307691();
+                if (PED::IS_PED_IN_ANY_VEHICLE(PLAYER::PLAYER_PED_ID(), 0)) {
+                    if (VEHICLE::IS_VEHICLE_DRIVEABLE(PED::GET_VEHICLE_PED_IS_IN(PLAYER::PLAYER_PED_ID(), 0), 0)) {
+                        g_10B90/*{3}*/ = ENTITY::GET_ENTITY_VELOCITY(PED::GET_VEHICLE_PED_IS_IN(PLAYER::PLAYER_PED_ID(), 0));
+                    }
+                }
+                if (!PED::IS_PED_INJURED(PLAYER::PLAYER_PED_ID())) {
+                    ENTITY::SET_ENTITY_INVINCIBLE(PLAYER::PLAYER_PED_ID(), 1);
+                }
+            } else { }
+            break;
+        }
+        break;
+    }
+    SCRIPT::TERMINATE_THIS_THREAD();
+}
+
+void sub_2e9(auto a_0, auto a_1) {
+    g_10B8B = a_0;
+    g_10B8B._f1 = a_1;
+    if (a_1 == 7) {
+        if ((a_0 >= 0) && (a_0 < 63)) {
+            g_178B8[a_0/*10*/]._f3 = 1;
+        }
+    }
+    GAMEPLAY::SET_BIT(&g_10B8D, 0);
+}
+
+void sub_32a(auto a_0, auto a_1) {
+    if (sub_43f() == -1) {
+        if (sub_399(a_0)) {
+            sub_374(2);
+            sub_d91(g_10B9F, a_1);
+            sub_35e(1);
+        } else { }
+    } else { }
+}
+
+void sub_35e(auto a_0) {
+    sub_ba7(1, a_0);
+    sub_ba7(2, a_0);
+}
+
+auto sub_374(auto a_0) {
+    UI::REQUEST_ADDITIONAL_TEXT("MISHSTA", 8);
+    if (!UI::HAS_ADDITIONAL_TEXT_LOADED(8)) {
+        return 0;
+    }
+    a_0 += 1;
+    return 1;
+}
+
+auto sub_399(auto a_0) {
+    switch (a_0) {
+    case 1:
+        return sub_3e7();
+        break;
+    case 7:
+        return sub_3cc();
+        break;
+    default:
+        break;
+    }
+    return 0;
+}
+
+auto sub_3cc() {
+    if (g_17C49._f41BC._f17C > 0) {
+        return 1;
+    }
+    return 0;
+}
+
+auto sub_3e7() {
+    if (g_28006E) {
+        if (g_300000._f3A1._f15 > 0) {
+            return 1;
+        }
+        return 0;
+    } else if (g_28006D) {
+        if (g_380000._f3A1._f15 > 0) {
+            return 1;
+        }
+        return 0;
+    } else if (g_17C49._f204E._f15 > 0) {
+        return 1;
+    }
+    return 0;
+}
+
+auto sub_43f() {
+    if (sub_b84()) {
+        if (sub_b76(14)) {
+            return 5;
+        }
+        return 0;
+    }
+    if (g_10B99 == 1) {
+        return 0;
+    }
+    if (g_28006E) {
+        if (SCRIPT::_GET_NUMBER_OF_INSTANCES_OF_STREAMED_SCRIPT(0xa5a16dfa) > 0) {
+            return 0;
+        }
+    } else if (g_28006D) {
+        if (SCRIPT::_GET_NUMBER_OF_INSTANCES_OF_STREAMED_SCRIPT(0x7792e586) > 0) {
+            return 0;
+        }
+    } else if (SCRIPT::_GET_NUMBER_OF_INSTANCES_OF_STREAMED_SCRIPT(${mission_stat_watcher}) > 0) {
+        return 0;
+    }
+    if (SCRIPT::_GET_NUMBER_OF_INSTANCES_OF_STREAMED_SCRIPT(${creator}) > 0) {
+        return 1;
+    }
+    if (sub_b4b(0)) {
+        return 0;
+    }
+    if (sub_b3c(g_1787A, 256)) {
+        return 2;
+    }
+    if (sub_9c8()) {
+        return 2;
+    }
+    if (sub_9b6()) {
+        return 3;
+    }
+    if (sub_9a4()) {
+        return 3;
+    }
+    if (sub_993()) {
+        return 3;
+    }
+    if (sub_5bb()) {
+        return 3;
+    }
+    if (STREAMING::_D9D2CFFF49FAB35F() || sub_5a1()) {
+        return 2;
+    }
+    if (ENTITY::DOES_ENTITY_EXIST(PLAYER::PLAYER_PED_ID())) {
+        if (!PED::IS_PED_INJURED(PLAYER::PLAYER_PED_ID())) {
+            if (ENTITY::IS_ENTITY_IN_ANGLED_AREA(PLAYER::PLAYER_PED_ID(), 207.43357849121094, -1019.79541015625, -100.47276306152344, 189.93377685546875, -1019.6234741210938, -95.56883239746094, 17.1875, 0, 1, 0) && PED::IS_PED_IN_ANY_VEHICLE(PLAYER::PLAYER_PED_ID(), 1)) {
+                return 3;
+            }
+        }
+    }
+    if (g_10A93) {
+        return 2;
+    }
+    if (g_10642._f241) {
+        return 4;
+    }
+    return -1;
+}
+
+auto sub_5a1() {
+    if (SCRIPT::_GET_NUMBER_OF_INSTANCES_OF_STREAMED_SCRIPT(${player_timetable_scene}) > 0) {
+        return 1;
+    }
+    return 0;
+}
+
+auto sub_5bb() {
+    if (sub_982()) {
+        for (v_2 = 0; v_2 < 44; v_2 += 1) {
+            if (sub_5eb(v_2)) {
+                return 1;
+            }
+        }
+    }
+    return 0;
+}
+
+auto sub_5eb(auto a_0) {
+    return sub_5fc(a_0, 20, 1);
+}
+
+auto sub_5fc(auto a_0, auto a_1, auto a_2) {
+    if (a_2) {
+        return GAMEPLAY::IS_BIT_SET(g_15F9E._f4F3[a_0/*1*/], a_1);
+    } else if (NETWORK::NETWORK_IS_GAME_IN_PROGRESS()) {
+        if (sub_977() == 0) {
+            return GAMEPLAY::IS_BIT_SET(sub_65c(sub_6ce(a_0), -1, 0), a_1);
+        }
+    } else { 
+        return GAMEPLAY::IS_BIT_SET(g_17C49._f29C[a_0/*1*/], a_1);
+    }
+    return 0;
+}
+
+auto sub_65c(auto a_0, auto a_1, auto a_2) {
+    if (a_2 == 0) {}
+    v_5 = g_25744D[a_0/*6*/][sub_68e(a_1)/*1*/];
+    if (STATS::STAT_GET_INT(v_5, &v_6, -1)) {
+        return v_6;
+    }
+    return 0;
+}
+
+auto sub_68e(auto a_0) {
+    v_3 = a_0;
+    if (v_3 == -1) {
+        v_4 = sub_6c2();
+        if (v_4 > -1) {
+            g_25732E = 0;
+            v_3 = v_4;
+        } else { 
+            v_3 = 0;
+            g_25732E = 1;
+        }
+    }
+    return v_3;
+}
+
+auto sub_6c2() {
+    return g_1407E1;
+}
+
+auto sub_6ce(auto a_0) {
+    switch (a_0) {
+    case 0:
+        return 815;
+        break;
+    case 1:
+        return 816;
+        break;
+    case 2:
+        return 817;
+        break;
+    case 3:
+        return 818;
+        break;
+    case 4:
+        return 819;
+        break;
+    case 5:
+        return 820;
+        break;
+    case 6:
+        return 821;
+        break;
+    case 7:
+        return 822;
+        break;
+    case 8:
+        return 823;
+        break;
+    case 9:
+        return 824;
+        break;
+    case 10:
+        return 825;
+        break;
+    case 11:
+        return 826;
+        break;
+    case 12:
+        return 827;
+        break;
+    case 13:
+        return 828;
+        break;
+    case 14:
+        return 829;
+        break;
+    case 15:
+        return 831;
+        break;
+    case 16:
+        return 832;
+        break;
+    case 17:
+        return 833;
+        break;
+    case 18:
+        return 834;
+        break;
+    case 19:
+        return 835;
+        break;
+    case 20:
+        return 836;
+        break;
+    case 21:
+        return 837;
+        break;
+    case 22:
+        return 838;
+        break;
+    case 23:
+        return 839;
+        break;
+    case 24:
+        return 840;
+        break;
+    case 25:
+        return 841;
+        break;
+    case 26:
+        return 842;
+        break;
+    case 27:
+        return 843;
+        break;
+    case 28:
+        return 844;
+        break;
+    case 29:
+        return 845;
+        break;
+    case 30:
+        return 846;
+        break;
+    case 31:
+        return 847;
+        break;
+    case 32:
+        return 848;
+        break;
+    case 33:
+        return 849;
+        break;
+    case 34:
+        return 850;
+        break;
+    case 35:
+        return 851;
+        break;
+    case 36:
+        return 852;
+        break;
+    case 37:
+        return 853;
+        break;
+    case 38:
+        return 854;
+        break;
+    case 39:
+        return 855;
+        break;
+    case 40:
+        return 859;
+        break;
+    case 41:
+        return 860;
+        break;
+    case 42:
+        return 861;
+        break;
+    case 43:
+        return 862;
+        break;
+    default:
+        break;
+    }
+    return 2903;
+}
+
+auto sub_977() {
+    return g_5F7C;
+}
+
+auto sub_982() {
+    return g_15F9E._f122 > 0;
+}
+
+auto sub_993() {
+    return g_15F9E._f123 > 0;
+}
+
+auto sub_9a4() {
+    return GAMEPLAY::IS_BIT_SET(g_10B8D, 9);
+}
+
+auto sub_9b6() {
+    return GAMEPLAY::IS_BIT_SET(g_10B8D, 8);
+}
+
+auto sub_9c8() {
+    if ((!ENTITY::IS_ENTITY_DEAD(PLAYER::PLAYER_PED_ID())) && (!PED::IS_PED_INJURED(PLAYER::PLAYER_PED_ID()))) {
+        if (((((((((((((((ENTITY::IS_ENTITY_PLAYING_ANIM(PLAYER::PLAYER_PED_ID(), "misshair_shop@barbers", "player_intro", 3) || ENTITY::IS_ENTITY_PLAYING_ANIM(PLAYER::PLAYER_PED_ID(), "misshair_shop@barbers", "player_base", 3)) || ENTITY::IS_ENTITY_PLAYING_ANIM(PLAYER::PLAYER_PED_ID(), "misshair_shop@barbers", "player_enterchair", 3)) || ENTITY::IS_ENTITY_PLAYING_ANIM(PLAYER::PLAYER_PED_ID(), "misshair_shop@barbers", "player_exitchair", 3)) || ENTITY::IS_ENTITY_PLAYING_ANIM(PLAYER::PLAYER_PED_ID(), "misshair_shop@barbers", "player_idle_a", 3)) || ENTITY::IS_ENTITY_PLAYING_ANIM(PLAYER::PLAYER_PED_ID(), "misshair_shop@barbers", "player_idle_b", 3)) || ENTITY::IS_ENTITY_PLAYING_ANIM(PLAYER::PLAYER_PED_ID(), "misshair_shop@barbers", "player_idle_c", 3)) || ENTITY::IS_ENTITY_PLAYING_ANIM(PLAYER::PLAYER_PED_ID(), "misshair_shop@barbers", "player_idle_d", 3)) || ENTITY::IS_ENTITY_PLAYING_ANIM(PLAYER::PLAYER_PED_ID(), "misshair_shop@hair_dressers", "player_intro", 3)) || ENTITY::IS_ENTITY_PLAYING_ANIM(PLAYER::PLAYER_PED_ID(), "misshair_shop@hair_dressers", "player_base", 3)) || ENTITY::IS_ENTITY_PLAYING_ANIM(PLAYER::PLAYER_PED_ID(), "misshair_shop@hair_dressers", "player_enterchair", 3)) || ENTITY::IS_ENTITY_PLAYING_ANIM(PLAYER::PLAYER_PED_ID(), "misshair_shop@hair_dressers", "player_exitchair", 3)) || ENTITY::IS_ENTITY_PLAYING_ANIM(PLAYER::PLAYER_PED_ID(), "misshair_shop@hair_dressers", "player_idle_a", 3)) || ENTITY::IS_ENTITY_PLAYING_ANIM(PLAYER::PLAYER_PED_ID(), "misshair_shop@hair_dressers", "player_idle_b", 3)) || ENTITY::IS_ENTITY_PLAYING_ANIM(PLAYER::PLAYER_PED_ID(), "misshair_shop@hair_dressers", "player_idle_c", 3)) || ENTITY::IS_ENTITY_PLAYING_ANIM(PLAYER::PLAYER_PED_ID(), "misshair_shop@hair_dressers", "player_idle_d", 3)) {
+            return 1;
+        }
+    }
+    return 0;
+}
+
+auto sub_b3c(auto a_0, auto a_1) {
+    return (a_0 & a_1) != 0;
+}
+
+auto sub_b4b(auto a_0) {
+    if ((!a_0) && (SCRIPT::_GET_NUMBER_OF_INSTANCES_OF_STREAMED_SCRIPT(${benchmark}) > 0)) {
+        return 1;
+    }
+    return GAMEPLAY::IS_BIT_SET(g_10B8D, 0);
+}
+
+auto sub_b76(auto a_0) {
+    return g_8861 == a_0;
+}
+
+auto sub_b84() {
+    if (g_8861 == 15) {
+        return 0;
+    }
+    return 1;
+}
+
+void sub_b99(auto a_0) {
+    g_10B9F = a_0;
+}
+
+void sub_ba7(auto a_0, auto a_1) {
+    if (a_1 == 1) {
+        sub_bd6(0, 1);
+    } else { }
+    GRAPHICS::_AB58C27C2E6123C6("SHOW_COLUMN");
+    GRAPHICS::_PUSH_SCALEFORM_MOVIE_FUNCTION_PARAMETER_INT(a_0);
+    GRAPHICS::_PUSH_SCALEFORM_MOVIE_FUNCTION_PARAMETER_BOOL(a_1);
+    GRAPHICS::_POP_SCALEFORM_MOVIE_FUNCTION_VOID();
+}
+
+void sub_bd6(auto a_0, auto a_1) {
+    GRAPHICS::_AB58C27C2E6123C6("SHOW_WARNING_MESSAGE");
+    GRAPHICS::_PUSH_SCALEFORM_MOVIE_FUNCTION_PARAMETER_BOOL(a_0);
+    v_7 = sub_43f();
+    if (v_7 != -1) {
+        v_6 = 1;
+        v_5 = "PM_RP_HELPT";
+        if (a_1 == 1) {
+            switch (v_7) {
+            case 0:
+                v_4 = "PM_RPB_SM_1";
+                break;
+            case 2:
+                v_4 = "PM_RPB_SM_2";
+                break;
+            case 3:
+                v_4 = "PM_RPB_SM_3";
+                break;
+            case 1:
+                v_4 = "PM_RPB_SM_4";
+                break;
+            case 4:
+                v_4 = "PM_RPB_SM_5";
+                break;
+            case 5:
+                v_4 = "PM_RPB_SM_6";
+                break;
+            default:
+                break;
+            }
+        } else { 
+            switch (v_7) {
+            case 0:
+                v_4 = "PM_RPB_RC_1";
+                break;
+            case 2:
+                v_4 = "PM_RPB_RC_2";
+                break;
+            case 3:
+                v_4 = "PM_RPB_RC_3";
+                break;
+            case 1:
+                v_4 = "PM_RPB_RC_4";
+                break;
+            case 4:
+                v_4 = "PM_RPB_RC_5";
+                break;
+            case 5:
+                v_4 = "PM_RPB_RC_6";
+                break;
+            default:
+                break;
+            }
+        }
+    } else if (sub_399(a_1)) {
+        v_6 = 1;
+        if (a_1 == 1) {
+            v_5 = "PM_RP_HELPT";
+            v_4 = "PM_RP_HELP";
+        } else { 
+            v_5 = "PM_RP_HELPT3";
+            v_4 = "PM_RP_HELP3";
+        }
+    } else { 
+        v_6 = 1;
+        if (a_1 == 1) {
+            v_5 = "PM_RP_HELPT1";
+            v_4 = "PM_RP_HELP1";
+        } else { 
+            v_5 = "PM_RP_HELPT3";
+            v_4 = "PM_RP_HELP4";
+        }
+    }
+    GRAPHICS::_PUSH_SCALEFORM_MOVIE_FUNCTION_PARAMETER_INT(v_6);
+    GRAPHICS::_PUSH_SCALEFORM_MOVIE_FUNCTION_PARAMETER_INT(3 - v_6);
+    sub_d57(v_4);
+    sub_d57(v_5);
+    GRAPHICS::_PUSH_SCALEFORM_MOVIE_FUNCTION_PARAMETER_INT(0);
+    sub_d57("");
+    sub_d57("");
+    GRAPHICS::_POP_SCALEFORM_MOVIE_FUNCTION_VOID();
+}
+
+void sub_d57(auto a_0) {
+    GRAPHICS::_BEGIN_TEXT_COMPONENT(a_0);
+    GRAPHICS::_END_TEXT_COMPONENT();
+}
+
+void sub_d69(auto a_0) {
+    if (a_0 == 1) {
+        UI::OBJECT_DECAL_TOGGLE(0x14211b54);
+    } else { 
+        UI::_DD564BDD0472C936(0x14211b54);
+    }
+    UI::ENABLE_DEATHBLOOD_SEETHROUGH(0);
+}
+
+void sub_d91(auto a_0, auto a_1) {
+    if (sub_43f() == -1) {
+        if (sub_399(g_10B8E)) {
+            sub_b99(a_0);
+            sub_1530(a_0);
+            if (g_10B8F > 16) {
+                if (a_1 == 0) {
+                    sub_e38();
+                }
+                sub_ddf(sub_e0a(a_0), g_10B8F);
+            }
+        } else { }
+    } else { }
+}
+
+void sub_ddf(auto a_0, auto a_1) {
+    GRAPHICS::_AB58C27C2E6123C6("SET_COLUMN_SCROLL");
+    GRAPHICS::_PUSH_SCALEFORM_MOVIE_FUNCTION_PARAMETER_INT(1);
+    GRAPHICS::_PUSH_SCALEFORM_MOVIE_FUNCTION_PARAMETER_INT(a_0);
+    GRAPHICS::_PUSH_SCALEFORM_MOVIE_FUNCTION_PARAMETER_INT(a_1);
+    GRAPHICS::_PUSH_SCALEFORM_MOVIE_FUNCTION_PARAMETER_INT(-1);
+    GRAPHICS::_POP_SCALEFORM_MOVIE_FUNCTION_VOID();
+}
+
+auto sub_e0a(auto a_0) {
+    for (v_3 = 0; v_3 <= (94 - 1); v_3 += 1) {
+        if (l_1D[v_3/*2*/] == a_0) {
+            return v_3;
+        }
+    }
+    return -1;
+}
+
+void sub_e38() {
+    switch (g_10B8E) {
+    case 1:
+        g_10B8F = sub_e78(&l_1D, 1, 0, 1);
+        break;
+    case 7:
+        g_10B8F = sub_e78(&l_1D, 0, 1, 1);
+        break;
+    default:
+        break;
+    }
+}
+
+auto sub_e78(auto a_0, auto a_1, auto a_2, auto a_3) {
+    v_6 = 0;
+    if (a_1 == 1) {
+        if (a_2 == 1) {
+            sub_ed0(a_0, &v_6, 1, a_3, 0);
+            sub_ed0(a_0, &v_6, 7, a_3, 0);
+        } else { 
+            sub_ed0(a_0, &v_6, 1, a_3, 1);
+        }
+    } else if (a_2 == 1) {
+        sub_ed0(a_0, &v_6, 7, a_3, 1);
+    } else { }
+    return v_6;
+}
+
+void sub_ed0(auto a_0, auto a_1, auto a_2, auto a_3, auto a_4) {
+    v_7 = sub_1501(a_2);
+    if (a_4 == 0) {
+        for (v_8 = 0; v_8 < v_7; v_8 += 1) {
+            if (sub_1409(v_8, a_2)) {
+                v_9 = sub_13c1(v_8, a_2);
+                if (v_9 == -1) {
+                } else { 
+                    if ((a_3 == 0) || (sub_103a(v_8, a_2) == 1)) {
+                        a_0[v_9/*2*/] = v_8;
+                        a_0[v_9/*2*/]._f1 = a_2;
+                    }
+                    if (sub_103a(v_8, a_2) == 1) {
+                        a_1 += 1;
+                    }
+                }
+            }
+        }
+    } else { 
+        v_B = 0;
+        for (v_A = 0; v_A <= (v_7 - 1); v_A += 1) {
+            v_C = sub_fbe(v_B, a_3, a_2);
+            if (v_C != -1) {
+                v_B = sub_13c1(v_C, a_2) + 1;
+                a_0[v_A/*2*/] = v_C;
+                a_0[v_A/*2*/]._f1 = a_2;
+                if (sub_103a(v_C, a_2)) {
+                    a_1 += 1;
+                } else { }
+            } else { 
+                v_A = v_7 + 1;
+            }
+        }
+    }
+}
+
+auto sub_fbe(auto a_0, auto a_1, auto a_2) {
+    v_5 = 0;
+    v_6 = -1;
+    v_7 = -1;
+    v_9 = sub_1501(a_2);
+    for (v_5 = 0; v_5 < v_9; v_5 += 1) {
+        if (sub_1409(v_5, a_2) == 1) {
+            if ((a_1 == 0) || (sub_103a(v_5, a_2) == 1)) {
+                v_8 = sub_13c1(v_5, a_2);
+                if (v_8 >= a_0) {
+                    if ((v_8 < v_6) || (v_6 == -1)) {
+                        v_6 = v_8;
+                        v_7 = v_5;
+                    }
+                }
+            }
+        }
+    }
+    return v_7;
+}
+
+auto sub_103a(auto a_0, auto a_1) {
+    switch (a_1) {
+    case 1:
+        return !GAMEPLAY::IS_BIT_SET(g_13D03[a_0/*34*/]._fF, 5);
+        break;
+    case 7:
+        return sub_107b(a_0);
+        break;
+    default:
+        break;
+    }
+    return 0;
+}
+
+auto sub_107b(auto a_0) {
+    switch (a_0) {
+    case 0:
+        return 0;
+        break;
+    case 1:
+        return 0;
+        break;
+    case 2:
+        return 1;
+        break;
+    case 3:
+        return 1;
+        break;
+    case 4:
+        return 0;
+        break;
+    case 5:
+        return 1;
+        break;
+    case 6:
+        return 1;
+        break;
+    case 7:
+        return 0;
+        break;
+    case 8:
+        return 1;
+        break;
+    case 9:
+        return 0;
+        break;
+    case 10:
+        return 0;
+        break;
+    case 11:
+        return 0;
+        break;
+    case 12:
+        return 1;
+        break;
+    case 13:
+        return 0;
+        break;
+    case 14:
+        return 1;
+        break;
+    case 15:
+        return 0;
+        break;
+    case 16:
+        return 1;
+        break;
+    case 17:
+        return 1;
+        break;
+    case 18:
+        return 1;
+        break;
+    case 19:
+        return 1;
+        break;
+    case 20:
+        return 1;
+        break;
+    case 21:
+        return 1;
+        break;
+    case 22:
+        return 1;
+        break;
+    case 23:
+        return 1;
+        break;
+    case 24:
+        return 1;
+        break;
+    case 25:
+        return 1;
+        break;
+    case 26:
+        return 1;
+        break;
+    case 27:
+        return 0;
+        break;
+    case 28:
+        return 1;
+        break;
+    case 29:
+        return 1;
+        break;
+    case 30:
+        return 1;
+        break;
+    case 31:
+        return 0;
+        break;
+    case 32:
+        return 1;
+        break;
+    case 33:
+        return 1;
+        break;
+    case 34:
+        return 1;
+        break;
+    case 35:
+        return 0;
+        break;
+    case 36:
+        return 0;
+        break;
+    case 37:
+        return 0;
+        break;
+    case 38:
+        return 1;
+        break;
+    case 39:
+        return 1;
+        break;
+    case 40:
+        return 1;
+        break;
+    case 41:
+        return 1;
+        break;
+    case 42:
+        return 1;
+        break;
+    case 43:
+        return 1;
+        break;
+    case 44:
+        return 0;
+        break;
+    case 45:
+        return 0;
+        break;
+    case 46:
+        return 1;
+        break;
+    case 47:
+        return 1;
+        break;
+    case 48:
+        return 0;
+        break;
+    case 49:
+        return 1;
+        break;
+    case 50:
+        return 1;
+        break;
+    case 51:
+        return 1;
+        break;
+    case 52:
+        return 1;
+        break;
+    case 54:
+        return 1;
+        break;
+    case 55:
+        return 1;
+        break;
+    case 56:
+        return 1;
+        break;
+    case 53:
+        return 1;
+        break;
+    case 57:
+        return 1;
+        break;
+    case 58:
+        return 1;
+        break;
+    case 59:
+        return 1;
+        break;
+    case 60:
+        return 1;
+        break;
+    case 61:
+        return 1;
+        break;
+    case 62:
+        return 1;
+        break;
+    default:
+        break;
+    }
+    return 0;
+}
+
+auto sub_13c1(auto a_0, auto a_1) {
+    switch (a_1) {
+    case 1:
+        return g_17C49._f1CAD._f148[a_0/*6*/]._f3;
+        break;
+    case 7:
+        return g_17C49._f41BC[a_0/*6*/]._f3;
+        break;
+    default:
+        break;
+    }
+    return -1;
+}
+
+auto sub_1409(auto a_0, auto a_1) {
+    switch (a_1) {
+    case 1:
+        if (sub_14c7(a_0)) {
+            return sub_1465();
+        } else { 
+            return g_17C49._f1CAD._f148[a_0/*6*/];
+        }
+        break;
+    case 7:
+        return GAMEPLAY::IS_BIT_SET(g_17C49._f41BC[a_0/*6*/], 3);
+        break;
+    default:
+        break;
+    }
+    return 0;
+}
+
+auto sub_1465() {
+    if ((((g_17C49._f1CAD._f148[24/*6*/] == 1) || (g_17C49._f1CAD._f148[25/*6*/] == 1)) || (g_17C49._f1CAD._f148[26/*6*/] == 1)) || (g_17C49._f1CAD._f148[27/*6*/] == 1)) {
+        return 1;
+    }
+    return 0;
+}
+
+auto sub_14c7(auto a_0) {
+    v_3 = a_0;
+    if ((((v_3 == 24) || (v_3 == 25)) || (v_3 == 26)) || (v_3 == 27)) {
+        return 1;
+    }
+    return 0;
+}
+
+auto sub_1501(auto a_0) {
+    switch (a_0) {
+    case 1:
+        return 94;
+        break;
+    case 7:
+        return 63;
+        break;
+    default:
+        break;
+    }
+    return -1;
+}
+
+void sub_1530(auto a_0) {
+    l_1B/*{2}*/ = sub_4e44(a_0, g_10B8E);
+    if (!sub_374(2)) {
+        return ;
+    }
+    sub_4e1f(2);
+    GRAPHICS::_AB58C27C2E6123C6("SET_COLUMN_TITLE");
+    GRAPHICS::_PUSH_SCALEFORM_MOVIE_FUNCTION_PARAMETER_INT(2);
+    sub_d57("MISSTA");
+    sub_d57(&l_1B);
+    GRAPHICS::_POP_SCALEFORM_MOVIE_FUNCTION_VOID();
+    v_4 = -333;
+    v_5 = -333;
+    v_6 = 0;
+    v_7 = 0;
+    for (v_3 = 0; v_3 < sub_4c33(a_0, g_10B8E); v_3 += 1) {
+        v_8 = sub_450c(a_0, g_10B8E, v_3);
+        v_9 = 1;
+        switch (v_8) {
+        case 42:
+        case 55:
+        case 70:
+        case 85:
+        case 101:
+            v_9 = 0;
+            v_5 = sub_44e7(v_8);
+            if (v_5 >= 0x7fffffff) {
+                v_5 = 1;
+            }
+            break;
+        case 41:
+        case 54:
+        case 69:
+        case 84:
+        case 100:
+            v_9 = 0;
+            v_4 = sub_44e7(v_8);
+            if (v_4 >= 0x7fffffff) {
+                v_4 = 50;
+            }
+            break;
+        }
+        if ((!g_D6BF[v_8/*13*/]._f7) && v_9) {
+            if (sub_18f3(v_8, v_6, 0)) {
+                v_7 += 1;
+            }
+            v_6 += 1;
+        }
+    }
+    sub_1833(a_0, &v_5);
+    sub_1691(v_7, v_6, 0, v_4, v_5);
+    sub_1674(2);
+}
+
+void sub_1674(auto a_0) {
+    if (GRAPHICS::_AB58C27C2E6123C6("DISPLAY_DATA_SLOT")) {
+        GRAPHICS::_PUSH_SCALEFORM_MOVIE_FUNCTION_PARAMETER_INT(a_0);
+        GRAPHICS::_POP_SCALEFORM_MOVIE_FUNCTION_VOID();
+    }
+}
+
+auto sub_1691(auto a_0, auto a_1, auto a_2, auto a_3, auto a_4) {
+    v_7 = sub_17d4(a_0, a_1, 0);
+    v_8 = sub_179f(v_7);
+    if (a_2) {
+        v_7 = 50.0;
+        v_8 = 1;
+    }
+    if (a_4 > -1) {
+        v_8 = a_4;
+    }
+    if (a_3 > -1) {
+        v_7 = SYSTEM::TO_FLOAT(a_3);
+    }
+    if (v_8 == 0) {
+        GRAPHICS::_AB58C27C2E6123C6("SET_DESCRIPTION");
+        GRAPHICS::_PUSH_SCALEFORM_MOVIE_FUNCTION_PARAMETER_INT(2);
+        GRAPHICS::_PUSH_SCALEFORM_MOVIE_FUNCTION_PARAMETER_INT(0);
+        GRAPHICS::_PUSH_SCALEFORM_MOVIE_FUNCTION_PARAMETER_FLOAT(v_7);
+        sub_d57("MTPHPER");
+        GRAPHICS::_POP_SCALEFORM_MOVIE_FUNCTION_VOID();
+    } else { 
+        GRAPHICS::_AB58C27C2E6123C6("SET_DESCRIPTION");
+        GRAPHICS::_PUSH_SCALEFORM_MOVIE_FUNCTION_PARAMETER_INT(2);
+        GRAPHICS::_PUSH_SCALEFORM_MOVIE_FUNCTION_PARAMETER_INT(sub_1763(v_8));
+        GRAPHICS::_PUSH_SCALEFORM_MOVIE_FUNCTION_PARAMETER_FLOAT(v_7);
+        switch (sub_1763(v_8)) {
+        case 109:
+            sub_d57("MTPHPER_G");
+            break;
+        case 108:
+            sub_d57("MTPHPER_S");
+            break;
+        case 107:
+            sub_d57("MTPHPER_B");
+            break;
+        }
+        GRAPHICS::_POP_SCALEFORM_MOVIE_FUNCTION_VOID();
+    }
+    return v_7;
+}
+
+auto sub_1763(auto a_0) {
+    v_3 = 107;
+    switch (a_0) {
+    case 3:
+        v_3 = 109;
+        break;
+    case 2:
+        v_3 = 108;
+        break;
+    case 1:
+        v_3 = 107;
+        break;
+    }
+    return v_3;
+}
+
+auto sub_179f(auto a_0) {
+    if (a_0 == 0.0) {
+        return 0;
+    }
+    if (a_0 == 100.0) {
+        return 3;
+    } else if (a_0 > 50.0) {
+        return 2;
+    }
+    return 1;
+}
+
+auto sub_17d4(auto a_0, auto a_1, auto a_2) {
+    if (a_2) {
+        return 0.0;
+    }
+    if (a_0 == a_1) {
+        return 100.0;
+    }
+    v_5 = SYSTEM::TO_FLOAT(a_0) / SYSTEM::TO_FLOAT(a_1);
+    v_6 = (50.0 * v_5) + 50.0;
+    v_6 = SYSTEM::TO_FLOAT(SYSTEM::CEIL(v_6));
+    if (v_6 > 100.0) {
+        v_6 = 100.0;
+    }
+    return v_6;
+}
+
+void sub_1833(auto a_0, auto a_1) {
+    if (g_10B8E == 7) {
+        v_4 = a_0;
+        switch (v_4) {
+        case 52:
+            a_1 = g_17C49._f6B6[0/*2*/];
+            if (a_1 == 0) {
+                a_1 = 1;
+            }
+            break;
+        case 53:
+            a_1 = g_17C49._f6B6[1/*2*/];
+            if (a_1 == 0) {
+                a_1 = 1;
+            }
+            break;
+        case 54:
+            a_1 = g_17C49._f6B6[2/*2*/];
+            if (a_1 == 0) {
+                a_1 = 1;
+            }
+            break;
+        case 55:
+            a_1 = g_17C49._f6B6[3/*2*/];
+            if (a_1 == 0) {
+                a_1 = 1;
+            }
+            break;
+        case 56:
+            a_1 = g_17C49._f6B6[4/*2*/];
+            if (a_1 == 0) {
+                a_1 = 1;
+            }
+            break;
+        }
+    }
+}
+
+auto sub_18f3(auto a_0, auto a_1, auto a_2) {
+    if (a_2 != 0) {
+        if (!GRAPHICS::HAS_SCALEFORM_MOVIE_LOADED(a_2)) {
+            return 0;
+        }
+    }
+    if (g_D6BF[a_0/*13*/]._f7) {
+        return 1;
+    }
+    v_5/*{13}*/ = g_D6BF[a_0/*13*/];
+    v_12 = sub_4248(a_0);
+    switch (a_0) {
+    case 38:
+    case 40:
+    case 41:
+    case 42:
+    case 52:
+    case 54:
+    case 55:
+    case 56:
+    case 66:
+    case 68:
+    case 69:
+    case 70:
+    case 81:
+    case 83:
+    case 84:
+    case 85:
+    case 97:
+    case 99:
+    case 100:
+    case 101:
+        v_12 = -1;
+        break;
+    }
+    v_13 = sub_44e7(a_0);
+    v_14 = sub_3096(a_0);
+    if (v_13 == -1) {
+        sub_3026(v_13, a_1, 0, v_14, a_0, a_2);
+        v_12 = 0;
+    } else { 
+        switch (v_5) {
+        case 1:
+            sub_2f87(v_13, a_1, v_12, "MTTIME", a_0, a_2);
+            break;
+        case 2:
+            sub_2f87(v_13, a_1, v_12, v_14, a_0, a_2);
+            break;
+        case 3:
+            sub_2f22(a_1, v_12, v_14, a_0, a_2);
+            break;
+        case 4:
+        case 17:
+            sub_2f87(v_13, a_1, v_12, v_14, a_0, a_2);
+            break;
+        case 5:
+            sub_2e99(v_13, v_5._f2, a_1, v_12, v_14, a_0, a_2);
+            break;
+        case 6:
+            sub_2f22(a_1, v_12, v_14, a_0, a_2);
+            break;
+        case 7:
+            sub_2e14(v_13, v_5._f2, a_1, v_12, v_14, a_0, a_2);
+            break;
+        case 8:
+            sub_2e14(v_13, v_5._f2, a_1, v_12, v_14, a_0, a_2);
+            break;
+        case 9:
+            sub_2e99(v_13, 100, a_1, v_12, v_14, a_0, a_2);
+            break;
+        case 10:
+        case 14:
+        case 15:
+        case 16:
+            sub_2da4(v_13, a_1, v_12, v_14, a_0, a_2);
+            break;
+        case 11:
+            sub_2e99(v_13, 100, a_1, v_12, v_14, a_0, a_2);
+            break;
+        case 12:
+        case 13:
+            sub_1b59(v_13, a_1, v_12, v_14, a_0, a_2);
+            break;
+        case 0:
+            break;
+        }
+    }
+    if (v_12 == 0) {
+        return 0;
+    }
+    return 1;
+}
+
+void sub_1b59(auto a_0, auto a_1, auto a_2, auto a_3, auto a_4, auto a_5) {
+    if (a_5 != 0) {
+        GRAPHICS::_PUSH_SCALEFORM_MOVIE_FUNCTION(a_5, "SET_DATA_SLOT");
+    } else { 
+        GRAPHICS::_AB58C27C2E6123C6("SET_DATA_SLOT");
+        GRAPHICS::_PUSH_SCALEFORM_MOVIE_FUNCTION_PARAMETER_INT(2);
+    }
+    GRAPHICS::_PUSH_SCALEFORM_MOVIE_FUNCTION_PARAMETER_INT(a_1);
+    GRAPHICS::_PUSH_SCALEFORM_MOVIE_FUNCTION_PARAMETER_INT(a_2);
+    GRAPHICS::_PUSH_SCALEFORM_MOVIE_FUNCTION_PARAMETER_INT(6);
+    GRAPHICS::_PUSH_SCALEFORM_MOVIE_FUNCTION_PARAMETER_INT(a_0);
+    if (a_5 == 0) {
+        GRAPHICS::_BEGIN_TEXT_COMPONENT("PM_RP_STATD");
+        UI::_ADD_TEXT_COMPONENT_ITEM_STRING(a_3);
+        UI::_ADD_TEXT_COMPONENT_ITEM_STRING(sub_1bc9(a_4));
+        GRAPHICS::_END_TEXT_COMPONENT();
+    } else { 
+        sub_d57(a_3);
+    }
+    GRAPHICS::_POP_SCALEFORM_MOVIE_FUNCTION_VOID();
+}
+
+auto sub_1bc9(auto a_0) {
+    switch (a_0) {
+    case 0:
+        return "MISHSTD0";
+    case 9:
+        return "MISHSTD1";
+    case 10:
+        return "MISHSTD2";
+    case 21:
+        return "MISHSTD3";
+    case 22:
+        return "MISHSTD4";
+    case 338:
+        return "MISHSTD5";
+    case 339:
+        return "MISHSTD6";
+    case 196:
+        return "MISHSTD7";
+    case 197:
+        return "MISHSTD8";
+    case 205:
+        return "MISHSTD9";
+    case 206:
+        return "MISHSTD10";
+    case 207:
+        return "MISHSTD11";
+    case 218:
+        return "MISHSTD12";
+    case 217:
+        return "MISHSTD13";
+    case 384:
+        return "MISHSTD14";
+    case 385:
+        return "MISHSTD15";
+    case 372:
+        return "MISHSTD16";
+    case 373:
+        return "MISHSTD17";
+    case 375:
+        return "MISHSTD18";
+    case 374:
+        return "MISHSTD19";
+    }
+    switch (a_0) {
+    case 486:
+        return "MISHSTD20";
+    case 487:
+        return "MISHSTD21";
+    case 488:
+        return "MISHSTD22";
+    case 489:
+        return "MISHSTD23";
+    case 490:
+        return "MISHSTD24";
+    case 499:
+        return "MISHSTD25";
+    case 500:
+        return "MISHSTD26";
+    case 501:
+        return "MISHSTD27";
+    case 502:
+        return "MISHSTD28";
+    case 515:
+        return "MISHSTD25";
+    case 516:
+        return "MISHSTD30";
+    case 517:
+        return "MISHSTD19";
+    case 518:
+        return "MISHSTD32";
+    case 137:
+        return "MISHSTD19";
+    case 136:
+        return "MISHSTD34";
+    case 148:
+        return "MISHSTD17";
+    case 149:
+        return "MISHSTD19";
+    case 150:
+        return "MISHSTD37";
+    case 229:
+        return "MISHSTD38";
+    }
+    switch (a_0) {
+    case 230:
+        return "MISHSTD39";
+    case 273:
+        return "MISHSTD40";
+    case 274:
+        return "MISHSTD41";
+    case 275:
+        return "MISHSTD42";
+    case 276:
+        return "MISHSTD43";
+    case 277:
+        return "MISHSTD19";
+    case 283:
+        return "MISHSTD45";
+    case 284:
+        return "MISHSTD16";
+    case 285:
+        return "MISHSTD17";
+    case 346:
+        return "MISHSTD48";
+    case 239:
+        return "MISHSTD49";
+    case 240:
+        return "MISHSTD50";
+    case 241:
+        return "MISHSTD51";
+    case 242:
+        return "MISHSTD52";
+    case 294:
+        return "MISHSTD53";
+    case 295:
+        return "MISHSTD54";
+    case 296:
+        return "MISHSTD55";
+    case 297:
+        return "MISHSTD56";
+    case 298:
+        return "MISHSTD57";
+    }
+    switch (a_0) {
+    case 308:
+        return "MISHSTD58";
+    case 102:
+        return "MISHSTD59";
+    case 115:
+        return "MISHSTD60";
+    case 114:
+        return "MISHSTD22";
+    case 111:
+        return "MISHSTD62";
+    case 112:
+        return "MISHSTD63";
+    case 113:
+        return "MISHSTD64";
+    case 396:
+        return "MISHSTD65";
+    case 393:
+        return "MISHSTD66";
+    case 394:
+        return "MISHSTD67";
+    case 395:
+        return "MISHSTD68";
+    case 120:
+        return "MISHSTD69";
+    case 121:
+        return "MISHSTD70";
+    case 122:
+        return "MISHSTD71";
+    case 123:
+        return "MISHSTD72";
+    case 124:
+        return "MISHSTD73";
+    case 161:
+        return "MISHSTD74";
+    case 172:
+        return "MISHSTD40";
+    case 173:
+        return "MISHSTD76";
+    }
+    switch (a_0) {
+    case 174:
+        return "MISHSTD77";
+    case 175:
+        return "MISHSTD78";
+    case 185:
+        return "MISHSTD79";
+    case 186:
+        return "MISHSTD66";
+    case 187:
+        return "MISHSTD81";
+    case 326:
+        return "MISHSTD82";
+    case 129:
+        return "MISHSTD22";
+    case 130:
+        return "MISHSTD84";
+    case 466:
+        return "MISHSTD85";
+    case 400:
+        return "MISHSTD86";
+    case 401:
+        return "MISHSTD87";
+    case 413:
+        return "MISHSTD88";
+    case 414:
+        return "MISHSTD40";
+    case 415:
+        return "MISHSTD17";
+    case 416:
+        return "MISHSTD91";
+    case 417:
+        return "MISHSTD92";
+    case 249:
+        return "MISHSTD18";
+    case 474:
+        return "MISHSTD12";
+    case 257:
+        return "MISHSTD95";
+    }
+    switch (a_0) {
+    case 527:
+        return "MISHSTD96";
+    case 528:
+        return "MISHSTD97";
+    case 529:
+        return "MISHSTD76";
+    case 534:
+        return "MISHSTD99";
+    case 709:
+        return "MISHSTD100";
+    case 576:
+        return "MISHSTD101";
+    case 577:
+        return "MISHSTD102";
+    case 578:
+        return "MISHSTD103";
+    case 579:
+        return "MISHSTD104";
+    case 742:
+        return "MISHSTD105";
+    case 741:
+        return "MISHSTD19";
+    case 743:
+        return "MISHSTD107";
+    case 745:
+        return "MISHSTD108";
+    case 748:
+        return "MISHSTD109";
+    case 747:
+        return "MISHSTD110";
+    case 749:
+        return "MISHSTD111";
+    case 750:
+        return "MISHSTD112";
+    case 751:
+        return "MISHSTD113";
+    case 754:
+        return "MISHSTD114";
+    }
+    switch (a_0) {
+    case 753:
+        return "MISHSTD115";
+    case 757:
+        return "MISHSTD116";
+    case 756:
+        return "MISHSTD117";
+    case 755:
+        return "MISHSTD118";
+    case 759:
+        return "MISHSTD119";
+    case 758:
+        return "MISHSTD120";
+    case 761:
+        return "MISHSTD121";
+    case 760:
+        return "MISHSTD122";
+    case 762:
+        return "MISHSTD123";
+    case 763:
+        return "MISHSTD124";
+    case 766:
+        return "MISHSTD124";
+    case 769:
+        return "MISHSTD126";
+    case 768:
+        return "MISHSTD127";
+    case 767:
+        return "MISHSTD128";
+    case 771:
+        return "MISHSTD129";
+    case 770:
+        return "MISHSTD130";
+    case 773:
+        return "MISHSTD131";
+    case 772:
+        return "MISHSTD132";
+    case 775:
+        return "MISHSTD133";
+    }
+    switch (a_0) {
+    case 774:
+        return "MISHSTD134";
+    case 777:
+        return "MISHSTD135";
+    case 776:
+        return "MISHSTD136";
+    case 779:
+        return "MISHSTD137";
+    case 778:
+        return "MISHSTD138";
+    case 782:
+        return "MISHSTD139";
+    case 780:
+        return "MISHSTD140";
+    case 781:
+        return "MISHSTD141";
+    case 784:
+        return "MISHSTD142";
+    case 783:
+        return "MISHSTD143";
+    case 786:
+        return "MISHSTD144";
+    case 785:
+        return "MISHSTD145";
+    case 788:
+        return "MISHSTD146";
+    case 787:
+        return "MISHSTD147";
+    case 789:
+        return "MISHSTD148";
+    case 792:
+        return "MISHSTD149";
+    case 791:
+        return "MISHSTD150";
+    case 790:
+        return "MISHSTD151";
+    case 793:
+        return "MISHSTD152";
+    }
+    switch (a_0) {
+    case 794:
+        return "MISHSTD153";
+    case 795:
+        return "MISHSTD154";
+    case 796:
+        return "MISHSTD155";
+    case 797:
+        return "MISHSTD156";
+    case 798:
+        return "MISHSTD157";
+    case 799:
+        return "MISHSTD158";
+    case 800:
+        return "MISHSTD159";
+    case 801:
+        return "MISHSTD160";
+    case 802:
+        return "MISHSTD161";
+    case 803:
+        return "MISHSTD162";
+    case 804:
+        return "MISHSTD163";
+    case 805:
+        return "MISHSTD164";
+    case 806:
+        return "MISHSTD165";
+    case 807:
+        return "MISHSTD166";
+    case 808:
+        return "MISHSTD167";
+    case 809:
+        return "MISHSTD168";
+    case 429:
+        return "MISHSTD48";
+    case 441:
+        return "MISHSTD1";
+    case 4:
+        return "MISHSTD171";
+    }
+    switch (a_0) {
+    case 13:
+        return "MISHSTD172";
+    case 341:
+        return "MISHSTD173";
+    case 5:
+        return "MISHSTD174";
+    case 6:
+        return "MISHSTD175";
+    case 20:
+        return "MISHSTD40";
+    case 169:
+        return "MISHSTD177";
+    case 731:
+        return "MISHSTD178";
+    case 737:
+        return "MISHSTD179";
+    case 145:
+        return "MISHSTD180";
+    case 159:
+        return "MISHSTD74";
+    case 353:
+        return "MISHSTD40";
+    case 357:
+        return "MISHSTD21";
+    case 605:
+        return "MISHSTD21";
+    case 606:
+        return "MISHSTD74";
+    case 613:
+        return "MISHSTD186";
+    case 616:
+        return "MISHSTD187";
+    case 628:
+        return "MISHSTD188";
+    case 309:
+        return "MISHSTD21";
+    case 310:
+        return "MISHSTD16";
+    }
+    switch (a_0) {
+    case 313:
+        return "MISHSTD191";
+    case 477:
+        return "MISHSTD192";
+    case 482:
+        return "MISHSTD193";
+    case 484:
+        return "MISHSTD194";
+    case 715:
+        return "MISHSTD195";
+    case 570:
+        return "MISHSTD40";
+    case 566:
+        return "MISHSTD87";
+    case 565:
+        return "MISHSTD198";
+    case 572:
+        return "MISHSTD199";
+    case 574:
+        return "MISHSTD200";
+    case 431:
+        return "MISHSTD201";
+    case 443:
+        return "MISHSTD202";
+    case 446:
+        return "MISHSTD21";
+    case 452:
+        return "MISHSTD204";
+    case 364:
+        return "MISHSTD201";
+    case 365:
+        return "MISHSTD40";
+    case 369:
+        return "MISHSTD207";
+    case 668:
+        return "MISHSTD87";
+    case 670:
+        return "MISHSTD209";
+    }
+    switch (a_0) {
+    case 678:
+        return "MISHSTD87";
+    case 265:
+        return "MISHSTD87";
+    case 266:
+        return "MISHSTD40";
+    case 270:
+        return "MISHSTD213";
+    case 271:
+        return "MISHSTD214";
+    case 272:
+        return "MISHSTD215";
+    case 765:
+        return "MISHSTD216";
+    case 764:
+        return "MISHSTD217";
+    case 330:
+        return "MISHSTD218";
+    case 331:
+        return "MISHSTD40";
+    case 643:
+        return "MISHSTD220";
+    case 644:
+        return "MISHSTD221";
+    case 645:
+        return "MISHSTD222";
+    case 646:
+        return "MISHSTD223";
+    case 404:
+        return "MISHSTD74";
+    case 721:
+        return "MISHSTD25";
+    case 752:
+        return "MISHSTD226";
+    case 147:
+        return "MISHSTD227";
+    case 336:
+        return "MISHSTD228";
+    }
+    switch (a_0) {
+    case 371:
+        return "MISHSTD228";
+    case 557:
+        return "MISHSTD230";
+    case 575:
+        return "MISHSTD231";
+    case 629:
+        return "MISHSTD232";
+    case 647:
+        return "MISHSTD86";
+    case 685:
+        return "MISHSTD234";
+    case 693:
+        return "MISHSTD235";
+    case 738:
+        return "MISHSTD234";
+    case 650:
+        return "MISHSTD237";
+    case 649:
+        return "MISHSTD238";
+    case 825:
+        return "MISHSTD239";
+    case 824:
+        return "MISHSTD240";
+    case 821:
+        return "MISHSTD241";
+    case 820:
+        return "MISHSTD242";
+    case 319:
+        return "MISHSTD243";
+    case 318:
+        return "MISHSTD244";
+    case 317:
+        return "MISHSTD3";
+    case 322:
+        return "MISHSTD85";
+    case 323:
+        return "MISHSTD247";
+    }
+    switch (a_0) {
+    case 324:
+        return "MISHSTD248";
+    case 816:
+        return "MISHSTD249";
+    case 815:
+        return "MISHSTD250";
+    case 814:
+        return "MISHSTD251";
+    case 746:
+        return "MISHSTD252";
+    case 514:
+        return "MISHSTD253";
+    case 744:
+        return "MISHSTD254";
+    case 841:
+        return "MISHSTD255";
+    case 840:
+        return "MISHSTD3";
+    case 838:
+        return "MISHSTD255";
+    case 828:
+        return "MISHSTD3";
+    case 829:
+        return "MISHSTD255";
+    case 831:
+        return "MISHSTD12";
+    case 832:
+        return "MISHSTD255";
+    case 834:
+        return "MISHSTD48";
+    case 835:
+        return "MISHSTD255";
+    case 837:
+        return "MISHSTD264";
+    case 739:
+        return "MISHSTD265";
+    case 619:
+        return "MISHSTD266";
+    }
+    switch (a_0) {
+    case 560:
+        return "MISHSTD267";
+    case 559:
+        return "MISHSTD268";
+    case 558:
+        return "MISHSTD269";
+    case 673:
+        return "MISHSTD16";
+    case 688:
+        return "MISHSTD16";
+    case 687:
+        return "MISHSTD272";
+    case 844:
+        return "MISHSTD273";
+    case 845:
+        return "MISHSTD274";
+    case 843:
+        return "MISHSTD275";
+    case 236:
+        return "MISHSTD276";
+    case 29:
+        return "MISHSTD277";
+    case 109:
+        return "MISHSTD278";
+    case 108:
+        return "MISHSTD279";
+    case 135:
+        return "MISHSTD280";
+    case 227:
+        return "MISHSTD281";
+    case 852:
+        return "MISHSTD282";
+    case 846:
+        return "MISHSTD283";
+    case 440:
+        return "MISHSTD284";
+    case 864:
+        return "MISHSTD285";
+    }
+    switch (a_0) {
+    case 863:
+        return "MISHSTD286";
+    case 861:
+        return "MISHSTD287";
+    case 862:
+        return "MISHSTD288";
+    case 870:
+        return "MISHSTD289";
+    case 544:
+        return "MISHSTD290";
+    case 543:
+        return "MISHSTD291";
+    case 593:
+        return "MISHSTD292";
+    case 592:
+        return "MISHSTD14";
+    case 603:
+        return "MISHSTD12";
+    case 899:
+        return "MISHSTD295";
+    case 900:
+        return "MISHSTD296";
+    case 883:
+        return "MISHSTD297";
+    case 891:
+        return "MISHSTD297";
+    case 657:
+        return "MISHSTD299";
+    case 875:
+        return "MISHSTD297";
+    case 906:
+        return "MISHSTD193";
+    case 706:
+        return "MISHSTD302";
+    case 699:
+        return "MISHSTD303";
+    case 726:
+        return "MISHSTD304";
+    }
+    switch (a_0) {
+    case 237:
+        return "MISHSTD305";
+    case 658:
+        return "MISHSTD3";
+    case 877:
+        return "MISHSTD307";
+    case 885:
+        return "MISHSTD307";
+    case 893:
+        return "MISHSTD307";
+    case 694:
+        return "MISHSTD310";
+    case 881:
+        return "MISHSTD311";
+    case 889:
+        return "MISHSTD312";
+    case 897:
+        return "MISHSTD311";
+    case 633:
+        return "MISHSTD314";
+    case 632:
+        return "MISHSTD315";
+    case 38:
+        return "MISHSTD316";
+    case 41:
+        return "MISHSTD317";
+    case 39:
+        return "MISHSTD318";
+    case 40:
+        return "MISHSTD319";
+    case 42:
+        return "MISHSTD320";
+    case 56:
+        return "MISHSTD319";
+    case 52:
+        return "MISHSTD316";
+    case 53:
+        return "MISHSTD323";
+    }
+    switch (a_0) {
+    case 54:
+        return "MISHSTD317";
+    case 55:
+        return "MISHSTD320";
+    case 70:
+        return "MISHSTD320";
+    case 69:
+        return "MISHSTD317";
+    case 67:
+        return "MISHSTD328";
+    case 68:
+        return "MISHSTD319";
+    case 66:
+        return "MISHSTD316";
+    case 81:
+        return "MISHSTD316";
+    case 82:
+        return "MISHSTD332";
+    case 84:
+        return "MISHSTD317";
+    case 83:
+        return "MISHSTD319";
+    case 85:
+        return "MISHSTD320";
+    case 97:
+        return "MISHSTD316";
+    case 98:
+        return "MISHSTD337";
+    case 100:
+        return "MISHSTD317";
+    case 99:
+        return "MISHSTD319";
+    case 101:
+        return "MISHSTD320";
+    }
+    return "MISSING_MISSION_STAT_STRING";
+}
+
+void sub_2da4(auto a_0, auto a_1, auto a_2, auto a_3, auto a_4, auto a_5) {
+    if (a_5 != 0) {
+        GRAPHICS::_PUSH_SCALEFORM_MOVIE_FUNCTION(a_5, "SET_DATA_SLOT");
+    } else { 
+        GRAPHICS::_AB58C27C2E6123C6("SET_DATA_SLOT");
+        GRAPHICS::_PUSH_SCALEFORM_MOVIE_FUNCTION_PARAMETER_INT(2);
+    }
+    GRAPHICS::_PUSH_SCALEFORM_MOVIE_FUNCTION_PARAMETER_INT(a_1);
+    GRAPHICS::_PUSH_SCALEFORM_MOVIE_FUNCTION_PARAMETER_INT(a_2);
+    GRAPHICS::_PUSH_SCALEFORM_MOVIE_FUNCTION_PARAMETER_INT(1);
+    GRAPHICS::_PUSH_SCALEFORM_MOVIE_FUNCTION_PARAMETER_INT(a_0);
+    if (a_5 == 0) {
+        GRAPHICS::_BEGIN_TEXT_COMPONENT("PM_RP_STATD");
+        UI::_ADD_TEXT_COMPONENT_ITEM_STRING(a_3);
+        UI::_ADD_TEXT_COMPONENT_ITEM_STRING(sub_1bc9(a_4));
+        GRAPHICS::_END_TEXT_COMPONENT();
+    } else { 
+        sub_d57(a_3);
+    }
+    GRAPHICS::_POP_SCALEFORM_MOVIE_FUNCTION_VOID();
+}
+
+void sub_2e14(auto a_0, auto a_1, auto a_2, auto a_3, auto a_4, auto a_5, auto a_6) {
+    if (a_6 != 0) {
+        GRAPHICS::_PUSH_SCALEFORM_MOVIE_FUNCTION(a_6, "SET_DATA_SLOT");
+    } else { 
+        GRAPHICS::_AB58C27C2E6123C6("SET_DATA_SLOT");
+        GRAPHICS::_PUSH_SCALEFORM_MOVIE_FUNCTION_PARAMETER_INT(2);
+    }
+    v_9 = a_0;
+    if (v_9 > a_1) {
+        v_9 = a_1;
+    }
+    GRAPHICS::_PUSH_SCALEFORM_MOVIE_FUNCTION_PARAMETER_INT(a_2);
+    GRAPHICS::_PUSH_SCALEFORM_MOVIE_FUNCTION_PARAMETER_INT(a_3);
+    GRAPHICS::_PUSH_SCALEFORM_MOVIE_FUNCTION_PARAMETER_INT(5);
+    GRAPHICS::_PUSH_SCALEFORM_MOVIE_FUNCTION_PARAMETER_INT(v_9);
+    GRAPHICS::_PUSH_SCALEFORM_MOVIE_FUNCTION_PARAMETER_INT(a_1);
+    if (a_6 == 0) {
+        GRAPHICS::_BEGIN_TEXT_COMPONENT("PM_RP_STATD");
+        UI::_ADD_TEXT_COMPONENT_ITEM_STRING(a_4);
+        UI::_ADD_TEXT_COMPONENT_ITEM_STRING(sub_1bc9(a_5));
+        GRAPHICS::_END_TEXT_COMPONENT();
+    } else { 
+        sub_d57(a_4);
+    }
+    GRAPHICS::_POP_SCALEFORM_MOVIE_FUNCTION_VOID();
+}
+
+void sub_2e99(auto a_0, auto a_1, auto a_2, auto a_3, auto a_4, auto a_5, auto a_6) {
+    v_9 = (SYSTEM::TO_FLOAT(a_0) / SYSTEM::TO_FLOAT(a_1)) * 100.0;
+    if (a_6 != 0) {
+        GRAPHICS::_PUSH_SCALEFORM_MOVIE_FUNCTION(a_6, "SET_DATA_SLOT");
+    } else { 
+        GRAPHICS::_AB58C27C2E6123C6("SET_DATA_SLOT");
+        GRAPHICS::_PUSH_SCALEFORM_MOVIE_FUNCTION_PARAMETER_INT(2);
+    }
+    GRAPHICS::_PUSH_SCALEFORM_MOVIE_FUNCTION_PARAMETER_INT(a_2);
+    GRAPHICS::_PUSH_SCALEFORM_MOVIE_FUNCTION_PARAMETER_INT(a_3);
+    GRAPHICS::_PUSH_SCALEFORM_MOVIE_FUNCTION_PARAMETER_INT(3);
+    GRAPHICS::_PUSH_SCALEFORM_MOVIE_FUNCTION_PARAMETER_INT(SYSTEM::CEIL(v_9));
+    if (a_6 == 0) {
+        GRAPHICS::_BEGIN_TEXT_COMPONENT("PM_RP_STATD");
+        UI::_ADD_TEXT_COMPONENT_ITEM_STRING(a_4);
+        UI::_ADD_TEXT_COMPONENT_ITEM_STRING(sub_1bc9(a_5));
+        GRAPHICS::_END_TEXT_COMPONENT();
+    } else { 
+        sub_d57(a_4);
+    }
+    GRAPHICS::_POP_SCALEFORM_MOVIE_FUNCTION_VOID();
+}
+
+void sub_2f22(auto a_0, auto a_1, auto a_2, auto a_3, auto a_4) {
+    if (a_4 != 0) {
+        GRAPHICS::_PUSH_SCALEFORM_MOVIE_FUNCTION(a_4, "SET_DATA_SLOT");
+    } else { 
+        GRAPHICS::_AB58C27C2E6123C6("SET_DATA_SLOT");
+        GRAPHICS::_PUSH_SCALEFORM_MOVIE_FUNCTION_PARAMETER_INT(2);
+    }
+    GRAPHICS::_PUSH_SCALEFORM_MOVIE_FUNCTION_PARAMETER_INT(a_0);
+    GRAPHICS::_PUSH_SCALEFORM_MOVIE_FUNCTION_PARAMETER_INT(a_1);
+    if (a_4 == 0) {
+        GRAPHICS::_BEGIN_TEXT_COMPONENT("PM_RP_STATD");
+        UI::_ADD_TEXT_COMPONENT_ITEM_STRING(a_2);
+        UI::_ADD_TEXT_COMPONENT_ITEM_STRING(sub_1bc9(a_3));
+        GRAPHICS::_END_TEXT_COMPONENT();
+    } else { 
+        sub_d57(a_2);
+    }
+    GRAPHICS::_POP_SCALEFORM_MOVIE_FUNCTION_VOID();
+}
+
+void sub_2f87(auto a_0, auto a_1, auto a_2, auto a_3, auto a_4, auto a_5) {
+    v_8 = SYSTEM::FLOOR(SYSTEM::TO_FLOAT(a_0) / 60000.0);
+    v_9 = SYSTEM::FLOOR(SYSTEM::TO_FLOAT(a_0) / 1000.0) - (v_8 * 60);
+    if (a_5 != 0) {
+        GRAPHICS::_PUSH_SCALEFORM_MOVIE_FUNCTION(a_5, "SET_DATA_SLOT");
+    } else { 
+        GRAPHICS::_AB58C27C2E6123C6("SET_DATA_SLOT");
+        GRAPHICS::_PUSH_SCALEFORM_MOVIE_FUNCTION_PARAMETER_INT(2);
+    }
+    GRAPHICS::_PUSH_SCALEFORM_MOVIE_FUNCTION_PARAMETER_INT(a_1);
+    GRAPHICS::_PUSH_SCALEFORM_MOVIE_FUNCTION_PARAMETER_INT(a_2);
+    GRAPHICS::_PUSH_SCALEFORM_MOVIE_FUNCTION_PARAMETER_INT(4);
+    GRAPHICS::_PUSH_SCALEFORM_MOVIE_FUNCTION_PARAMETER_INT(v_8);
+    GRAPHICS::_PUSH_SCALEFORM_MOVIE_FUNCTION_PARAMETER_INT(v_9);
+    if (a_5 == 0) {
+        GRAPHICS::_BEGIN_TEXT_COMPONENT("PM_RP_STATD");
+        UI::_ADD_TEXT_COMPONENT_ITEM_STRING(a_3);
+        UI::_ADD_TEXT_COMPONENT_ITEM_STRING(sub_1bc9(a_4));
+        GRAPHICS::_END_TEXT_COMPONENT();
+    } else { 
+        sub_d57(a_3);
+    }
+    GRAPHICS::_POP_SCALEFORM_MOVIE_FUNCTION_VOID();
+}
+
+void sub_3026(auto a_0, auto a_1, auto a_2, auto a_3, auto a_4, auto a_5) {
+    if (a_5 != 0) {
+        GRAPHICS::_PUSH_SCALEFORM_MOVIE_FUNCTION(a_5, "SET_DATA_SLOT");
+    } else { 
+        GRAPHICS::_AB58C27C2E6123C6("SET_DATA_SLOT");
+        GRAPHICS::_PUSH_SCALEFORM_MOVIE_FUNCTION_PARAMETER_INT(2);
+    }
+    GRAPHICS::_PUSH_SCALEFORM_MOVIE_FUNCTION_PARAMETER_INT(a_1);
+    GRAPHICS::_PUSH_SCALEFORM_MOVIE_FUNCTION_PARAMETER_INT(a_2);
+    GRAPHICS::_PUSH_SCALEFORM_MOVIE_FUNCTION_PARAMETER_INT(0);
+    GRAPHICS::_PUSH_SCALEFORM_MOVIE_FUNCTION_PARAMETER_INT(a_0);
+    if (a_5 == 0) {
+        GRAPHICS::_BEGIN_TEXT_COMPONENT("PM_RP_STATD");
+        UI::_ADD_TEXT_COMPONENT_ITEM_STRING(a_3);
+        UI::_ADD_TEXT_COMPONENT_ITEM_STRING(sub_1bc9(a_4));
+        GRAPHICS::_END_TEXT_COMPONENT();
+    } else { 
+        sub_d57(a_3);
+    }
+    GRAPHICS::_POP_SCALEFORM_MOVIE_FUNCTION_VOID();
+}
+
+auto sub_3096(auto a_0) {
+    switch (a_0) {
+    case 0:
+        return "MISHSTA_0";
+    case 9:
+        return "MISHSTA_1";
+    case 10:
+        return "MISHSTA_2";
+    case 21:
+        return "MISHSTA_1";
+    case 22:
+        return "MISHSTA_3";
+    case 338:
+        return "MISHSTA_0";
+    case 339:
+        return "MISHSTA_4";
+    case 196:
+        return "MISHSTA_5";
+    case 197:
+        return "MISHSTA_0";
+    case 205:
+        return "MISHSTA_6";
+    case 206:
+        return "MISHSTA_7";
+    case 207:
+        return "MISHSTA_8";
+    case 218:
+        return "MISHSTA_1";
+    case 217:
+        return "MISHSTA_0";
+    case 384:
+        return "MISHSTA_1";
+    case 385:
+        return "MISHSTA_9";
+    case 372:
+        return "MISHSTA_10";
+    case 373:
+        return "MISHSTA_11";
+    case 375:
+        return "MISHSTA_1";
+    case 374:
+        return "MISHSTA_12";
+    case 486:
+        return "MISHSTA_13";
+    case 487:
+        return "MISHSTA_11";
+    case 488:
+        return "MISHSTA_1";
+    case 489:
+        return "MISHSTA_14";
+    case 490:
+        return "MISHSTA_15";
+    case 499:
+        return "MISHSTA_11";
+    case 500:
+        return "MISHSTA_1";
+    case 501:
+        return "MISHSTA_16";
+    case 502:
+        return "MISHSTA_17";
+    case 515:
+        return "MISHSTA_11";
+    }
+    switch (a_0) {
+    case 516:
+        return "MISHSTA_18";
+    case 517:
+        return "MISHSTA_12";
+    case 518:
+        return "MISHSTA_19";
+    case 137:
+        return "MISHSTA_12";
+    case 136:
+        return "MISHSTA_20";
+    case 148:
+        return "MISHSTA_11";
+    case 149:
+        return "MISHSTA_12";
+    case 150:
+        return "MISHSTA_21";
+    case 229:
+        return "MISHSTA_6";
+    case 230:
+        return "MISHSTA_22";
+    case 273:
+        return "MISHSTA_10";
+    case 274:
+        return "MISHSTA_11";
+    case 275:
+        return "MISHSTA_1";
+    case 276:
+        return "MISHSTA_23";
+    case 277:
+        return "MISHSTA_12";
+    case 283:
+        return "MISHSTA_1";
+    case 284:
+        return "MISHSTA_10";
+    case 285:
+        return "MISHSTA_11";
+    case 346:
+        return "MISHSTA_1";
+    case 239:
+        return "MISHSTA_1";
+    case 240:
+        return "MISHSTA_24";
+    case 241:
+        return "MISHSTA_25";
+    case 242:
+        return "MISHSTA_26";
+    case 294:
+        return "MISHSTA_27";
+    case 295:
+        return "MISHSTA_28";
+    case 296:
+        return "MISHSTA_29";
+    case 297:
+        return "MISHSTA_30";
+    case 298:
+        return "MISHSTA_31";
+    case 308:
+        return "MISHSTA_32";
+    case 102:
+        return "MISHSTA_0";
+    case 115:
+        return "MISHSTA_33";
+    }
+    switch (a_0) {
+    case 114:
+        return "MISHSTA_1";
+    case 111:
+        return "MISHSTA_34";
+    case 112:
+        return "MISHSTA_35";
+    case 113:
+        return "MISHSTA_36";
+    case 396:
+        return "MISHSTA_1";
+    case 393:
+        return "MISHSTA_37";
+    case 394:
+        return "MISHSTA_38";
+    case 395:
+        return "MISHSTA_39";
+    case 120:
+        return "MISHSTA_0";
+    case 121:
+        return "MISHSTA_6";
+    case 122:
+        return "MISHSTA_40";
+    case 123:
+        return "MISHSTA_41";
+    case 124:
+        return "MISHSTA_42";
+    case 161:
+        return "MISHSTA_43";
+    case 172:
+        return "MISHSTA_43";
+    case 173:
+        return "MISHSTA_1";
+    case 174:
+        return "MISHSTA_11";
+    case 175:
+        return "MISHSTA_44";
+    case 185:
+        return "MISHSTA_1";
+    case 186:
+        return "MISHSTA_6";
+    case 187:
+        return "MISHSTA_45";
+    case 326:
+        return "MISHSTA_46";
+    case 129:
+        return "MISHSTA_1";
+    case 130:
+        return "MISHSTA_0";
+    case 466:
+        return "MISHSTA_1";
+    case 400:
+        return "MISHSTA_1";
+    case 401:
+        return "MISHSTA_47";
+    case 413:
+        return "MISHSTA_48";
+    case 414:
+        return "MISHSTA_10";
+    case 415:
+        return "MISHSTA_11";
+    case 416:
+        return "MISHSTA_49";
+    }
+    switch (a_0) {
+    case 417:
+        return "MISHSTA_50";
+    case 249:
+        return "MISHSTA_1";
+    case 474:
+        return "MISHSTA_1";
+    case 257:
+        return "MISHSTA_1";
+    case 527:
+        return "MISHSTA_51";
+    case 528:
+        return "MISHSTA_52";
+    case 529:
+        return "MISHSTA_53";
+    case 534:
+        return "MISHSTA_54";
+    case 709:
+        return "MISHSTA_55";
+    case 576:
+        return "MISHSTA_1";
+    case 577:
+        return "MISHSTA_56";
+    case 578:
+        return "MISHSTA_57";
+    case 579:
+        return "MISHSTA_58";
+    case 742:
+        return "MISHSTA_59";
+    case 741:
+        return "MISHSTA_60";
+    case 743:
+        return "MISHSTA_61";
+    case 745:
+        return "MISHSTA_62";
+    case 748:
+        return "MISHSTA_62";
+    case 747:
+        return "MISHSTA_63";
+    case 749:
+        return "MISHSTA_64";
+    case 750:
+        return "MISHSTA_65";
+    case 751:
+        return "MISHSTA_66";
+    case 754:
+        return "MISHSTA_67";
+    case 753:
+        return "MISHSTA_68";
+    case 757:
+        return "MISHSTA_69";
+    case 756:
+        return "MISHSTA_70";
+    case 755:
+        return "MISHSTA_71";
+    case 759:
+        return "MISHSTA_72";
+    case 758:
+        return "MISHSTA_73";
+    case 761:
+        return "MISHSTA_74";
+    case 760:
+        return "MISHSTA_75";
+    }
+    switch (a_0) {
+    case 762:
+        return "MISHSTA_76";
+    case 763:
+        return "MISHSTA_77";
+    case 766:
+        return "MISHSTA_78";
+    case 769:
+        return "MISHSTA_79";
+    case 768:
+        return "MISHSTA_80";
+    case 767:
+        return "MISHSTA_81";
+    case 771:
+        return "MISHSTA_82";
+    case 770:
+        return "MISHSTA_83";
+    case 773:
+        return "MISHSTA_84";
+    case 772:
+        return "MISHSTA_85";
+    case 775:
+        return "MISHSTA_86";
+    case 774:
+        return "MISHSTA_87";
+    case 777:
+        return "MISHSTA_88";
+    case 776:
+        return "MISHSTA_89";
+    case 779:
+        return "MISHSTA_90";
+    case 778:
+        return "MISHSTA_91";
+    case 782:
+        return "MISHSTA_92";
+    case 780:
+        return "MISHSTA_93";
+    case 781:
+        return "MISHSTA_94";
+    case 784:
+        return "MISHSTA_95";
+    case 783:
+        return "MISHSTA_96";
+    case 786:
+        return "MISHSTA_97";
+    case 785:
+        return "MISHSTA_98";
+    case 788:
+        return "MISHSTA_99";
+    case 787:
+        return "MISHSTA_100";
+    case 789:
+        return "MISHSTA_101";
+    case 792:
+        return "MISHSTA_102";
+    case 791:
+        return "MISHSTA_103";
+    case 790:
+        return "MISHSTA_104";
+    case 793:
+        return "MISHSTA_105";
+    case 794:
+        return "MISHSTA_106";
+    }
+    switch (a_0) {
+    case 795:
+        return "MISHSTA_0";
+    case 796:
+        return "MISHSTA_107";
+    case 797:
+        return "MISHSTA_108";
+    case 798:
+        return "MISHSTA_109";
+    case 799:
+        return "MISHSTA_110";
+    case 800:
+        return "MISHSTA_111";
+    case 801:
+        return "MISHSTA_112";
+    case 802:
+        return "MISHSTA_113";
+    case 803:
+        return "MISHSTA_114";
+    case 804:
+        return "MISHSTA_115";
+    case 805:
+        return "MISHSTA_116";
+    case 806:
+        return "MISHSTA_117";
+    case 807:
+        return "MISHSTA_118";
+    case 808:
+        return "MISHSTA_119";
+    case 809:
+        return "MISHSTA_120";
+    case 429:
+        return "MISHSTA_1";
+    case 441:
+        return "MISHSTA_1";
+    case 4:
+        return "MISHSTA_121";
+    case 13:
+        return "MISHSTA_11";
+    case 341:
+        return "MISHSTA_122";
+    case 5:
+        return "MISHSTA_123";
+    case 6:
+        return "MISHSTA_124";
+    case 20:
+        return "MISHSTA_10";
+    case 169:
+        return "MISHSTA_125";
+    case 731:
+        return "MISHSTA_126";
+    case 737:
+        return "MISHSTA_10";
+    case 145:
+        return "MISHSTA_127";
+    case 159:
+        return "MISHSTA_10";
+    case 353:
+        return "MISHSTA_10";
+    case 357:
+        return "MISHSTA_11";
+    case 605:
+        return "MISHSTA_11";
+    }
+    switch (a_0) {
+    case 606:
+        return "MISHSTA_10";
+    case 613:
+        return "MISHSTA_128";
+    case 616:
+        return "MISHSTA_129";
+    case 628:
+        return "MISHSTA_130";
+    case 309:
+        return "MISHSTA_11";
+    case 310:
+        return "MISHSTA_10";
+    case 313:
+        return "MISHSTA_131";
+    case 477:
+        return "MISHSTA_37";
+    case 482:
+        return "MISHSTA_132";
+    case 484:
+        return "MISHSTA_133";
+    case 715:
+        return "MISHSTA_123";
+    case 570:
+        return "MISHSTA_10";
+    case 566:
+        return "MISHSTA_11";
+    case 565:
+        return "MISHSTA_134";
+    case 572:
+        return "MISHSTA_135";
+    case 574:
+        return "MISHSTA_136";
+    case 431:
+        return "MISHSTA_11";
+    case 443:
+        return "MISHSTA_137";
+    case 446:
+        return "MISHSTA_138";
+    case 452:
+        return "MISHSTA_139";
+    case 364:
+        return "MISHSTA_11";
+    case 365:
+        return "MISHSTA_10";
+    case 369:
+        return "MISHSTA_140";
+    case 668:
+        return "MISHSTA_11";
+    case 670:
+        return "MISHSTA_141";
+    case 678:
+        return "MISHSTA_11";
+    case 265:
+        return "MISHSTA_11";
+    case 266:
+        return "MISHSTA_10";
+    case 270:
+        return "MISHSTA_142";
+    case 271:
+        return "MISHSTA_143";
+    case 272:
+        return "MISHSTA_144";
+    }
+    switch (a_0) {
+    case 765:
+        return "MISHSTA_145";
+    case 764:
+        return "MISHSTA_146";
+    case 330:
+        return "MISHSTA_11";
+    case 331:
+        return "MISHSTA_10";
+    case 643:
+        return "MISHSTA_147";
+    case 644:
+        return "MISHSTA_148";
+    case 645:
+        return "MISHSTA_149";
+    case 646:
+        return "MISHSTA_150";
+    case 404:
+        return "MISHSTA_10";
+    case 721:
+        return "MISHSTA_151";
+    case 752:
+        return "MISHSTA_152";
+    case 147:
+        return "MISHSTA_1";
+    case 336:
+        return "MISHSTA_1";
+    case 371:
+        return "MISHSTA_1";
+    case 557:
+        return "MISHSTA_1";
+    case 575:
+        return "MISHSTA_1";
+    case 629:
+        return "MISHSTA_1";
+    case 647:
+        return "MISHSTA_1";
+    case 685:
+        return "MISHSTA_1";
+    case 693:
+        return "MISHSTA_1";
+    case 738:
+        return "MISHSTA_1";
+    case 650:
+        return "MISHSTA_0";
+    case 649:
+        return "MISHSTA_153";
+    case 825:
+        return "MISHSTA_154";
+    case 824:
+        return "MISHSTA_155";
+    case 821:
+        return "MISHSTA_156";
+    case 820:
+        return "MISHSTA_157";
+    case 319:
+        return "MISHSTA_158";
+    case 318:
+        return "MISHSTA_159";
+    case 317:
+        return "MISHSTA_1";
+    case 322:
+        return "MISHSTA_1";
+    }
+    switch (a_0) {
+    case 323:
+        return "MISHSTA_0";
+    case 324:
+        return "MISHSTA_160";
+    case 816:
+        return "MISHSTA_161";
+    case 815:
+        return "MISHSTA_162";
+    case 814:
+        return "MISHSTA_163";
+    case 746:
+        return "MISHSTA_164";
+    case 514:
+        return "MISHSTA_165";
+    case 744:
+        return "MISHSTA_166";
+    case 841:
+        return "MISHSTA_167";
+    case 840:
+        return "MISHSTA_1";
+    case 838:
+        return "MISHSTA_167";
+    case 828:
+        return "MISHSTA_1";
+    case 829:
+        return "MISHSTA_167";
+    case 831:
+        return "MISHSTA_1";
+    case 832:
+        return "MISHSTA_167";
+    case 834:
+        return "MISHSTA_1";
+    case 835:
+        return "MISHSTA_167";
+    case 837:
+        return "MISHSTA_1";
+    case 739:
+        return "MISHSTA_168";
+    case 619:
+        return "MISHSTA_169";
+    case 560:
+        return "MISHSTA_170";
+    case 559:
+        return "MISHSTA_171";
+    case 558:
+        return "MISHSTA_172";
+    case 673:
+        return "MISHSTA_10";
+    case 688:
+        return "MISHSTA_10";
+    case 687:
+        return "MISHSTA_173";
+    case 844:
+        return "MISHSTA_174";
+    case 845:
+        return "MISHSTA_175";
+    case 843:
+        return "MISHSTA_176";
+    case 236:
+        return "MISHSTA_177";
+    case 29:
+        return "MISHSTA_178";
+    }
+    switch (a_0) {
+    case 109:
+        return "MISHSTA_179";
+    case 108:
+        return "MISHSTA_180";
+    case 135:
+        return "MISHSTA_181";
+    case 227:
+        return "MISHSTA_182";
+    case 852:
+        return "MISHSTA_183";
+    case 846:
+        return "MISHSTA_184";
+    case 440:
+        return "MISHSTA_185";
+    case 864:
+        return "MISHSTA_186";
+    case 863:
+        return "MISHSTA_187";
+    case 861:
+        return "MISHSTA_1";
+    case 862:
+        return "MISHSTA_188";
+    case 870:
+        return "MISHSTA_1";
+    case 544:
+        return "MISHSTA_0";
+    case 543:
+        return "MISHSTA_189";
+    case 593:
+        return "MISHSTA_190";
+    case 592:
+        return "MISHSTA_1";
+    case 603:
+        return "MISHSTA_1";
+    case 899:
+        return "MISHSTA_1";
+    case 900:
+        return "MISHSTA_191";
+    case 883:
+        return "MISHSTA_192";
+    case 891:
+        return "MISHSTA_192";
+    case 657:
+        return "MISHSTA_193";
+    case 875:
+        return "MISHSTA_192";
+    case 906:
+        return "MISHSTA_194";
+    case 706:
+        return "MISHSTA_195";
+    case 699:
+        return "MISHSTA_196";
+    case 726:
+        return "MISHSTA_197";
+    case 237:
+        return "MISHSTA_198";
+    case 658:
+        return "MISHSTA_1";
+    case 877:
+        return "MISHSTA_0";
+    case 885:
+        return "MISHSTA_0";
+    }
+    switch (a_0) {
+    case 893:
+        return "MISHSTA_0";
+    case 694:
+        return "MISHSTA_110";
+    case 881:
+        return "MISHSTA_199";
+    case 889:
+        return "MISHSTA_199";
+    case 897:
+        return "MISHSTA_199";
+    case 633:
+        return "MISHSTA_200";
+    case 632:
+        return "MISHSTA_201";
+    case 38:
+        return "MISHSTA_202";
+    case 41:
+        return "MISHSTA_203";
+    case 39:
+        return "MISHSTA_204";
+    case 40:
+        return "MISHSTA_205";
+    case 42:
+        return "MISHSTA_206";
+    case 56:
+        return "MISHSTA_205";
+    case 52:
+        return "MISHSTA_202";
+    case 53:
+        return "MISHSTA_207";
+    case 54:
+        return "MISHSTA_203";
+    case 55:
+        return "MISHSTA_206";
+    case 70:
+        return "MISHSTA_206";
+    case 69:
+        return "MISHSTA_203";
+    case 67:
+        return "MISHSTA_132";
+    case 68:
+        return "MISHSTA_205";
+    case 66:
+        return "MISHSTA_202";
+    case 81:
+        return "MISHSTA_202";
+    case 82:
+        return "MISHSTA_208";
+    case 84:
+        return "MISHSTA_203";
+    case 83:
+        return "MISHSTA_205";
+    case 85:
+        return "MISHSTA_206";
+    case 97:
+        return "MISHSTA_202";
+    case 98:
+        return "MISHSTA_209";
+    case 100:
+        return "MISHSTA_203";
+    case 99:
+        return "MISHSTA_205";
+    }
+    switch (a_0) {
+    case 101:
+        return "MISHSTA_206";
+    }
+    return "MISSING_MISSION_STAT_STRING";
+}
+
+auto sub_4248(auto a_0) {
+    if (sub_426b(a_0, sub_44be(g_D6BF[a_0/*13*/]._f4))) {
+        return 1;
+    }
+    return 0;
+}
+
+auto sub_426b(auto a_0, auto a_1) {
+    if (a_1 < 0) {
+        return 0;
+    }
+    switch (g_D6BF[a_0/*13*/]) {
+    case 1:
+    case 2:
+    case 4:
+    case 5:
+    case 17:
+        if (a_1 < 1) {
+            return 0;
+        }
+        break;
+    }
+    if (a_1 == 0x7fffffff) {
+        return 0;
+    }
+    if ((((a_0 == 881) || (a_0 == 889)) || (a_0 == 897)) && (g_17C49._f6DC5[4/*4*/] == sub_4335())) {
+        g_D6BF[a_0/*13*/]._f2 = 0;
+    }
+    if (g_D6BF[a_0/*13*/]._f3) {
+        if (a_1 < g_D6BF[a_0/*13*/]._f2) {
+            return 1;
+        }
+    } else if (a_1 >= g_D6BF[a_0/*13*/]._f2) {
+        return 1;
+    }
+    return 0;
+}
+
+auto sub_4335() {
+    sub_434e();
+    return g_17C49._f6C1._f21B._fC8D;
+}
+
+void sub_434e() {
+    if (ENTITY::DOES_ENTITY_EXIST(PLAYER::PLAYER_PED_ID())) {
+        if (sub_4494(g_17C49._f6C1._f21B._fC8D) != ENTITY::GET_ENTITY_MODEL(PLAYER::PLAYER_PED_ID())) {
+            v_2 = sub_4457(PLAYER::PLAYER_PED_ID());
+            if (sub_444b(v_2) && ((!sub_b76(14)) || g_17832)) {
+                if ((g_17C49._f6C1._f21B._fC8D != v_2) && sub_444b(g_17C49._f6C1._f21B._fC8D)) {
+                    g_17C49._f6C1._f21B._fC8E = g_17C49._f6C1._f21B._fC8D;
+                }
+                g_17C49._f6C1._f21B._fC8F = v_2;
+                g_17C49._f6C1._f21B._fC8D = v_2;
+                return ;
+            }
+        } else { 
+            if (g_17C49._f6C1._f21B._fC8D != 145) {
+                g_17C49._f6C1._f21B._fC8F = g_17C49._f6C1._f21B._fC8D;
+            }
+            return ;
+        }
+    }
+    g_17C49._f6C1._f21B._fC8D = 145;
+}
+
+auto sub_444b(auto a_0) {
+    return a_0 < 3;
+}
+
+auto sub_4457(auto a_0) {
+    if (ENTITY::DOES_ENTITY_EXIST(a_0)) {
+        v_4 = ENTITY::GET_ENTITY_MODEL(a_0);
+        for (v_3 = 0; v_3 <= 2; v_3 += 1) {
+            if (sub_4494(v_3) == v_4) {
+                return v_3;
+            }
+        }
+    }
+    return 145;
+}
+
+auto sub_4494(auto a_0) {
+    if (sub_444b(a_0)) {
+        return g_17C49._f744E[a_0/*29*/];
+    } else if (a_0 != 145) {}
+    return 0;
+}
+
+auto sub_44be(auto a_0) {
+    if (a_0 == 0) {
+        return -1;
+    }
+    if (STATS::STAT_GET_INT(a_0, &v_3, -1)) {
+        return v_3 - 1;
+    } else { 
+        return -1;
+    }
+}
+
+auto sub_44e7(auto a_0) {
+    v_3 = sub_44be(g_D6BF[a_0/*13*/]._f4);
+    if (v_3 > -2) {
+        return v_3;
+    }
+    return 0;
+}
+
+auto sub_450c(auto a_0, auto a_1, auto a_2) {
+    switch (a_1) {
+    case 1:
+        return g_13D03[a_0/*34*/]._f11[a_2/*1*/];
+        break;
+    case 7:
+        return sub_454f(a_0, a_2);
+        break;
+    default:
+        break;
+    }
+    return 914;
+}
+
+auto sub_454f(auto a_0, auto a_1) {
+    switch (a_0) {
+    case 2:
+        switch (a_1) {
+        case 0:
+            return 741;
+        case 1:
+            return 742;
+        }
+        return -1;
+    case 3:
+        switch (a_1) {
+        case 0:
+            return 743;
+        case 1:
+            return 744;
+        }
+        return -1;
+    case 5:
+        switch (a_1) {
+        case 0:
+            return 745;
+        case 1:
+            return 746;
+        }
+        return -1;
+    case 6:
+        switch (a_1) {
+        case 0:
+            return 747;
+        case 1:
+            return 748;
+        }
+        return -1;
+    case 8:
+        switch (a_1) {
+        case 0:
+            return 749;
+        }
+        return -1;
+    case 12:
+        switch (a_1) {
+        case 0:
+            return 750;
+        }
+        return -1;
+    case 14:
+        switch (a_1) {
+        case 0:
+            return 751;
+        case 1:
+            return 752;
+        }
+        return -1;
+    case 16:
+        switch (a_1) {
+        case 0:
+            return 753;
+        case 1:
+            return 754;
+        }
+        return -1;
+    case 17:
+        switch (a_1) {
+        case 0:
+            return 755;
+        case 1:
+            return 756;
+        case 2:
+            return 757;
+        }
+        return -1;
+    case 18:
+        switch (a_1) {
+        case 0:
+            return 758;
+        case 1:
+            return 759;
+        }
+        return -1;
+    case 19:
+        switch (a_1) {
+        case 0:
+            return 760;
+        case 1:
+            return 761;
+        }
+        return -1;
+    case 20:
+        switch (a_1) {
+        case 0:
+            return 762;
+        }
+        return -1;
+    case 21:
+        switch (a_1) {
+        case 0:
+            return 763;
+        }
+        return -1;
+    case 22:
+        switch (a_1) {
+        case 0:
+            return 764;
+        case 1:
+            return 765;
+        }
+        return -1;
+    case 23:
+        switch (a_1) {
+        case 0:
+            return 766;
+        }
+        return -1;
+    case 25:
+        switch (a_1) {
+        case 0:
+            return 767;
+        case 1:
+            return 768;
+        case 2:
+            return 769;
+        }
+        return -1;
+    case 26:
+        switch (a_1) {
+        case 0:
+            return 770;
+        case 1:
+            return 771;
+        }
+        return -1;
+    case 28:
+        switch (a_1) {
+        case 0:
+            return 772;
+        case 1:
+            return 773;
+        }
+        return -1;
+    case 29:
+        switch (a_1) {
+        case 0:
+            return 774;
+        case 1:
+            return 775;
+        }
+        return -1;
+    case 30:
+        switch (a_1) {
+        case 0:
+            return 776;
+        case 1:
+            return 777;
+        }
+        return -1;
+    case 32:
+        switch (a_1) {
+        case 0:
+            return 778;
+        case 1:
+            return 779;
+        }
+        return -1;
+    }
+    switch (a_0) {
+    case 33:
+        switch (a_1) {
+        case 0:
+            return 780;
+        case 1:
+            return 781;
+        case 2:
+            return 782;
+        }
+        return -1;
+    case 34:
+        switch (a_1) {
+        case 0:
+            return 783;
+        case 1:
+            return 784;
+        }
+        return -1;
+    case 38:
+        switch (a_1) {
+        case 0:
+            return 785;
+        case 1:
+            return 786;
+        }
+        return -1;
+    case 39:
+        switch (a_1) {
+        case 0:
+            return 787;
+        case 1:
+            return 788;
+        }
+        return -1;
+    case 40:
+        switch (a_1) {
+        case 0:
+            return 789;
+        }
+        return -1;
+    case 41:
+        switch (a_1) {
+        case 0:
+            return 790;
+        case 1:
+            return 791;
+        case 2:
+            return 792;
+        }
+        return -1;
+    case 42:
+        switch (a_1) {
+        case 0:
+            return 793;
+        case 1:
+            return 794;
+        case 2:
+            return 795;
+        }
+        return -1;
+    case 43:
+        switch (a_1) {
+        case 0:
+            return 796;
+        case 1:
+            return 797;
+        }
+        return -1;
+    case 46:
+        switch (a_1) {
+        case 0:
+            return 798;
+        case 1:
+            return 799;
+        }
+        return -1;
+    case 47:
+        switch (a_1) {
+        case 0:
+            return 800;
+        case 1:
+            return 801;
+        }
+        return -1;
+    case 49:
+        switch (a_1) {
+        case 0:
+            return 802;
+        case 1:
+            return 803;
+        }
+        return -1;
+    case 50:
+        switch (a_1) {
+        case 0:
+            return 804;
+        case 1:
+            return 805;
+        }
+        return -1;
+    case 51:
+        switch (a_1) {
+        case 0:
+            return 806;
+        }
+        return -1;
+    case 57:
+        switch (a_1) {
+        case 0:
+            return 807;
+        case 1:
+            return 808;
+        case 2:
+            return 809;
+        }
+        return -1;
+    case 58:
+        switch (a_1) {
+        case 0:
+            return 828;
+        case 1:
+            return 829;
+        case 2:
+            return 830;
+        }
+        return -1;
+    case 59:
+        switch (a_1) {
+        case 0:
+            return 831;
+        case 1:
+            return 832;
+        case 2:
+            return 833;
+        }
+        return -1;
+    case 60:
+        switch (a_1) {
+        case 0:
+            return 834;
+        case 1:
+            return 835;
+        case 2:
+            return 836;
+        }
+        return -1;
+    case 61:
+        switch (a_1) {
+        case 0:
+            return 837;
+        case 1:
+            return 838;
+        case 2:
+            return 839;
+        }
+        return -1;
+    case 62:
+        switch (a_1) {
+        case 0:
+            return 840;
+        case 1:
+            return 841;
+        case 2:
+            return 842;
+        }
+        return -1;
+    case 24:
+        switch (a_1) {
+        case 0:
+            return 843;
+        case 1:
+            return 844;
+        case 2:
+            return 845;
+        }
+        return -1;
+    }
+    return -1;
+}
+
+auto sub_4c33(auto a_0, auto a_1) {
+    switch (a_1) {
+    case 1:
+        return g_13D03[a_0/*34*/]._f10;
+        break;
+    case 7:
+        return sub_4c6e(a_0);
+        break;
+    default:
+        break;
+    }
+    return 0;
+}
+
+auto sub_4c6e(auto a_0) {
+    switch (a_0) {
+    case 2:
+        return 2;
+    case 3:
+        return 2;
+    case 5:
+        return 2;
+    case 6:
+        return 2;
+    case 8:
+        return 1;
+    case 12:
+        return 1;
+    case 14:
+        return 2;
+    case 16:
+        return 2;
+    case 17:
+        return 3;
+    case 18:
+        return 2;
+    case 19:
+        return 2;
+    case 20:
+        return 1;
+    case 21:
+        return 1;
+    case 22:
+        return 2;
+    case 23:
+        return 1;
+    case 25:
+        return 3;
+    case 26:
+        return 2;
+    case 28:
+        return 2;
+    case 29:
+        return 2;
+    case 30:
+        return 2;
+    case 32:
+        return 2;
+    }
+    switch (a_0) {
+    case 33:
+        return 3;
+    case 34:
+        return 2;
+    case 38:
+        return 2;
+    case 39:
+        return 2;
+    case 40:
+        return 1;
+    case 41:
+        return 3;
+    case 42:
+        return 3;
+    case 43:
+        return 2;
+    case 46:
+        return 2;
+    case 47:
+        return 2;
+    case 49:
+        return 2;
+    case 50:
+        return 2;
+    case 51:
+        return 1;
+    case 57:
+        return 3;
+    case 58:
+        return 3;
+    case 59:
+        return 3;
+    case 60:
+        return 3;
+    case 61:
+        return 3;
+    case 62:
+        return 3;
+    case 24:
+        return 3;
+    }
+    return 0;
+}
+
+void sub_4e1f(auto a_0) {
+    GRAPHICS::_AB58C27C2E6123C6("SET_DATA_SLOT_EMPTY");
+    GRAPHICS::_PUSH_SCALEFORM_MOVIE_FUNCTION_PARAMETER_INT(a_0);
+    GRAPHICS::_POP_SCALEFORM_MOVIE_FUNCTION_VOID();
+    if (a_0 == 1) {
+        sub_535f();
+    }
+}
+
+auto<2> sub_4e44(auto a_0, auto a_1) {
+    v_4/*"8"*/ = "";
+    switch (a_1) {
+    case 1:
+        if (((a_0 == 80) || (a_0 == 81)) || (a_0 == 82)) {
+            v_4/*8*/ += g_13D03[a_0/*34*/]._f8;
+            v_4/*8*/ += "A";
+        } else { 
+            v_4/*"8"*/ = "M_";
+            v_4/*8*/ += g_13D03[a_0/*34*/]._f8;
+            if (a_0 == 90) {
+                v_4/*8*/ += "A";
+            }
+        }
+        break;
+    case 7:
+        v_4/*{2}*/ = sub_4eda(a_0);
+        break;
+    default:
+        break;
+    }
+    return v_4;
+}
+
+auto<2> sub_4eda(auto a_0) {
+    v_3/*"8"*/ = "";
+    v_5/*{2}*/ = sub_4f12(a_0);
+    if (GAMEPLAY::IS_STRING_NULL_OR_EMPTY(&v_5)) {
+    } else { 
+        v_3/*"8"*/ = "RC_";
+        v_3/*8*/ += v_5;
+    }
+    return v_3;
+}
+
+auto<2> sub_4f12(auto a_0) {
+    v_3/*"8"*/ = "";
+    switch (a_0) {
+    case 0:
+        v_3/*"8"*/ = "ABI1";
+        break;
+    case 1:
+        v_3/*"8"*/ = "ABI2";
+        break;
+    case 2:
+        v_3/*"8"*/ = "BA1";
+        break;
+    case 3:
+        v_3/*"8"*/ = "BA2";
+        break;
+    case 4:
+        v_3/*"8"*/ = "BA3";
+        break;
+    case 5:
+        v_3/*"8"*/ = "BA3A";
+        break;
+    case 6:
+        v_3/*"8"*/ = "BA3C";
+        break;
+    case 7:
+        v_3/*"8"*/ = "BA4";
+        break;
+    case 8:
+        v_3/*"8"*/ = "DRE1";
+        break;
+    case 9:
+        v_3/*"8"*/ = "EPS1";
+        break;
+    case 10:
+        v_3/*"8"*/ = "EPS2";
+        break;
+    case 11:
+        v_3/*"8"*/ = "EPS3";
+        break;
+    case 12:
+        v_3/*"8"*/ = "EPS4";
+        break;
+    case 13:
+        v_3/*"8"*/ = "EPS5";
+        break;
+    case 14:
+        v_3/*"8"*/ = "EPS6";
+        break;
+    case 15:
+        v_3/*"8"*/ = "EPS7";
+        break;
+    case 16:
+        v_3/*"8"*/ = "EPS8";
+        break;
+    case 17:
+        v_3/*"8"*/ = "EXT1";
+        break;
+    case 18:
+        v_3/*"8"*/ = "EXT2";
+        break;
+    case 19:
+        v_3/*"8"*/ = "EXT3";
+        break;
+    case 20:
+        v_3/*"8"*/ = "EXT4";
+        break;
+    case 21:
+        v_3/*"8"*/ = "FAN1";
+        break;
+    case 22:
+        v_3/*"8"*/ = "FAN2";
+        break;
+    case 23:
+        v_3/*"8"*/ = "FAN3";
+        break;
+    case 24:
+        v_3/*"8"*/ = "HAO1";
+        break;
+    case 25:
+        v_3/*"8"*/ = "HUN1";
+        break;
+    case 26:
+        v_3/*"8"*/ = "HUN2";
+        break;
+    case 27:
+        v_3/*"8"*/ = "JOS1";
+        break;
+    case 28:
+        v_3/*"8"*/ = "JOS2";
+        break;
+    case 29:
+        v_3/*"8"*/ = "JOS3";
+        break;
+    case 30:
+        v_3/*"8"*/ = "JOS4";
+        break;
+    case 31:
+        v_3/*"8"*/ = "MAU1";
+        break;
+    case 32:
+        v_3/*"8"*/ = "MIN1";
+        break;
+    case 33:
+        v_3/*"8"*/ = "MIN2";
+        break;
+    case 34:
+        v_3/*"8"*/ = "MIN3";
+        break;
+    case 35:
+        v_3/*"8"*/ = "MRS1";
+        break;
+    case 36:
+        v_3/*"8"*/ = "MRS2";
+        break;
+    case 37:
+        v_3/*"8"*/ = "NI1";
+        break;
+    case 38:
+        v_3/*"8"*/ = "NI1A";
+        break;
+    case 39:
+        v_3/*"8"*/ = "NI1B";
+        break;
+    case 40:
+        v_3/*"8"*/ = "NI1C";
+        break;
+    case 41:
+        v_3/*"8"*/ = "NI1D";
+        break;
+    case 42:
+        v_3/*"8"*/ = "NI2";
+        break;
+    case 43:
+        v_3/*"8"*/ = "NI3";
+        break;
+    case 44:
+        v_3/*"8"*/ = "OME1";
+        break;
+    case 45:
+        v_3/*"8"*/ = "OME2";
+        break;
+    case 46:
+        v_3/*"8"*/ = "PA1";
+        break;
+    case 47:
+        v_3/*"8"*/ = "PA2";
+        break;
+    case 48:
+        v_3/*"8"*/ = "PA3";
+        break;
+    case 49:
+        v_3/*"8"*/ = "PA3A";
+        break;
+    case 50:
+        v_3/*"8"*/ = "PA3B";
+        break;
+    case 51:
+        v_3/*"8"*/ = "PA4";
+        break;
+    case 52:
+        v_3/*"8"*/ = "RAM1";
+        break;
+    case 53:
+        v_3/*"8"*/ = "RAM2";
+        break;
+    case 54:
+        v_3/*"8"*/ = "RAM3";
+        break;
+    case 55:
+        v_3/*"8"*/ = "RAM4";
+        break;
+    case 56:
+        v_3/*"8"*/ = "RAM5";
+        break;
+    case 57:
+        v_3/*"8"*/ = "SAS1";
+        break;
+    case 58:
+        v_3/*"8"*/ = "TON1";
+        break;
+    case 59:
+        v_3/*"8"*/ = "TON2";
+        break;
+    case 60:
+        v_3/*"8"*/ = "TON3";
+        break;
+    case 61:
+        v_3/*"8"*/ = "TON4";
+        break;
+    case 62:
+        v_3/*"8"*/ = "TON5";
+        break;
+    default:
+        break;
+    }
+    return v_3;
+}
+
+void sub_535f() {
+    GRAPHICS::_AB58C27C2E6123C6("SET_COLUMN_SCROLL");
+    GRAPHICS::_PUSH_SCALEFORM_MOVIE_FUNCTION_PARAMETER_INT(1);
+    GRAPHICS::_PUSH_SCALEFORM_MOVIE_FUNCTION_PARAMETER_INT(-1);
+    GRAPHICS::_PUSH_SCALEFORM_MOVIE_FUNCTION_PARAMETER_INT(-1);
+    GRAPHICS::_PUSH_SCALEFORM_MOVIE_FUNCTION_PARAMETER_INT(-1);
+    sub_d57("");
+    GRAPHICS::_PUSH_SCALEFORM_MOVIE_FUNCTION_PARAMETER_BOOL(1);
+    GRAPHICS::_POP_SCALEFORM_MOVIE_FUNCTION_VOID();
+}
+
+void sub_5395(auto a_0, auto a_1, auto a_2) {
+    v_5 = 0;
+    if ((g_10B8E != a_0) || (a_2 == 1)) {
+        v_5 = 1;
+    }
+    g_10B8E = a_0;
+    sub_374(2);
+    if ((sub_43f() != -1) || (!sub_399(a_0))) {
+        if (a_1 == 1) {
+            sub_d69(0);
+        }
+        sub_35e(0);
+        sub_bd6(1, a_0);
+    } else { 
+        if (v_5 == 1) {
+            sub_ba7(1, 0);
+            sub_ba7(2, 0);
+            sub_4e1f(1);
+            sub_4e1f(2);
+            sub_542f();
+            sub_b99(l_1D[0/*2*/]);
+        }
+        if (a_1 == 1) {
+            sub_d69(1);
+        }
+        sub_32a(a_0, v_5);
+    }
+}
+
+void sub_542f() {
+    sub_e38();
+    if (g_10B8F > 16) {
+        sub_55a4();
+        sub_ddf(0, g_10B8F);
+    } else { 
+        sub_535f();
+    }
+    v_4 = 0;
+    v_5 = 0;
+    for (v_2 = 0; v_2 < g_10B8F; v_2 += 1) {
+        v_4 = 0;
+        v_5 = 0;
+        v_A = -1;
+        v_3 = l_1D[v_2/*2*/];
+        l_1B/*{2}*/ = sub_4e44(v_3, g_10B8E);
+        for (v_9 = 0; v_9 < sub_4c33(v_3, g_10B8E); v_9 += 1) {
+            v_6 = sub_450c(v_3, g_10B8E, v_9);
+            if (!g_D6BF[v_6/*13*/]._f7) {
+                if (sub_4248(v_6) == 1) {
+                    v_5 += 1;
+                }
+                switch (v_6) {
+                case 42:
+                case 55:
+                case 70:
+                case 85:
+                case 101:
+                    v_A = sub_44e7(v_6);
+                    break;
+                }
+                v_4 += 1;
+            }
+        }
+        sub_1833(v_3, &v_A);
+        v_7 = sub_17d4(v_5, v_4, 0);
+        v_8 = sub_179f(v_7);
+        if (v_A > -1) {
+            v_8 = v_A;
+        }
+        sub_554d(1, v_2, 1076, v_3, 1, &l_1B, sub_1763(v_8));
+    }
+    sub_1674(1);
+}
+
+void sub_554d(auto a_0, auto a_1, auto a_2, auto a_3, auto a_4, auto a_5, auto a_6) {
+    if (GRAPHICS::_AB58C27C2E6123C6("SET_DATA_SLOT")) {
+        GRAPHICS::_PUSH_SCALEFORM_MOVIE_FUNCTION_PARAMETER_INT(a_0);
+        GRAPHICS::_PUSH_SCALEFORM_MOVIE_FUNCTION_PARAMETER_INT(a_1);
+        GRAPHICS::_PUSH_SCALEFORM_MOVIE_FUNCTION_PARAMETER_INT(a_2);
+        GRAPHICS::_PUSH_SCALEFORM_MOVIE_FUNCTION_PARAMETER_INT(a_3);
+        GRAPHICS::_PUSH_SCALEFORM_MOVIE_FUNCTION_PARAMETER_INT(3);
+        GRAPHICS::_PUSH_SCALEFORM_MOVIE_FUNCTION_PARAMETER_INT(0);
+        if (a_4) {
+            GRAPHICS::_PUSH_SCALEFORM_MOVIE_FUNCTION_PARAMETER_INT(1);
+        } else { 
+            GRAPHICS::_PUSH_SCALEFORM_MOVIE_FUNCTION_PARAMETER_INT(0);
+        }
+        sub_d57(a_5);
+        GRAPHICS::_PUSH_SCALEFORM_MOVIE_FUNCTION_PARAMETER_INT(a_6);
+        GRAPHICS::_POP_SCALEFORM_MOVIE_FUNCTION_VOID();
+    }
+}
+
+void sub_55a4() {
+    GRAPHICS::_AB58C27C2E6123C6("INIT_COLUMN_SCROLL");
+    GRAPHICS::_PUSH_SCALEFORM_MOVIE_FUNCTION_PARAMETER_INT(1);
+    GRAPHICS::_PUSH_SCALEFORM_MOVIE_FUNCTION_PARAMETER_BOOL(0);
+    GRAPHICS::_PUSH_SCALEFORM_MOVIE_FUNCTION_PARAMETER_INT(1);
+    GRAPHICS::_PUSH_SCALEFORM_MOVIE_FUNCTION_PARAMETER_INT(0);
+    GRAPHICS::_PUSH_SCALEFORM_MOVIE_FUNCTION_PARAMETER_INT(2);
+    GRAPHICS::_PUSH_SCALEFORM_MOVIE_FUNCTION_PARAMETER_BOOL(1);
+    GRAPHICS::_PUSH_SCALEFORM_MOVIE_FUNCTION_PARAMETER_INT(0);
+    GRAPHICS::_PUSH_SCALEFORM_MOVIE_FUNCTION_PARAMETER_BOOL(1);
+    GRAPHICS::_POP_SCALEFORM_MOVIE_FUNCTION_VOID();
+}

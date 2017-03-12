@@ -1,0 +1,319 @@
+// listener's C4 decompiler
+
+void main() {
+    l_2 = 1;
+    l_3 = 134;
+    l_4 = 134;
+    l_5 = 1;
+    l_6 = 1;
+    l_7 = 1;
+    l_8 = 134;
+    l_9 = 1;
+    l_A = 12;
+    l_B = 12;
+    l_E = 0.001;
+    if (NETWORK::NETWORK_IS_GAME_IN_PROGRESS()) {
+        if (GAMEPLAY::IS_BIT_SET(g_146527, 1)) {
+            sub_599();
+        } else { 
+            NETWORK::NETWORK_SET_THIS_SCRIPT_IS_NETWORK_SCRIPT(32, 0, -1);
+            sub_46c(0, -1, 0);
+            GAMEPLAY::SET_THIS_SCRIPT_CAN_BE_PAUSED(0);
+            l_15 = 1;
+        }
+    } else if (PLAYER::_C968670BFACE42D9(2)) {
+        sub_599();
+    }
+    while (1) {
+        SYSTEM::WAIT(0);
+        if (l_15 == 1) {
+            if (sub_1d6()) {
+                sub_599();
+            }
+        }
+        if (ENTITY::DOES_ENTITY_EXIST(l_16)) {
+            if (BRAIN::IS_OBJECT_WITHIN_BRAIN_ACTIVATION_RANGE(l_16)) {
+                switch (l_11) {
+                case 0:
+                    if (ENTITY::DOES_ENTITY_HAVE_DRAWABLE(l_16)) {
+                        l_12/*{3}*/ = ENTITY::GET_ENTITY_COORDS(l_16, 1);
+                        l_11 = 1;
+                    }
+                    break;
+                case 1:
+                    if ((OBJECT::HAS_OBJECT_BEEN_BROKEN(l_16) && ENTITY::IS_ENTITY_VISIBLE(l_16)) && (!ENTITY::IS_ENTITY_A_MISSION_ENTITY(l_16))) {
+                        sub_110();
+                        l_11 = 2;
+                    }
+                    break;
+                case 2:
+                    break;
+                }
+            } else { 
+                sub_599();
+            }
+        } else { 
+            sub_599();
+        }
+    }
+}
+
+void sub_110() {
+    v_2 = ${prop_money_bag_01};
+    v_3 = ${pickup_money_med_bag};
+    v_5 = GAMEPLAY::GET_RANDOM_INT_IN_RANGE(70, 121);
+    if (NETWORK::NETWORK_IS_GAME_IN_PROGRESS()) {
+        v_2 = ${prop_cash_pile_01};
+        v_5 = GAMEPLAY::GET_RANDOM_INT_IN_RANGE(50, 101);
+        v_5 = sub_195(v_5, 1);
+    }
+    GAMEPLAY::SET_BIT(&v_4, 3);
+    GAMEPLAY::SET_BIT(&v_4, 4);
+    STREAMING::REQUEST_MODEL(v_2);
+    while (!STREAMING::HAS_MODEL_LOADED(v_2)) {
+        SYSTEM::WAIT(0);
+    }
+    OBJECT::CREATE_PICKUP(v_3, OBJECT::GET_SAFE_PICKUP_COORDS(l_12, 0x3f99999a, 0x3fc00000), v_4, v_5, 0, v_2);
+}
+
+auto sub_195(auto a_0, auto a_1) {
+    switch (a_1) {
+    case 0:
+        break;
+    case 1:
+        if (a_0 > 0) {
+            v_4 = SYSTEM::TO_FLOAT(a_0) * g_40001;
+            a_0 = SYSTEM::ROUND(v_4);
+        }
+        break;
+    default:
+        break;
+    }
+    return a_0;
+}
+
+auto sub_1d6() {
+    sub_2e9(&v_2);
+    if (v_2) {
+        return 1;
+    }
+    if (g_141422 == 0) {
+        if (!NETWORK::NETWORK_IS_GAME_IN_PROGRESS()) {
+            return 1;
+        }
+    }
+    if (sub_2da()) {
+        return 1;
+    }
+    if (g_252FC2) {
+        return 1;
+    }
+    if (sub_2ce()) {
+        return 1;
+    }
+    if (sub_2b7(157)) {
+        if (!sub_2a8()) {
+            return 1;
+        }
+    }
+    if (sub_2b7(155)) {
+        return 1;
+    }
+    if (!NETWORK::NETWORK_IS_SIGNED_ONLINE()) {
+        return 1;
+    }
+    if (sub_269() != 0) {
+        if (SCRIPT::_GET_NUMBER_OF_INSTANCES_OF_STREAMED_SCRIPT(sub_269()) == 0) {
+            return 1;
+        }
+    }
+    return 0;
+}
+
+auto sub_269() {
+    switch (sub_29d()) {
+    case 0:
+        return ${freemode};
+        break;
+    case 2:
+        return ${creator};
+        break;
+    }
+    return 0;
+}
+
+auto sub_29d() {
+    return g_5F7C;
+}
+
+auto sub_2a8() {
+    return g_250CE3._f23C;
+}
+
+auto sub_2b7(auto a_0) {
+    if (SCRIPT::GET_EVENT_EXISTS(1, a_0)) {
+        return 1;
+    }
+    return 0;
+}
+
+auto sub_2ce() {
+    return g_2528A6;
+}
+
+auto sub_2da() {
+    return g_250CE3._f237;
+}
+
+void sub_2e9(auto a_0) {
+    for (v_3 = 0; v_3 < SCRIPT::GET_NUMBER_OF_EVENTS(1); v_3 += 1) {
+        v_4 = SCRIPT::GET_EVENT_AT_INDEX(1, v_3);
+        if (v_4 == 168) {
+            SCRIPT::GET_EVENT_DATA(1, v_3, &v_5, 2);
+            switch (v_5) {
+            case 306:
+                sub_359(v_3);
+                break;
+            case 2:
+                SCRIPT::GET_EVENT_DATA(1, v_3, &v_7, 3);
+                if (v_7._f2 == 53) {
+                    a_0 = 1;
+                }
+                break;
+            }
+        }
+    }
+}
+
+void sub_359(auto a_0) {
+    if (SCRIPT::GET_EVENT_DATA(1, a_0, &v_3, 3)) {
+        if (sub_428(v_3._f1, 1, 1)) {
+            v_6 = PLAYER::GET_PLAYER_PED(v_3._f1);
+            if (ENTITY::DOES_ENTITY_EXIST(v_6)) {
+                if (PED::IS_PED_IN_ANY_VEHICLE(v_6, 0)) {
+                    v_7 = PED::GET_VEHICLE_PED_IS_IN(v_6, 0);
+                    if (VEHICLE::IS_VEHICLE_WINDOW_INTACT(v_7, v_3._f2) && NETWORK::NETWORK_GET_THIS_SCRIPT_IS_NETWORK_SCRIPT()) {
+                        if (sub_3da(v_7, &v_8)) {
+                            VEHICLE::REMOVE_VEHICLE_WINDOW(v_7, v_3._f2);
+                        }
+                        if (v_8) {
+                            ENTITY::SET_VEHICLE_AS_NO_LONGER_NEEDED(&v_7);
+                        }
+                    }
+                }
+            }
+        }
+    } else { }
+}
+
+auto sub_3da(auto a_0, auto a_1) {
+    if (ENTITY::DOES_ENTITY_EXIST(a_0)) {
+        if (!ENTITY::IS_ENTITY_A_MISSION_ENTITY(a_0)) {
+            if (NETWORK::NETWORK_GET_ENTITY_IS_LOCAL(a_0)) {
+                ENTITY::SET_ENTITY_AS_MISSION_ENTITY(a_0, 0, 1);
+                a_1 = 1;
+            }
+        }
+        if (ENTITY::_DDE6DF5AE89981D2(a_0, 0)) {
+            if (NETWORK::NETWORK_HAS_CONTROL_OF_ENTITY(a_0)) {
+                return 1;
+            }
+        } else { }
+    } else { }
+    return 0;
+}
+
+auto sub_428(auto a_0, auto a_1, auto a_2) {
+    v_5 = a_0;
+    if (NETWORK::NETWORK_IS_PLAYER_ACTIVE(a_0)) {
+        if (a_1) {
+            if (!PLAYER::IS_PLAYER_PLAYING(a_0)) {
+                return 0;
+            }
+        }
+        if (a_2) {
+            if (!g_24F57C._f3[v_5/*1*/]) {
+                return 0;
+            }
+        }
+        return 1;
+    }
+    return 0;
+}
+
+auto sub_46c(auto a_0, auto a_1, auto a_2) {
+    v_5 = NETWORK::NETWORK_GET_SCRIPT_STATUS();
+    while (v_5 != 2) {
+        if ((((v_5 == 3) || (v_5 == 4)) || (v_5 == 5)) || (v_5 == 6)) {
+            if (!a_2) {
+                sub_58d();
+            } else { 
+                return 0;
+            }
+        }
+        if (!sub_581()) {
+            if (a_0 == 0) {
+                if (!NETWORK::NETWORK_IS_GAME_IN_PROGRESS()) {
+                    if (!a_2) {
+                        sub_58d();
+                    } else { 
+                        return 0;
+                    }
+                }
+                if (sub_2da()) {
+                    if (!a_2) {
+                        sub_58d();
+                    } else { 
+                        return 0;
+                    }
+                }
+                if (sub_2b7(155)) {
+                    if (!a_2) {
+                        sub_58d();
+                    } else { 
+                        return 0;
+                    }
+                }
+            } else if (!NETWORK::NETWORK_IS_IN_SESSION()) {
+                if (!a_2) {
+                    sub_58d();
+                } else { 
+                    return 0;
+                }
+            }
+        }
+        SYSTEM::WAIT(0);
+        v_5 = NETWORK::NETWORK_GET_SCRIPT_STATUS();
+    }
+    if (a_1 > -1) {
+        g_1406F8 = v_5;
+    }
+    if (a_0 == 0) {
+        if (!NETWORK::NETWORK_IS_GAME_IN_PROGRESS()) {
+            if (!a_2) {
+                sub_58d();
+            } else { 
+                return 0;
+            }
+        }
+    } else if (!NETWORK::NETWORK_IS_IN_SESSION()) {
+        if (!a_2) {
+            sub_58d();
+        } else { 
+            return 0;
+        }
+    }
+    return 1;
+}
+
+auto sub_581() {
+    return g_141422;
+}
+
+void sub_58d() {
+    SCRIPT::TERMINATE_THIS_THREAD();
+}
+
+void sub_599() {
+    SCRIPT::TERMINATE_THIS_THREAD();
+}

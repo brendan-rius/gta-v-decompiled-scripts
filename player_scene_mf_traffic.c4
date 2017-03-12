@@ -1,0 +1,4386 @@
+// listener's C4 decompiler
+
+void main() {
+    l_2 = 1;
+    l_3 = 134;
+    l_4 = 134;
+    l_5 = 1;
+    l_6 = 1;
+    l_7 = 1;
+    l_8 = 134;
+    l_9 = 1;
+    l_A = 12;
+    l_B = 12;
+    l_E = 0.001;
+    l_13 = "NULL";
+    l_14 = 0.0;
+    l_18 = -0.0375;
+    l_19 = 0.17;
+    l_1B = 3;
+    l_1E = 80.0;
+    l_1F = 140.0;
+    l_20 = 180.0;
+    l_26 = 1;
+    l_27 = 65;
+    l_28 = 49;
+    l_29 = 64;
+    l_38/*{3}*/ = {0.0, 0.0, 0.0 };
+    l_3B/*{3}*/ = {0.0, 0.0, 0.0 };
+    l_3E = -1;
+    l_41 = 318;
+    l_42 = 1;
+    if (PLAYER::_C968670BFACE42D9(3)) {
+        sub_788d();
+    }
+    SYSTEM::WAIT(0);
+    sub_104b();
+    sub_9c8();
+    sub_980();
+    while (l_42 && sub_6ce(3, 0)) {
+        if (sub_594()) {
+            sub_788d();
+        }
+        SYSTEM::WAIT(0);
+        switch (l_40) {
+        case 0:
+            if (sub_2c0()) {
+                STREAMING::SET_VEHICLE_POPULATION_BUDGET(2);
+                l_40 = 1;
+            }
+            break;
+        case 1:
+            if (sub_115()) {
+                l_40 = 2;
+            }
+            break;
+        case 2:
+            sub_10a();
+            break;
+        }
+    }
+    sub_788d();
+}
+
+void sub_10a() {
+    l_42 = 0;
+}
+
+auto sub_115() {
+    if (sub_223(&l_EC, 0.0)) {
+        v_2 = GAMEPLAY::GET_RANDOM_INT_IN_RANGE(0, 12);
+        if (!ENTITY::IS_ENTITY_DEAD(l_48[v_2/*1*/])) {
+            v_3 = VEHICLE::GET_PED_IN_VEHICLE_SEAT(l_48[v_2/*1*/], -1);
+            if (!PED::IS_PED_INJURED(v_3)) {
+                v_4 = GAMEPLAY::GET_RANDOM_FLOAT_IN_RANGE(0.5, 1.0);
+                v_5 = GAMEPLAY::GET_RANDOM_FLOAT_IN_RANGE(0.0, 0.5);
+                VEHICLE::START_VEHICLE_HORN(l_48[v_2/*1*/], SYSTEM::ROUND(v_4 * 1000.0), 0, 0);
+                sub_1ad(&l_EC, v_5);
+            }
+        }
+    }
+    if (GAMEPLAY::GET_DISTANCE_BETWEEN_COORDS(ENTITY::GET_ENTITY_COORDS(PLAYER::PLAYER_PED_ID(), 1), l_E8, 1) > 100.0) {
+        return 1;
+    }
+    return 0;
+}
+
+void sub_1ad(auto a_0, auto a_1) {
+    a_0._f1 = sub_1db(GAMEPLAY::IS_BIT_SET(a_0, 4)) + a_1;
+    GAMEPLAY::SET_BIT(a_0, 1);
+    GAMEPLAY::CLEAR_BIT(a_0, 2);
+    a_0._f2 = 0.0;
+}
+
+auto sub_1db(auto a_0) {
+    if (a_0) {
+        return SYSTEM::TO_FLOAT(GAMEPLAY::GET_GAME_TIMER()) / 1000.0;
+    }
+    if (NETWORK::NETWORK_IS_GAME_IN_PROGRESS()) {
+        v_3 = NETWORK::GET_NETWORK_TIME();
+        return SYSTEM::TO_FLOAT(v_3) / 1000.0;
+    }
+    return SYSTEM::TO_FLOAT(GAMEPLAY::GET_GAME_TIMER()) / 1000.0;
+}
+
+auto sub_223(auto a_0, auto a_1) {
+    if (sub_2a2(a_0)) {
+        if (sub_245(a_0) < a_1) {
+            return 1;
+        }
+    }
+    return 0;
+}
+
+auto sub_245(auto a_0) {
+    if (sub_2a2(a_0)) {
+        if (sub_284(a_0)) {
+            return a_0._f2;
+        } else { 
+            return a_0._f1 - sub_1db(GAMEPLAY::IS_BIT_SET(a_0, 4));
+        }
+    } else { 
+        return a_0._f1;
+    }
+}
+
+auto sub_284(auto a_0) {
+    return sub_292(a_0);
+}
+
+auto sub_292(auto a_0) {
+    return GAMEPLAY::IS_BIT_SET(a_0, 2);
+}
+
+auto sub_2a2(auto a_0) {
+    return sub_2b0(a_0);
+}
+
+auto sub_2b0(auto a_0) {
+    return GAMEPLAY::IS_BIT_SET(a_0, 1);
+}
+
+auto sub_2c0() {
+    if (sub_223(&l_EC, 0.0)) {
+        v_2 = GAMEPLAY::GET_RANDOM_INT_IN_RANGE(0, 12);
+        if (!ENTITY::IS_ENTITY_DEAD(l_48[v_2/*1*/])) {
+            v_3 = VEHICLE::GET_PED_IN_VEHICLE_SEAT(l_48[v_2/*1*/], -1);
+            if (!PED::IS_PED_INJURED(v_3)) {
+                v_4 = GAMEPLAY::GET_RANDOM_FLOAT_IN_RANGE(0.5, 1.0) * 2.0;
+                v_5 = GAMEPLAY::GET_RANDOM_FLOAT_IN_RANGE(0.0, 0.5) * 2.0;
+                VEHICLE::START_VEHICLE_HORN(l_48[v_2/*1*/], SYSTEM::ROUND(v_4 * 1000.0), 0, 0);
+                sub_1ad(&l_EC, v_5);
+            }
+        }
+    }
+    if (!sub_53f()) {
+        sub_39b();
+        sub_381(&l_EC, GAMEPLAY::GET_RANDOM_FLOAT_IN_RANGE(1.75, 2.25));
+        return 1;
+    }
+    if (!sub_2a2(&l_EC)) {
+        sub_381(&l_EC, GAMEPLAY::GET_RANDOM_FLOAT_IN_RANGE(1.75, 2.25) * 2.0);
+    }
+    return 0;
+}
+
+void sub_381(auto a_0, auto a_1) {
+    if (!sub_2a2(a_0)) {
+        sub_1ad(a_0, a_1);
+    }
+}
+
+void sub_39b() {
+    for (v_2 = 0; v_2 < 12; v_2 += 1) {
+        if (!ENTITY::IS_ENTITY_DEAD(l_48[v_2/*1*/])) {
+            v_3 = VEHICLE::GET_PED_IN_VEHICLE_SEAT(l_48[v_2/*1*/], -1);
+            if (!PED::IS_PED_INJURED(v_3)) {
+                sub_4e4(v_3, l_48[v_2/*1*/], 10.0, 786603);
+                PED::SET_PED_KEEP_TASK(v_3, 1);
+            }
+        }
+    }
+    for (v_2 = 0; v_2 < 4; v_2 += 1) {
+        if (!ENTITY::IS_ENTITY_DEAD(l_94[v_2/*1*/])) {
+            v_4 = VEHICLE::GET_PED_IN_VEHICLE_SEAT(l_94[v_2/*1*/], -1);
+            if (!PED::IS_PED_INJURED(v_4)) {
+                sub_4e4(v_4, l_94[v_2/*1*/], 5.0, 786603);
+                PED::SET_PED_KEEP_TASK(v_4, 1);
+            }
+        }
+    }
+    for (v_2 = 0; v_2 < 4; v_2 += 1) {
+        if (!ENTITY::IS_ENTITY_DEAD(l_B0[v_2/*1*/])) {
+            v_5 = VEHICLE::GET_PED_IN_VEHICLE_SEAT(l_B0[v_2/*1*/], -1);
+            if (!PED::IS_PED_INJURED(v_5)) {
+                sub_4e4(v_5, l_B0[v_2/*1*/], 5.0, 786603);
+                PED::SET_PED_KEEP_TASK(v_5, 1);
+            }
+        }
+    }
+    for (v_2 = 0; v_2 < 4; v_2 += 1) {
+        if (!ENTITY::IS_ENTITY_DEAD(l_CC[v_2/*1*/])) {
+            v_6 = VEHICLE::GET_PED_IN_VEHICLE_SEAT(l_CC[v_2/*1*/], -1);
+            if (!PED::IS_PED_INJURED(v_6)) {
+                sub_4e4(v_6, l_CC[v_2/*1*/], 5.0, 786603);
+                PED::SET_PED_KEEP_TASK(v_6, 1);
+            }
+        }
+    }
+}
+
+void sub_4e4(auto a_0, auto a_1, auto a_2, auto a_3) {
+    v_6/*{3}*/ = {0.0, a_2, 0.0 };
+    v_9/*{3}*/ = ENTITY::GET_OFFSET_FROM_ENTITY_IN_WORLD_COORDS(a_1, v_6);
+    AI::OPEN_SEQUENCE_TASK(&v_C);
+    AI::TASK_VEHICLE_DRIVE_TO_COORD(0, a_1, v_9, a_2, 0, ENTITY::GET_ENTITY_MODEL(a_1), a_3, 2.0, 5.0);
+    AI::TASK_VEHICLE_DRIVE_WANDER(0, a_1, a_2, a_3);
+    AI::CLOSE_SEQUENCE_TASK(v_C);
+    AI::TASK_PERFORM_SEQUENCE(a_0, v_C);
+    AI::CLEAR_SEQUENCE_TASK(&v_C);
+}
+
+auto sub_53f() {
+    if ((!STREAMING::_D9D2CFFF49FAB35F()) || (STREAMING::GET_PLAYER_SWITCH_TYPE() == 3)) {
+        return 0;
+    }
+    if (STREAMING::GET_PLAYER_SWITCH_STATE() > 8) {
+        if (STREAMING::GET_PLAYER_SWITCH_STATE() != 11) {
+            return 0;
+        }
+        if (STREAMING::GET_PLAYER_SWITCH_STATE() == 11) {
+            if (STREAMING::SET_PLAYER_INVERTED_UP() > 0) {
+                if (STREAMING::_5B48A06DD0E792A5() > 100) {
+                    return 0;
+                }
+            }
+        }
+    }
+    return 1;
+}
+
+auto sub_594() {
+    if (g_3) {
+        if (!PED::IS_PED_INJURED(PLAYER::PLAYER_PED_ID())) {
+            if (PED::IS_PED_IN_ANY_VEHICLE(PLAYER::PLAYER_PED_ID(), 0)) {
+                v_2 = PED::GET_VEHICLE_PED_IS_IN(PLAYER::PLAYER_PED_ID(), 0);
+                if (VEHICLE::IS_VEHICLE_DRIVEABLE(v_2, 0)) {
+                    if (VEHICLE::IS_PLAYBACK_GOING_ON_FOR_VEHICLE(v_2)) {
+                        return 0;
+                    }
+                }
+            }
+        }
+    }
+    if ((sub_6c0(0) || sub_6c0(3)) || sub_6c0(2)) {
+        if ((!STREAMING::_D9D2CFFF49FAB35F()) && (!sub_6a6())) {
+            return 1;
+        }
+    }
+    if (sub_66b(8, -1)) {
+        return 1;
+    }
+    if (g_24F57C._f48) {
+        return 1;
+    }
+    if (g_15725._f2C == 1) {
+        if (g_15725._f2E == 0) {
+            return 1;
+        }
+    }
+    if (STREAMING::_D9D2CFFF49FAB35F()) {
+        if (STREAMING::GET_PLAYER_SWITCH_TYPE() != 3) {
+            if ((STREAMING::GET_PLAYER_SWITCH_STATE() <= 2) && (STREAMING::GET_PLAYER_SWITCH_STATE() != 1)) {
+                return 1;
+            }
+        }
+    }
+    return 0;
+}
+
+auto sub_66b(auto a_0, auto a_1) {
+    switch (a_0) {
+    case 5:
+        if (a_1 > -1) {
+            return g_1441E9._fCB[a_1/*1*/];
+        } else { }
+        break;
+    }
+    return GAMEPLAY::IS_BIT_SET(g_1441E9._f3B5, a_0);
+}
+
+auto sub_6a6() {
+    if (SCRIPT::_GET_NUMBER_OF_INSTANCES_OF_STREAMED_SCRIPT(${player_timetable_scene}) > 0) {
+        return 1;
+    }
+    return 0;
+}
+
+auto sub_6c0(auto a_0) {
+    return g_8861 == a_0;
+}
+
+auto sub_6ce(auto a_0, auto a_1) {
+    if (STREAMING::_D9D2CFFF49FAB35F()) {
+        if (STREAMING::GET_PLAYER_SWITCH_TYPE() != 3) {
+            if ((STREAMING::GET_PLAYER_SWITCH_STATE() <= 2) && (STREAMING::GET_PLAYER_SWITCH_STATE() != 1)) {
+                return 1;
+            }
+        }
+    }
+    if (!STREAMING::_D9D2CFFF49FAB35F()) {
+        if (sub_6c0(14)) {
+            return 0;
+        }
+        if (GAMEPLAY::_9689123E3F213AA5()) {
+            return 0;
+        }
+        if (!sub_7bb(a_0, sub_7ca())) {
+            return 0;
+        }
+        if (ENTITY::DOES_ENTITY_EXIST(a_1)) {
+            v_4/*{3}*/ = ENTITY::GET_ENTITY_COORDS(a_1, 0);
+            v_7 = SYSTEM::VDIST(ENTITY::GET_ENTITY_COORDS(PLAYER::PLAYER_PED_ID(), 0), v_4);
+            if (v_7 > 250.0) {
+                if (!ENTITY::IS_ENTITY_DEAD(a_1)) {
+                    if (!ENTITY::IS_ENTITY_ON_SCREEN(a_1)) {
+                        return 0;
+                    }
+                } else if (!CAM::IS_SPHERE_VISIBLE(v_4, 1.5)) {
+                    return 0;
+                }
+            }
+        } else if ((a_1 == sub_7b1(g_15E94)) && (a_1 != 0)) {
+            g_15E94 = 0;
+        }
+    }
+    return 1;
+}
+
+auto sub_7b1(auto a_0) {
+    return a_0;
+}
+
+auto sub_7bb(auto a_0, auto a_1) {
+    return (a_0 & a_1) != 0;
+}
+
+auto sub_7ca() {
+    sub_810();
+    switch (g_17C49._f6C1._f21B._fC8D) {
+    case 0:
+        return 1;
+        break;
+    case 1:
+        return 2;
+        break;
+    case 2:
+        return 4;
+        break;
+    }
+    return 0;
+}
+
+void sub_810() {
+    if (ENTITY::DOES_ENTITY_EXIST(PLAYER::PLAYER_PED_ID())) {
+        if (sub_956(g_17C49._f6C1._f21B._fC8D) != ENTITY::GET_ENTITY_MODEL(PLAYER::PLAYER_PED_ID())) {
+            v_2 = sub_919(PLAYER::PLAYER_PED_ID());
+            if (sub_90d(v_2) && ((!sub_6c0(14)) || g_17832)) {
+                if ((g_17C49._f6C1._f21B._fC8D != v_2) && sub_90d(g_17C49._f6C1._f21B._fC8D)) {
+                    g_17C49._f6C1._f21B._fC8E = g_17C49._f6C1._f21B._fC8D;
+                }
+                g_17C49._f6C1._f21B._fC8F = v_2;
+                g_17C49._f6C1._f21B._fC8D = v_2;
+                return ;
+            }
+        } else { 
+            if (g_17C49._f6C1._f21B._fC8D != 145) {
+                g_17C49._f6C1._f21B._fC8F = g_17C49._f6C1._f21B._fC8D;
+            }
+            return ;
+        }
+    }
+    g_17C49._f6C1._f21B._fC8D = 145;
+}
+
+auto sub_90d(auto a_0) {
+    return a_0 < 3;
+}
+
+auto sub_919(auto a_0) {
+    if (ENTITY::DOES_ENTITY_EXIST(a_0)) {
+        v_4 = ENTITY::GET_ENTITY_MODEL(a_0);
+        for (v_3 = 0; v_3 <= 2; v_3 += 1) {
+            if (sub_956(v_3) == v_4) {
+                return v_3;
+            }
+        }
+    }
+    return 145;
+}
+
+auto sub_956(auto a_0) {
+    if (sub_90d(a_0)) {
+        return g_17C49._f744E[a_0/*29*/];
+    } else if (a_0 != 145) {}
+    return 0;
+}
+
+void sub_980() {
+    if (!STREAMING::_D9D2CFFF49FAB35F()) {
+        if (CAM::IS_SCREEN_FADED_OUT()) {
+            g_15E96 = 0;
+        }
+        return ;
+    }
+    if (STREAMING::GET_PLAYER_SWITCH_TYPE() == 3) {
+        g_15E96 = 0;
+        return ;
+    }
+    g_15E96 -= 1;
+    if (g_15E96 > 0) {
+        return ;
+    }
+    STREAMING::_74DE2E8739086740();
+}
+
+void sub_9c8() {
+    STREAMING::SET_VEHICLE_POPULATION_BUDGET(1);
+    for (v_2 = 0; v_2 < l_43; v_2 += 1) {
+        STREAMING::REQUEST_MODEL(l_43[v_2/*1*/]);
+    }
+    for (v_2 = 0; v_2 < l_55; v_2 += 1) {
+        STREAMING::REQUEST_MODEL(l_55[v_2/*1*/]);
+    }
+    for (v_2 = 0; v_2 < l_99; v_2 += 1) {
+        STREAMING::REQUEST_MODEL(l_99[v_2/*1*/]);
+    }
+    for (v_2 = 0; v_2 < l_B5; v_2 += 1) {
+        STREAMING::REQUEST_MODEL(l_B5[v_2/*1*/]);
+    }
+    for (v_2 = 0; v_2 < l_D1; v_2 += 1) {
+        STREAMING::REQUEST_MODEL(l_D1[v_2/*1*/]);
+    }
+    v_3 = 0;
+    v_4 = 0;
+    while ((!v_4) && (v_3 < 400)) {
+        v_4 = 1;
+        for (v_2 = 0; v_2 < l_43; v_2 += 1) {
+            if (!STREAMING::HAS_MODEL_LOADED(l_43[v_2/*1*/])) {
+                STREAMING::REQUEST_MODEL(l_43[v_2/*1*/]);
+                v_4 = 0;
+            }
+        }
+        for (v_2 = 0; v_2 < 12; v_2 += 1) {
+            if (!ENTITY::DOES_ENTITY_EXIST(l_48[v_2/*1*/])) {
+                if (!STREAMING::HAS_MODEL_LOADED(l_55[v_2/*1*/])) {
+                    STREAMING::REQUEST_MODEL(l_55[v_2/*1*/]);
+                    v_4 = 0;
+                } else { 
+                    GAMEPLAY::CLEAR_AREA(l_E8 + l_62[v_2/*3*/], 10.0, 1, 0, 0, 0);
+                    l_48[v_2/*1*/] = VEHICLE::CREATE_VEHICLE(l_55[v_2/*1*/], l_E8 + l_62[v_2/*3*/], l_EB + l_87[v_2/*1*/], 1, 1);
+                    ENTITY::SET_ENTITY_LOD_DIST(l_48[v_2/*1*/], 250);
+                    VEHICLE::SET_VEHICLE_LOD_MULTIPLIER(l_48[v_2/*1*/], 2.0);
+                    ENTITY::_3910051CCECDB00C(l_48[v_2/*1*/], 1);
+                }
+            }
+        }
+        for (v_2 = 0; v_2 < 4; v_2 += 1) {
+            if (!ENTITY::DOES_ENTITY_EXIST(l_94[v_2/*1*/])) {
+                if (!STREAMING::HAS_MODEL_LOADED(l_99[v_2/*1*/])) {
+                    STREAMING::REQUEST_MODEL(l_99[v_2/*1*/]);
+                    v_4 = 0;
+                } else { 
+                    GAMEPLAY::CLEAR_AREA(l_E8 + l_9E[v_2/*3*/], 10.0, 1, 0, 0, 0);
+                    l_94[v_2/*1*/] = VEHICLE::CREATE_VEHICLE(l_99[v_2/*1*/], l_E8 + l_9E[v_2/*3*/], l_EB + l_AB[v_2/*1*/], 1, 1);
+                    ENTITY::SET_ENTITY_LOD_DIST(l_94[v_2/*1*/], 250);
+                    VEHICLE::SET_VEHICLE_LOD_MULTIPLIER(l_94[v_2/*1*/], 2.0);
+                    ENTITY::_3910051CCECDB00C(l_94[v_2/*1*/], 1);
+                }
+            }
+        }
+        for (v_2 = 0; v_2 < 4; v_2 += 1) {
+            if (!ENTITY::DOES_ENTITY_EXIST(l_B0[v_2/*1*/])) {
+                if (!STREAMING::HAS_MODEL_LOADED(l_B5[v_2/*1*/])) {
+                    STREAMING::REQUEST_MODEL(l_B5[v_2/*1*/]);
+                    v_4 = 0;
+                } else { 
+                    GAMEPLAY::CLEAR_AREA(l_E8 + l_BA[v_2/*3*/], 10.0, 1, 0, 0, 0);
+                    l_B0[v_2/*1*/] = VEHICLE::CREATE_VEHICLE(l_B5[v_2/*1*/], l_E8 + l_BA[v_2/*3*/], l_EB + l_C7[v_2/*1*/], 1, 1);
+                    ENTITY::SET_ENTITY_LOD_DIST(l_B0[v_2/*1*/], 250);
+                    VEHICLE::SET_VEHICLE_LOD_MULTIPLIER(l_B0[v_2/*1*/], 2.0);
+                    ENTITY::_3910051CCECDB00C(l_B0[v_2/*1*/], 1);
+                }
+            }
+        }
+        for (v_2 = 0; v_2 < 4; v_2 += 1) {
+            if (!ENTITY::DOES_ENTITY_EXIST(l_CC[v_2/*1*/])) {
+                if (!STREAMING::HAS_MODEL_LOADED(l_D1[v_2/*1*/])) {
+                    STREAMING::REQUEST_MODEL(l_D1[v_2/*1*/]);
+                    v_4 = 0;
+                } else { 
+                    GAMEPLAY::CLEAR_AREA(l_E8 + l_D6[v_2/*3*/], 10.0, 1, 0, 0, 0);
+                    l_CC[v_2/*1*/] = VEHICLE::CREATE_VEHICLE(l_D1[v_2/*1*/], l_E8 + l_D6[v_2/*3*/], l_EB + l_E3[v_2/*1*/], 1, 1);
+                    ENTITY::SET_ENTITY_LOD_DIST(l_CC[v_2/*1*/], 250);
+                    VEHICLE::SET_VEHICLE_LOD_MULTIPLIER(l_CC[v_2/*1*/], 2.0);
+                    ENTITY::_3910051CCECDB00C(l_CC[v_2/*1*/], 1);
+                }
+            }
+        }
+        if (!v_4) {
+            v_3 += 1;
+        }
+        SYSTEM::WAIT(0);
+    }
+    for (v_2 = 0; v_2 < 12; v_2 += 1) {
+        if (!ENTITY::IS_ENTITY_DEAD(l_48[v_2/*1*/])) {
+            v_5 = PED::CREATE_PED_INSIDE_VEHICLE(l_48[v_2/*1*/], 4, l_43[sub_fb2()/*1*/], -1, 1, 1);
+            sub_f3f(v_5);
+            ENTITY::_3910051CCECDB00C(l_48[v_2/*1*/], 1);
+            ENTITY::_3910051CCECDB00C(v_5, 1);
+            STREAMING::SET_MODEL_AS_NO_LONGER_NEEDED(l_55[v_2/*1*/]);
+        }
+    }
+    for (v_2 = 0; v_2 < 4; v_2 += 1) {
+        if (!ENTITY::IS_ENTITY_DEAD(l_94[v_2/*1*/])) {
+            if (VEHICLE::GET_VEHICLE_MAX_NUMBER_OF_PASSENGERS(l_94[v_2/*1*/]) > 0) {
+                v_6 = PED::CREATE_PED_INSIDE_VEHICLE(l_94[v_2/*1*/], 4, l_43[sub_fb2()/*1*/], -1, 1, 1);
+                sub_f3f(v_6);
+                ENTITY::_3910051CCECDB00C(l_48[v_2/*1*/], 1);
+                ENTITY::_3910051CCECDB00C(v_6, 1);
+                STREAMING::SET_MODEL_AS_NO_LONGER_NEEDED(l_99[v_2/*1*/]);
+            }
+        }
+    }
+    if (!(VEHICLE::GET_VEHICLE_MAX_NUMBER_OF_PASSENGERS(l_94[2/*1*/]) > 0)) {
+        VEHICLE::ATTACH_VEHICLE_TO_TRAILER(l_94[0/*1*/], l_94[2/*1*/], 0x3f800000);
+    }
+    if (!(VEHICLE::GET_VEHICLE_MAX_NUMBER_OF_PASSENGERS(l_94[3/*1*/]) > 0)) {
+        VEHICLE::ATTACH_VEHICLE_TO_TRAILER(l_94[1/*1*/], l_94[3/*1*/], 0x3f800000);
+    }
+    for (v_2 = 0; v_2 < 4; v_2 += 1) {
+        if (!ENTITY::IS_ENTITY_DEAD(l_B0[v_2/*1*/])) {
+            if (VEHICLE::GET_VEHICLE_MAX_NUMBER_OF_PASSENGERS(l_B0[v_2/*1*/]) > 0) {
+                v_7 = PED::CREATE_PED_INSIDE_VEHICLE(l_B0[v_2/*1*/], 4, l_43[sub_fb2()/*1*/], -1, 1, 1);
+                sub_f3f(v_7);
+                ENTITY::_3910051CCECDB00C(l_48[v_2/*1*/], 1);
+                ENTITY::_3910051CCECDB00C(v_7, 1);
+                STREAMING::SET_MODEL_AS_NO_LONGER_NEEDED(l_B5[v_2/*1*/]);
+            }
+        }
+    }
+    for (v_2 = 0; v_2 < 4; v_2 += 1) {
+        if (!ENTITY::IS_ENTITY_DEAD(l_CC[v_2/*1*/])) {
+            if (VEHICLE::GET_VEHICLE_MAX_NUMBER_OF_PASSENGERS(l_CC[v_2/*1*/]) > 0) {
+                v_8 = PED::CREATE_PED_INSIDE_VEHICLE(l_CC[v_2/*1*/], 4, l_43[sub_fb2()/*1*/], -1, 1, 1);
+                sub_f3f(v_8);
+                ENTITY::_3910051CCECDB00C(l_48[v_2/*1*/], 1);
+                ENTITY::_3910051CCECDB00C(v_8, 1);
+                STREAMING::SET_MODEL_AS_NO_LONGER_NEEDED(l_D1[v_2/*1*/]);
+            }
+        }
+    }
+    for (v_2 = 0; v_2 < l_43; v_2 += 1) {
+        STREAMING::SET_MODEL_AS_NO_LONGER_NEEDED(l_43[v_2/*1*/]);
+    }
+}
+
+void sub_f3f(auto a_0) {
+    PED::SET_PED_RANDOM_COMPONENT_VARIATION(a_0, 0);
+    if (ENTITY::GET_ENTITY_MODEL(a_0) == ${a_m_m_salton_01}) {
+        if (PED::GET_PED_DRAWABLE_VARIATION(a_0, 3) == 1) {
+            if (sub_f91()) {
+                PED::SET_PED_COMPONENT_VARIATION(a_0, 3, 0, PED::GET_PED_TEXTURE_VARIATION(a_0, 3), 0);
+            } else { 
+                PED::SET_PED_COMPONENT_VARIATION(a_0, 3, 2, PED::GET_PED_TEXTURE_VARIATION(a_0, 3), 0);
+            }
+        }
+    }
+}
+
+auto sub_f91() {
+    if (GAMEPLAY::IS_BIT_SET(GAMEPLAY::GET_RANDOM_INT_IN_RANGE(0, 65535), 0)) {
+        return 1;
+    } else { 
+        return 0;
+    }
+}
+
+auto sub_fb2() {
+    v_2 = GAMEPLAY::GET_RANDOM_INT_IN_RANGE(0, l_43);
+    if (STREAMING::HAS_MODEL_LOADED(l_43[v_2/*1*/])) {
+        return v_2;
+    }
+    asm .vardef<F> 3, "[{\"offset\":0,\"value\":4}]"
+    v_9 = 0;
+    for (v_8 = 0; v_8 < l_43; v_8 += 1) {
+        if (STREAMING::HAS_MODEL_LOADED(l_43[v_8/*1*/])) {
+            v_3[v_9/*1*/] = l_43[v_8/*1*/];
+            v_9 += 1;
+        }
+    }
+    if (v_9 <= 0) {
+        return 0;
+    }
+    v_2 = GAMEPLAY::GET_RANDOM_INT_IN_RANGE(0, v_9);
+    for (v_8 = 0; v_8 < l_43; v_8 += 1) {
+        if (v_3[v_2/*1*/] == l_43[v_8/*1*/]) {
+            return v_8;
+        }
+    }
+    return v_2;
+}
+
+void sub_104b() {
+    l_41 = g_15D9E;
+    sub_2828(l_41, &l_E8, &l_EB, &v_2);
+    sub_1086(l_41, &l_43, &l_55, &l_62, &l_87, &l_99, &l_9E, &l_AB, &l_B5, &l_BA, &l_C7, &l_D1, &l_D6, &l_E3);
+}
+
+void sub_1086(auto a_0, auto a_1, auto a_2, auto a_3, auto a_4, auto a_5, auto a_6, auto a_7, auto a_8, auto a_9, auto a_10, auto a_11, auto a_12, auto a_13) {
+    switch (a_0) {
+    case 105:
+        sub_255b(a_3, a_4, a_6, a_7, a_9, a_A);
+        sub_241d(a_1, a_2, a_5, a_8, a_B);
+        sub_2828(a_0, &v_10, &v_13, &v_14);
+        a_C[0/*3*/]/*{3}*/ = ({-453.6, -1565.9158935546875, 38.0807 }) - v_10;
+        a_D[0/*1*/] = 171.85809326171875 - v_13;
+        a_C[1/*3*/]/*{3}*/ = ({-467.9527893066406, -1599.476806640625, 38.09400177 }) - v_10;
+        a_D[1/*1*/] = 151.23460388183594 - v_13;
+        a_C[2/*3*/]/*{3}*/ = ({-442.0422058105469, -1566.734375, 38.1786 }) - v_10;
+        a_D[2/*1*/] = 170.75100708 - v_13;
+        a_C[3/*3*/]/*{3}*/ = ({-486.7076110839844, -1614.5, 32.48720169067383 }) - v_10;
+        a_D[3/*1*/] = 146.94729614257812 - v_13;
+        break;
+    case 106:
+        sub_21dd(a_3, a_4, a_6, a_7, a_9, a_A);
+        sub_241d(a_1, a_2, a_5, a_8, a_B);
+        a_C[0/*3*/]/*{3}*/ = ({-7.5, 0.0, 0.0 }) + sub_21c4(0xbf000000, 0x3f000000);
+        a_D[0/*1*/] = 0.0 + GAMEPLAY::GET_RANDOM_FLOAT_IN_RANGE(-5.0, 5.0);
+        a_C[1/*3*/]/*{3}*/ = ({0.0, -21.6, 12.0 }) + sub_21c4(0xbf000000, 0x3f000000);
+        a_D[1/*1*/] = -8.1 + GAMEPLAY::GET_RANDOM_FLOAT_IN_RANGE(-5.0, 5.0);
+        a_C[2/*3*/]/*{3}*/ = ({2.4, -6.3, 0.0 }) + sub_21c4(0xbf000000, 0x3f000000);
+        a_D[2/*1*/] = 0.0 + GAMEPLAY::GET_RANDOM_FLOAT_IN_RANGE(-5.0, 5.0);
+        a_C[3/*3*/]/*{3}*/ = ({9.3, -5.4, 0.0 }) + sub_21c4(0xbf000000, 0x3f000000);
+        a_D[3/*1*/] = 0.0 + GAMEPLAY::GET_RANDOM_FLOAT_IN_RANGE(-5.0, 5.0);
+        break;
+    case 107:
+        sub_1f84(a_3, a_4, a_6, a_7, a_9, a_A);
+        sub_1e46(a_1, a_2, a_5, a_8, a_B);
+        a_C[0/*3*/]/*{3}*/ = ({17.429399490356445, -18.7658, 0.0 }) + sub_21c4(0xbf000000, 0x3f000000);
+        a_D[0/*1*/] = -82.86 + GAMEPLAY::GET_RANDOM_FLOAT_IN_RANGE(-5.0, 5.0);
+        a_C[1/*3*/]/*{3}*/ = ({8.399999999999999, -0.2185, 0.0 }) + sub_21c4(0xbf000000, 0x3f000000);
+        a_D[1/*1*/] = 326.88 + GAMEPLAY::GET_RANDOM_FLOAT_IN_RANGE(-5.0, 5.0);
+        a_C[2/*3*/]/*{3}*/ = ({1.0773, 11.103099822998047, 0.0 }) + sub_21c4(0xbf000000, 0x3f000000);
+        a_D[2/*1*/] = 16.56 + GAMEPLAY::GET_RANDOM_FLOAT_IN_RANGE(-5.0, 5.0);
+        a_C[3/*3*/]/*{3}*/ = ({3.6826, 6.6924, 0.0 }) + sub_21c4(0xbf000000, 0x3f000000);
+        a_D[3/*1*/] = -21.48979949951172 + GAMEPLAY::GET_RANDOM_FLOAT_IN_RANGE(-5.0, 5.0);
+        break;
+    case 23:
+    case 208:
+        sub_255b(a_3, a_4, a_6, a_7, a_9, a_A);
+        sub_241d(a_1, a_2, a_5, a_8, a_B);
+        sub_2828(a_0, &v_1C, &v_1F, &v_20);
+        a_C[0/*3*/]/*{3}*/ = ({-453.6, -1565.9158935546875, 38.0807 }) - v_1C;
+        a_D[0/*1*/] = 171.85809326171875 - v_1F;
+        a_C[1/*3*/]/*{3}*/ = ({-467.9527893066406, -1599.476806640625, 38.09400177 }) - v_1C;
+        a_D[1/*1*/] = 151.23460388183594 - v_1F;
+        a_C[2/*3*/]/*{3}*/ = ({-442.0422058105469, -1566.734375, 38.1786 }) - v_1C;
+        a_D[2/*1*/] = 170.75100708 - v_1F;
+        a_C[3/*3*/]/*{3}*/ = ({-486.7076110839844, -1614.5, 32.48720169067383 }) - v_1C;
+        a_D[3/*1*/] = 146.94729614257812 - v_1F;
+        break;
+    case 209:
+        sub_1c06(a_3, a_4, a_6, a_7, a_9, a_A);
+        sub_1a64(a_1, a_2, a_5, a_8, a_B);
+        a_C[0/*3*/]/*{3}*/ = ({12.4248, -18.4197998046875, 0.0 }) + sub_21c4(0xbf000000, 0x3f000000);
+        a_D[0/*1*/] = -42.952598571777344 + GAMEPLAY::GET_RANDOM_FLOAT_IN_RANGE(-5.0, 5.0);
+        a_C[1/*3*/]/*{3}*/ = ({-6.4903998374938965, 6.1436, 0.0 }) + sub_21c4(0xbf000000, 0x3f000000);
+        a_D[1/*1*/] = 0.0 + GAMEPLAY::GET_RANDOM_FLOAT_IN_RANGE(-5.0, 5.0);
+        a_C[2/*3*/]/*{3}*/ = ({15.2, 46.6, 0.0 }) + sub_21c4(0xbf000000, 0x3f000000);
+        a_D[2/*1*/] = 74.08779907226562 + GAMEPLAY::GET_RANDOM_FLOAT_IN_RANGE(-5.0, 5.0);
+        a_C[3/*3*/]/*{3}*/ = ({9.0, -43.7, 0.0 }) + sub_21c4(0xbf000000, 0x3f000000);
+        a_D[3/*1*/] = 102.24 + GAMEPLAY::GET_RANDOM_FLOAT_IN_RANGE(-5.0, 5.0);
+        break;
+    case 210:
+        sub_1824(a_3, a_4, a_6, a_7, a_9, a_A);
+        sub_1682(a_1, a_2, a_5, a_8, a_B);
+        a_C[0/*3*/]/*{3}*/ = ({3.4877, 8.466, 0.0 }) + sub_21c4(0xbf000000, 0x3f000000);
+        a_D[0/*1*/] = -10.26 + GAMEPLAY::GET_RANDOM_FLOAT_IN_RANGE(-5.0, 5.0);
+        a_C[1/*3*/]/*{3}*/ = ({2.7229, 5.6192, 0.0 }) + sub_21c4(0xbf000000, 0x3f000000);
+        a_D[1/*1*/] = 2.3194 + GAMEPLAY::GET_RANDOM_FLOAT_IN_RANGE(-5.0, 5.0);
+        a_C[2/*3*/]/*{3}*/ = ({6.87169981, 5.108099999999999, 0.0 }) + sub_21c4(0xbf000000, 0x3f000000);
+        a_D[2/*1*/] = 350.17669677734375 + GAMEPLAY::GET_RANDOM_FLOAT_IN_RANGE(-5.0, 5.0);
+        a_C[3/*3*/]/*{3}*/ = ({0.997, -9.6576, 0.0 }) + sub_21c4(0xbf000000, 0x3f000000);
+        a_D[3/*1*/] = 349.0776062011719 + GAMEPLAY::GET_RANDOM_FLOAT_IN_RANGE(-5.0, 5.0);
+        break;
+    default:
+        sub_255b(a_3, a_4, a_6, a_7, a_9, a_A);
+        sub_241d(a_1, a_2, a_5, a_8, a_B);
+        for (v_28 = 0; v_28 < a_C; v_28 += 1) {
+            a_B[v_28/*1*/] = 0;
+            a_C[v_28/*3*/]/*{3}*/ = {0.0, 0.0, 0.0 };
+            a_D[v_28/*1*/] = GAMEPLAY::GET_RANDOM_FLOAT_IN_RANGE(0.0, 360.0);
+        }
+        break;
+    }
+}
+
+void sub_1682(auto a_0, auto a_1, auto a_2, auto a_3, auto a_4) {
+    a_0[0/*1*/] = ${a_m_m_salton_01};
+    a_0[1/*1*/] = ${a_m_m_prolhost_01};
+    a_0[2/*1*/] = a_0[1/*1*/];
+    a_0[3/*1*/] = a_0[2/*1*/];
+    a_1[0/*1*/] = ${taxi};
+    a_1[2/*1*/] = ${issi2};
+    a_1[3/*1*/] = ${washington};
+    a_1[7/*1*/] = ${peyote};
+    a_1[8/*1*/] = ${surge};
+    a_1[11/*1*/] = ${adder};
+    switch (GAMEPLAY::GET_RANDOM_INT_IN_RANGE(0, 3)) {
+    case 0:
+        v_7 = ${carbonizzare};
+        break;
+    case 1:
+        v_7 = ${rocoto};
+        break;
+    case 2:
+        v_7 = ${asterope};
+        break;
+    }
+    switch (GAMEPLAY::GET_RANDOM_INT_IN_RANGE(0, 3)) {
+    case 0:
+        v_8 = ${fq2};
+        break;
+    case 1:
+        v_8 = ${landstalker};
+        break;
+    case 2:
+        v_8 = ${emperor};
+        break;
+    }
+    a_1[10/*1*/] = v_7;
+    a_1[9/*1*/] = v_7;
+    a_1[1/*1*/] = v_7;
+    a_1[6/*1*/] = v_8;
+    a_1[4/*1*/] = v_8;
+    a_1[5/*1*/] = v_8;
+    a_2[0/*1*/] = ${stretch};
+    a_2[1/*1*/] = ${boxville2};
+    a_2[2/*1*/] = ${bus};
+    a_2[3/*1*/] = ${trash};
+    a_3[0/*1*/] = a_1[GAMEPLAY::GET_RANDOM_INT_IN_RANGE(0, a_1)/*1*/];
+    a_3[1/*1*/] = a_1[GAMEPLAY::GET_RANDOM_INT_IN_RANGE(0, a_1)/*1*/];
+    a_3[2/*1*/] = a_1[GAMEPLAY::GET_RANDOM_INT_IN_RANGE(0, a_1)/*1*/];
+    a_3[3/*1*/] = a_1[GAMEPLAY::GET_RANDOM_INT_IN_RANGE(0, a_1)/*1*/];
+    for (v_9 = 0; v_9 < a_4; v_9 += 1) {
+        a_4[v_9/*1*/] = a_1[GAMEPLAY::GET_RANDOM_INT_IN_RANGE(0, a_1)/*1*/];
+    }
+}
+
+void sub_1824(auto a_0, auto a_1, auto a_2, auto a_3, auto a_4, auto a_5) {
+    a_0[0/*3*/]/*{3}*/ = {16.332, 30.08, 0.0 };
+    a_1[0/*1*/] = -90.43489837646484;
+    a_0[1/*3*/]/*{3}*/ = {22.782, -37.68, 0.0 };
+    a_1[1/*1*/] = -90.43489837646484;
+    a_0[2/*3*/]/*{3}*/ = {28.272, 29.22, 0.0 };
+    a_1[2/*1*/] = -90.74510192871094;
+    a_0[3/*3*/]/*{3}*/ = {22.282, 32.05, 0.0 };
+    a_1[3/*1*/] = -97.28510284423828;
+    a_0[4/*3*/]/*{3}*/ = {15.012, 34.53, 0.0 };
+    a_1[4/*1*/] = -94.98509979248047;
+    a_0[5/*3*/]/*{3}*/ = {-14.088, -53.31, 0.0 };
+    a_1[5/*1*/] = 174.48489379882812;
+    a_0[6/*3*/]/*{3}*/ = {-8.618, -54.68, 0.0 };
+    a_1[6/*1*/] = 176.05490112304688;
+    a_0[7/*3*/]/*{3}*/ = {4.432, -2.42, 0.0 };
+    a_1[7/*1*/] = -4.3151;
+    a_0[8/*3*/]/*{3}*/ = {1.422, 5.53, 0.0 };
+    a_1[8/*1*/] = -4.3151;
+    a_0[9/*3*/]/*{3}*/ = {28.922000885, 34.419999999999995, 0.0 };
+    a_1[9/*1*/] = -96.01509857177734;
+    a_0[10/*3*/]/*{3}*/ = {34.012, 36.51, 0.0 };
+    a_1[10/*1*/] = -99.94509887695312;
+    a_0[11/*3*/]/*{3}*/ = {-4.888, -0.68, 0.0 };
+    a_1[11/*1*/] = 5.7;
+    a_2[0/*3*/]/*{3}*/ = {-0.818, -16.7, 0.0 };
+    a_3[0/*1*/] = 7.2;
+    a_2[1/*3*/]/*{3}*/ = {21.212, -26.79, 0.0 };
+    a_3[1/*1*/] = -97.28510284423828;
+    a_2[2/*3*/]/*{3}*/ = {-31.208, 27.73, 0.0 };
+    a_3[2/*1*/] = 83.71489715576172;
+    a_2[3/*3*/]/*{3}*/ = {36.181999999999995, 32.35, 0.0 };
+    a_3[3/*1*/] = -99.94509887695312;
+    a_4[0/*3*/]/*{3}*/ = {-8.798, 15.99, 0.0 };
+    a_5[0/*1*/] = -54.045101165771484;
+    a_4[1/*3*/]/*{3}*/ = {-16.408, -17.59, 0.0 };
+    a_5[1/*1*/] = -96.04509735107422;
+    a_4[2/*3*/]/*{3}*/ = {18.108, 12.54, 0.0 };
+    a_5[2/*1*/] = -88.54509735107422;
+    a_4[3/*3*/]/*{3}*/ = {52.11, -3.18, 0.0 };
+    a_5[3/*1*/] = -86.76;
+}
+
+void sub_1a64(auto a_0, auto a_1, auto a_2, auto a_3, auto a_4) {
+    a_0[0/*1*/] = ${a_m_m_salton_01};
+    a_0[1/*1*/] = ${a_m_m_prolhost_01};
+    a_0[2/*1*/] = ${a_m_m_afriamer_01};
+    a_0[3/*1*/] = a_0[2/*1*/];
+    a_1[0/*1*/] = ${camper};
+    a_1[2/*1*/] = ${futo};
+    a_1[3/*1*/] = ${blista};
+    a_1[4/*1*/] = ${regina};
+    a_1[7/*1*/] = ${sadler};
+    a_1[9/*1*/] = ${manana};
+    switch (GAMEPLAY::GET_RANDOM_INT_IN_RANGE(0, 3)) {
+    case 0:
+        v_7 = ${dilettante};
+        break;
+    case 1:
+        v_7 = ${surfer};
+        break;
+    case 2:
+        v_7 = ${sultan};
+        break;
+    }
+    switch (GAMEPLAY::GET_RANDOM_INT_IN_RANGE(0, 3)) {
+    case 0:
+        v_8 = ${asterope};
+        break;
+    case 1:
+        v_8 = ${phoenix};
+        break;
+    case 2:
+        v_8 = ${picador};
+        break;
+    }
+    a_1[1/*1*/] = v_7;
+    a_1[8/*1*/] = v_7;
+    a_1[5/*1*/] = v_7;
+    a_1[6/*1*/] = v_8;
+    a_1[11/*1*/] = v_8;
+    a_1[10/*1*/] = v_8;
+    a_2[0/*1*/] = ${benson};
+    a_2[1/*1*/] = ${bus};
+    a_2[2/*1*/] = ${coach};
+    a_2[3/*1*/] = ${mule};
+    a_3[0/*1*/] = a_1[GAMEPLAY::GET_RANDOM_INT_IN_RANGE(0, a_1)/*1*/];
+    a_3[1/*1*/] = a_1[GAMEPLAY::GET_RANDOM_INT_IN_RANGE(0, a_1)/*1*/];
+    a_3[2/*1*/] = a_1[GAMEPLAY::GET_RANDOM_INT_IN_RANGE(0, a_1)/*1*/];
+    a_3[3/*1*/] = a_1[GAMEPLAY::GET_RANDOM_INT_IN_RANGE(0, a_1)/*1*/];
+    for (v_9 = 0; v_9 < a_4; v_9 += 1) {
+        a_4[v_9/*1*/] = a_1[GAMEPLAY::GET_RANDOM_INT_IN_RANGE(0, a_1)/*1*/];
+    }
+}
+
+void sub_1c06(auto a_0, auto a_1, auto a_2, auto a_3, auto a_4, auto a_5) {
+    a_0[0/*3*/]/*{3}*/ = {1.34, 37.14, 0.0 };
+    a_1[0/*1*/] = 91.57;
+    a_0[1/*3*/]/*{3}*/ = {7.99, 38.55, 0.0 };
+    a_1[1/*1*/] = 91.57;
+    a_0[2/*3*/]/*{3}*/ = {11.35, -25.5, 0.0 };
+    a_1[2/*1*/] = 87.74;
+    a_0[3/*3*/]/*{3}*/ = {19.16, -25.28, 0.0 };
+    a_1[3/*1*/] = -94.86;
+    a_0[4/*3*/]/*{3}*/ = {40.1, -8.519, 0.0 };
+    a_1[4/*1*/] = 108.59;
+    a_0[5/*3*/]/*{3}*/ = {35.52, -12.35, 0.0 };
+    a_1[5/*1*/] = 108.59;
+    a_0[6/*3*/]/*{3}*/ = {23.22, -21.68, 0.0 };
+    a_1[6/*1*/] = 105.31;
+    a_0[7/*3*/]/*{3}*/ = {21.56, -38.68, 0.0 };
+    a_1[7/*1*/] = 90.43;
+    a_0[8/*3*/]/*{3}*/ = {12.05, 10.24, 0.0 };
+    a_1[8/*1*/] = -4.32;
+    a_0[9/*3*/]/*{3}*/ = {6.32, -5.309, 0.0 };
+    a_1[9/*1*/] = -4.32;
+    a_0[10/*3*/]/*{3}*/ = {51.94, 36.66, 0.0 };
+    a_1[10/*1*/] = 177.89999999999998;
+    a_0[11/*3*/]/*{3}*/ = {57.47, 41.3, 0.0 };
+    a_1[11/*1*/] = 177.89999999999998;
+    a_2[0/*3*/]/*{3}*/ = {29.53, 17.97, 0.0 };
+    a_3[0/*1*/] = 103.07;
+    a_2[1/*3*/]/*{3}*/ = {35.68, 0.27, 0.0 };
+    a_3[1/*1*/] = 66.81;
+    a_2[2/*3*/]/*{3}*/ = {11.74, -31.94, 0.0 };
+    a_3[2/*1*/] = 126.95;
+    a_2[3/*3*/]/*{3}*/ = {45.13, 2.58, 0.0 };
+    a_3[3/*1*/] = 89.89;
+    a_4[0/*3*/]/*{3}*/ = {26.69, 41.23, 0.0 };
+    a_5[0/*1*/] = 87.02;
+    a_4[1/*3*/]/*{3}*/ = {22.21, -46.2, 0.0 };
+    a_5[1/*1*/] = 90.07;
+    a_4[2/*3*/]/*{3}*/ = {45.62, -10.14, 0.0 };
+    a_5[2/*1*/] = -86.76;
+    a_4[3/*3*/]/*{3}*/ = {52.11, -3.18, 0.0 };
+    a_5[3/*1*/] = -86.76;
+}
+
+void sub_1e46(auto a_0, auto a_1, auto a_2, auto a_3, auto a_4) {
+    a_0[0/*1*/] = ${a_m_m_salton_02};
+    a_0[1/*1*/] = a_0[0/*1*/];
+    a_0[2/*1*/] = ${a_m_m_prolhost_01};
+    a_0[3/*1*/] = ${a_m_m_afriamer_01};
+    a_1[0/*1*/] = ${camper};
+    a_1[1/*1*/] = ${dilettante};
+    a_1[2/*1*/] = ${futo};
+    a_1[3/*1*/] = ${blista};
+    a_1[4/*1*/] = ${regina};
+    a_1[5/*1*/] = ${sultan};
+    a_1[6/*1*/] = ${asterope};
+    a_1[7/*1*/] = ${sadler};
+    a_1[8/*1*/] = ${surfer};
+    a_1[9/*1*/] = ${dubsta};
+    a_1[10/*1*/] = ${picador};
+    a_1[11/*1*/] = ${phoenix};
+    a_2[0/*1*/] = ${bus};
+    a_2[1/*1*/] = ${boxville};
+    a_2[2/*1*/] = ${bus};
+    a_2[3/*1*/] = ${boxville2};
+    a_3[0/*1*/] = a_1[GAMEPLAY::GET_RANDOM_INT_IN_RANGE(0, a_1)/*1*/];
+    a_3[1/*1*/] = a_1[GAMEPLAY::GET_RANDOM_INT_IN_RANGE(0, a_1)/*1*/];
+    a_3[2/*1*/] = a_1[GAMEPLAY::GET_RANDOM_INT_IN_RANGE(0, a_1)/*1*/];
+    a_3[3/*1*/] = a_1[GAMEPLAY::GET_RANDOM_INT_IN_RANGE(0, a_1)/*1*/];
+    for (v_7 = 0; v_7 < a_4; v_7 += 1) {
+        a_4[v_7/*1*/] = a_1[GAMEPLAY::GET_RANDOM_INT_IN_RANGE(0, a_1)/*1*/];
+    }
+}
+
+void sub_1f84(auto a_0, auto a_1, auto a_2, auto a_3, auto a_4, auto a_5) {
+    a_0[0/*3*/]/*{3}*/ = {-29.899, 48.6, 0.0 };
+    a_1[0/*1*/] = 296.0;
+    a_0[1/*3*/]/*{3}*/ = {-17.809, 40.73, 0.0 };
+    a_1[1/*1*/] = 274.46;
+    a_0[2/*3*/]/*{3}*/ = {-18.339, 26.16, 0.0 };
+    a_1[2/*1*/] = 309.22;
+    a_0[3/*3*/]/*{3}*/ = {-12.76, -37.72, 0.0 };
+    a_1[3/*1*/] = 273.0;
+    a_0[4/*3*/]/*{3}*/ = {-7.669, -34.99, 0.0 };
+    a_1[4/*1*/] = 270.0;
+    a_0[5/*3*/]/*{3}*/ = {4.460999999999999, -23.85, 0.0 };
+    a_1[5/*1*/] = 270.0;
+    a_0[6/*3*/]/*{3}*/ = {2.609, 32.32, 0.0 };
+    a_1[6/*1*/] = 270.0;
+    a_0[7/*3*/]/*{3}*/ = {3.591, -30.44, 0.0 };
+    a_1[7/*1*/] = 266.0;
+    a_0[8/*3*/]/*{3}*/ = {9.701, -22.01, 0.0 };
+    a_1[8/*1*/] = 259.0;
+    a_0[9/*3*/]/*{3}*/ = {34.851, -18.68, 0.0 };
+    a_1[9/*1*/] = 259.0;
+    a_0[10/*3*/]/*{3}*/ = {2.311, 7.35, 0.0 };
+    a_1[10/*1*/] = 353.49;
+    a_0[11/*3*/]/*{3}*/ = {7.721, 5.22, 0.0 };
+    a_1[11/*1*/] = 353.49;
+    a_2[0/*3*/]/*{3}*/ = {-21.429, 36.16, 0.0 };
+    a_3[0/*1*/] = -40.280601501464844;
+    a_2[1/*3*/]/*{3}*/ = {-32.949, -44.24, 0.0 };
+    a_3[1/*1*/] = 296.0;
+    a_2[2/*3*/]/*{3}*/ = {-5.419, -28.52, 0.0 };
+    a_3[2/*1*/] = 268.79;
+    a_2[3/*3*/]/*{3}*/ = {-16.149, -34.45, 0.0 };
+    a_3[3/*1*/] = 269.44;
+    a_4[0/*3*/]/*{3}*/ = {9.91100025177, -27.02, 0.0 };
+    a_5[0/*1*/] = 265.0;
+    a_4[1/*3*/]/*{3}*/ = {15.671, -24.5, 0.0 };
+    a_5[1/*1*/] = 262.0;
+    a_4[2/*3*/]/*{3}*/ = {20.341, 22.64, 0.0 };
+    a_5[2/*1*/] = 260.0;
+    a_4[3/*3*/]/*{3}*/ = {28.061, -20.67, 0.0 };
+    a_5[3/*1*/] = 269.0;
+}
+
+auto<3> sub_21c4(auto a_0, auto a_1) {
+    return {GAMEPLAY::GET_RANDOM_FLOAT_IN_RANGE(a_0, a_1), GAMEPLAY::GET_RANDOM_FLOAT_IN_RANGE(a_0, a_1), 0.0 };
+}
+
+void sub_21dd(auto a_0, auto a_1, auto a_2, auto a_3, auto a_4, auto a_5) {
+    a_0[0/*3*/]/*{3}*/ = {-38.3, 8.5562, 0.0 };
+    a_1[0/*1*/] = -16.046199798583984;
+    a_0[1/*3*/]/*{3}*/ = {-29.9505, 8.6162, 0.0 };
+    a_1[1/*1*/] = -18.056499481201172;
+    a_0[2/*3*/]/*{3}*/ = {-23.7805, 13.1962, 0.0 };
+    a_1[2/*1*/] = -18.345199584960938;
+    a_0[3/*3*/]/*{3}*/ = {-29.660499572753906, 16.1762, 0.0 };
+    a_1[3/*1*/] = 21.835;
+    a_0[4/*3*/]/*{3}*/ = {-14.3505, 6.546199798583984, 0.0 };
+    a_1[4/*1*/] = -20.365699768066406;
+    a_0[5/*3*/]/*{3}*/ = {-18.3605, 0.5062, 0.0 };
+    a_1[5/*1*/] = -18.8008;
+    a_0[6/*3*/]/*{3}*/ = {-29.480499267578125, 2.2262, 0.0 };
+    a_1[6/*1*/] = -20.524;
+    a_0[7/*3*/]/*{3}*/ = {-24.1905, 4.6262, 0.0 };
+    a_1[7/*1*/] = -21.9109;
+    a_0[8/*3*/]/*{3}*/ = {-24.340499877929688, 2.2238, 0.0 };
+    a_1[8/*1*/] = 18;
+    a_0[9/*3*/]/*{3}*/ = {-13.580499649047852, 4.2538, 0.0 };
+    a_1[9/*1*/] = -17.90169906616211;
+    a_0[10/*3*/]/*{3}*/ = {-19.670499801635742, -6.393799781799316, 0.0 };
+    a_1[10/*1*/] = -15.631699562072754;
+    a_0[11/*3*/]/*{3}*/ = {-15.2805, -10.543800354, 0.0 };
+    a_1[11/*1*/] = 21.7654;
+    a_2[0/*3*/]/*{3}*/ = {47.51, 23.097, 0.0 };
+    a_3[0/*1*/] = -50.280601501464844;
+    a_2[1/*3*/]/*{3}*/ = {44.64, 28.267, 0.0 };
+    a_3[1/*1*/] = -8.5494;
+    a_2[2/*3*/]/*{3}*/ = {-43.84049987792969, 19.3262, 0.0 };
+    a_3[2/*1*/] = -15.140199661254883;
+    a_2[3/*3*/]/*{3}*/ = {-8.2179, -30.67639923095703, 0.0 };
+    a_3[3/*1*/] = -21.36359977722168;
+    a_4[0/*3*/]/*{3}*/ = {-7.25, -9.213, 0.0 };
+    a_5[0/*1*/] = 2.174;
+    a_4[1/*3*/]/*{3}*/ = {-9.14, 15.642999999999999, 0.0 };
+    a_5[1/*1*/] = -8.9755;
+    a_4[2/*3*/]/*{3}*/ = {1.83, 16.063, 0.0 };
+    a_5[2/*1*/] = -29.2;
+    a_4[3/*3*/]/*{3}*/ = {3.76, -20.593, 0.0 };
+    a_5[3/*1*/] = -27.8686;
+}
+
+void sub_241d(auto a_0, auto a_1, auto a_2, auto a_3, auto a_4) {
+    a_0[0/*1*/] = ${a_m_m_salton_02};
+    a_0[1/*1*/] = a_0[0/*1*/];
+    a_0[2/*1*/] = ${a_m_m_prolhost_01};
+    a_0[3/*1*/] = ${a_m_m_afriamer_01};
+    a_1[0/*1*/] = ${camper};
+    a_1[1/*1*/] = ${dilettante};
+    a_1[2/*1*/] = ${futo};
+    a_1[3/*1*/] = ${blista};
+    a_1[4/*1*/] = ${regina};
+    a_1[5/*1*/] = ${sultan};
+    a_1[6/*1*/] = ${asterope};
+    a_1[7/*1*/] = ${sadler};
+    a_1[8/*1*/] = ${surfer};
+    a_1[9/*1*/] = ${dubsta};
+    a_1[10/*1*/] = ${picador};
+    a_1[11/*1*/] = ${phoenix};
+    a_2[0/*1*/] = ${packer};
+    a_2[1/*1*/] = ${hauler};
+    a_2[2/*1*/] = ${tanker};
+    a_2[3/*1*/] = ${trailerlogs};
+    a_3[0/*1*/] = a_1[GAMEPLAY::GET_RANDOM_INT_IN_RANGE(0, a_1)/*1*/];
+    a_3[1/*1*/] = a_1[GAMEPLAY::GET_RANDOM_INT_IN_RANGE(0, a_1)/*1*/];
+    a_3[2/*1*/] = a_1[GAMEPLAY::GET_RANDOM_INT_IN_RANGE(0, a_1)/*1*/];
+    a_3[3/*1*/] = a_1[GAMEPLAY::GET_RANDOM_INT_IN_RANGE(0, a_1)/*1*/];
+    for (v_7 = 0; v_7 < a_4; v_7 += 1) {
+        a_4[v_7/*1*/] = a_1[GAMEPLAY::GET_RANDOM_INT_IN_RANGE(0, a_1)/*1*/];
+    }
+}
+
+void sub_255b(auto a_0, auto a_1, auto a_2, auto a_3, auto a_4, auto a_5) {
+    v_8/*{3}*/ = ({5.0, 7.0, 0.0 }) * ((vector)(0.7));
+    a_0[0/*3*/]/*{3}*/ = ({9.2247, -22.776899337768555, 0.0 }) + sub_21c4(0xbf000000, 0x3f000000);
+    a_0[1/*3*/]/*{3}*/ = ({0.8889999999999999, -21.46969985961914, 0.0 }) + sub_21c4(0xbf000000, 0x3f000000);
+    for (v_B = 2; v_B <= (a_0 - 1); v_B += 1) {
+        a_0[v_B/*3*/]/*{3}*/ = a_0[v_B - 2/*3*/];
+        a_0[v_B/*3*/] += v_8 * ((vector)(1.0 + (SYSTEM::TO_FLOAT(v_B) / SYSTEM::TO_FLOAT((a_0 + 1) - 2))));
+        a_0[v_B/*3*/] += sub_21c4(0xbf000000, 0x3f000000);
+        a_1[v_B/*1*/] = GAMEPLAY::GET_RANDOM_FLOAT_IN_RANGE(-22.0, -15.0);
+    }
+    a_2[0/*3*/]/*{3}*/ = {-19.462299346923828, -36.7338981628418, 0.0 };
+    a_2[1/*3*/]/*{3}*/ = {-11.7179, -35.5764, 0.0 };
+    a_2[2/*3*/]/*{3}*/ = a_2[0/*3*/] + v_8;
+    a_2[3/*3*/]/*{3}*/ = a_2[1/*3*/] + v_8;
+    a_4[0/*3*/]/*{3}*/ = ({2.1, 8.1, 0.0 }) + sub_21c4(0xbf000000, 0x3f000000);
+    a_4[1/*3*/]/*{3}*/ = ({4.4, 15.3, 0.0 }) + sub_21c4(0xbf000000, 0x3f000000);
+    a_4[2/*3*/]/*{3}*/ = ({-23.7, -15.3, 11.399999999999999 }) + sub_21c4(0xbf000000, 0x3f000000);
+    a_4[3/*3*/]/*{3}*/ = ({13.399999999999999, 10.899999999999999, 12.7 }) + sub_21c4(0xbf000000, 0x3f000000);
+    a_1[0/*1*/] = GAMEPLAY::GET_RANDOM_FLOAT_IN_RANGE(-22.0, -15.0);
+    a_1[1/*1*/] = GAMEPLAY::GET_RANDOM_FLOAT_IN_RANGE(-22.0, -15.0);
+    a_1[2/*1*/] = GAMEPLAY::GET_RANDOM_FLOAT_IN_RANGE(-22.0, -15.0);
+    a_1[3/*1*/] = GAMEPLAY::GET_RANDOM_FLOAT_IN_RANGE(-22.0, -15.0);
+    a_1[4/*1*/] = GAMEPLAY::GET_RANDOM_FLOAT_IN_RANGE(-22.0, -15.0);
+    a_1[5/*1*/] = GAMEPLAY::GET_RANDOM_FLOAT_IN_RANGE(-22.0, -15.0);
+    a_1[6/*1*/] = GAMEPLAY::GET_RANDOM_FLOAT_IN_RANGE(-22.0, -15.0);
+    a_3[0/*1*/] = GAMEPLAY::GET_RANDOM_FLOAT_IN_RANGE(-22.0, -15.0);
+    a_3[1/*1*/] = GAMEPLAY::GET_RANDOM_FLOAT_IN_RANGE(-22.0, -15.0);
+    a_3[2/*1*/] = GAMEPLAY::GET_RANDOM_FLOAT_IN_RANGE(-22.0, -15.0);
+    a_3[3/*1*/] = GAMEPLAY::GET_RANDOM_FLOAT_IN_RANGE(-22.0, -15.0);
+    a_5[0/*1*/] = GAMEPLAY::GET_RANDOM_FLOAT_IN_RANGE(-6.0, 4.0);
+    a_5[1/*1*/] = GAMEPLAY::GET_RANDOM_FLOAT_IN_RANGE(-16.0, -6.0);
+    a_5[2/*1*/] = GAMEPLAY::GET_RANDOM_FLOAT_IN_RANGE(-38.0, -28.0);
+    a_5[3/*1*/] = GAMEPLAY::GET_RANDOM_FLOAT_IN_RANGE(-28.0, -18.0);
+}
+
+auto sub_2828(auto a_0, auto a_1, auto a_2, auto a_3) {
+    if (sub_2af6(a_0, a_2, a_3)) {
+        switch (a_0) {
+        case 0:
+            return 0;
+            break;
+        case 1:
+            sub_2a13(&v_6);
+            if (v_6 < 5) {
+                a_1/*{3}*/ = g_14E42[v_6/*9*/]._f3;
+                a_2 = g_14E42[v_6/*9*/]._f6;
+                a_3/*"32"*/ = "";
+                return 1;
+            } else { 
+                a_1/*{3}*/ = g_14E42[0/*9*/]._f3;
+                a_2 = g_14E42[0/*9*/]._f6;
+                a_3/*"32"*/ = "";
+                return 1;
+            }
+            break;
+        case 2:
+            a_1/*{3}*/ = g_15892[0/*109*/]._f4;
+            a_2 = g_15892[0/*109*/]._f7;
+            a_3/*"32"*/ = "";
+            return 1;
+            break;
+        case 3:
+            a_1/*{3}*/ = g_15892[1/*109*/]._f4;
+            a_2 = g_15892[1/*109*/]._f7;
+            a_3/*"32"*/ = "";
+            return 1;
+            break;
+        case 4:
+            a_1/*{3}*/ = g_15892[2/*109*/]._f4;
+            a_2 = g_15892[2/*109*/]._f7;
+            a_3/*"32"*/ = "";
+            return 1;
+            break;
+        case 5:
+            a_1/*{3}*/ = g_17C49._f6C1._f21B._f5F8[0/*3*/] + ({0.0, 0.0, -1.0 });
+            a_2 = g_17C49._f6C1._f21B._f602[0/*1*/];
+            a_3/*"32"*/ = "";
+            return 1;
+            break;
+        case 6:
+            a_1/*{3}*/ = g_17C49._f6C1._f21B._f5F8[1/*3*/] + ({0.0, 0.0, -1.0 });
+            a_2 = g_17C49._f6C1._f21B._f602[1/*1*/];
+            a_3/*"32"*/ = "";
+            return 1;
+            break;
+        case 7:
+            a_1/*{3}*/ = g_17C49._f6C1._f21B._f5F8[2/*3*/] + ({0.0, 0.0, -1.0 });
+            a_2 = g_17C49._f6C1._f21B._f602[2/*1*/];
+            a_3/*"32"*/ = "";
+            return 1;
+            break;
+        }
+        a_1/*{3}*/ = g_159DA[a_0/*3*/];
+        return 1;
+    }
+    return 0;
+}
+
+auto sub_2a13(auto a_0) {
+    v_3 = g_17C49._f6C1._f21B._fC8F;
+    v_4/*{3}*/ = g_17C49._f6C1._f21B._f5F8[v_3/*3*/];
+    if (sub_2acd(v_4, 0.0, 0.0, 0.0)) {
+        v_4/*{3}*/ = ENTITY::GET_ENTITY_COORDS(PLAYER::PLAYER_PED_ID(), 0);
+    }
+    a_0 = 5;
+    v_7 = 9999999.0;
+    for (v_8 = 0; v_8 < 5; v_8 += 1) {
+        if (GAMEPLAY::IS_BIT_SET(g_17C49._f156E._fB[v_8/*1*/], 0)) {
+            v_9/*{3}*/ = g_14E42[v_8/*9*/]._f3;
+            v_C = SYSTEM::VDIST(v_4, v_9);
+            if (v_C > 150.0) {
+                if (v_C < v_7) {
+                    a_0 = v_8;
+                    v_7 = v_C;
+                }
+            }
+        }
+    }
+    return a_0 != 5;
+}
+
+auto sub_2acd(auto a_0, auto a_1, auto a_2, auto a_3, auto a_4, auto a_5) {
+    return ((a_0 == a_3) && (a_0._f1 == a_3._f1)) && (a_0._f2 == a_3._f2);
+}
+
+auto sub_2af6(auto a_0, auto a_1, auto a_2) {
+    switch (a_0) {
+    case 0:
+        return 0;
+        break;
+    case 1:
+        sub_2a13(&v_8);
+        if (v_8 < 5) {
+            a_1 = g_14E42[v_8/*9*/]._f6;
+            a_2/*"32"*/ = "";
+            return 1;
+        } else { 
+            a_1 = g_14E42[0/*9*/]._f6;
+            a_2/*"32"*/ = "";
+            return 1;
+        }
+        break;
+    case 2:
+        a_1 = g_15892[0/*109*/]._f7;
+        a_2/*"32"*/ = "";
+        return 1;
+        break;
+    case 3:
+        a_1 = g_15892[1/*109*/]._f7;
+        a_2/*"32"*/ = "";
+        return 1;
+        break;
+    case 4:
+        a_1 = g_15892[2/*109*/]._f7;
+        a_2/*"32"*/ = "";
+        return 1;
+        break;
+    case 5:
+        a_1 = g_17C49._f6C1._f21B._f602[0/*1*/];
+        a_2/*"32"*/ = sub_7805(g_17C49._f6C1._f21B._f606[0/*1*/]);
+        return 1;
+        break;
+    case 6:
+        a_1 = g_17C49._f6C1._f21B._f602[1/*1*/];
+        a_2/*"32"*/ = sub_7805(g_17C49._f6C1._f21B._f606[1/*1*/]);
+        return 1;
+        break;
+    case 7:
+        a_1 = g_17C49._f6C1._f21B._f602[2/*1*/];
+        a_2/*"32"*/ = sub_7805(g_17C49._f6C1._f21B._f606[2/*1*/]);
+        return 1;
+        break;
+    case 11:
+        if (sub_6e96(a_0, &v_5, a_1)) {
+            a_2/*"32"*/ = "v_strip3";
+            return 1;
+        }
+        break;
+    case 8:
+        if (sub_6e96(a_0, &v_5, a_1)) {
+            a_2/*"32"*/ = "";
+            return 1;
+        }
+        break;
+    case 9:
+        return sub_2af6(8, a_1, a_2);
+        break;
+    case 10:
+        return sub_2af6(8, a_1, a_2);
+        break;
+    case 13:
+        if (sub_6e96(a_0, &v_5, a_1)) {
+            a_2/*"32"*/ = "";
+            return 1;
+        }
+        break;
+    case 14:
+        if (sub_6e96(a_0, &v_5, a_1)) {
+            a_2/*"32"*/ = "";
+            return 1;
+        }
+        break;
+    case 15:
+        if (sub_6e96(a_0, &v_5, a_1)) {
+            a_2/*"32"*/ = "";
+            return 1;
+        }
+        break;
+    case 12:
+        if (sub_6e96(a_0, &v_5, a_1)) {
+            a_2/*"32"*/ = "";
+            return 1;
+        }
+        break;
+    case 16:
+        if (sub_6e96(a_0, &v_5, a_1)) {
+            a_2/*"32"*/ = "";
+            return 1;
+        }
+        break;
+    case 17:
+        if (sub_6e96(a_0, &v_5, a_1)) {
+            a_2/*"32"*/ = "";
+            return 1;
+        }
+        break;
+    case 18:
+        if (sub_6e96(a_0, &v_5, a_1)) {
+            a_2/*"32"*/ = "";
+            return 1;
+        }
+        break;
+    case 19:
+        if (sub_6e96(a_0, &v_5, a_1)) {
+            a_2/*"32"*/ = "";
+            return 1;
+        }
+        break;
+    case 20:
+        if (sub_6e96(a_0, &v_5, a_1)) {
+            a_2/*"32"*/ = "";
+            return 1;
+        }
+        break;
+    case 21:
+        a_1 = 0.0;
+        a_2/*"32"*/ = "";
+        return 0;
+        break;
+    case 22:
+        if (sub_6e96(a_0, &v_5, a_1)) {
+            a_2/*"32"*/ = "";
+            return 1;
+        }
+        break;
+    case 74:
+        if (sub_6e96(a_0, &v_5, a_1)) {
+            a_2/*"32"*/ = "";
+            return 1;
+        }
+        break;
+    case 23:
+        return sub_2af6(208, a_1, a_2);
+        break;
+    case 24:
+        if (sub_6e96(a_0, &v_5, a_1)) {
+            a_2/*"32"*/ = "";
+            return 1;
+        }
+        break;
+    case 67:
+        if (sub_6e96(a_0, &v_5, a_1)) {
+            a_2/*"32"*/ = "";
+            return 1;
+        }
+        break;
+    case 25:
+        if (sub_6e96(a_0, &v_5, a_1)) {
+            a_2/*"32"*/ = "";
+            return 1;
+        }
+        break;
+    case 26:
+        if (sub_6e96(a_0, &v_5, a_1)) {
+            a_2/*"32"*/ = "";
+            return 1;
+        }
+        break;
+    case 27:
+        if (sub_6e96(a_0, &v_5, a_1)) {
+            a_2/*"32"*/ = "";
+            return 1;
+        }
+        break;
+    case 28:
+        if (sub_6e96(a_0, &v_5, a_1)) {
+            a_2/*"32"*/ = "";
+            return 1;
+        }
+        break;
+    case 29:
+        a_1 = 0.0;
+        a_2/*"32"*/ = "";
+        return 0;
+        break;
+    case 30:
+        a_1 = 0.0;
+        a_2/*"32"*/ = "";
+        return 0;
+        break;
+    case 31:
+        a_1 = 0.0;
+        a_2/*"32"*/ = "";
+        return 0;
+        break;
+    case 32:
+        a_1 = 0.0;
+        a_2/*"32"*/ = "";
+        return 0;
+        break;
+    case 33:
+        a_1 = 0.0;
+        a_2/*"32"*/ = "";
+        return 0;
+        break;
+    case 34:
+        a_1 = 0.0;
+        a_2/*"32"*/ = "";
+        return 0;
+        break;
+    case 35:
+        a_1 = 0.0;
+        a_2/*"32"*/ = "";
+        return 0;
+        break;
+    case 36:
+        a_1 = 0.0;
+        a_2/*"32"*/ = "";
+        return 0;
+        break;
+    case 37:
+        a_1 = 0.0;
+        a_2/*"32"*/ = "";
+        return 0;
+        break;
+    case 58:
+        if (sub_6e96(a_0, &v_5, a_1)) {
+            a_2/*"32"*/ = "";
+            return 1;
+        }
+        break;
+    case 59:
+        if (sub_6e96(a_0, &v_5, a_1)) {
+            a_2/*"32"*/ = "";
+            return 1;
+        }
+        break;
+    case 60:
+        if (sub_6e96(a_0, &v_5, a_1)) {
+            a_2/*"32"*/ = "";
+            return 1;
+        }
+        break;
+    case 38:
+        if (sub_6e96(a_0, &v_5, a_1)) {
+            a_2/*"32"*/ = "";
+            return 1;
+        }
+        break;
+    case 39:
+        a_1 = 0.0;
+        a_2/*"32"*/ = "";
+        return 0;
+        break;
+    case 40:
+        if (sub_6e96(a_0, &v_5, a_1)) {
+            a_2/*"32"*/ = "v_trailer";
+            return 1;
+        }
+        break;
+    case 41:
+        if (sub_6e96(a_0, &v_5, a_1)) {
+            a_2/*"32"*/ = "";
+            return 1;
+        }
+        break;
+    case 42:
+        if (sub_6e96(a_0, &v_5, a_1)) {
+            a_2/*"32"*/ = "";
+            return 1;
+        }
+        break;
+    case 43:
+        if (sub_6e96(a_0, &v_5, a_1)) {
+            a_2/*"32"*/ = "";
+            return 1;
+        }
+        break;
+    case 44:
+        if (sub_6e96(a_0, &v_5, a_1)) {
+            a_2/*"32"*/ = "";
+            return 1;
+        }
+        break;
+    case 45:
+        if (sub_6e96(a_0, &v_5, a_1)) {
+            a_2/*"32"*/ = "";
+            return 1;
+        }
+        break;
+    case 46:
+        a_1 = 0.0;
+        a_2/*"32"*/ = "";
+        return 0;
+        break;
+    case 47:
+        if (sub_6e96(a_0, &v_5, a_1)) {
+            a_2/*"32"*/ = "";
+            return 1;
+        }
+        break;
+    case 49:
+        if (sub_6e96(a_0, &v_5, a_1)) {
+            a_2/*"32"*/ = "";
+            return 1;
+        }
+        break;
+    case 48:
+        if (sub_6e96(a_0, &v_5, a_1)) {
+            a_2/*"32"*/ = "";
+            return 1;
+        }
+        break;
+    case 124:
+        v_5/*{3}*/ = {-803.734, 168.1479949951172, 76.35420227050781 };
+        a_1 = 105.0;
+        a_2/*"32"*/ = "v_michael";
+        return 1;
+        break;
+    case 50:
+        if (sub_6e96(a_0, &v_5, a_1)) {
+            a_2/*"32"*/ = "";
+            return 1;
+        }
+        break;
+    case 51:
+        if (sub_6e96(a_0, &v_5, a_1)) {
+            a_2/*"32"*/ = "";
+            return 1;
+        }
+        break;
+    case 52:
+        if (sub_6e96(a_0, &v_5, a_1)) {
+            a_2/*"32"*/ = "";
+            return 1;
+        }
+        break;
+    case 66:
+        if (sub_6e96(a_0, &v_5, a_1)) {
+            a_2/*"32"*/ = "";
+            return 1;
+        }
+        break;
+    case 53:
+        a_1 = 0.0;
+        a_2/*"32"*/ = "";
+        return 0;
+        break;
+    case 54:
+        if (sub_6e96(a_0, &v_5, a_1)) {
+            a_2/*"32"*/ = "";
+            return 1;
+        }
+        break;
+    case 55:
+        if (sub_6e96(a_0, &v_5, a_1)) {
+            a_2/*"32"*/ = "";
+            return 1;
+        }
+        break;
+    case 56:
+        if (sub_6e96(a_0, &v_5, a_1)) {
+            a_2/*"32"*/ = "";
+            return 1;
+        }
+        break;
+    case 57:
+        if (sub_6e96(a_0, &v_5, a_1)) {
+            a_2/*"32"*/ = "";
+            return 1;
+        }
+        break;
+    case 61:
+        if (sub_6e96(a_0, &v_5, a_1)) {
+            a_2/*"32"*/ = "";
+            return 1;
+        }
+        break;
+    case 62:
+        if (sub_6e96(a_0, &v_5, a_1)) {
+            a_2/*"32"*/ = "";
+            return 1;
+        }
+        break;
+    case 63:
+        if (sub_6e96(a_0, &v_5, a_1)) {
+            a_2/*"32"*/ = "";
+            return 1;
+        }
+        break;
+    case 68:
+        a_1 = 0.0;
+        a_2/*"32"*/ = "";
+        return 0;
+        break;
+    case 69:
+        if (sub_6e96(a_0, &v_5, a_1)) {
+            a_2/*"32"*/ = "";
+            return 1;
+        }
+        break;
+    case 64:
+        if (sub_6e96(a_0, &v_5, a_1)) {
+            a_2/*"32"*/ = "";
+            return 1;
+        }
+        break;
+    case 65:
+        if (sub_6e96(a_0, &v_5, a_1)) {
+            a_2/*"32"*/ = "";
+            return 1;
+        }
+        break;
+    case 70:
+        a_1 = 0.0;
+        a_2/*"32"*/ = "";
+        return 0;
+        break;
+    case 71:
+        a_1 = 0.0;
+        a_2/*"32"*/ = "";
+        return 0;
+        break;
+    case 72:
+        a_1 = 0.0;
+        a_2/*"32"*/ = "";
+        return 0;
+        break;
+    case 73:
+        a_1 = 0.0;
+        a_2/*"32"*/ = "";
+        return 0;
+        break;
+    case 234:
+        a_1 = 122.69;
+        a_2/*"32"*/ = "v_trailer";
+        return 1;
+        break;
+    case 316:
+        a_1 = -60.31;
+        a_2/*"32"*/ = "v_trailer";
+        return 1;
+        break;
+    case 315:
+        a_1 = 41.653999999999996 - 180.0;
+        a_2/*"32"*/ = "v_trailer";
+        return 1;
+        break;
+    case 75:
+        a_1 = -172.697;
+        a_2/*"32"*/ = "";
+        return 1;
+        break;
+    case 76:
+        a_1 = 181.8927 - 180.0;
+        a_2/*"32"*/ = "";
+        return 1;
+        break;
+    case 77:
+        a_1 = -158.0;
+        a_2/*"32"*/ = "v_michael";
+        return 1;
+        break;
+    case 78:
+        a_1 = -152.0;
+        a_2/*"32"*/ = "v_michael";
+        return 1;
+        break;
+    case 79:
+        a_1 = 20.353;
+        a_2/*"32"*/ = "v_michael";
+        return 1;
+        break;
+    case 80:
+        a_1 = 48.53 + 180.0;
+        a_2/*"32"*/ = "";
+        return 1;
+        break;
+    case 81:
+        a_1 = -45.0;
+        a_2/*"32"*/ = "";
+        return 1;
+        break;
+    case 82:
+        a_1 = -113.748;
+        a_2/*"32"*/ = "v_michael";
+        return 1;
+        break;
+    case 83:
+        a_1 = -173.748;
+        a_2/*"32"*/ = "v_michael";
+        return 1;
+        break;
+    case 84:
+        a_1 = 32.793800354;
+        a_2/*"32"*/ = "v_trailer";
+        return 1;
+        break;
+    case 85:
+        a_1 = -56.0;
+        a_2/*"32"*/ = "v_michael";
+        return 1;
+        break;
+    case 86:
+        a_1 = 13.0;
+        a_2/*"32"*/ = "v_michael";
+        return 1;
+        break;
+    case 87:
+        a_1 = 166.32;
+        a_2/*"32"*/ = "";
+        return 1;
+        break;
+    case 88:
+        a_1 = 21.0;
+        a_1 = -132.0;
+        a_2/*"32"*/ = "";
+        return 1;
+        break;
+    case 89:
+        a_1 = -84.81079864501953;
+        a_2/*"32"*/ = "";
+        return 1;
+        break;
+    case 90:
+        a_1 = -90.5046;
+        a_2/*"32"*/ = "";
+        return 1;
+        break;
+    case 91:
+        a_1 = 105.07949829101562;
+        a_2/*"32"*/ = "";
+        return 1;
+        break;
+    case 92:
+        a_1 = -54.347;
+        a_2/*"32"*/ = "";
+        return 1;
+        break;
+    case 93:
+        a_1 = 117.0;
+        a_2/*"32"*/ = "";
+        return 1;
+        break;
+    case 94:
+        a_1 = -36.0;
+        a_2/*"32"*/ = "";
+        return 1;
+        break;
+    case 95:
+        a_1 = 70.0;
+        a_2/*"32"*/ = "";
+        return 1;
+        break;
+    case 96:
+        a_1 = 34.62099838256836;
+        a_2/*"32"*/ = "";
+        return 1;
+        break;
+    case 97:
+        a_1 = -45.0;
+        a_2/*"32"*/ = "";
+        return 1;
+        break;
+    case 98:
+        a_1 = -150.61480712890625 + 0.0095;
+        a_1 += 0.0004;
+        a_1 += 0.0015;
+        a_1 += 0.00019999999999999998;
+        a_1 += 0.0009;
+        a_2/*"32"*/ = "";
+        return 1;
+        break;
+    case 99:
+        a_1 = -57.0;
+        a_2/*"32"*/ = "";
+        return 1;
+        break;
+    case 100:
+        a_1 = 84.6072998046875;
+        a_2/*"32"*/ = "";
+        return 1;
+        break;
+    case 101:
+        a_1 = 249.07530212402344;
+        a_2/*"32"*/ = "";
+        return 1;
+        break;
+    case 102:
+        a_1 = 69.0;
+        a_2/*"32"*/ = "";
+        return 1;
+        break;
+    case 103:
+        a_1 = 143.49310302734375;
+        a_2/*"32"*/ = "";
+        return 1;
+        break;
+    case 104:
+        a_1 = 123.0;
+        a_2/*"32"*/ = "";
+        return 1;
+        break;
+    case 105:
+        a_1 = 168.0;
+        a_2/*"32"*/ = "";
+        return 1;
+        break;
+    case 106:
+        a_1 = 63.4995;
+        a_2/*"32"*/ = "";
+        return 1;
+        break;
+    case 107:
+        a_1 = -159.0;
+        a_2/*"32"*/ = "";
+        return 1;
+        break;
+    case 108:
+        a_1 = -6.0;
+        a_2/*"32"*/ = "";
+        return 1;
+        break;
+    case 109:
+        a_1 = 99.0;
+        a_2/*"32"*/ = "";
+        return 1;
+        break;
+    case 110:
+        a_1 = 133.0;
+        a_2/*"32"*/ = "";
+        return 1;
+        break;
+    case 111:
+        a_1 = 33.0;
+        a_2/*"32"*/ = "";
+        return 1;
+        break;
+    case 112:
+        a_1 = -162.311;
+        a_2/*"32"*/ = "";
+        return 1;
+        break;
+    case 113:
+        a_1 = 172.0;
+        a_2/*"32"*/ = "";
+        return 1;
+        break;
+    case 135:
+        a_1 = -59.25;
+        a_2/*"32"*/ = "";
+        return 1;
+        break;
+    case 136:
+        a_1 = 82.25399780273438;
+        a_2/*"32"*/ = "";
+        return 1;
+        break;
+    case 137:
+        a_1 = -152.96499633789062;
+        a_2/*"32"*/ = "";
+        return 1;
+        break;
+    case 138:
+        a_1 = 10.099;
+        a_2/*"32"*/ = "";
+        return 1;
+        break;
+    case 139:
+        a_1 = 158.59739685058594;
+        a_2/*"32"*/ = "";
+        return 1;
+        break;
+    case 140:
+        a_1 = 99.18;
+        a_2/*"32"*/ = "";
+        return 1;
+        break;
+    case 141:
+        a_1 = 218.47740173339844;
+        a_2/*"32"*/ = "";
+        return 1;
+        break;
+    case 142:
+        a_1 = 125.6193;
+        a_2/*"32"*/ = "";
+        return 1;
+        break;
+    case 143:
+        a_1 = 142.373;
+        a_2/*"32"*/ = "";
+        return 1;
+        break;
+    case 144:
+        a_1 = -34.87799835205078;
+        a_2/*"32"*/ = "";
+        return 1;
+        break;
+    case 145:
+        a_1 = -172.419;
+        a_2/*"32"*/ = "";
+        return 1;
+        break;
+    case 146:
+        a_1 = -107.439;
+        a_2/*"32"*/ = "";
+        return 1;
+        break;
+    case 147:
+        a_1 = 157.311;
+        a_2/*"32"*/ = "";
+        return 1;
+        break;
+    case 148:
+        a_1 = -68.81199645996094;
+        a_2/*"32"*/ = "";
+        return 1;
+        break;
+    case 149:
+        a_1 = 4.693;
+        a_2/*"32"*/ = "";
+        return 1;
+        break;
+    case 150:
+        a_1 = 78.65;
+        a_2/*"32"*/ = "v_trailer";
+        return 1;
+        break;
+    case 114:
+        a_1 = 8.0;
+        a_2/*"32"*/ = "";
+        return 1;
+        break;
+    case 115:
+        a_1 = 69.0;
+        a_2/*"32"*/ = "";
+        return 1;
+        break;
+    case 116:
+        a_1 = 0.0;
+        a_2/*"32"*/ = "";
+        return 1;
+        break;
+    case 117:
+        a_1 = -74.78179931640625;
+        a_2/*"32"*/ = "";
+        return 1;
+        break;
+    case 118:
+        a_1 = -48.36;
+        a_2/*"32"*/ = "";
+        return 1;
+        break;
+    case 119:
+        a_1 = 144.17799377441406;
+        a_2/*"32"*/ = "";
+        return 1;
+        break;
+    case 120:
+        a_1 = 288.0;
+        a_2/*"32"*/ = "";
+        return 1;
+        break;
+    case 121:
+        a_1 = 101.5;
+        a_2/*"32"*/ = "";
+        return 1;
+        break;
+    case 122:
+        a_1 = 99.72;
+        a_2/*"32"*/ = "v_michael";
+        return 1;
+        break;
+    case 123:
+        a_1 = 120.0;
+        a_2/*"32"*/ = "";
+        return 1;
+        break;
+    case 125:
+        a_1 = -3.0;
+        a_2/*"32"*/ = "";
+        return 1;
+        break;
+    case 126:
+        a_1 = -158.0894012451172;
+        a_2/*"32"*/ = "";
+        return 1;
+        break;
+    case 127:
+        a_1 = -76.36810302734375;
+        a_2/*"32"*/ = "";
+        return 1;
+        break;
+    case 128:
+        a_1 = 30.0 + 180.0;
+        a_2/*"32"*/ = "v_trailer";
+        return 1;
+        break;
+    case 129:
+        a_1 = 80.6;
+        a_2/*"32"*/ = "";
+        return 1;
+        break;
+    case 130:
+        a_1 = -9.1673;
+        a_2/*"32"*/ = "v_trailer";
+        return 1;
+        break;
+    case 131:
+        a_1 = -86.08940124511719;
+        a_2/*"32"*/ = "";
+        return 1;
+        break;
+    case 132:
+        a_1 = -161.0894012451172;
+        a_2/*"32"*/ = "v_trailer";
+        return 1;
+        break;
+    case 133:
+        a_1 = 226.5579071044922 - 270.0;
+        a_2/*"32"*/ = "";
+        return 1;
+        break;
+    case 134:
+        a_1 = -33.12799835205078;
+        a_2/*"32"*/ = "";
+        return 1;
+        break;
+    case 151:
+        a_1 = -6.0;
+        a_2/*"32"*/ = "";
+        return 1;
+        break;
+    case 152:
+        a_1 = 72.0;
+        a_2/*"32"*/ = "";
+        return 1;
+        break;
+    case 153:
+        a_1 = -176.25;
+        a_2/*"32"*/ = "";
+        return 1;
+        break;
+    case 154:
+        a_1 = -147.192;
+        a_2/*"32"*/ = "";
+        return 1;
+        break;
+    case 155:
+        a_1 = 59.082;
+        a_2/*"32"*/ = "";
+        return 1;
+        break;
+    case 156:
+        a_1 = 26.087;
+        a_2/*"32"*/ = "v_michael";
+        return 1;
+        break;
+    case 157:
+        a_1 = 37.27;
+        a_2/*"32"*/ = "";
+        return 1;
+        break;
+    case 158:
+        a_1 = 13.8153;
+        a_2/*"32"*/ = "";
+        return 1;
+        break;
+    case 159:
+        a_1 = -62.5;
+        a_2/*"32"*/ = "";
+        return 1;
+        break;
+    case 160:
+        a_1 = 119.0;
+        a_2/*"32"*/ = "";
+        return 1;
+        break;
+    case 161:
+        a_1 = 86.37760162353516;
+        a_2/*"32"*/ = "";
+        return 1;
+        break;
+    case 162:
+        a_1 = 117.0;
+        a_2/*"32"*/ = "";
+        return 1;
+        break;
+    case 163:
+        a_1 = -164.0;
+        a_2/*"32"*/ = "v_michael";
+        return 1;
+        break;
+    case 164:
+        a_1 = 88.0;
+        a_2/*"32"*/ = "";
+        return 1;
+        break;
+    case 165:
+        a_1 = -144.6219940185547;
+        a_2/*"32"*/ = "";
+        return 1;
+        break;
+    case 166:
+        a_1 = -61.2262;
+        a_2/*"32"*/ = "";
+        return 1;
+        break;
+    case 167:
+        a_1 = 22.32;
+        a_2/*"32"*/ = "";
+        return 1;
+        break;
+    case 168:
+        if (sub_4f49(0, 25, &v_9, &v_C)) {
+            a_1 = v_C + 222.83140563964844;
+            a_2/*"32"*/ = "v_michael";
+            return 1;
+        }
+        break;
+    case 169:
+        a_1 = 112.841;
+        a_2/*"32"*/ = "v_michael";
+        return 1;
+        break;
+    case 170:
+        a_1 = -103.81580352783203 + 180.0;
+        a_2/*"32"*/ = "";
+        return 1;
+        break;
+    case 171:
+        a_1 = -28.092599868774414;
+        a_2/*"32"*/ = "";
+        return 1;
+        break;
+    case 173:
+        a_1 = 0.0301;
+        a_2/*"32"*/ = "";
+        return 1;
+        break;
+    case 172:
+        a_1 = 30.185;
+        a_1 += 0.003;
+        a_2/*"32"*/ = "";
+        return 1;
+        break;
+    case 174:
+        a_1 = 14.979999999999999;
+        a_2/*"32"*/ = "v_michael";
+        return 1;
+        break;
+    }
+    switch (a_0) {
+    case 175:
+        a_1 = 179.653;
+        a_2/*"32"*/ = "v_franklins";
+        return 1;
+        break;
+    case 176:
+        a_1 = -147.0;
+        a_2/*"32"*/ = "v_franklinshouse";
+        return 1;
+        break;
+    case 177:
+        a_1 = -81.0;
+        a_2/*"32"*/ = "v_franklinshouse";
+        return 1;
+        break;
+    case 178:
+        a_1 = -95.40160369873047;
+        a_2/*"32"*/ = "v_franklinshouse";
+        return 1;
+        break;
+    case 179:
+        a_1 = -16.0627 + 180.0;
+        a_2/*"32"*/ = "v_franklins";
+        return 1;
+        break;
+    case 180:
+        a_1 = 129.0;
+        a_2/*"32"*/ = "v_franklinshouse";
+        return 1;
+        break;
+    case 181:
+        a_1 = -86.61299896240234;
+        a_2/*"32"*/ = "v_franklins";
+        return 1;
+        break;
+    case 182:
+        a_1 = -63.0;
+        a_2/*"32"*/ = "";
+        return 1;
+        break;
+    case 183:
+        a_1 = 111.68800354;
+        a_2/*"32"*/ = "";
+        return 1;
+        break;
+    case 184:
+        a_1 = 143.79739379882812;
+        a_2/*"32"*/ = "";
+        return 1;
+        break;
+    case 185:
+        a_1 = 143.792;
+        a_2/*"32"*/ = "";
+        return 1;
+        break;
+    case 186:
+        a_1 = 4.6834;
+        a_2/*"32"*/ = "v_franklinshouse";
+        return 1;
+        break;
+    case 187:
+        a_1 = -108.0;
+        a_2/*"32"*/ = "v_franklinshouse";
+        return 1;
+        break;
+    case 188:
+        a_1 = 69.0;
+        a_2/*"32"*/ = "v_franklinshouse";
+        return 1;
+        break;
+    case 189:
+        a_1 = -172.220703125;
+        a_2/*"32"*/ = "v_franklinshouse";
+        return 1;
+        break;
+    case 190:
+        a_1 = 0.0;
+        a_2/*"32"*/ = "v_franklinshouse";
+        return 1;
+        break;
+    case 191:
+        a_1 = -12.5158;
+        a_2/*"32"*/ = "v_franklinshouse";
+        return 1;
+        break;
+    case 196:
+        a_1 = -1.5;
+        a_2/*"32"*/ = "v_franklins";
+        return 1;
+        break;
+    case 197:
+        a_1 = 27.0;
+        a_2/*"32"*/ = "v_franklinshouse";
+        return 1;
+        break;
+    case 192:
+        a_1 = 107.981;
+        a_2/*"32"*/ = "";
+        return 1;
+        break;
+    case 193:
+        a_1 = 172.918701171875;
+        a_2/*"32"*/ = "";
+        return 1;
+        break;
+    case 194:
+        a_1 = -67.608;
+        a_2/*"32"*/ = "";
+        return 1;
+        break;
+    case 195:
+        a_1 = 74.11579895019531;
+        a_2/*"32"*/ = "";
+        return 1;
+        break;
+    case 198:
+        a_1 = 1.041100025177;
+        a_2/*"32"*/ = "";
+        return 1;
+        break;
+    case 199:
+        a_1 = -152.203;
+        a_2/*"32"*/ = "";
+        return 1;
+        break;
+    case 200:
+        a_1 = 310.8789978027344 - 180.0;
+        a_2/*"32"*/ = "";
+        return 1;
+        break;
+    case 201:
+        a_1 = 130.87899780273438;
+        a_2/*"32"*/ = "";
+        return 1;
+        break;
+    case 202:
+        a_1 = 35.604;
+        a_2/*"32"*/ = "";
+        return 1;
+        break;
+    case 203:
+        a_1 = -93.0;
+        a_2/*"32"*/ = "";
+        return 1;
+        break;
+    case 204:
+        a_1 = -119.39440155029297;
+        a_2/*"32"*/ = "";
+        return 1;
+        break;
+    case 205:
+        a_1 = 121.9321975708;
+        a_2/*"32"*/ = "";
+        return 1;
+        break;
+    case 206:
+        a_1 = -36.0;
+        a_2/*"32"*/ = "";
+        return 1;
+        break;
+    case 207:
+        a_1 = -95.58799743652344;
+        a_2/*"32"*/ = "";
+        return 1;
+        break;
+    case 208:
+        a_1 = 168.0;
+        a_2/*"32"*/ = "";
+        return 1;
+        break;
+    case 209:
+        a_1 = 230.78;
+        a_2/*"32"*/ = "";
+        return 1;
+        break;
+    case 210:
+        a_1 = 165.775100708;
+        a_2/*"32"*/ = "";
+        return 1;
+        break;
+    case 211:
+        a_1 = -179.0;
+        a_2/*"32"*/ = "";
+        return 1;
+        break;
+    case 212:
+        a_1 = 1.2709;
+        a_2/*"32"*/ = "";
+        return 1;
+        break;
+    case 213:
+        a_1 = 84.0;
+        a_2/*"32"*/ = "";
+        return 1;
+        break;
+    case 214:
+        a_1 = 117.03;
+        a_2/*"32"*/ = "";
+        return 1;
+        break;
+    case 215:
+        a_1 = -49.03239822387695;
+        a_2/*"32"*/ = "";
+        return 1;
+        break;
+    case 216:
+        a_1 = -45.0;
+        a_2/*"32"*/ = "";
+        return 1;
+        break;
+    case 217:
+        a_1 = 153.0;
+        a_2/*"32"*/ = "";
+        return 1;
+        break;
+    case 221:
+        a_1 = 84.96;
+        a_2/*"32"*/ = "";
+        return 1;
+        break;
+    case 222:
+        a_1 = 59.3848;
+        a_2/*"32"*/ = "v_chopshop";
+        return 1;
+        break;
+    case 223:
+        a_1 = 43.82;
+        a_2/*"32"*/ = "v_chopshop";
+        return 1;
+        break;
+    case 224:
+        return sub_2af6(222, a_1, a_2);
+        break;
+    case 226:
+        a_1 = 160.0;
+        a_2/*"32"*/ = "";
+        return 1;
+        break;
+    case 227:
+        a_1 = 14.748999999999999;
+        a_2/*"32"*/ = "";
+        return 1;
+        break;
+    case 228:
+        a_1 = -150.0;
+        a_2/*"32"*/ = "";
+        return 1;
+        break;
+    case 229:
+        a_1 = 96.0115966796875;
+        a_2/*"32"*/ = "";
+        return 1;
+        break;
+    case 230:
+        a_1 = -43.666099548339844;
+        a_2/*"32"*/ = "";
+        return 1;
+        break;
+    case 218:
+        a_1 = -70.41239929199219;
+        a_2/*"32"*/ = "";
+        return 1;
+        break;
+    case 219:
+        a_1 = -12.0;
+        a_2/*"32"*/ = "";
+        return 1;
+        break;
+    case 220:
+        a_1 = -117.356;
+        a_2/*"32"*/ = "";
+        return 1;
+        break;
+    case 225:
+        a_1 = -83.8;
+        a_2/*"32"*/ = "";
+        return 1;
+        break;
+    case 231:
+        a_1 = 350.3381958;
+        a_2/*"32"*/ = "";
+        return 1;
+        break;
+    case 232:
+        a_1 = 109.02059936523438;
+        a_2/*"32"*/ = "";
+        return 1;
+        break;
+    case 233:
+        a_1 = 109.02059936523438;
+        a_2/*"32"*/ = "";
+        return 1;
+        break;
+    case 235:
+        a_1 = -112.0;
+        a_2/*"32"*/ = "v_strip3";
+        return 1;
+        break;
+    case 236:
+        a_1 = 114.0;
+        a_2/*"32"*/ = "v_strip3";
+        return 1;
+        break;
+    case 237:
+        a_1 = 30.0;
+        a_2/*"32"*/ = "";
+        return 1;
+        break;
+    case 238:
+        a_1 = -164.0;
+        a_2/*"32"*/ = "";
+        return 1;
+        break;
+    case 239:
+        a_1 = -122.0;
+        a_2/*"32"*/ = "";
+        return 1;
+        break;
+    case 240:
+        a_1 = -4.124;
+        a_2/*"32"*/ = "";
+        return 1;
+        break;
+    case 241:
+        a_1 = 108.0;
+        a_2/*"32"*/ = "";
+        return 1;
+        break;
+    case 242:
+        a_1 = 13.7207;
+        a_2/*"32"*/ = "";
+        return 1;
+        break;
+    case 245:
+        a_1 = 27.746;
+        a_2/*"32"*/ = "v_trailer";
+        return 1;
+        break;
+    case 243:
+        a_1 = 18.0;
+        a_2/*"32"*/ = "";
+        return 1;
+        break;
+    case 244:
+        a_1 = -51.0;
+        a_2/*"32"*/ = "";
+        return 1;
+        break;
+    case 246:
+        a_1 = -165.0;
+        a_2/*"32"*/ = "";
+        return 1;
+        break;
+    case 247:
+        a_1 = 133.0;
+        a_2/*"32"*/ = "";
+        return 1;
+        break;
+    case 248:
+        a_1 = 10.77;
+        a_2/*"32"*/ = "";
+        return 1;
+        break;
+    case 249:
+        a_1 = 138.0 - 180.0;
+        a_2/*"32"*/ = "";
+        return 1;
+        break;
+    case 250:
+        a_1 = 87.0;
+        a_2/*"32"*/ = "";
+        return 1;
+        break;
+    case 251:
+        a_1 = -42.852901458740234;
+        a_2/*"32"*/ = "";
+        return 1;
+        break;
+    case 252:
+        a_1 = 2.6497;
+        a_2/*"32"*/ = "";
+        return 1;
+        break;
+    case 253:
+        a_1 = 135.0;
+        a_2/*"32"*/ = "";
+        return 1;
+        break;
+    case 254:
+        a_1 = -40.0;
+        a_2/*"32"*/ = "";
+        return 1;
+        break;
+    case 255:
+        a_1 = 30.24;
+        a_2/*"32"*/ = "";
+        return 1;
+        break;
+    case 264:
+        a_1 = -90.0;
+        a_2/*"32"*/ = "";
+        return 1;
+        break;
+    case 265:
+        a_1 = -144.274;
+        a_2/*"32"*/ = "";
+        return 1;
+        break;
+    case 266:
+        a_1 = 68.8227005;
+        a_2/*"32"*/ = "";
+        return 1;
+        break;
+    case 267:
+        a_1 = 56.20370101928711;
+        a_2/*"32"*/ = "";
+        return 1;
+        break;
+    case 268:
+        a_1 = 33.0;
+        a_2/*"32"*/ = "";
+        return 1;
+        break;
+    case 269:
+        a_1 = -106.6604995727539;
+        a_2/*"32"*/ = "";
+        return 1;
+        break;
+    case 270:
+        a_1 = -102.0;
+        a_2/*"32"*/ = "";
+        return 1;
+        break;
+    case 271:
+        a_1 = 26.359699249267578;
+        a_2/*"32"*/ = "";
+        return 1;
+        break;
+    case 272:
+        a_1 = -83.31749725341797;
+        a_2/*"32"*/ = "";
+        return 1;
+        break;
+    case 273:
+        a_1 = -153.0;
+        a_2/*"32"*/ = "";
+        return 1;
+        break;
+    case 274:
+        a_1 = 9.0;
+        a_2/*"32"*/ = "";
+        return 1;
+        break;
+    case 275:
+        a_1 = 277.613 - 360.0;
+        a_2/*"32"*/ = "";
+        return 1;
+        break;
+    case 276:
+        a_1 = -4.7459;
+        a_2/*"32"*/ = "";
+        return 1;
+        break;
+    case 277:
+        a_1 = 98.56;
+        a_2/*"32"*/ = "";
+        return 1;
+        break;
+    case 278:
+        a_1 = -33.77;
+        a_2/*"32"*/ = "";
+        return 1;
+        break;
+    case 279:
+        a_1 = 155.67999999999998;
+        a_2/*"32"*/ = "";
+        return 1;
+        break;
+    case 280:
+        a_1 = -49.56;
+        a_2/*"32"*/ = "";
+        return 1;
+        break;
+    case 281:
+        a_1 = 5.8739;
+        a_2/*"32"*/ = "";
+        return 1;
+        break;
+    case 282:
+        a_1 = 70.1626968383789;
+        a_2/*"32"*/ = "";
+        return 1;
+        break;
+    case 283:
+        a_1 = 158.979;
+        a_2/*"32"*/ = "";
+        return 1;
+        break;
+    case 284:
+        a_1 = -67.18509674072266;
+        a_2/*"32"*/ = "";
+        return 1;
+        break;
+    case 285:
+        a_1 = 47.054;
+        a_2/*"32"*/ = "";
+        return 1;
+        break;
+    case 256:
+        a_1 = 120.0;
+        a_2/*"32"*/ = "";
+        return 1;
+        break;
+    case 257:
+        a_1 = 171.253;
+        a_2/*"32"*/ = "";
+        return 1;
+        break;
+    case 258:
+        a_1 = 10.247;
+        a_2/*"32"*/ = "";
+        return 1;
+        break;
+    case 259:
+        a_1 = -32.487998962402344;
+        a_2/*"32"*/ = "";
+        return 1;
+        break;
+    case 260:
+        a_1 = -29.093;
+        a_2/*"32"*/ = "";
+        return 1;
+        break;
+    case 261:
+        a_1 = 229.60850524902344;
+        a_2/*"32"*/ = "";
+        return 1;
+        break;
+    case 286:
+        a_1 = -150.0;
+        a_2/*"32"*/ = "";
+        return 1;
+        break;
+    case 287:
+        a_1 = -81.0;
+        a_2/*"32"*/ = "";
+        return 1;
+        break;
+    case 288:
+        a_1 = 12.0;
+        a_2/*"32"*/ = "";
+        return 1;
+        break;
+    case 262:
+        a_1 = -90.0;
+        a_2/*"32"*/ = "";
+        return 1;
+        break;
+    case 263:
+        a_1 = -171.0;
+        a_2/*"32"*/ = "";
+        return 1;
+        break;
+    case 289:
+        a_1 = -11.501799583435059;
+        a_2/*"32"*/ = "";
+        return 1;
+        break;
+    case 290:
+        a_1 = -129.0;
+        a_2/*"32"*/ = "v_strip3";
+        return 1;
+        break;
+    case 291:
+        a_1 = -147.0;
+        a_2/*"32"*/ = "v_Trevors";
+        return 1;
+        break;
+    case 292:
+        a_1 = 28.7271;
+        a_2/*"32"*/ = "v_Trevors";
+        return 1;
+        break;
+    case 293:
+        a_1 = 28.7271;
+        a_2/*"32"*/ = "v_Trevors";
+        return 1;
+        break;
+    case 294:
+        return sub_2af6(293, a_1, a_2);
+        break;
+    case 295:
+        return sub_2af6(292, a_1, a_2);
+        break;
+    case 299:
+        a_1 = 34.660999999999994;
+        a_2/*"32"*/ = "v_Trevors";
+        return 1;
+        break;
+    case 300:
+        return sub_2af6(303, a_1, a_2);
+        break;
+    case 301:
+        return sub_2af6(303, a_1, a_2);
+        break;
+    case 302:
+        return sub_2af6(303, a_1, a_2);
+        break;
+    case 303:
+        a_1 = 32.0;
+        a_2/*"32"*/ = "v_Trevors";
+        return 1;
+        break;
+    case 296:
+        a_1 = 116.74199676513672;
+        a_2/*"32"*/ = "v_Trevors";
+        return 1;
+        break;
+    case 297:
+        a_1 = 100.46;
+        a_2/*"32"*/ = "v_Trevors";
+        return 1;
+        break;
+    case 298:
+        a_1 = 102.0;
+        a_2/*"32"*/ = "v_Trevors";
+        return 1;
+        break;
+    case 304:
+        a_1 = -152.0894012451172;
+        a_2/*"32"*/ = "";
+        return 1;
+        break;
+    case 305:
+        a_1 = 122.52690124511719;
+        a_2/*"32"*/ = "v_methlab";
+        return 1;
+        break;
+    case 306:
+        v_D/*{3}*/ = {-7.4998, 7.499499797821045, 0.5257999999999999 };
+        a_1 = GAMEPLAY::GET_HEADING_FROM_VECTOR_2D(-v_D, -v_D._f1);
+        a_2/*"32"*/ = "";
+        return 1;
+        break;
+    case 307:
+        v_10/*{3}*/ = {10.634499549865723, 0.7246, 1.2508 };
+        a_1 = GAMEPLAY::GET_HEADING_FROM_VECTOR_2D(-v_10, -v_10._f1);
+        a_2/*"32"*/ = "";
+        return 1;
+        break;
+    case 308:
+        v_13/*{3}*/ = {3.4271, -13.6787, 1.4107 };
+        a_1 = GAMEPLAY::GET_HEADING_FROM_VECTOR_2D(-v_13, -v_13._f1);
+        a_2/*"32"*/ = "";
+        return 1;
+        break;
+    case 309:
+        v_16/*{3}*/ = {-19.658199310302734, 7.896, 0.1334 };
+        a_1 = GAMEPLAY::GET_HEADING_FROM_VECTOR_2D(-v_16, -v_16._f1);
+        a_2/*"32"*/ = "";
+        return 1;
+        break;
+    case 310:
+        a_1 = -87.72149658203125;
+        a_2/*"32"*/ = "";
+        return 1;
+        break;
+    case 311:
+        a_1 = -145.0;
+        a_2/*"32"*/ = "v_trailer";
+        return 1;
+        break;
+    case 312:
+        a_1 = (103.28410339355469 + 88.7571029663086) / 2.0;
+        a_2/*"32"*/ = "";
+        return 1;
+        break;
+    case 313:
+        a_1 = -177.0 + 180.0;
+        a_2/*"32"*/ = "";
+        return 1;
+        break;
+    case 314:
+        a_1 = 327.77459716796875;
+        a_2/*"32"*/ = "";
+        return 1;
+        break;
+    }
+    a_1 = 0.0;
+    a_2/*"32"*/ = "";
+    return 0;
+}
+
+auto sub_4f49(auto a_0, auto a_1, auto a_2, auto a_3) {
+    switch (a_1) {
+    case 0:
+        switch (a_0) {
+        case 0:
+            a_2/*{3}*/ = {13.904, 1.193, 0.7 };
+            a_3 = -144.0;
+            return 1;
+            break;
+        case 1:
+            if (sub_4f49(0, a_1, a_2, a_3)) {
+                a_2 += {0.809, 1.1731, 0.0 };
+                a_3 += 456.76611328125 - 360.0;
+                return 1;
+            }
+            break;
+        case 2:
+            a_2/*{3}*/ = ({-796.9910888671875, 180.5482940673828, 71.83560180664062 }) - ({-812.0607299804688, 179.51170349121094, 71.15309906 });
+            a_3 = (16.0 - 222.83140563964844) + 360.0;
+            return 1;
+            break;
+        }
+        return 0;
+        break;
+    case 1:
+        switch (a_0) {
+        case 0:
+            a_2/*{3}*/ = {10.979299545288086, -5.9, 4.6 };
+            a_3 = 163.07159423828125;
+            return 1;
+            break;
+        case 1:
+            if (sub_4f49(0, a_1, a_2, a_3)) {
+                a_2 += {-0.6, 0.25, 0.0 };
+                a_3 += 0.0;
+                return 1;
+            }
+            break;
+        case 2:
+            if (sub_4f49(0, a_1, a_2, a_3)) {
+                a_2 += {-1.2, -0.5, 0.0 };
+                a_3 += 0.0;
+                return 1;
+            }
+            break;
+        }
+        break;
+    case 2:
+    case 3:
+        switch (a_0) {
+        case 0:
+        case 1:
+        case 2:
+            a_2/*{3}*/ = ({-796.9910278320312, 180.548, 71.835 }) - ({-812.0607299804688, 179.51170349121094, 71.15309906 });
+            a_3 = ((16.0 + 90.0) - 222.83140563964844) + 360.0;
+            return 1;
+            break;
+        }
+        break;
+    case 4:
+        switch (a_0) {
+        case 0:
+        case 1:
+        case 2:
+            a_2/*{3}*/ = {6.8878, -5.5247, 1.5228 };
+            a_3 = 160.0;
+            return 1;
+            break;
+        }
+        break;
+    case 18:
+        switch (a_0) {
+        case 0:
+            a_2/*{3}*/ = {4.193699836730957, -9.0309, 4.587699890136719 };
+            a_3 = 255.0;
+            return 1;
+            break;
+        }
+        break;
+    case 9:
+        switch (a_0) {
+        case 0:
+            a_2/*{3}*/ = {4.457699775695801, -9.6399, 4.5876 };
+            a_3 = 252.0;
+            return 1;
+            break;
+        }
+        break;
+    case 5:
+        switch (a_0) {
+        case 0:
+            a_2/*{3}*/ = {3.799, 9.41, 4.587699890136719 };
+            a_3 = 273.0;
+            return 1;
+            break;
+        }
+        break;
+    case 21:
+        switch (a_0) {
+        case 0:
+            if (sub_4f49(0, 5, a_2, a_3)) {
+                a_2 += {0.0, 0.0, 0.0 };
+                a_3 += 0.0;
+                return 1;
+            }
+            break;
+        }
+        break;
+    case 6:
+        switch (a_0) {
+        case 0:
+            a_2/*{3}*/ = {12.552, 4.373, 4.6 + 1.0 };
+            a_3 = 318.0;
+            return 1;
+            break;
+        }
+        break;
+    case 7:
+        switch (a_0) {
+        case 0:
+            a_2/*{3}*/ = {-0.4395, -11.0022, 0.0747 };
+            a_3 = 306.0;
+            return 1;
+            break;
+        }
+        break;
+    case 8:
+        switch (a_0) {
+        case 0:
+            a_2/*{3}*/ = {5.5001, -12.4406, 4.6 };
+            a_3 = 0.0;
+            return 1;
+            break;
+        }
+        break;
+    case 10:
+        switch (a_0) {
+        case 0:
+            a_2/*{3}*/ = {3.5, -9.1, 4.6 };
+            a_3 = 330.0;
+            return 1;
+            break;
+        }
+        break;
+    case 11:
+        switch (a_0) {
+        case 0:
+            a_2/*{3}*/ = {0.849, 1.575, 0.0 };
+            a_3 = 272.85699462890625;
+            return 1;
+            break;
+        }
+        break;
+    case 12:
+        switch (a_0) {
+        case 0:
+        case 1:
+            a_2/*{3}*/ = {8.183, -3.0467, 5.5876 };
+            a_3 = 158.0;
+            return 1;
+            break;
+        }
+        break;
+    case 13:
+        switch (a_0) {
+        case 0:
+        case 1:
+            a_2/*{3}*/ = {9.383, -3.3887, 5.73 };
+            a_3 = 339.0;
+            return 1;
+            break;
+        }
+        break;
+    case 14:
+        switch (a_0) {
+        case 0:
+        case 1:
+            a_2/*{3}*/ = ({-802.7020263671875, 176.17599487304688, 76.89 }) - ({-812.0607299804688, 179.51170349121094, 71.15309906 });
+            a_3 = (159.23 - 222.83140563964844) + 360.0;
+            return 1;
+            break;
+        }
+        break;
+    case 15:
+        switch (a_0) {
+        case 0:
+        case 1:
+            a_2/*{3}*/ = ({-802.7020263671875, 176.17599487304688, 76.89 }) - ({-812.0607299804688, 179.51170349121094, 71.15309906 });
+            a_3 = (159.23 - 222.83140563964844) + 360.0;
+            return 1;
+            break;
+        }
+        break;
+    case 16:
+        switch (a_0) {
+        case 0:
+            a_2/*{3}*/ = {4.4879999999999995, 9.097999999999999, 5.4864 };
+            a_3 = 147.0;
+            return 1;
+            break;
+        }
+        break;
+    case 17:
+        switch (a_0) {
+        case 0:
+            a_2/*{3}*/ = {9.04, 5.71, 1.44 };
+            a_3 = 159.31820678710938;
+            return 1;
+            break;
+        }
+        break;
+    case 20:
+        switch (a_0) {
+        case 0:
+            a_2/*{3}*/ = {3.25, 9.53, 4.588 };
+            a_3 = 333.0;
+            return 1;
+            break;
+        }
+        break;
+    case 22:
+        switch (a_0) {
+        case 0:
+            a_2/*{3}*/ = ({-0.4395, -11.0022, 0.0 }) + ({GAMEPLAY::GET_RANDOM_FLOAT_IN_RANGE(-0.5, 0.5), GAMEPLAY::GET_RANDOM_FLOAT_IN_RANGE(-0.5, 0.5), 0.0 });
+            a_3 = 306.0 + GAMEPLAY::GET_RANDOM_FLOAT_IN_RANGE(10.0, 10.0);
+            return 1;
+            break;
+        }
+        break;
+    case 23:
+        switch (a_0) {
+        case 0:
+            a_2/*{3}*/ = (({-863.54248046875, 141.5128936767578, 60.206298828125 }) - ({-812.0607299804688, 179.51170349121094, 71.15309906 })) - ({0.0, 0.0, 1.0 });
+            a_2 *= (vector)(0.95);
+            a_3 = GAMEPLAY::GET_HEADING_FROM_VECTOR_2D(a_2, a_2._f1);
+            return 1;
+            break;
+        }
+        break;
+    case 24:
+        switch (a_0) {
+        case 0:
+            a_2/*{3}*/ = ({-796.75927734375, 180.47250366210938, 71.82659912109375 }) - ({-812.0607299804688, 179.51170349121094, 71.15309906 });
+            a_3 = (26.087 - 222.83140563964844) + 360.0;
+            return 1;
+            break;
+        }
+        break;
+    case 19:
+        switch (a_0) {
+        case 0:
+            a_2/*{3}*/ = ({-805.1729736328125, 173.987, 72.6875991821289 }) - ({-812.0607299804688, 179.51170349121094, 71.15309906 });
+            a_3 = (13.0 - 222.83140563964844) + 360.0;
+            return 1;
+            break;
+        }
+        break;
+    case 25:
+        switch (a_0) {
+        case 0:
+        case 1:
+            a_2/*{3}*/ = ({-803.1823120117188, 172.4196014404297, 72.8447036743164 }) - ({-812.0607299804688, 179.51170349121094, 71.15309906 });
+            a_3 = (-28.7112 - 222.83140563964844) + 360.0;
+            return 1;
+            break;
+        }
+        break;
+    case 26:
+        switch (a_0) {
+        case 1:
+            a_2/*{3}*/ = {27.964799880981445, 8.3766, 0.7 };
+            a_3 = 319.0;
+            return 1;
+            break;
+        }
+        break;
+    case 32:
+        switch (a_0) {
+        case 1:
+            a_2/*{3}*/ = ({10.3, -6.5, 0.6 }) + ({0.0, 0.0, 0.1 });
+            a_3 = 78.0;
+            return 1;
+            break;
+        }
+        break;
+    case 27:
+        switch (a_0) {
+        case 1:
+            a_2/*{3}*/ = {-0.3142, -10.992600440979, 0.0747 };
+            a_3 = 304.1026;
+            return 1;
+            break;
+        }
+        break;
+    case 41:
+        switch (a_0) {
+        case 1:
+            a_2/*{3}*/ = {10.3, -6.5, 4.6 };
+            a_3 = 180.0;
+            return 1;
+            break;
+        }
+        break;
+    case 33:
+        switch (a_0) {
+        case 1:
+            if (sub_4f49(1, 32, a_2, a_3)) {
+                a_2 += {0.0, 0.0, 0.0 };
+                a_3 += 0.0;
+                return 1;
+            }
+            break;
+        }
+        break;
+    case 38:
+        switch (a_0) {
+        case 1:
+            a_2/*{3}*/ = {8.505, -10.971699714660645, 4.601900100708 };
+            a_3 = 228.0;
+            return 1;
+            break;
+        }
+        break;
+    case 31:
+        switch (a_0) {
+        case 1:
+            a_2/*{3}*/ = {12.7165, 4.710899829864502, 4.6 + 1.0 };
+            a_3 = 310.6695861816406;
+            return 1;
+            break;
+        }
+        break;
+    case 34:
+        switch (a_0) {
+        case 1:
+            a_2/*{3}*/ = {9.0529, -8.917499542236328, 1.6907 };
+            a_3 = 102.15599822998047;
+            return 1;
+            break;
+        }
+        break;
+    case 35:
+        switch (a_0) {
+        case 1:
+            a_2/*{3}*/ = {8.4799, -7.531499862670898, 0.6819999999999999 };
+            a_3 = 264.0;
+            return 1;
+            break;
+        }
+        break;
+    case 37:
+        switch (a_0) {
+        case 1:
+            a_2/*{3}*/ = {9.352, 3.356, 5.7338 };
+            a_3 = 338.0;
+            return 1;
+            break;
+        }
+        break;
+    case 39:
+        switch (a_0) {
+        case 1:
+            a_2/*{3}*/ = {8.3, -10.3127, 4.5874 };
+            a_3 = 262.789;
+            return 1;
+            break;
+        }
+        break;
+    case 40:
+        switch (a_0) {
+        case 1:
+            a_2/*{3}*/ = {10.76, 5.95, 4.59 };
+            a_3 = 177.67660522460938;
+            return 1;
+            break;
+        }
+        break;
+    case 36:
+        switch (a_0) {
+        case 1:
+            a_2/*{3}*/ = {9.669099807739258, -7.6405, 0.6817 };
+            a_3 = 159.156;
+            return 1;
+            break;
+        }
+        break;
+    case 28:
+        switch (a_0) {
+        case 1:
+            a_2/*{3}*/ = {1.228, 4.044, 0.7665 };
+            a_3 = 165.0;
+            return 1;
+            break;
+        }
+        break;
+    case 42:
+        switch (a_0) {
+        case 1:
+            a_2/*{3}*/ = {10.236499786376953, -7.6072998046875, 6.2761 };
+            a_3 = 157.07159423828125;
+            return 1;
+            break;
+        }
+        break;
+    case 43:
+        switch (a_0) {
+        case 1:
+            a_2/*{3}*/ = {8.16100025177, 7.562, 2.17 };
+            a_3 = 78.0;
+            return 1;
+            break;
+        }
+        break;
+    case 29:
+    case 30:
+    case 44:
+        switch (a_0) {
+        case 1:
+            a_2/*{3}*/ = {10.7668, 7.875699999999999, 5.5559 };
+            a_3 = 144.6938934326172;
+            return 1;
+            break;
+        }
+        break;
+    case 45:
+        switch (a_0) {
+        case 1:
+            a_2/*{3}*/ = {10.6257, -9.49269962310791, 5.5876 };
+            a_3 = 257.45831298828125;
+            return 1;
+            break;
+        }
+        break;
+    case 46:
+        return sub_4f49(a_0, 26, a_2, a_3);
+        break;
+    case 47:
+        switch (a_0) {
+        case 2:
+        case 3:
+            a_2/*{3}*/ = {8.445099830627441, 3.1568, 1.47 };
+            a_3 = 159.0;
+            return 1;
+            break;
+        }
+        break;
+    case 48:
+    case 68:
+        switch (a_0) {
+        case 2:
+            a_2/*{3}*/ = {9.047699999999999, -7.9397, 0.6817 };
+            a_3 = 88.568603515625;
+            return 1;
+            break;
+        }
+        break;
+    case 49:
+        switch (a_0) {
+        case 2:
+            a_2/*{3}*/ = {0.0, 0.0, 0.0 };
+            a_3 = 0.0;
+            return 0;
+            break;
+        }
+        break;
+    case 50:
+    case 69:
+        switch (a_0) {
+        case 2:
+            a_2/*{3}*/ = {21.7, 9.0, 1.7029 };
+            a_3 = 0.0;
+            return 1;
+            break;
+        }
+        break;
+    case 51:
+        switch (a_0) {
+        case 2:
+            a_2/*{3}*/ = {1.3278, 1.5340000391, 0.0 };
+            a_3 = 159.72;
+            return 1;
+            break;
+        }
+        break;
+    case 52:
+    case 67:
+        switch (a_0) {
+        case 2:
+            a_2/*{3}*/ = {3.0265, 1.7627, 0.1273 };
+            a_3 = 338.5;
+            return 1;
+            break;
+        }
+        break;
+    case 53:
+        switch (a_0) {
+        case 2:
+            a_2/*{3}*/ = {15.2374, 8.722999999999999, 1.4495 };
+            a_3 = 205.677;
+            return 1;
+            break;
+        }
+        break;
+    case 54:
+    case 70:
+        switch (a_0) {
+        case 2:
+            a_2/*{3}*/ = {28.7, 8.82409954071045, 0.6 };
+            a_3 = 39.0;
+            return 1;
+            break;
+        }
+        break;
+    case 55:
+    case 71:
+        switch (a_0) {
+        case 2:
+            a_2/*{3}*/ = ({9.056699752807617, -9.01070022583, 1.1936 }) + ({0.0, 0.0, 0.03 - 0.02 });
+            a_3 = 94.20860290527344;
+            return 1;
+            break;
+        }
+        break;
+    case 64:
+        switch (a_0) {
+        case 2:
+            a_2/*{3}*/ = ({-2.8213, 2.040299892425537, 5.2891 }) + ({0.0, 0.0, 0.03 - 0.05 });
+            a_3 = 336.0;
+            return 1;
+            break;
+        }
+        break;
+    case 56:
+        switch (a_0) {
+        case 0:
+        case 2:
+            a_2/*{3}*/ = {5.578199863433838, 5.7754998207092285, 3.84 };
+            a_3 = 311.4;
+            return 1;
+            break;
+        }
+        break;
+    case 57:
+        switch (a_0) {
+        case 0:
+        case 2:
+            a_2/*{3}*/ = {5.578199863433838, 5.7754998207092285, 3.8418 };
+            a_3 = 306.6;
+            return 1;
+            break;
+        }
+        break;
+    case 58:
+        switch (a_0) {
+        case 1:
+        case 2:
+            a_2/*{3}*/ = {5.80919981, 5.7965, 3.85 };
+            a_3 = 337.4;
+            return 1;
+            break;
+        }
+        break;
+    case 59:
+    case 72:
+        switch (a_0) {
+        case 2:
+            a_2/*{3}*/ = {13.322099685668945, 0.0684, 0.6817 };
+            a_3 = 277.3169860839844;
+            return 1;
+            break;
+        }
+        break;
+    case 60:
+        if (sub_4f49(a_0, 59, a_2, a_3)) {
+            a_2 += {GAMEPLAY::GET_RANDOM_FLOAT_IN_RANGE(-1.0, 1.0), GAMEPLAY::GET_RANDOM_FLOAT_IN_RANGE(-1.0, 1.0), 0.0 };
+            a_3 += GAMEPLAY::GET_RANDOM_FLOAT_IN_RANGE(-10.0, 10.0);
+            return 1;
+        }
+        break;
+    case 61:
+    case 62:
+    case 63:
+        switch (a_0) {
+        case 2:
+            a_2/*{3}*/ = {2.235, 1.725, 4.587699890136719 };
+            a_3 = 172.714;
+            return 1;
+            break;
+        }
+        break;
+    case 65:
+        switch (a_0) {
+        case 2:
+            a_2/*{3}*/ = ({-814.2459716796875, 181.264, 75.7406997680664 }) - ({-812.0607299804688, 179.51170349121094, 71.15309906 });
+            a_3 = (-158.0 - 222.83140563964844) + 360.0;
+            return 1;
+            break;
+        }
+        break;
+    case 66:
+        switch (a_0) {
+        case 2:
+            a_2/*{3}*/ = ({-812.89599609375, 181.11399841308594, 76.72329711914062 }) - ({-812.0607299804688, 179.51170349121094, 71.15309906 });
+            a_3 = (-164.0 - 222.83140563964844) + 360.0;
+            return 1;
+            break;
+        }
+        break;
+    case 73:
+        switch (a_0) {
+        case 2:
+            a_2/*{3}*/ = {7.394, 5.368, 1.451 };
+            a_3 = 235.0655975341797;
+            return 1;
+            break;
+        }
+        break;
+    case 74:
+        switch (a_0) {
+        case 1:
+        case 2:
+            a_2/*{3}*/ = {1.0704, 1.4624, 1 };
+            a_3 = 157.44;
+            return 1;
+            break;
+        }
+        break;
+    case 75:
+    case 84:
+        switch (a_0) {
+        case 3:
+            a_2/*{3}*/ = {14.8185997, 6.8253, 0.5 };
+            a_3 = 87.33679962158203;
+            return 1;
+            break;
+        }
+        break;
+    case 76:
+    case 78:
+    case 85:
+        switch (a_0) {
+        case 3:
+            a_2/*{3}*/ = {13.648599624633789, 6.225299835205078, 0.45 };
+            a_3 = 262.32;
+            return 1;
+            break;
+        }
+        break;
+    case 77:
+        if (sub_4f49(a_0, 47, a_2, a_3)) {
+            a_2 += {0.0, 0.0, 0.0 };
+            a_3 += 0.0;
+            return 1;
+        }
+        break;
+    case 79:
+    case 86:
+        switch (a_0) {
+        case 3:
+            a_2/*{3}*/ = {16.319, -1.375, 0.6817 };
+            a_3 = 334.12600708;
+            return 1;
+            break;
+        }
+        break;
+    case 80:
+        switch (a_0) {
+        case 3:
+            a_2/*{3}*/ = {0.39, 3.27, 0.0 };
+            a_3 = 154.12600708;
+            return 1;
+            break;
+        }
+        break;
+    case 81:
+        switch (a_0) {
+        case 3:
+            a_2/*{3}*/ = {15.0213, 6.9622, 1.39 };
+            a_3 = 142.889;
+            return 1;
+            break;
+        }
+        break;
+    case 82:
+    case 83:
+        switch (a_0) {
+        case 3:
+            a_2/*{3}*/ = {15.128, 6.842, 0.4524 };
+            a_3 = 54.0;
+            return 1;
+            break;
+        }
+        break;
+    case 87:
+        switch (a_0) {
+        case 4:
+            a_2/*{3}*/ = {-10.9019, 23.8349, 2.1 };
+            a_3 = 339.0;
+            return 1;
+            break;
+        }
+        break;
+    case 88:
+        switch (a_0) {
+        case 4:
+            a_2/*{3}*/ = {-10.9937, -24.9, -2.18 };
+            a_3 = 314.2131958;
+            return 1;
+            break;
+        }
+        break;
+    case 89:
+        switch (a_0) {
+        case 4:
+            a_2/*{3}*/ = {31.7401, -1.0943, 0.6822 };
+            a_3 = 147.0;
+            return 1;
+            break;
+        }
+        break;
+    case 90:
+        switch (a_0) {
+        case 4:
+            a_2/*{3}*/ = {-27.1728, -3.75, -1.62600004673 };
+            a_3 = 147.0 + 90.0;
+            return 1;
+            break;
+        }
+        break;
+    case 91:
+        switch (a_0) {
+        case 4:
+            a_2/*{3}*/ = {14.772199630737305, -10.9336, -0.537 };
+            a_3 = 110.85050201416016;
+            return 1;
+            break;
+        }
+        break;
+    case 92:
+        switch (a_0) {
+        case 4:
+            a_2/*{3}*/ = {-17.253599166870117, 2.451, -0.6 };
+            a_3 = 0.0;
+            return 1;
+            break;
+        }
+        break;
+    case 93:
+        switch (a_0) {
+        case 4:
+            a_2/*{3}*/ = {23.971599578857422, -20.3533, -3.18 };
+            a_3 = 324.0;
+            return 1;
+            break;
+        }
+        break;
+    case 94:
+        switch (a_0) {
+        case 5:
+            a_2/*{3}*/ = {3.1415998935699463, -2.0799, 0.014499999999999999 };
+            a_3 = 33.0;
+            return 1;
+            break;
+        }
+        break;
+    case 95:
+        switch (a_0) {
+        case 5:
+            a_2/*{3}*/ = {3.2746, -4.1995, 0.0144 };
+            a_3 = 69.0;
+            return 1;
+            break;
+        }
+        break;
+    case 96:
+    case 98:
+        switch (a_0) {
+        case 5:
+            a_2/*{3}*/ = {2.98300004, 4.094, 0.4629 };
+            a_3 = 33.0;
+            return 1;
+            break;
+        }
+        break;
+    case 97:
+        switch (a_0) {
+        case 5:
+            a_2/*{3}*/ = {5.523499999999999, 2.9133, 0.7288 };
+            a_3 = 71.0;
+            return 1;
+            break;
+        }
+        break;
+    case 99:
+        switch (a_0) {
+        case 6:
+            a_2/*{3}*/ = ({-42.20589828491211, -1454.6756591796875, 30.7131 }) - ({-14.3064, -1435.9974365234375, 30.116 });
+            a_3 = 84.7 - 188.58169555664062;
+            return 1;
+            break;
+        case 7:
+            a_2/*{3}*/ = ({-40.747798919677734, -1455.84765625, 30.680299758911133 }) - ({-14.3064, -1435.9974365234375, 30.116 });
+            a_3 = 90.6417 - 188.58169555664062;
+            return 1;
+            break;
+        }
+        break;
+    case 100:
+        switch (a_0) {
+        case 10:
+            a_2/*{3}*/ = {2.0126, 0.3422, -0.0086 };
+            a_3 = 354.0;
+            return 1;
+            break;
+        }
+        break;
+    case 101:
+        switch (a_0) {
+        case 10:
+            a_2/*{3}*/ = {1.2931, 1.4476, 1.0127 };
+            a_3 = 61.752498626708984;
+            return 1;
+            break;
+        }
+        break;
+    case 102:
+    case 103:
+        switch (a_0) {
+        case 10:
+            a_2/*{3}*/ = {0.0158, 1.4182, 0.9913 };
+            a_3 = 119.008;
+            return 1;
+            break;
+        }
+        break;
+    case 104:
+        switch (a_0) {
+        case 10:
+            a_2/*{3}*/ = {-3.467, 0.074, 0.0 };
+            a_3 = 30.0;
+            return 1;
+            break;
+        }
+        break;
+    case 105:
+        switch (a_0) {
+        case 10:
+            a_2/*{3}*/ = {-2.1013998985290527, -5.408899784088135, -0.013 };
+            a_3 = 123.75299835205078;
+            return 1;
+            break;
+        }
+        break;
+    case 106:
+        switch (a_0) {
+        case 10:
+            a_2/*{3}*/ = {-2.802, -6.3295, 0.009999999999999998 };
+            a_3 = 42.757;
+            return 1;
+            break;
+        }
+        break;
+    case 107:
+        switch (a_0) {
+        case 8:
+            a_2/*{3}*/ = {2.1559999999999997, 4.9563999999999995, 1.4886 };
+            a_3 = 136.309;
+            return 1;
+            break;
+        }
+        break;
+    case 108:
+        switch (a_0) {
+        case 8:
+            a_2/*{3}*/ = {7.2656, 3.022, 0.9061 };
+            a_3 = 92.88909912109375;
+            return 1;
+            break;
+        }
+        break;
+    case 109:
+        switch (a_0) {
+        case 8:
+            a_2/*{3}*/ = {0.5066, 1.6992, 0.0168 };
+            a_3 = 115.77;
+            return 1;
+            break;
+        }
+        break;
+    case 110:
+    case 111:
+        switch (a_0) {
+        case 8:
+            a_2/*{3}*/ = {0.2121, 6.2791, 0.0089 };
+            a_3 = 114.33910369873047;
+            return 1;
+            break;
+        }
+        break;
+    case 116:
+        switch (a_0) {
+        case 9:
+        case 11:
+            a_2/*{3}*/ = {8.2458, 0.7136, 0.2503 };
+            a_3 = 252.26870727539062;
+            return 1;
+            break;
+        }
+        break;
+    case 117:
+        switch (a_0) {
+        case 9:
+        case 11:
+            a_2/*{3}*/ = {2.334, 1.6889, 0.586 };
+            a_3 = 109.0;
+            return 1;
+            break;
+        }
+        break;
+    case 112:
+        switch (a_0) {
+        case 9:
+            a_2/*{3}*/ = {0.6331, 1.2093, -0.0086 };
+            a_3 = 137.18609619140625;
+            return 1;
+            break;
+        }
+        break;
+    case 113:
+        switch (a_0) {
+        case 9:
+            a_2/*{3}*/ = {-3.887, 0.166, 0.0 };
+            a_3 = 30.0;
+            return 1;
+            break;
+        }
+        break;
+    case 114:
+        switch (a_0) {
+        case 9:
+            a_2/*{3}*/ = {3.5179, 9.1355, -1.0 };
+            a_3 = 141.79;
+            return 1;
+            break;
+        }
+        break;
+    case 115:
+        switch (a_0) {
+        case 9:
+            a_2/*{3}*/ = ({-6.013, -1.9326, 0.15 }) + ({0.0, 0.0, 1.0 });
+            a_3 = 121.65910339355469;
+            return 1;
+            break;
+        }
+        break;
+    case 118:
+        switch (a_0) {
+        case 10:
+            a_2/*{3}*/ = {10.2823, 2.2595, -1.0742 };
+            a_3 = 170.27960205078125 - 180.0;
+            return 1;
+            break;
+        }
+        break;
+    case 119:
+        switch (a_0) {
+        case 10:
+            a_2/*{3}*/ = {1.077, 5.1446, 0.9904 };
+            a_3 = 107.1399;
+            return 1;
+            break;
+        }
+        break;
+    case 120:
+        switch (a_0) {
+        case 10:
+            a_2/*{3}*/ = {12.902999999999999, -6.623, -0.0406 };
+            a_3 = 63.48;
+            return 1;
+            break;
+        }
+        break;
+    case 121:
+        switch (a_0) {
+        case 10:
+            a_2/*{3}*/ = {10.5514, 5.393, 0.0998 };
+            a_3 = 327.483;
+            return 1;
+            break;
+        }
+        break;
+    case 122:
+        switch (a_0) {
+        case 11:
+            a_2/*{3}*/ = {0.9793999999999999, -0.3043, 0.0 };
+            a_3 = 179.7612;
+            return 1;
+            break;
+        }
+        break;
+    case 123:
+        switch (a_0) {
+        case 11:
+            a_2/*{3}*/ = {11.97589969635, 1.0, -1.0728 };
+            a_3 = 238.94219970703125;
+            return 1;
+            break;
+        }
+        break;
+    case 124:
+        switch (a_0) {
+        case 8:
+        case 11:
+            a_2/*{3}*/ = {0.576, 1.671, 0.601 };
+            a_3 = 296.0;
+            return 1;
+            break;
+        }
+        break;
+    case 125:
+        switch (a_0) {
+        case 12:
+            a_2/*{3}*/ = {0.6532, 0.9556, -0.0087 };
+            a_3 = 121.05560302734375;
+            return 1;
+            break;
+        }
+        break;
+    case 126:
+        switch (a_0) {
+        case 13:
+            a_2/*{3}*/ = {-0.18, 4.173, 0.9981 };
+            a_3 = 216.61;
+            return 1;
+            break;
+        }
+        break;
+    case 127:
+        switch (a_0) {
+        case 13:
+            a_2/*{3}*/ = {6.5937, 0.3521, 1.0 };
+            a_3 = 119.4;
+            return 1;
+            break;
+        }
+        break;
+    case 128:
+        switch (a_0) {
+        case 13:
+            if (g_17C49._f4193[2/*1*/] == 299) {
+                a_2/*{3}*/ = ({-1158.133056640625, -1521.39404296875, 9.6327 }) - ({-1152.5706787109375, -1517.6, 9.634599685668945 });
+                a_3 = 34.660999999999994 - 90.67289733886719;
+                return 1;
+            } else if ((((g_17C49._f4193[2/*1*/] == 300) || (g_17C49._f4193[2/*1*/] == 301)) || (g_17C49._f4193[2/*1*/] == 302)) || (g_17C49._f4193[2/*1*/] == 303)) {
+                a_2/*{3}*/ = ({-1157.802978515625, -1521.333984375, 9.6327 }) - ({-1152.5706787109375, -1517.6, 9.634599685668945 });
+                a_3 = 32.0 - 90.67289733886719;
+                return 1;
+            }
+            if (sub_f91()) {
+                a_2/*{3}*/ = ({-1158.133056640625, -1521.39404296875, 9.6327 }) - ({-1152.5706787109375, -1517.6, 9.634599685668945 });
+                a_3 = 34.660999999999994 - 90.67289733886719;
+                return 1;
+            } else { 
+                a_2/*{3}*/ = ({-1157.802978515625, -1521.333984375, 9.6327 }) - ({-1152.5706787109375, -1517.6, 9.634599685668945 });
+                a_3 = 32.0 - 90.67289733886719;
+                return 1;
+            }
+            break;
+        }
+        break;
+    case 129:
+        switch (a_0) {
+        case 13:
+            a_2/*{3}*/ = ({-1156.4219970703125, -1519.56103515625, 10.6327 }) - ({-1152.5706787109375, -1517.6, 9.634599685668945 });
+            a_3 = 102.0 - 90.67289733886719;
+            return 1;
+            break;
+        }
+        break;
+    case 130:
+        switch (a_0) {
+        case 13:
+            a_2/*{3}*/ = {-2.8352, 0.0552, 0.0 };
+            a_3 = 334.44;
+            return 1;
+            break;
+        }
+        break;
+    case 131:
+        switch (a_0) {
+        case 13:
+            if (sub_4f49(a_0, 130, a_2, a_3)) {
+                a_2 += {GAMEPLAY::GET_RANDOM_FLOAT_IN_RANGE(-1.0, 1.0), GAMEPLAY::GET_RANDOM_FLOAT_IN_RANGE(-1.0, 1.0), 0.0 };
+                a_3 += GAMEPLAY::GET_RANDOM_FLOAT_IN_RANGE(-10.0, 10.0);
+                return 1;
+            }
+            break;
+        }
+        break;
+    case 132:
+        switch (a_0) {
+        case 13:
+            a_2/*{3}*/ = {7.213, -1.4536, 0.9981 };
+            a_3 = 42.6;
+            return 1;
+            break;
+        }
+        break;
+    case 133:
+        switch (a_0) {
+        case 13:
+            a_2/*{3}*/ = ({-1148.4664306640625, -1518.736328125, 9.6327 + 1.0 }) - ({-1152.5706787109375, -1517.6, 9.634599685668945 });
+            a_3 = GAMEPLAY::GET_RANDOM_FLOAT_IN_RANGE(0.0, 360.0);
+            return 1;
+            break;
+        }
+        break;
+    case 134:
+        switch (a_0) {
+        case 13:
+            a_2/*{3}*/ = {5.24, 6.217, 0.998 };
+            a_3 = 315.72;
+            return 1;
+            break;
+        }
+        break;
+    case 135:
+        switch (a_0) {
+        case 13:
+            a_2/*{3}*/ = {6.644700050354, 0.7635, 1.0507 };
+            a_3 = 296.6830139160156;
+            return 1;
+            break;
+        }
+        break;
+    case 136:
+        switch (a_0) {
+        case 13:
+            a_2/*{3}*/ = {3.968, 1.04, 0.0 };
+            a_3 = 214.92;
+            return 1;
+            break;
+        case 14:
+            a_2/*{3}*/ = {4.617, 1.1314, 0.0 };
+            a_3 = 39.4085;
+            return 1;
+            break;
+        }
+        break;
+    case 137:
+    case 138:
+        a_2/*{3}*/ = {0.0, 0.0, 0.0 };
+        a_3 = 0.0;
+        return 0;
+        break;
+    case 140:
+    case 141:
+        a_2/*{3}*/ = {0.0, 0.0, 0.0 };
+        a_3 = 0.0;
+        return 0;
+        break;
+    default:
+        a_2/*{3}*/ = {GAMEPLAY::GET_RANDOM_FLOAT_IN_RANGE(-10.0, 10.0), GAMEPLAY::GET_RANDOM_FLOAT_IN_RANGE(-10.0, 10.0), 0.0 };
+        a_3 = GAMEPLAY::GET_RANDOM_FLOAT_IN_RANGE(0.0, 360.0);
+        return 0;
+        break;
+    }
+    a_2/*{3}*/ = {GAMEPLAY::GET_RANDOM_FLOAT_IN_RANGE(-10.0, 10.0), GAMEPLAY::GET_RANDOM_FLOAT_IN_RANGE(-10.0, 10.0), 0.0 };
+    a_3 = GAMEPLAY::GET_RANDOM_FLOAT_IN_RANGE(0.0, 360.0);
+    return 0;
+}
+
+auto sub_6e96(auto a_0, auto a_1, auto a_2) {
+    switch (a_0) {
+    case 11:
+        a_1/*{3}*/ = {115.15689849853516, -1286.6839599609375, 28.2612991333 };
+        a_2 = 111.0;
+        return 1;
+        break;
+    case 8:
+        a_1/*{3}*/ = {-90.00890350341797, -1324.1947021484375, 28.32029914855957 };
+        a_2 = 194.18870544433594;
+        return 1;
+        break;
+    case 9:
+        return sub_6e96(8, a_1, a_2);
+        break;
+    case 10:
+        return sub_6e96(8, a_1, a_2);
+        break;
+    case 13:
+        a_1/*{3}*/ = {-807.2979125976562, -48.4, 36.817298889160156 };
+        a_2 = 201.63279724121094;
+        return 1;
+        break;
+    case 14:
+        a_1/*{3}*/ = {1432.3402099609375, -1887.3831787109375, 70.57679748535156 };
+        a_2 = 350.0509033203125;
+        return 1;
+        break;
+    case 15:
+        a_1/*{3}*/ = {1666.2039794921875, 1967.2503662109375, 143.32130432128906 };
+        a_2 = 0.7896;
+        return 1;
+        break;
+    case 12:
+        a_1/*{3}*/ = {-1440.219970703125, 127.02, 50.0 };
+        a_2 = 42.0;
+        return 1;
+        break;
+    case 16:
+        a_1/*{3}*/ = {135.05499267578125, -1759.6396484375, 27.8957 };
+        a_2 = -129.0;
+        return 1;
+        break;
+    case 17:
+        a_1/*{3}*/ = {687.69921875, -1744.0299072265625, 28.3624 };
+        a_2 = 267.1408996582031;
+        return 1;
+        break;
+    case 18:
+        a_1/*{3}*/ = {56.51169967651367, -744.6121826171875, 43.13560104370117 };
+        a_2 = 340.0526123046875;
+        return 1;
+        break;
+    case 19:
+        a_1/*{3}*/ = {506.4849853515625, -1884.967041015625, 24.764 };
+        a_2 = 22.9566;
+        return 1;
+        break;
+    case 20:
+        a_1/*{3}*/ = {1555.95751953125, 953.6135864257812, 77.206298828125 };
+        a_2 = 152.81179809570312;
+        return 1;
+        break;
+    case 21:
+        a_1/*{3}*/ = {0.0, 0.0, 0.0 };
+        a_2 = 0.0;
+        return 1;
+        break;
+    case 22:
+        a_1/*{3}*/ = {220.72, -64.4177017211914, 68.29219818115234 };
+        a_2 = 250.45350646972656 - 360.0;
+        return 1;
+        break;
+    case 74:
+        a_1/*{3}*/ = {2048.07, 3840.84, 34.2238 };
+        a_2 = 119.60299682617188;
+        return 1;
+        break;
+    case 23:
+        a_1/*{3}*/ = {-464.22, -1592.97998046875, 38.73 };
+        a_2 = 168.0;
+        return 1;
+        break;
+    case 24:
+        a_1/*{3}*/ = {744.7899780273438 + 0.0186, -465.8599853515625 - 0.0114, 36.6399 };
+        a_2 = 51.727901458740234;
+        return 1;
+        break;
+    case 67:
+        a_1/*{3}*/ = {-9.0, 508.1, 173.6278076171875 };
+        a_2 = 151.25039672851562;
+        return 1;
+        break;
+    case 25:
+        a_1/*{3}*/ = {72.22779846191406, -1464.6798095703125, 28.2915 };
+        a_2 = 156.88270568847656;
+        return 1;
+        break;
+    case 27:
+        a_1/*{3}*/ = {763.0, -906.0, 24.231199264526367 };
+        a_2 = 7.2736;
+        return 1;
+        break;
+    case 26:
+        a_1/*{3}*/ = {257.91668701171875, -1120.7855224609375, 28.3684 };
+        a_2 = 97.27359771728516;
+        return 1;
+        break;
+    case 28:
+        a_1/*{3}*/ = {422.5857849121094, -978.6331787109375, 69.7072982788086 };
+        a_2 = 4.0;
+        return 1;
+        break;
+    case 29:
+        a_1/*{3}*/ = {0.0, 0.0, 0.0 };
+        a_2 = 0.0;
+        return 1;
+        break;
+    case 30:
+        a_1/*{3}*/ = {0.0, 0.0, 0.0 };
+        a_2 = 0.0;
+        return 1;
+        break;
+    case 31:
+        a_1/*{3}*/ = {0.0, 0.0, 0.0 };
+        a_2 = 0.0;
+        return 1;
+        break;
+    case 32:
+        a_1/*{3}*/ = {0.0, 0.0, 0.0 };
+        a_2 = 0.0;
+        return 1;
+        break;
+    case 33:
+        a_1/*{3}*/ = {0.0, 0.0, 0.0 };
+        a_2 = 0.0;
+        return 1;
+        break;
+    case 34:
+        a_1/*{3}*/ = {0.0, 0.0, 0.0 };
+        a_2 = 0.0;
+        return 1;
+        break;
+    case 35:
+        a_1/*{3}*/ = {0.0, 0.0, 0.0 };
+        a_2 = 0.0;
+        return 1;
+        break;
+    case 36:
+        a_1/*{3}*/ = {0.0, 0.0, 0.0 };
+        a_2 = 0.0;
+        return 1;
+        break;
+    case 37:
+        a_1/*{3}*/ = {0.0, 0.0, 0.0 };
+        a_2 = 0.0;
+        return 1;
+        break;
+    case 58:
+        a_1/*{3}*/ = {294.85211181640625, 882.9365844726562, 197.8527069091797 };
+        a_2 = 162.6929931640625;
+        return 1;
+        break;
+    case 59:
+        a_1/*{3}*/ = {-1771.801513671875, 794.4315795898438, 138.4210968017578 };
+        a_2 = 128.99459838867188;
+        return 1;
+        break;
+    case 60:
+        a_1/*{3}*/ = {1495.5953369140625, -1848.8206787109375, 70.2074966430664 };
+        a_2 = 32.272098541259766;
+        return 1;
+        break;
+    case 38:
+        a_1/*{3}*/ = {2897.554443359375, 4032.240966796875, 50.14189910888672 };
+        a_2 = 192.80909729;
+        return 1;
+        break;
+    case 39:
+        a_1/*{3}*/ = {1973.35498046875, 3818.2041015625, 32.005 };
+        a_2 = 32.0;
+        return 1;
+        break;
+    case 40:
+        a_1/*{3}*/ = {1973.35498046875, 3818.2041015625, 32.005 };
+        a_2 = 32.0;
+        return 1;
+        break;
+    case 41:
+        a_1/*{3}*/ = {1397.0, 3725.8, 33.067298889160156 };
+        a_2 = -3.7534;
+        return 1;
+        break;
+    case 42:
+        a_1/*{3}*/ = ({798.45361328125, -2975.3408203125, 4.0205 }) + ({0.0, 0.0, 1.0 });
+        a_2 = 90.0;
+        return 1;
+        break;
+    case 43:
+        a_1/*{3}*/ = {709.0244140625, -2916.478759765625, 5.058899879455566 };
+        a_2 = 355.32598876953125;
+        return 1;
+        break;
+    case 44:
+        a_1/*{3}*/ = {643.5247802734375, -2917.324951171875, 5.133699893951416 };
+        a_2 = 334.1068115234375;
+        return 1;
+        break;
+    case 45:
+        a_1/*{3}*/ = {595.274169921875, -2819.1826171875, 5.0559 };
+        a_2 = 46.88529968261719;
+        return 1;
+        break;
+    case 46:
+        a_1/*{3}*/ = {0.0, 0.0, 0.0 };
+        a_2 = 0.0;
+        return 1;
+        break;
+    case 47:
+        a_1/*{3}*/ = {314.4171142578125, 965.2069702148438, 208.40240478515625 };
+        a_2 = 165.9420928955078;
+        return 1;
+        break;
+    case 49:
+        a_1/*{3}*/ = {3321.536865234375, 4975.45458984375, 25.9097 };
+        a_2 = 221.22799682617188;
+        return 1;
+        break;
+    case 48:
+        a_1/*{3}*/ = {-111.13179779052734, 6316.479, 30.4904 };
+        a_2 = 42.0 + 180.0;
+        return 1;
+        break;
+    case 50:
+        a_1/*{3}*/ = {-731.3261108398438, 106.68, 54.71689987182617 };
+        a_2 = 98.97640228271484;
+        return 1;
+        break;
+    case 51:
+        a_1/*{3}*/ = {-1257.5, 527, 30.236099243164062 };
+        a_2 = 220.9553985595703;
+        return 1;
+        break;
+    case 52:
+        a_1/*{3}*/ = {736.9868774414062, -2050.677978515625, 28.271799087524414 };
+        a_2 = 83.99220275878906;
+        return 1;
+        break;
+    case 66:
+        a_1/*{3}*/ = {262.5498962402344, -2540.150390625, 4.843299865722656 };
+        a_2 = -64.1365966796875;
+        return 1;
+        break;
+    case 53:
+        a_1/*{3}*/ = {0.0, 0.0, 0.0 };
+        a_2 = 0.0;
+        return 1;
+        break;
+    case 55:
+        a_1/*{3}*/ = {-315.7789, 6201.35498046875, 30.432199478149414 };
+        a_2 = 127.75469970703125;
+        return 1;
+        break;
+    case 56:
+        a_1/*{3}*/ = {118.0988, -1264.916015625, 32.3637 };
+        a_2 = -63.0;
+        return 1;
+        break;
+    case 57:
+        a_1/*{3}*/ = {37.5988, -1351.520263671875, 28.2954 };
+        a_2 = 90.0338974;
+        return 1;
+        break;
+    case 61:
+        a_1/*{3}*/ = {-558.269287109375, 261.11669921875, 82.07 };
+        a_2 = 84.6231;
+        return 1;
+        break;
+    case 62:
+        a_1/*{3}*/ = {197, 508, 132.477005 };
+        a_2 = 99.60489654541016;
+        return 1;
+        break;
+    case 63:
+        a_1/*{3}*/ = {1312.01, 1645.87, 51.2 };
+        a_2 = 120.0;
+        return 1;
+        break;
+    case 68:
+        a_1/*{3}*/ = {0.0, 0.0, 0.0 };
+        a_2 = 0.0;
+        return 1;
+        break;
+    case 69:
+        a_1/*{3}*/ = {-818.7374267578125, 6.4824, 41.24319839477539 };
+        a_2 = 211.82229614257812;
+        return 1;
+        break;
+    case 64:
+        a_1/*{3}*/ = {2091.2583, 4714.85205078125, 40.1935997 };
+        a_2 = 136.0867;
+        return 1;
+        break;
+    case 54:
+        a_1/*{3}*/ = {1762.5899658203125, 3247.2119140625, 40.735 };
+        a_2 = 27.0648;
+        return 1;
+        break;
+    case 65:
+        a_1/*{3}*/ = {1764.012939453125, 3252.902099609375, 40.735 };
+        a_2 = 27.0648;
+        return 1;
+        break;
+    case 70:
+        a_1/*{3}*/ = {0.0, 0.0, 0.0 };
+        a_2 = 0.0;
+        return 1;
+        break;
+    case 71:
+        a_1/*{3}*/ = {0.0, 0.0, 0.0 };
+        a_2 = 0.0;
+        return 1;
+        break;
+    case 72:
+        a_1/*{3}*/ = {0.0, 0.0, 0.0 };
+        a_2 = 0.0;
+        return 1;
+        break;
+    case 73:
+        a_1/*{3}*/ = {0.0, 0.0, 0.0 };
+        a_2 = 0.0;
+        return 1;
+        break;
+    default:
+        break;
+    }
+    return 0;
+}
+
+auto sub_7805(auto a_0) {
+    switch (a_0) {
+    case ${v_chopshop}:
+        return "v_chopshop";
+        break;
+    case ${v_franklins}:
+        return "v_franklins";
+        break;
+    case ${v_franklinshouse}:
+        return "v_franklinshouse";
+        break;
+    case ${v_methlab}:
+        return "v_methlab";
+        break;
+    case ${v_michael}:
+        return "v_michael";
+        break;
+    case ${v_strip3}:
+        return "v_strip3";
+        break;
+    case ${v_trailer}:
+        return "v_trailer";
+        break;
+    case ${v_trevors}:
+        return "v_Trevors";
+        break;
+    }
+    return "";
+}
+
+void sub_788d() {
+    for (v_2 = 0; v_2 < l_48; v_2 += 1) {
+        ENTITY::SET_VEHICLE_AS_NO_LONGER_NEEDED(&l_48[v_2/*1*/]);
+    }
+    for (v_2 = 0; v_2 < l_94; v_2 += 1) {
+        ENTITY::SET_VEHICLE_AS_NO_LONGER_NEEDED(&l_94[v_2/*1*/]);
+    }
+    for (v_2 = 0; v_2 < l_B0; v_2 += 1) {
+        ENTITY::SET_VEHICLE_AS_NO_LONGER_NEEDED(&l_B0[v_2/*1*/]);
+    }
+    for (v_2 = 0; v_2 < l_CC; v_2 += 1) {
+        ENTITY::SET_VEHICLE_AS_NO_LONGER_NEEDED(&l_CC[v_2/*1*/]);
+    }
+    for (v_2 = 0; v_2 < l_43; v_2 += 1) {
+        STREAMING::SET_MODEL_AS_NO_LONGER_NEEDED(l_43[v_2/*1*/]);
+    }
+    for (v_2 = 0; v_2 < l_55; v_2 += 1) {
+        STREAMING::SET_MODEL_AS_NO_LONGER_NEEDED(l_55[v_2/*1*/]);
+    }
+    for (v_2 = 0; v_2 < l_99; v_2 += 1) {
+        STREAMING::SET_MODEL_AS_NO_LONGER_NEEDED(l_99[v_2/*1*/]);
+    }
+    for (v_2 = 0; v_2 < l_B5; v_2 += 1) {
+        STREAMING::SET_MODEL_AS_NO_LONGER_NEEDED(l_B5[v_2/*1*/]);
+    }
+    for (v_2 = 0; v_2 < l_D1; v_2 += 1) {
+        STREAMING::SET_MODEL_AS_NO_LONGER_NEEDED(l_D1[v_2/*1*/]);
+    }
+    STREAMING::SET_VEHICLE_POPULATION_BUDGET(3);
+    GAMEPLAY::SET_GAME_PAUSED(0);
+    SCRIPT::TERMINATE_THIS_THREAD();
+}

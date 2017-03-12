@@ -1,0 +1,1083 @@
+// listener's C4 decompiler
+
+void main() {
+    l_2 = -1;
+    v_2/*{3}*/ = l_1C._f1[0/*3*/];
+    if (PLAYER::_C968670BFACE42D9(19)) {
+        sub_2082();
+    }
+    sub_1ee8(v_2);
+    l_18 = sub_17b9();
+    l_19/*{3}*/ = ENTITY::GET_ENTITY_COORDS(PLAYER::PLAYER_PED_ID(), 0);
+    sub_5c();
+    while (1) {
+        SYSTEM::WAIT(0);
+        if (!BRAIN::IS_WORLD_POINT_WITHIN_BRAIN_ACTIVATION_RANGE()) {
+            sub_2082();
+        }
+    }
+}
+
+void sub_5c() {
+    v_2 = 0;
+    for (v_2 = 0; v_2 < 20; v_2 += 1) {
+        if (sub_27a(v_2, &v_3, &v_4, &v_7, &v_B)) {
+            if (sub_251(v_7, 0.0, 0.0, 0.0)) {
+                v_A = 0;
+                GAMEPLAY::SET_BIT(&v_A, 1);
+                GAMEPLAY::SET_BIT(&v_A, 4);
+                GAMEPLAY::SET_BIT(&v_A, 3);
+                if (v_3 == ${pickup_money_case}) {
+                    if (l_18) {
+                        l_3[v_2/*1*/] = OBJECT::CREATE_PICKUP(v_3, v_4, v_A, v_B, 1, 0);
+                    }
+                } else if (SYSTEM::VDIST2(v_4, l_19) > 400.0) {
+                    if (v_3 == ${pickup_armour_standard}) {
+                        l_3[v_2/*1*/] = OBJECT::CREATE_PICKUP(v_3, v_4, v_A, v_B, 1, 0);
+                    } else if (((v_3 == ${pickup_weapon_grenadelauncher}) || (v_3 == ${pickup_weapon_rpg})) || (v_3 == ${pickup_weapon_mg})) {
+                        if (l_18) {
+                            l_3[v_2/*1*/] = OBJECT::CREATE_PICKUP(v_3, v_4, v_A, -1, 1, 0);
+                        }
+                    } else { 
+                        l_3[v_2/*1*/] = OBJECT::CREATE_PICKUP(v_3, v_4, v_A, -1, 1, 0);
+                    }
+                } else { }
+            } else { 
+                v_A = 0;
+                GAMEPLAY::SET_BIT(&v_A, 1);
+                GAMEPLAY::SET_BIT(&v_A, 4);
+                if (v_3 == ${pickup_money_case}) {
+                    if (l_18) {
+                        l_3[v_2/*1*/] = OBJECT::CREATE_PICKUP_ROTATE(v_3, v_4, v_7, v_A, 10000, 2, 1, 0);
+                    }
+                } else if (SYSTEM::VDIST2(v_4, l_19) > 400.0) {
+                    if (v_3 == ${pickup_armour_standard}) {
+                        l_3[v_2/*1*/] = OBJECT::CREATE_PICKUP_ROTATE(v_3, v_4, v_7, v_A, -1, 2, 1, 0);
+                    } else if (((v_3 == ${pickup_weapon_grenadelauncher}) || (v_3 == ${pickup_weapon_rpg})) || (v_3 == ${pickup_weapon_mg})) {
+                        if (l_18) {
+                            l_3[v_2/*1*/] = OBJECT::CREATE_PICKUP_ROTATE(v_3, v_4, v_7, v_A, -1, 2, 1, 0);
+                        }
+                    } else { 
+                        l_3[v_2/*1*/] = OBJECT::CREATE_PICKUP_ROTATE(v_3, v_4, v_7, v_A, -1, 2, 1, 0);
+                    }
+                }
+            }
+        } else { }
+    }
+}
+
+auto sub_251(auto a_0, auto a_1, auto a_2, auto a_3, auto a_4, auto a_5) {
+    return ((a_0 == a_3) && (a_0._f1 == a_3._f1)) && (a_0._f2 == a_3._f2);
+}
+
+auto sub_27a(auto a_0, auto a_1, auto a_2, auto a_3, auto a_4) {
+    a_3/*{3}*/ = {0.0, 0.0, 0.0 };
+    a_4 = -1;
+    switch (l_2) {
+    case 0:
+        switch (a_0) {
+        case 0:
+            a_1 = ${pickup_money_case};
+            a_2/*{3}*/ = {-998.18927, 6538.74755859375, -31.81679916381836 };
+            a_4 = 12000;
+            break;
+        case 1:
+            a_1 = ${pickup_weapon_smg};
+            a_2/*{3}*/ = {-992.1826782226562, 6568.46630859375, -25.409799575805664 };
+            break;
+        case 2:
+            a_1 = ${pickup_armour_standard};
+            a_2/*{3}*/ = {-980.2034301757812, 6595.58349609375, -27.4281 };
+            a_4 = -1;
+            break;
+        case 3:
+            a_1 = ${pickup_health_standard};
+            a_2/*{3}*/ = {-914.1810302734375, 6644.13916015625, -33.83919906616211 };
+            break;
+        case 4:
+            a_1 = ${pickup_weapon_smg};
+            a_2/*{3}*/ = {-988.0040283203125, 6524.17333984375, -37.6496 };
+            break;
+        case 5:
+            a_1 = ${pickup_weapon_grenade};
+            a_2/*{3}*/ = {-975.5474853515625, 6604.4833984375, 27.6453 };
+            break;
+        case 6:
+            a_1 = ${pickup_weapon_assaultrifle};
+            a_2/*{3}*/ = {-947.2838745117188, 6601.140625, -29.9503 };
+            break;
+        case 7:
+            a_1 = ${pickup_weapon_pumpshotgun};
+            a_2/*{3}*/ = {-921.4030151367188, 6613.2822265625, 31.421 };
+            break;
+        case 8:
+            a_1 = ${pickup_weapon_rpg};
+            a_2/*{3}*/ = {-1032.6805419921875, 6543.84033203125, -29.68 };
+            break;
+        case 9:
+            a_1 = ${pickup_weapon_mg};
+            a_2/*{3}*/ = {-942.8458251953125, 6547.75048828125, -35.408199310302734 };
+            break;
+        case 10:
+            a_1 = ${pickup_weapon_smg};
+            a_2/*{3}*/ = {985.56, 6495.06, 36.07 };
+            break;
+        case 11:
+            a_1 = ${pickup_weapon_grenade};
+            a_2/*{3}*/ = {-1006.82, 6491.08, -36.31 };
+            break;
+        default:
+            return 0;
+            break;
+        }
+        return 1;
+        break;
+    case 1:
+        switch (a_0) {
+        case 0:
+            a_1 = ${pickup_money_case};
+            a_2/*{3}*/ = {3267.37158203125, 6408.69140625, -49.36513137817383 };
+            a_4 = 8000;
+            break;
+        case 1:
+            a_1 = ${pickup_weapon_pumpshotgun};
+            a_2/*{3}*/ = {3270.706787109375, 6417.4599609375, -50.224098205566406 };
+            break;
+        case 2:
+            a_1 = ${pickup_weapon_stickybomb};
+            a_2/*{3}*/ = {3254.6298828125, 6414.1298828125, 47.78 };
+            break;
+        case 3:
+            a_1 = ${pickup_weapon_pistol};
+            a_2/*{3}*/ = {3270.389892578125, 6425.1201171875, -51.36 };
+            break;
+        case 4:
+            a_1 = ${pickup_weapon_pistol};
+            a_2/*{3}*/ = {3283.49, 6418.16015625, 51.91 };
+            break;
+        case 5:
+            a_1 = ${pickup_weapon_stickybomb};
+            a_2/*{3}*/ = {3259.419921875, 6404.4, 48.03 };
+            break;
+        case 6:
+            a_1 = ${pickup_weapon_smg};
+            a_2/*{3}*/ = {3230.949951171875, 6402.33, 38.66 };
+            break;
+        case 7:
+            a_1 = ${pickup_weapon_grenade};
+            a_2/*{3}*/ = {3246.360107421875, 6390.9599609375, -44.68 };
+            break;
+        case 8:
+            a_1 = ${pickup_weapon_grenade};
+            a_2/*{3}*/ = {3256.18994140625, 6386.68017578125, 46.12 };
+            break;
+        case 9:
+            a_1 = ${pickup_armour_standard};
+            a_2/*{3}*/ = {3285.74, 6436.81, -53.08 };
+            break;
+        default:
+            return 0;
+            break;
+        }
+        return 1;
+        break;
+    case 2:
+        switch (a_0) {
+        case 0:
+            a_1 = ${pickup_money_case};
+            a_2/*{3}*/ = {4241.0712890625, 3600.49169921875, -46.81018829345703 };
+            a_4 = 10000;
+            break;
+        case 1:
+            a_1 = ${pickup_weapon_pumpshotgun};
+            a_2/*{3}*/ = {4245.2548828125, 3595.4716796875, -48.40230178833 };
+            break;
+        case 2:
+            a_1 = ${pickup_weapon_stickybomb};
+            a_2/*{3}*/ = {4234.14013671875, 3598.2099609375, -48.61 };
+            break;
+        case 3:
+            a_1 = ${pickup_weapon_stickybomb};
+            a_2/*{3}*/ = {4233.56982421875, 3593.389892578125, -48.97 };
+            break;
+        case 4:
+            a_1 = ${pickup_weapon_grenade};
+            a_2/*{3}*/ = {4239.68994140625, 3598.28, -47.06 };
+            break;
+        case 5:
+            a_1 = ${pickup_weapon_grenade};
+            a_2/*{3}*/ = {4238.7099609375, 3600.99, 46.41 };
+            break;
+        case 6:
+            a_1 = ${pickup_weapon_grenade};
+            a_2/*{3}*/ = {4195.8798828125, 3587.34, 47.35 };
+            break;
+        case 7:
+            a_1 = ${pickup_weapon_assaultrifle};
+            a_2/*{3}*/ = {4170.990234375, 3666.27, -40.33 };
+            break;
+        case 8:
+            a_1 = ${pickup_armour_standard};
+            a_2/*{3}*/ = {4159.58, 3664.659912109375, 35.82 };
+            break;
+        case 9:
+            a_1 = ${pickup_weapon_grenadelauncher};
+            a_2/*{3}*/ = {4202.8798828125, 3643.179931640625, -44.81 };
+            break;
+        case 10:
+            a_1 = ${pickup_weapon_grenade};
+            a_2/*{3}*/ = {4213.56, 3647.85, -43.0 };
+            break;
+        default:
+            return 0;
+            break;
+        }
+        return 1;
+        break;
+    case 3:
+        switch (a_0) {
+        case 0:
+            a_1 = ${pickup_money_case};
+            a_2/*{3}*/ = {-3242.5, 3667.486328125, -30.78 };
+            a_4 = 12500;
+            break;
+        case 1:
+            a_1 = ${pickup_weapon_mg};
+            a_2/*{3}*/ = {-3207.627685546875, 3668.37744140625, -37.7120018 };
+            break;
+        case 2:
+            a_1 = ${pickup_armour_standard};
+            a_2/*{3}*/ = {-3263.53662109375, 3673.927490234375, -36.42829895019531 };
+            a_4 = -1;
+            break;
+        case 3:
+            a_1 = ${pickup_weapon_pistol};
+            a_2/*{3}*/ = {-3232.389892578125, 3626.27, -36.5 };
+            break;
+        case 4:
+            a_1 = ${pickup_weapon_grenadelauncher};
+            a_2/*{3}*/ = {-3345.58, 3707.1, -98.22 };
+            break;
+        case 5:
+            a_1 = ${pickup_weapon_pumpshotgun};
+            a_2/*{3}*/ = {-3312.909912109375, 3673.68994140625, -80.69 };
+            break;
+        case 6:
+            a_1 = ${pickup_weapon_assaultrifle};
+            a_2/*{3}*/ = {-3328.56, 3723.76, 106.53 };
+            break;
+        case 7:
+            a_1 = ${pickup_health_standard};
+            a_2/*{3}*/ = {-3351.79, 3705.02, -96.25 };
+            break;
+        case 8:
+            a_1 = ${pickup_weapon_smg};
+            a_2/*{3}*/ = {-3377.969970703125, 3717.679931640625, -91.79 };
+            break;
+        case 9:
+            a_1 = ${pickup_weapon_grenade};
+            a_2/*{3}*/ = {-3205.889892578125, 3644.449951171875, 39.76 };
+            break;
+        case 10:
+            a_1 = ${pickup_weapon_grenade};
+            a_2/*{3}*/ = {-3330.3798828125, 3695.18994140625, 98.64 };
+            break;
+        case 11:
+            a_1 = ${pickup_weapon_smg};
+            a_2/*{3}*/ = {-3285.332275390625, 3677.188720703125, 80.918 };
+            break;
+        case 12:
+            a_1 = ${pickup_weapon_pumpshotgun};
+            a_2/*{3}*/ = {-3208.5, 3649.72998046875, -39.33 };
+            break;
+        case 13:
+            a_1 = ${pickup_weapon_pistol};
+            a_2/*{3}*/ = {-3231.449951171875, 3645.32, 36.419999999999995 };
+            break;
+        case 14:
+            a_1 = ${pickup_weapon_smg};
+            a_2/*{3}*/ = {-3251.419921875, 3629.54, -37.31 };
+            break;
+        default:
+            return 0;
+            break;
+        }
+        return 1;
+        break;
+    case 4:
+        switch (a_0) {
+        case 0:
+            a_1 = ${pickup_money_case};
+            a_2/*{3}*/ = {-3178.4619140625, 3038.094482421875, -35.22700881958 };
+            a_4 = 9000;
+            break;
+        case 1:
+            a_1 = ${pickup_armour_standard};
+            a_2/*{3}*/ = {-3168.24462890625, 3023.427734375, -38.98540115356445 };
+            a_4 = -1;
+            break;
+        case 2:
+            a_1 = ${pickup_weapon_sniperrifle};
+            a_2/*{3}*/ = {-3185.322509765625, 3055.627685546875, -40.60139846801758 };
+            break;
+        case 3:
+            a_1 = ${pickup_weapon_stickybomb};
+            a_2/*{3}*/ = {-3184.849853515625, 3042.180419921875, 40.23 };
+            break;
+        case 4:
+            a_1 = ${pickup_weapon_pumpshotgun};
+            a_2/*{3}*/ = {-3171.450927734375, 3025.466064453125, -37.862998962402344 };
+            a_3/*{3}*/ = {287.28, 5.04, 136.28 };
+            break;
+        case 5:
+            a_1 = ${pickup_weapon_smg};
+            a_2/*{3}*/ = {-3174.09, 2993.02, 40.26 };
+            break;
+        case 6:
+            a_1 = ${pickup_weapon_assaultrifle};
+            a_2/*{3}*/ = {-3198.393310546875, 3015.75927734375, -41.20389938354492 };
+            break;
+        case 7:
+            a_1 = ${pickup_weapon_smg};
+            a_2/*{3}*/ = {-3184.35083, 3021.47216796875, -40.01279830932617 };
+            break;
+        case 8:
+            a_1 = ${pickup_weapon_stickybomb};
+            a_2/*{3}*/ = {-3195.017333984375, 3061.275390625, -41.59989929199219 };
+            break;
+        case 9:
+            a_1 = ${pickup_health_standard};
+            a_2/*{3}*/ = {-3173.95947265625, 3069.583, -37.088 };
+            break;
+        case 10:
+            a_1 = ${pickup_weapon_grenade};
+            a_2/*{3}*/ = {-3193.34, 3023.59, -41.2 };
+            break;
+        default:
+            return 0;
+            break;
+        }
+        return 1;
+        break;
+    case 5:
+        switch (a_0) {
+        case 0:
+            a_1 = ${pickup_money_case};
+            a_2/*{3}*/ = {-2833.383544921875, -468.0155029296875, -20.406570434570312 };
+            a_4 = 25000;
+            break;
+        case 1:
+            a_1 = ${pickup_health_standard};
+            a_2/*{3}*/ = {-2825.33, -475.73870849609375, 26.053 };
+            a_3/*{3}*/ = {-94.0, 0.0, 34.0 };
+            break;
+        case 2:
+            a_1 = ${pickup_weapon_rpg};
+            a_2/*{3}*/ = {-2820.9638671875, -441.44061279296875, -40.60609817504883 };
+            break;
+        case 3:
+            a_1 = ${pickup_weapon_mg};
+            a_2/*{3}*/ = {-2841.876953125, -512.4901733398438, -67.76830291748047 };
+            a_3/*{3}*/ = {-95.76, 0.0, 20.16 };
+            break;
+        case 4:
+            a_1 = ${pickup_weapon_pumpshotgun};
+            a_2/*{3}*/ = {-2806.025146484375, -404.1601867675781, -39.309898376464844 };
+            break;
+        case 5:
+            a_1 = ${pickup_weapon_grenade};
+            a_2/*{3}*/ = {-2822.302, -398.05938720703125, -40.327301025390625 };
+            break;
+        case 6:
+            a_1 = ${pickup_armour_standard};
+            a_2/*{3}*/ = {-2865.832275390625, -399.65411376953125, -40.854 };
+            break;
+        case 7:
+            a_1 = ${pickup_weapon_grenadelauncher};
+            a_2/*{3}*/ = {-2892.772216796875, -404.4103088378906, -41.01150131225586 };
+            break;
+        case 8:
+            a_1 = ${pickup_weapon_pistol};
+            a_2/*{3}*/ = {-2863.0625, -498.6346130371094, -64.41 };
+            a_3/*{3}*/ = {102.88, 0.0, 47.52 };
+            break;
+        case 9:
+            a_1 = ${pickup_weapon_grenade};
+            a_2/*{3}*/ = {-2782.87841796875, -477.872314453125, -51.82899856567383 };
+            break;
+        case 10:
+            a_1 = ${pickup_weapon_assaultrifle};
+            a_2/*{3}*/ = {-2822.53173828125, -479.8832092285156, -61.06 };
+            a_3/*{3}*/ = {87.84, 0.0, 120.96 };
+            break;
+        default:
+            return 0;
+            break;
+        }
+        return 1;
+        break;
+    case 6:
+        switch (a_0) {
+        case 0:
+            a_1 = ${pickup_money_case};
+            a_2/*{3}*/ = {3166.302734375, -309.2426452636719, -13.467029571533203 };
+            a_4 = 20000;
+            break;
+        case 1:
+            a_1 = ${pickup_armour_standard};
+            a_2/*{3}*/ = {3181.081787109375, -333.6050109863281, -30.3985 };
+            a_4 = -1;
+            break;
+        case 2:
+            a_1 = ${pickup_weapon_assaultrifle};
+            a_2/*{3}*/ = {3148.4033203125, -324.3695983886719, -27.450599670410156 };
+            break;
+        case 3:
+            a_1 = ${pickup_weapon_stickybomb};
+            a_2/*{3}*/ = {3153.71728515625, -291.6850891113281, -27.2959 };
+            break;
+        case 4:
+            a_1 = ${pickup_weapon_sniperrifle};
+            a_2/*{3}*/ = {3152.961669921875, -251.01060485839844, -28.512300491333 };
+            break;
+        case 5:
+            a_1 = ${pickup_health_standard};
+            a_2/*{3}*/ = {3190.726806640625, -374.6689147949219, -33.355098724365234 };
+            break;
+        case 6:
+            a_1 = ${pickup_weapon_microsmg};
+            a_2/*{3}*/ = {3188.74169921875, -363.48309326171875, -31.9785 };
+            break;
+        case 7:
+            a_1 = ${pickup_weapon_pistol};
+            a_2/*{3}*/ = {3175.017578125, -368.1336975097656, -30.7548 };
+            break;
+        case 8:
+            a_1 = ${pickup_weapon_grenade};
+            a_2/*{3}*/ = {3166.64453125, -356.8429870605469, 29.123 };
+            break;
+        case 9:
+            a_1 = ${pickup_weapon_stickybomb};
+            a_2/*{3}*/ = {3171.986083984375, -339.4888916015625, -30.0216 };
+            break;
+        case 10:
+            a_1 = ${pickup_weapon_smg};
+            a_2/*{3}*/ = {3184.306640625, -336.647705078125, -30.7653 };
+            break;
+        case 11:
+            a_1 = ${pickup_weapon_grenadelauncher};
+            a_2/*{3}*/ = {3155.8701171875, -314.7699890136719, -28.94 };
+            break;
+        case 12:
+            a_1 = ${pickup_weapon_smg};
+            a_2/*{3}*/ = {3151.59130859375, -293.2681884765625, -27.3976993560791 };
+            break;
+        case 13:
+            a_1 = ${pickup_weapon_assaultrifle};
+            a_2/*{3}*/ = {3175.298095703125, -318.28448486328125, -27.87969970703125 };
+            break;
+        case 14:
+            a_1 = ${pickup_weapon_pumpshotgun};
+            a_2/*{3}*/ = {3133.649169921875, -340.5376892089844, -24.0701 };
+            break;
+        case 15:
+            a_1 = ${pickup_weapon_grenade};
+            a_2/*{3}*/ = {3171.9599609375, -306.42, -26.44 };
+            break;
+        default:
+            return 0;
+            break;
+        }
+        return 1;
+        break;
+    case 7:
+        switch (a_0) {
+        case 0:
+            a_1 = ${pickup_money_case};
+            a_2/*{3}*/ = {2690.048828125, -1407.16015625, -23.1385 };
+            a_4 = 12000;
+            break;
+        case 1:
+            a_1 = ${pickup_weapon_crowbar};
+            a_2/*{3}*/ = {2678.19482421875, -1387.251953125, -12.5066 };
+            break;
+        case 2:
+            a_1 = ${pickup_weapon_pumpshotgun};
+            a_2/*{3}*/ = {2670.23779296875, -1415.698974609375, -24.440399169921875 };
+            break;
+        case 3:
+            a_1 = ${pickup_weapon_assaultrifle};
+            a_2/*{3}*/ = {2692.931640625, -1390.9556884765625, -21.76919937133789 };
+            break;
+        case 4:
+            a_1 = ${pickup_armour_standard};
+            a_2/*{3}*/ = {2660.88671875, -1391.92431640625, -21.493799209594727 };
+            break;
+        case 5:
+            a_1 = ${pickup_weapon_pistol};
+            a_2/*{3}*/ = {2694.85302734375, -1381.531, -13.791299819946289 };
+            a_3/*{3}*/ = {95.0, 0.0, -32.36 };
+            break;
+        case 6:
+            a_1 = ${pickup_weapon_rpg};
+            a_2/*{3}*/ = {2702.012939453125, -1355.428955078125, -18.3013 };
+            a_3/*{3}*/ = {94.0, 0.0, -61.52 };
+            break;
+        case 7:
+            a_1 = ${pickup_weapon_grenade};
+            a_2/*{3}*/ = {2691.13671875, -1358.3880615234375, -23.32469940185547 };
+            break;
+        case 8:
+            a_1 = ${pickup_health_standard};
+            a_2/*{3}*/ = {2659.55322265625, -1363.3909912109375, -21.218799591064453 };
+            break;
+        case 9:
+            a_1 = ${pickup_weapon_sniperrifle};
+            a_2/*{3}*/ = {2647.701904296875, -1399.8690185546875, -18.928199768066406 };
+            a_3/*{3}*/ = {85.68, 0.0, 70.56 };
+            break;
+        default:
+            return 0;
+            break;
+        }
+        return 1;
+        break;
+    case 8:
+        switch (a_0) {
+        case 0:
+            a_1 = ${pickup_money_case};
+            a_2/*{3}*/ = {263.03833, -2278.808349609375, -5.903989791870117 };
+            a_4 = 7500;
+            break;
+        case 1:
+            a_1 = ${pickup_weapon_crowbar};
+            a_2/*{3}*/ = {270.14630126953125, -2268.96826171875, 4.8704 };
+            break;
+        case 2:
+            a_1 = ${pickup_armour_standard};
+            a_2/*{3}*/ = {262.25201416015625, -2296.546142578125, -12.7082 };
+            a_4 = -1;
+            break;
+        case 3:
+            a_1 = ${pickup_weapon_smg};
+            a_2/*{3}*/ = {250.298095703125, -2291.35546875, -6.0576 };
+            break;
+        case 4:
+            a_1 = ${pickup_weapon_grenade};
+            a_2/*{3}*/ = {284.8205871582031, -2270.16455078125, -9.7622 };
+            break;
+        case 5:
+            a_1 = ${pickup_weapon_grenade};
+            a_2/*{3}*/ = {291.5531, -2262.134765625, -8.454 };
+            break;
+        case 6:
+            a_1 = ${pickup_weapon_sawnoffshotgun};
+            a_2/*{3}*/ = {282.73748779296875, -2299.490478515625, -15.0066 };
+            break;
+        case 7:
+            a_1 = ${pickup_health_standard};
+            a_2/*{3}*/ = {262.5209045410156, -2305.645263671875, -14.8879 };
+            break;
+        case 8:
+            a_1 = ${pickup_weapon_stickybomb};
+            a_2/*{3}*/ = {227.40870666503906, -2284.601806640625, 3.8739 };
+            break;
+        case 9:
+            a_1 = ${pickup_weapon_pistol};
+            a_2/*{3}*/ = {264.1946105957031, -2260.702392578125, -7.1215 };
+            break;
+        case 10:
+            a_1 = ${pickup_weapon_pumpshotgun};
+            a_2/*{3}*/ = {247.1884, -2279.85205078125, -6.9333 };
+            break;
+        default:
+            return 0;
+            break;
+        }
+        return 1;
+        break;
+    case 9:
+        switch (a_0) {
+        case 0:
+            a_1 = ${pickup_money_case};
+            a_2/*{3}*/ = {1779.454345703125, -2984.549072265625, -47.8651 };
+            a_4 = 16500;
+            break;
+        case 1:
+            a_1 = ${pickup_health_standard};
+            a_2/*{3}*/ = {1791.1947021484375, -2962.912841796875, -44.548301696777344 };
+            break;
+        case 2:
+            a_1 = ${pickup_armour_standard};
+            a_2/*{3}*/ = {1771.26318359375, -2966.9, -47.043701171875 };
+            break;
+        case 3:
+            a_1 = ${pickup_weapon_pumpshotgun};
+            a_2/*{3}*/ = {1853.2838134765625, -2939.22802734375, -49.140201568603516 };
+            break;
+        case 4:
+            a_1 = ${pickup_weapon_smg};
+            a_2/*{3}*/ = {1803.014404296875, -2981.671630859375, -46.222198486328125 };
+            break;
+        case 5:
+            a_1 = ${pickup_weapon_grenade};
+            a_2/*{3}*/ = {1846.3388671875, -2969.9, -54.14889907836914 };
+            break;
+        case 6:
+            a_1 = ${pickup_weapon_grenade};
+            a_2/*{3}*/ = {1852.2867431640625, -2967.111572265625, -54.15079879760742 };
+            break;
+        case 7:
+            a_1 = ${pickup_weapon_smg};
+            a_2/*{3}*/ = {1848.7841796875, -2987.885986328125, -54.45819854736328 };
+            break;
+        case 8:
+            a_1 = ${pickup_weapon_grenadelauncher};
+            a_2/*{3}*/ = {1865.3719482421875, -2938.2919921875, -47.503200531 };
+            break;
+        case 9:
+            a_1 = ${pickup_weapon_assaultrifle};
+            a_2/*{3}*/ = {1829.6629638671875, -2916.424072265625, -37.2224 };
+            a_3/*{3}*/ = {83.76, 0.0, 32.0 };
+            break;
+        default:
+            return 0;
+            break;
+        }
+        return 1;
+        break;
+    case 10:
+        switch (a_0) {
+        case 0:
+            a_1 = ${pickup_money_case};
+            a_2/*{3}*/ = {-134.89039611816406, -2870.54833984375, -21.032699584960938 };
+            a_4 = 11000;
+            break;
+        case 1:
+            a_1 = ${pickup_weapon_rpg};
+            a_2/*{3}*/ = {-171.64019775390625, -2873.34033203125, -21.95159912109375 };
+            break;
+        case 2:
+            a_1 = ${pickup_armour_standard};
+            a_2/*{3}*/ = {-173.28140258789062, -2841.664306640625, -16.9981 };
+            a_4 = -1;
+            break;
+        case 3:
+            a_1 = ${pickup_weapon_sawnoffshotgun};
+            a_2/*{3}*/ = {-106.29879760742188, -2879.6845703125, -25.3423 };
+            break;
+        case 4:
+            a_1 = ${pickup_health_standard};
+            a_2/*{3}*/ = {-276.82659912109375, -2896.912841796875, -19.5037 };
+            break;
+        case 5:
+            a_1 = ${pickup_weapon_assaultrifle};
+            a_2/*{3}*/ = {-282.5338134765625, -2890.555419921875, -18.27549934387207 };
+            break;
+        case 6:
+            a_1 = ${pickup_weapon_smg};
+            a_2/*{3}*/ = {-261.7152099609375, -2878.223876953125, -16.9878 };
+            break;
+        case 7:
+            a_1 = ${pickup_weapon_pistol};
+            a_2/*{3}*/ = {-239.33299255371094, -2843.88623046875, 21.3757 };
+            break;
+        case 8:
+            a_1 = ${pickup_weapon_pumpshotgun};
+            a_2/*{3}*/ = {-238.3618927, -2870.67529296875, 24.074 };
+            break;
+        case 9:
+            a_1 = ${pickup_weapon_pistol};
+            a_2/*{3}*/ = {-169.2834930419922, -2834.5673828125, -16.032699584960938 };
+            break;
+        case 10:
+            a_1 = ${pickup_weapon_grenade};
+            a_2/*{3}*/ = {-184.23350524902344, -2828.09716796875, 17.272 };
+            break;
+        case 11:
+            a_1 = ${pickup_weapon_grenade};
+            a_2/*{3}*/ = {-211.73570251464844, -2842.16796875, -19.8885 };
+            break;
+        default:
+            return 0;
+            break;
+        }
+        return 1;
+        break;
+    case 11:
+        switch (a_0) {
+        case 0:
+            a_1 = ${pickup_money_case};
+            a_2/*{3}*/ = {3881.516845703125, 3042.36328125, -24.85409927368164 };
+            a_4 = 3000;
+            break;
+        case 1:
+            a_1 = ${pickup_armour_standard};
+            a_2/*{3}*/ = {3893.889892578125, 3026.486328125, -30.7098 };
+            break;
+        case 2:
+            a_1 = ${pickup_weapon_sawnoffshotgun};
+            a_2/*{3}*/ = {3893.220703125, 3032.483642578125, -30.12929916381836 };
+            a_4 = -1;
+            break;
+        case 3:
+            a_1 = ${pickup_weapon_pumpshotgun};
+            a_2/*{3}*/ = {3906.899169921875, 3034.00244140625, -33.451698303222656 };
+            break;
+        case 4:
+            a_1 = ${pickup_health_standard};
+            a_2/*{3}*/ = {3923.1181640625, 3065.83251953125, -26.66349983215332 };
+            break;
+        case 5:
+            a_1 = ${pickup_weapon_assaultrifle};
+            a_2/*{3}*/ = {3889.026611328125, 3062.0205078125, -27.3278 };
+            break;
+        }
+        break;
+    }
+    return 0;
+}
+
+auto sub_17b9() {
+    if (g_252BB5 == -15) {
+        g_252BB5 = sub_1ea2();
+        sub_1b2d(&g_252BB5, 0, 0, 0, 1, 0, 0);
+        return 1;
+    }
+    if (sub_180f(sub_1ea2(), g_252BB5)) {
+        g_252BB5 = sub_1ea2();
+        sub_1b2d(&g_252BB5, 0, 0, 0, 1, 0, 0);
+        return 1;
+    }
+    return 0;
+}
+
+auto sub_180f(auto a_0, auto a_1) {
+    if ((!sub_19af(a_1)) || (!sub_19af(a_0))) {
+        return 1;
+    }
+    v_4 = sub_1973(a_0);
+    v_5 = sub_1973(a_1);
+    if (v_4 > v_5) {
+        return 1;
+    } else if (v_4 < v_5) {
+        return 0;
+    }
+    v_4 = sub_1966(a_0);
+    v_5 = sub_1966(a_1);
+    if (v_4 > v_5) {
+        return 1;
+    } else if (v_4 < v_5) {
+        return 0;
+    }
+    v_4 = sub_1954(a_0);
+    v_5 = sub_1954(a_1);
+    if (v_4 > v_5) {
+        return 1;
+    } else if (v_4 < v_5) {
+        return 0;
+    }
+    v_4 = sub_1941(a_0);
+    v_5 = sub_1941(a_1);
+    if (v_4 > v_5) {
+        return 1;
+    } else if (v_4 < v_5) {
+        return 0;
+    }
+    v_4 = sub_192e(a_0);
+    v_5 = sub_192e(a_1);
+    if (v_4 > v_5) {
+        return 1;
+    } else if (v_4 < v_5) {
+        return 0;
+    }
+    v_4 = sub_191b(a_0);
+    v_5 = sub_191b(a_1);
+    if (v_4 > v_5) {
+        return 1;
+    }
+    return 0;
+}
+
+auto sub_191b(auto a_0) {
+    return SYSTEM::SHIFT_RIGHT(a_0, 20) & 63;
+}
+
+auto sub_192e(auto a_0) {
+    return SYSTEM::SHIFT_RIGHT(a_0, 14) & 63;
+}
+
+auto sub_1941(auto a_0) {
+    return SYSTEM::SHIFT_RIGHT(a_0, 9) & 31;
+}
+
+auto sub_1954(auto a_0) {
+    return SYSTEM::SHIFT_RIGHT(a_0, 4) & 31;
+}
+
+auto sub_1966(auto a_0) {
+    return a_0 & 15;
+}
+
+auto sub_1973(auto a_0) {
+    return ((SYSTEM::SHIFT_RIGHT(a_0, 26) & 31) * sub_1998(GAMEPLAY::IS_BIT_SET(a_0, 31), -1, 1)) + 2011;
+}
+
+auto sub_1998(auto a_0, auto a_1, auto a_2) {
+    if (a_0) {
+        return a_1;
+    } else { 
+        return a_2;
+    }
+}
+
+auto sub_19af(auto a_0) {
+    if (a_0 == -15) {
+        return 0;
+    }
+    v_3 = sub_191b(a_0);
+    if ((v_3 < 0) || (v_3 >= 60)) {
+        return 0;
+    }
+    v_4 = sub_192e(a_0);
+    if ((v_4 < 0) || (v_4 >= 60)) {
+        return 0;
+    }
+    v_5 = sub_1941(a_0);
+    if ((v_5 < 0) || (v_5 > 23)) {
+        return 0;
+    }
+    v_6 = sub_1973(a_0);
+    if (((v_6 <= 0) || (v_6 > 2043)) || (v_6 < 1979)) {
+        return 0;
+    }
+    v_7 = sub_1966(a_0);
+    if ((v_7 < 0) || (v_7 > 11)) {
+        return 0;
+    }
+    v_8 = sub_1954(a_0);
+    if ((v_8 < 1) || (v_8 > sub_1a8b(v_7, v_6))) {
+        return 0;
+    }
+    return 1;
+}
+
+auto sub_1a8b(auto a_0, auto a_1) {
+    if (a_1 < 0) {
+        a_1 = 0;
+    }
+    switch (a_0) {
+    case 0:
+    case 2:
+    case 4:
+    case 6:
+    case 7:
+    case 9:
+    case 11:
+        return 31;
+        break;
+    case 3:
+    case 5:
+    case 8:
+    case 10:
+        return 30;
+        break;
+    case 1:
+        if ((a_1 % 4) == 0) {
+            if ((a_1 % 100) != 0) {
+                return 29;
+            } else if ((a_1 % 400) == 0) {
+                return 29;
+            }
+        }
+        return 28;
+        break;
+    }
+    return 30;
+}
+
+void sub_1b2d(auto a_0, auto a_1, auto a_2, auto a_3, auto a_4, auto a_5, auto a_6) {
+    v_9 = sub_1973(a_0);
+    v_A = sub_1966(a_0);
+    v_B = sub_1954(a_0);
+    v_C = sub_1941(a_0);
+    v_D = sub_192e(a_0);
+    v_E = sub_191b(a_0);
+    if ((((((a_6 == 0) && (a_5 == 0)) && (a_4 == 0)) && (a_3 == 0)) && (a_2 == 0)) && (a_1 == 0)) {
+        return ;
+    }
+    if (a_1 < 0) {
+        return ;
+    }
+    if (a_2 < 0) {
+        return ;
+    }
+    if (a_3 < 0) {
+        return ;
+    }
+    if (a_4 < 0) {
+        return ;
+    }
+    if (a_5 < 0) {
+        return ;
+    }
+    if (a_6 < 0) {
+        return ;
+    }
+    v_E += a_1;
+    for (; v_E >= 60; v_E -= 60) {
+        a_2 += 1;
+    }
+    v_D += a_2;
+    for (; v_D >= 60; v_D -= 60) {
+        a_3 += 1;
+    }
+    v_C += a_3;
+    for (; v_C >= 24; v_C -= 24) {
+        a_4 += 1;
+    }
+    v_B += a_4;
+    v_F = sub_1a8b(v_A, v_9);
+    while (v_B > v_F) {
+        v_A += 1;
+        v_B -= v_F;
+        if (v_A > 11) {
+            v_9 += 1;
+            v_A -= 12;
+        }
+        v_F = sub_1a8b(v_A, v_9);
+    }
+    v_A += a_5;
+    for (; v_A > 11; v_A -= 12) {
+        a_6 += 1;
+    }
+    v_9 += a_6;
+    sub_1caf(a_0, v_E, v_D, v_C, v_B, v_A, v_9);
+}
+
+void sub_1caf(auto a_0, auto a_1, auto a_2, auto a_3, auto a_4, auto a_5, auto a_6) {
+    sub_1e66(a_0, a_1);
+    sub_1e2b(a_0, a_2);
+    sub_1df1(a_0, a_3);
+    sub_1da0(a_0, a_4);
+    sub_1d6d(a_0, a_5);
+    sub_1ce7(a_0, a_6);
+}
+
+void sub_1ce7(auto a_0, auto a_1) {
+    if (a_1 <= 0) {
+        return ;
+    }
+    if ((a_1 > 2043) || (a_1 < 1979)) {
+        return ;
+    }
+    a_0 -= a_0 & 0x7c000000;
+    if (a_1 < 2011) {
+        a_0 |= SYSTEM::SHIFT_LEFT(2011 - a_1, 26);
+        a_0 |= 0x80000000;
+    } else { 
+        a_0 |= SYSTEM::SHIFT_LEFT(a_1 - 2011, 26);
+        a_0 -= a_0 & 0x80000000;
+    }
+}
+
+void sub_1d6d(auto a_0, auto a_1) {
+    if ((a_1 < 0) || (a_1 > 11)) {
+        return ;
+    }
+    a_0 -= a_0 & 15;
+    a_0 |= a_1;
+}
+
+void sub_1da0(auto a_0, auto a_1) {
+    v_4 = sub_1966(a_0);
+    v_5 = sub_1973(a_0);
+    if ((a_1 < 1) || (a_1 > sub_1a8b(v_4, v_5))) {
+        return ;
+    }
+    a_0 -= a_0 & 496;
+    a_0 |= SYSTEM::SHIFT_LEFT(a_1, 4);
+}
+
+void sub_1df1(auto a_0, auto a_1) {
+    if ((a_1 < 0) || (a_1 > 24)) {
+        return ;
+    }
+    a_0 -= a_0 & 15872;
+    a_0 |= SYSTEM::SHIFT_LEFT(a_1, 9);
+}
+
+void sub_1e2b(auto a_0, auto a_1) {
+    if ((a_1 < 0) || (a_1 >= 60)) {
+        return ;
+    }
+    a_0 -= a_0 & 0xfc000;
+    a_0 |= SYSTEM::SHIFT_LEFT(a_1, 14);
+}
+
+void sub_1e66(auto a_0, auto a_1) {
+    if ((a_1 < 0) || (a_1 >= 60)) {
+        return ;
+    }
+    a_0 -= a_0 & 0x3f00000;
+    a_0 |= SYSTEM::SHIFT_LEFT(a_1, 20);
+}
+
+auto sub_1ea2() {
+    sub_1e66(&v_2, TIME::GET_CLOCK_SECONDS());
+    sub_1e2b(&v_2, TIME::GET_CLOCK_MINUTES());
+    sub_1df1(&v_2, TIME::GET_CLOCK_HOURS());
+    sub_1da0(&v_2, TIME::GET_CLOCK_DAY_OF_MONTH());
+    sub_1d6d(&v_2, TIME::GET_CLOCK_MONTH());
+    sub_1ce7(&v_2, TIME::GET_CLOCK_YEAR());
+    return v_2;
+}
+
+void sub_1ee8(auto a_0, auto a_1, auto a_2) {
+    asm .vardef<F> 5, "[{\"offset\":0,\"value\":12}]"
+    v_5[0/*3*/]/*{3}*/ = {-1029.0, 6517.0, -21.0 };
+    v_5[1/*3*/]/*{3}*/ = {3265.0, 6407.0, -47.0 };
+    v_5[2/*3*/]/*{3}*/ = {4215.0, 3603.0, -48.0 };
+    v_5[3/*3*/]/*{3}*/ = {-3247.0, 3669.0, -28.0 };
+    v_5[4/*3*/]/*{3}*/ = {-3192.0, 3029.0, -35.0 };
+    v_5[5/*3*/]/*{3}*/ = {-2838.0, -446.0, -38.0 };
+    v_5[6/*3*/]/*{3}*/ = {3156.0, -307.0, -17.0 };
+    v_5[7/*3*/]/*{3}*/ = {2695.0, -1334.0, -26.0 };
+    v_5[8/*3*/]/*{3}*/ = {264.0, -2280.0, -8.0 };
+    v_5[9/*3*/]/*{3}*/ = {1804.0, -2993.0, -46.0 };
+    v_5[10/*3*/]/*{3}*/ = {-131.0, -2867.0, -10.0 };
+    v_5[11/*3*/]/*{3}*/ = {3595.0, 3041.0, -15.0 };
+    for (v_2A = 0; v_2A <= (12 - 1); v_2A += 1) {
+        if (sub_2036(a_0, v_5[v_2A/*3*/], 0x3f000000)) {
+            l_2 = v_2A;
+            return ;
+        }
+    }
+}
+
+auto sub_2036(auto a_0, auto a_1, auto a_2, auto a_3, auto a_4, auto a_5, auto a_6) {
+    if (a_6 < 0.0) {
+        a_6 = 0.0;
+    }
+    if (GAMEPLAY::ABSF(a_0 - a_3) <= a_6) {
+        if (GAMEPLAY::ABSF(a_0._f1 - a_3._f1) <= a_6) {
+            if (GAMEPLAY::ABSF(a_0._f2 - a_3._f2) <= a_6) {
+                return 1;
+            }
+        }
+    }
+    return 0;
+}
+
+void sub_2082() {
+    sub_2092();
+    SCRIPT::TERMINATE_THIS_THREAD();
+}
+
+void sub_2092() {
+    for (v_2 = 0; v_2 < 20; v_2 += 1) {
+        if (OBJECT::DOES_PICKUP_EXIST(l_3[v_2/*1*/])) {
+            OBJECT::REMOVE_PICKUP(l_3[v_2/*1*/]);
+        }
+    }
+}

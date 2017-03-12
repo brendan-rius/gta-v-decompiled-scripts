@@ -1,0 +1,129 @@
+// listener's C4 decompiler
+
+void main() {
+    if (PLAYER::_C968670BFACE42D9(83)) {
+        sub_28c();
+    }
+    STREAMING::SET_GAME_PAUSES_FOR_STREAMING(0);
+    GAMEPLAY::CLEAR_BIT(&g_17C49._f204E._f19, 1);
+    sub_251();
+    SCRIPT::SET_NO_LOADING_SCREEN(1);
+    if (!CAM::IS_SCREEN_FADED_OUT()) {
+        CAM::DO_SCREEN_FADE_OUT(0);
+    }
+    l_0 = $67D02A194A2FC2BD("OPENING_CREDITS");
+    while (!GRAPHICS::HAS_SCALEFORM_MOVIE_LOADED(l_0)) {
+        sub_251();
+        SYSTEM::WAIT(0);
+    }
+    while (!CAM::IS_SCREEN_FADED_OUT()) {
+        sub_251();
+        SYSTEM::WAIT(0);
+    }
+    sub_200("TITLE", 0.0, 1.0, 1.5, 1.0, 0.0, 1.5, 15.0);
+    l_1 = (GAMEPLAY::GET_GAME_TIMER() + 8000) + SYSTEM::ROUND(2.0 * 1000.0);
+    while (!CUTSCENE::IS_CUTSCENE_PLAYING()) {
+        sub_251();
+        if (!GAMEPLAY::IS_BIT_SET(g_17C49._f204E._f19, 1)) {
+            GRAPHICS::_0DF606929C105BE1(l_0, 255, 255, 255, 255, 0);
+            if (!l_2) {
+                if (GAMEPLAY::GET_GAME_TIMER() > l_1) {
+                    sub_1d9("TITLE");
+                    l_2 = 1;
+                    l_1 = GAMEPLAY::GET_GAME_TIMER() + SYSTEM::ROUND(2.0 * 1000.0);
+                }
+            } else if (GAMEPLAY::GET_GAME_TIMER() > l_1) {
+                GAMEPLAY::SET_BIT(&g_17C49._f204E._f19, 1);
+                if (GAMEPLAY::_6FDDF453C0C756EC() || GAMEPLAY::IS_PC_VERSION()) {
+                    sub_1c1(1, 1);
+                    sub_14b();
+                } else { 
+                    sub_13e();
+                }
+            }
+        }
+        SYSTEM::WAIT(0);
+    }
+    sub_28c();
+}
+
+void sub_13e() {
+    g_15F91 = 1;
+}
+
+auto sub_14b() {
+    if (sub_196(0)) {
+        return 0;
+    }
+    if (g_15F91._f8) {
+        if (g_15F91._fA > 0) {
+            return 0;
+        }
+    } else if (g_15F91._fA > 1) {
+        return 0;
+    }
+    g_15F91._fA += 1;
+    return 1;
+}
+
+auto sub_196(auto a_0) {
+    if ((!a_0) && (SCRIPT::_GET_NUMBER_OF_INSTANCES_OF_STREAMED_SCRIPT(${benchmark}) > 0)) {
+        return 1;
+    }
+    return GAMEPLAY::IS_BIT_SET(g_10B8D, 0);
+}
+
+void sub_1c1(auto a_0, auto a_1) {
+    g_15F91._f7 = a_0;
+    g_15F91._f8 = a_1;
+}
+
+void sub_1d9(auto a_0) {
+    GRAPHICS::_PUSH_SCALEFORM_MOVIE_FUNCTION(l_0, "HIDE_LOGO");
+    GRAPHICS::_BEGIN_TEXT_COMPONENT("STRING");
+    UI::_ADD_TEXT_COMPONENT_STRING(a_0);
+    GRAPHICS::_END_TEXT_COMPONENT();
+    GRAPHICS::_POP_SCALEFORM_MOVIE_FUNCTION_VOID();
+}
+
+void sub_200(auto a_0, auto a_1, auto a_2, auto a_3, auto a_4, auto a_5, auto a_6, auto a_7) {
+    GRAPHICS::_PUSH_SCALEFORM_MOVIE_FUNCTION(l_0, "SHOW_LOGO");
+    GRAPHICS::_BEGIN_TEXT_COMPONENT("STRING");
+    UI::_ADD_TEXT_COMPONENT_STRING(a_0);
+    GRAPHICS::_END_TEXT_COMPONENT();
+    GRAPHICS::_PUSH_SCALEFORM_MOVIE_FUNCTION_PARAMETER_FLOAT(a_1);
+    GRAPHICS::_PUSH_SCALEFORM_MOVIE_FUNCTION_PARAMETER_FLOAT(a_2);
+    GRAPHICS::_PUSH_SCALEFORM_MOVIE_FUNCTION_PARAMETER_FLOAT(a_3);
+    GRAPHICS::_PUSH_SCALEFORM_MOVIE_FUNCTION_PARAMETER_FLOAT(a_4);
+    GRAPHICS::_PUSH_SCALEFORM_MOVIE_FUNCTION_PARAMETER_FLOAT(a_5);
+    GRAPHICS::_PUSH_SCALEFORM_MOVIE_FUNCTION_PARAMETER_FLOAT(a_6);
+    GRAPHICS::_PUSH_SCALEFORM_MOVIE_FUNCTION_PARAMETER_FLOAT(a_7);
+    GRAPHICS::_POP_SCALEFORM_MOVIE_FUNCTION_VOID();
+}
+
+void sub_251() {
+    UI::HIDE_LOADING_ON_FADE_THIS_FRAME();
+    CONTROLS::DISABLE_CONTROL_ACTION(2, 199, 1);
+    GRAPHICS::_61BB1D9B3A95D802(7);
+    sub_26e();
+}
+
+void sub_26e() {
+    UNK1::_EB2D525B57F42B40();
+    sub_27e();
+}
+
+void sub_27e() {
+    g_42CA._f86 = 1;
+}
+
+void sub_28c() {
+    GAMEPLAY::SET_BIT(&g_17C49._f204E._f19, 1);
+    if (l_0 != 0) {
+        GRAPHICS::SET_SCALEFORM_MOVIE_AS_NO_LONGER_NEEDED(&l_0);
+    }
+    GRAPHICS::_61BB1D9B3A95D802(4);
+    SCRIPT::SET_NO_LOADING_SCREEN(0);
+    STREAMING::SET_GAME_PAUSES_FOR_STREAMING(1);
+    SCRIPT::TERMINATE_THIS_THREAD();
+}

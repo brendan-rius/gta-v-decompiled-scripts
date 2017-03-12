@@ -1,0 +1,76 @@
+// listener's C4 decompiler
+
+void main() {
+    if (PLAYER::_C968670BFACE42D9(2)) {
+        sub_135();
+    }
+    while (1) {
+        SYSTEM::WAIT(0);
+        if (ENTITY::DOES_ENTITY_EXIST(l_5)) {
+            if (BRAIN::IS_OBJECT_WITHIN_BRAIN_ACTIVATION_RANGE(l_5) && (SCRIPT::_GET_NUMBER_OF_INSTANCES_OF_STREAMED_SCRIPT(${finalec1}) == 0)) {
+                switch (l_2) {
+                case 0:
+                    if (!PED::IS_PED_INJURED(PLAYER::PLAYER_PED_ID())) {
+                        v_2 = INTERIOR::GET_INTERIOR_FROM_ENTITY(PLAYER::PLAYER_PED_ID());
+                        if (INTERIOR::IS_VALID_INTERIOR(v_2)) {
+                            if (INTERIOR::IS_INTERIOR_READY(v_2)) {
+                                if (INTERIOR::IS_INTERIOR_SCENE()) {
+                                    STREAMING::REQUEST_PTFX_ASSET();
+                                    l_2 = 1;
+                                }
+                            }
+                        }
+                    }
+                    break;
+                case 1:
+                    if (STREAMING::HAS_PTFX_ASSET_LOADED()) {
+                        if (!PED::IS_PED_INJURED(PLAYER::PLAYER_PED_ID())) {
+                            if (!ENTITY::DOES_ENTITY_EXIST(l_4)) {
+                                l_4 = OBJECT::GET_CLOSEST_OBJECT_OF_TYPE(1090.0, -1996.0, 39.0, 100.0, ${v_ilev_found_cranebucket}, 1, 0, 1);
+                            }
+                            if (!GRAPHICS::DOES_PARTICLE_FX_LOOPED_EXIST(l_3)) {
+                                if (ENTITY::DOES_ENTITY_EXIST(l_4)) {
+                                    v_2 = INTERIOR::GET_INTERIOR_FROM_ENTITY(PLAYER::PLAYER_PED_ID());
+                                    if (INTERIOR::IS_VALID_INTERIOR(v_2)) {
+                                        if (INTERIOR::IS_INTERIOR_READY(v_2)) {
+                                            if (INTERIOR::IS_INTERIOR_SCENE()) {
+                                                l_3 = GRAPHICS::START_PARTICLE_FX_LOOPED_ON_ENTITY("scr_obfoundry_cauldron_steam", l_4, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0x3f800000, 0, 0, 0);
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                    break;
+                case 2:
+                    break;
+                }
+            } else { 
+                sub_135();
+            }
+        } else { 
+            sub_135();
+        }
+    }
+}
+
+void sub_135() {
+    if (GRAPHICS::DOES_PARTICLE_FX_LOOPED_EXIST(l_3)) {
+        GRAPHICS::STOP_PARTICLE_FX_LOOPED(l_3, 0);
+    }
+    if (ENTITY::DOES_ENTITY_EXIST(l_4)) {
+        ENTITY::SET_OBJECT_AS_NO_LONGER_NEEDED(&l_4);
+    }
+    sub_167("ob_foundry_cauldron Terminated >>>>>>>>>>>>>>>>>
+");
+    SCRIPT::TERMINATE_THIS_THREAD();
+}
+
+void sub_167(auto a_0) {
+    sub_175(a_0);
+}
+
+void sub_175(auto a_0) {
+    if (GAMEPLAY::ARE_STRINGS_EQUAL(a_0, a_0)) {}
+}
